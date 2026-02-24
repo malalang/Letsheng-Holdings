@@ -1,54 +1,146 @@
+
 "use client";
-import type React from "react";
-import { useState } from "react";
 
-export default function PrintOrderForm() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [product, setProduct] = useState("t-shirt");
-  const [quantity, setQuantity] = useState(1);
+import { useForm, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Upload, ArrowRight, BadgeCheck, User, Mail, Package } from "lucide-react";
+import React from "react";
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert(`Order submitted: ${product} x ${quantity} for ${name}`);
-  };
+const projectInquirySchema = z.object({
+    customer_name: z.string().min(2),
+    company_name: z.string().optional(),
+    email: z.string().email(),
+    product_type: z.enum(["t-shirt", "mug"]),
+    quantity: z.number().int().positive(),
+    project_details: z.string().min(10),
+});
+
+type InquiryFormData = z.infer<typeof projectInquirySchema>;
+
+const NextStepsInfo = () => (
+    <div 
+        className="bg-brand-navy/90 border-2 border-brand-gold/50 rounded-2xl p-8 backdrop-blur-xl shadow-2xl h-full"
+        style={{'--tw-shadow-color': 'hsl(45 100% 50% / 0.1)'} as React.CSSProperties}
+    >
+        <div className="flex items-center mb-6 text-brand-gold">
+            <BadgeCheck className="h-10 w-10 mr-4 shrink-0" />
+            <h2 className="text-3xl font-bold text-white">Your Project Has Been Initiated</h2>
+        </div>
+        <p className="text-gray-300 mb-6">Upon submission, your inquiry enters our structured workflow. Here is what to expect:</p>
+        <ol className="space-y-5 text-gray-300 ">
+            <li className="flex items-start">
+                <strong className="bg-brand-gold text-brand-navy rounded-full h-8 w-8 text-center shrink-0 leading-8 font-bold mr-4">1</strong>
+                <div>
+                    <strong className="text-white">Initial Review & Consultation:</strong> A dedicated project manager will review your inquiry and contact you within one business day to confirm project scope and details.
+                </div>
+            </li>
+            <li className="flex items-start">
+                <strong className="bg-brand-gold text-brand-navy rounded-full h-8 w-8 text-center shrink-0 leading-8 font-bold mr-4">2</strong>
+                <div>
+                    <strong className="text-white">Digital Proof & Formal Quote:</strong> You will receive a detailed digital proof of your artwork and a formal quote for your approval. This is your opportunity to request final adjustments.
+                </div>
+            </li>
+            <li className="flex items-start">
+                <strong className="bg-brand-gold text-brand-navy rounded-full h-8 w-8 text-center shrink-0 leading-8 font-bold mr-4">3</strong>
+                <div>
+                    <strong className="text-white">Production & Fulfillment:</strong> Once the proof and payment are approved, your order moves into our production queue. We manage the process end-to-end to ensure quality and timely fulfillment.
+                </div>
+            </li>
+        </ol>
+    </div>
+)
+
+export default function PrintOrderPage() {
+  const form = useForm<InquiryFormData>({
+    resolver: zodResolver(projectInquirySchema),
+    defaultValues: {
+      customer_name: "",
+      company_name: "",
+      email: "",
+      quantity: 1,
+      project_details: "",
+    },
+  });
+
+  const onSubmit: SubmitHandler<InquiryFormData> = (data) => {
+    console.log("Project Inquiry Submitted:", data);
+    alert("Thank you. Your project inquiry has been successfully submitted. Our team will be in touch shortly.");
+  }
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-lg p-6 border rounded">
-      <h2 className="text-xl font-semibold mb-4">Place an Order</h2>
-      <input
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Name"
-        className="w-full p-2 border rounded mb-3"
-      />
-      <input
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
-        className="w-full p-2 border rounded mb-3"
-      />
-      <select
-        value={product}
-        onChange={(e) => setProduct(e.target.value)}
-        className="w-full p-2 border rounded mb-3"
-      >
-        <option value="t-shirt">T-Shirt</option>
-        <option value="mug">Mug</option>
-      </select>
-      <input
-        type="number"
-        value={quantity}
-        onChange={(e) => setQuantity(Number(e.target.value))}
-        min={1}
-        className="w-full p-2 border rounded mb-4"
-      />
-      <button
-        type="submit"
-        className="px-4 py-2 bg-brand-gold text-brand-navy font-semibold rounded"
-      >
-        Submit Order
-      </button>
-    </form>
+    <div className="animate-fade-in">
+        <div className="text-center mb-12">
+            <h1 className="text-5xl font-extrabold text-brand-navy tracking-tight">Initiate a Printing Project</h1>
+            <p className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
+              Complete the form below to begin the consultation process for your custom branding project. A dedicated project manager will be assigned to guide you.
+            </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            <div className="lg:col-span-2">
+                <Form {...form}>
+                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                    <Card className="bg-white/60 backdrop-blur-lg border-black/10 shadow-lg">
+                        <CardHeader>
+                            <CardTitle className="text-2xl flex items-center text-brand-navy"><User className="mr-3"/>Contact Information</CardTitle>
+                        </CardHeader>
+                        <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                             <FormField control={form.control} name="customer_name" render={({ field }) => (<FormItem><FormLabel>Full Name</FormLabel><FormControl><Input placeholder="e.g., Jane Doe" {...field} /></FormControl><FormMessage /></FormItem>)}/>
+                             <FormField control={form.control} name="email" render={({ field }) => (<FormItem><FormLabel>Email Address</FormLabel><FormControl><Input type="email" placeholder="jane.doe@example.com" {...field} /></FormControl><FormMessage /></FormItem>)}/>
+                             <FormField control={form.control} name="company_name" render={({ field }) => (<FormItem className="md:col-span-2"><FormLabel>Company Name (Optional)</FormLabel><FormControl><Input placeholder="e.g., Acme Corporation" {...field} /></FormControl><FormMessage /></FormItem>)}/>
+                        </CardContent>
+                    </Card>
+
+                     <Card className="bg-white/60 backdrop-blur-lg border-black/10 shadow-lg">
+                        <CardHeader>
+                            <CardTitle className="text-2xl flex items-center text-brand-navy"><Package className="mr-3"/>Project Specifications</CardTitle>
+                        </CardHeader>
+                        <CardContent className="space-y-6">
+                            <FormField control={form.control} name="product_type" render={({ field }) => (
+                                <FormItem><FormLabel>Product Type</FormLabel>
+                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                    <FormControl><SelectTrigger><SelectValue placeholder="Select a product..." /></SelectTrigger></FormControl>
+                                    <SelectContent>
+                                        <SelectItem value="t-shirt">Executive Crewneck T-Shirt</SelectItem>
+                                        <SelectItem value="mug">Ceramic Branding Mug</SelectItem>
+                                    </SelectContent></Select><FormMessage />
+                                </FormItem>)}/>
+                             <FormField control={form.control} name="quantity" render={({ field }) => (<FormItem><FormLabel>Estimated Quantity</FormLabel><FormControl><Input type="number" min="1" placeholder="Minimum 1" {...field} onChange={e => field.onChange(+e.target.value)}/></FormControl><FormMessage /></FormItem>)}/>
+                             <FormField control={form.control} name="project_details" render={({ field }) => (<FormItem><FormLabel>Project Brief & Design Notes</FormLabel><FormControl><Textarea rows={6} placeholder="Please describe your project, including desired colors, branding placement, and any critical deadlines..." {...field} /></FormControl><FormMessage /></FormItem>)}/>
+                             <FormItem>
+                                  <FormLabel>Artwork & Logo Files</FormLabel>
+                                  <FormControl>
+                                    <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 flex flex-col items-center justify-center text-center hover:border-brand-gold hover:bg-white/50 transition-colors duration-300">
+                                        <Upload className="h-12 w-12 text-gray-400 mb-4"/>
+                                        <p className="text-gray-700 font-semibold mb-2">Drag & drop your vector artwork, or</p>
+                                        <Button type="button" variant="outline">Browse Files</Button>
+                                        <p className="text-xs text-gray-500 mt-4">Recommended formats: PDF, AI, EPS, SVG. High-resolution raster images (PNG) are also accepted.</p>
+                                    </div>
+                                  </FormControl><FormMessage />
+                             </FormItem>
+                        </CardContent>
+                    </Card>
+
+                    <div className="flex justify-end">
+                        <Button type="submit" size="lg" className="w-full md:w-auto bg-brand-navy text-white font-bold hover:bg-opacity-90 transition-transform transform hover:scale-105 shadow-lg">
+                            Submit Project Inquiry
+                            <ArrowRight className="h-5 w-5 ml-3" />
+                        </Button>
+                    </div>
+                  </form>
+                </Form>
+            </div>
+            <div className="lg:sticky lg:top-24 h-fit">
+                <NextStepsInfo />
+            </div>
+        </div>
+    </div>
   );
 }
