@@ -1,4 +1,5 @@
-export type Json =
+
+export type Json = 
   | string
   | number
   | boolean
@@ -58,3 +59,6 @@ export type Database = {
     };
   };
 };
+
+export type Property = Database["public"]["Tables"]["properties"]["Row"];
+export type PrintingOrder = Database["public"]["Tables"]["printing_orders"]["Row"];

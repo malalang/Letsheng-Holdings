@@ -1,0 +1,108 @@
+
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { MoreHorizontal } from "lucide-react";
+import Link from "next/link";
+
+const sampleOrders = [
+  {
+    id: "ORD-001",
+    customer: "John Doe",
+    company: "Acme Inc.",
+    date: "2023-10-26",
+    status: "Proof Pending",
+    total: 3500,
+  },
+  {
+    id: "ORD-002",
+    customer: "Jane Smith",
+    company: "Stark Industries",
+    date: "2023-10-24",
+    status: "In Production",
+    total: 12500,
+  },
+  {
+    id: "ORD-003",
+    customer: "Peter Jones",
+    company: "Wayne Enterprises",
+    date: "2023-10-22",
+    status: "Shipped",
+    total: 800,
+  },
+   {
+    id: "ORD-004",
+    customer: "Samuel Wilson",
+    company: "Daily Planet",
+    date: "2023-10-21",
+    status: "Delivered",
+    total: 2100,
+  },
+];
+
+
+const getStatusBadgeVariant = (status: string) => {
+  switch (status) {
+    case "Proof Pending":
+      return "secondary";
+    case "In Production":
+      return "default";
+    case "Shipped":
+    case "Delivered":
+      return "default"; // You might want different styles
+    default:
+      return "outline";
+  }
+};
+
+
+export default function PrintOrdersPage() {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Printing Orders</CardTitle>
+        <CardDescription>
+          Monitor and manage all incoming and ongoing printing projects.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Order ID</TableHead>
+              <TableHead>Customer</TableHead>
+              <TableHead>Date</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead className="text-right">Value (ZAR)</TableHead>
+              <TableHead className="text-center">Actions</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {sampleOrders.map((order) => (
+              <TableRow key={order.id}>
+                <TableCell className="font-mono">{order.id}</TableCell>
+                <TableCell>
+                    <div className="font-medium">{order.customer}</div>
+                    <div className="text-sm text-gray-500">{order.company}</div>
+                </TableCell>
+                <TableCell>{order.date}</TableCell>
+                <TableCell>
+                  <Badge variant={getStatusBadgeVariant(order.status)}>{order.status}</Badge>
+                </TableCell>
+                <TableCell className="text-right font-semibold">R{order.total.toLocaleString()}</TableCell>
+                <TableCell className="text-center">
+                    <Link href={`/dashboard/orders/${order.id}`}>
+                        <Button variant="outline" size="icon">
+                           <MoreHorizontal className="h-4 w-4" />
+                        </Button>
+                    </Link>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </CardContent>
+    </Card>
+  );
+}

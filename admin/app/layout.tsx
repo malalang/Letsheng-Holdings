@@ -1,85 +1,83 @@
-import "./globals.css";
-import type React from "react";
 
-export const metadata = {
-  title: "Letsheng Holdings - Admin",
-  description: "Admin Dashboard",
+import "./globals.css";
+import type { Metadata } from "next";
+import type { ReactNode } from "react";
+
+// Placeholder for Lucide icons - in a real scenario, you'd import these
+const Icon = ({ name, className }: { name: string; className: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    {/* Basic placeholder icon shape - replace with actual Lucide icon paths */}
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+  </svg>
+);
+
+export const metadata: Metadata = {
+  title: "Letsheng Holdings | Admin Portal",
+  description: "Administrative Command Center for Letsheng Holdings",
 };
 
-export default function AdminLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function AdminLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body className="antialiased">
+      <body className="bg-gray-100 font-sans">
         <div className="flex h-screen">
-          {/* Sidebar Navigation - Command Center Style */}
-          <aside className="w-64 bg-brand-navy text-brand-white shadow-xl flex flex-col">
-            <div className="px-6 py-8 border-b border-opacity-20 border-brand-gold">
-              <div className="flex items-center space-x-3 mb-2">
-                <div className="h-10 w-10 bg-brand-gold rounded-lg flex items-center justify-center font-bold text-brand-navy">
-                  LH
+          {/* Glassmorphic Sidebar */}
+          <aside className="w-64 bg-brand-navy text-white flex flex-col shrink-0 backdrop-blur-lg bg-opacity-90 border-r border-brand-gold/20">
+            <div className="flex items-center justify-center h-20 border-b border-brand-gold/20">
+                <div className="bg-brand-gold text-brand-navy font-bold rounded-full h-10 w-10 flex items-center justify-center text-md">
+                    LH
                 </div>
-                <h1 className="text-xl font-bold text-brand-white">Letsheng</h1>
-              </div>
-              <p className="text-xs text-brand-gold font-semibold">
-                ADMIN DASHBOARD
-              </p>
+              <h1 className="ml-3 text-xl font-bold">Admin Portal</h1>
             </div>
 
-            <nav className="flex-1 px-4 py-6 space-y-2">
-              <a
-                href="/dashboard"
-                className="block px-4 py-3 rounded-lg text-sm font-medium text-brand-white hover:bg-brand-gold hover:text-brand-navy transition-colors"
-              >
+            <nav className="flex-grow px-4 py-6 space-y-2">
+              <a href="/dashboard" className="flex items-center px-4 py-3 rounded-lg text-gray-300 hover:bg-brand-gold hover:text-brand-navy transition-colors duration-300">
+                <Icon name="LayoutDashboard" className="h-5 w-5 mr-3" />
                 Dashboard
               </a>
-              <a
-                href="/dashboard/estates"
-                className="block px-4 py-3 rounded-lg text-sm font-medium text-brand-white hover:bg-brand-gold hover:text-brand-navy transition-colors"
-              >
-                Estates
+              <a href="/dashboard/properties" className="flex items-center px-4 py-3 rounded-lg text-gray-300 hover:bg-brand-gold hover:text-brand-navy transition-colors duration-300">
+                <Icon name="Building2" className="h-5 w-5 mr-3" />
+                Properties
               </a>
-              <a
-                href="/dashboard/orders"
-                className="block px-4 py-3 rounded-lg text-sm font-medium text-brand-white hover:bg-brand-gold hover:text-brand-navy transition-colors"
-              >
-                Orders
-              </a>
-              <a
-                href="/dashboard/users"
-                className="block px-4 py-3 rounded-lg text-sm font-medium text-brand-white hover:bg-brand-gold hover:text-brand-navy transition-colors"
-              >
-                Users
+              <a href="/dashboard/printing-orders" className="flex items-center px-4 py-3 rounded-lg text-gray-300 hover:bg-brand-gold hover:text-brand-navy transition-colors duration-300">
+                <Icon name="Printer" className="h-5 w-5 mr-3" />
+                Printing Orders
               </a>
             </nav>
 
-            <div className="px-6 py-4 border-t border-opacity-20 border-brand-gold">
-              <a
-                href="/login"
-                className="block w-full px-4 py-2 rounded-lg text-sm font-medium text-brand-navy bg-brand-gold hover:opacity-90 transition-opacity text-center"
-              >
+            <div className="px-4 py-6 border-t border-brand-gold/20">
+              <a href="/login" className="w-full text-center border-2 border-brand-gold text-brand-gold px-4 py-3 rounded-lg font-semibold hover:bg-brand-gold hover:text-brand-navy transition-all duration-300">
                 Logout
               </a>
             </div>
           </aside>
 
-          {/* Main Content Area */}
           <div className="flex-1 flex flex-col overflow-hidden">
-            <header className="bg-brand-white border-b border-brand-muted px-8 py-6 shadow-sm">
-              <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-bold text-brand-navy">
-                  Control Center
-                </h2>
-                <div className="text-sm text-brand-navy opacity-70">
-                  Welcome, Administrator
+            {/* Header with Breadcrumbs and User Profile */}
+            <header className="bg-white shadow-sm border-b border-gray-200 z-10">
+              <div className="container mx-auto px-6 h-20 flex items-center justify-between">
+                <div>
+                  {/* Breadcrumb would be dynamically generated here */}
+                  <p className="text-sm text-gray-500">Dashboard /</p>
+                  <h2 className="text-xl font-bold text-brand-navy">Overview</h2>
+                </div>
+                <div className="flex items-center">
+                    <div className="relative">
+                        <Icon name="Bell" className="h-6 w-6 text-gray-500"/>
+                        <span className="absolute top-0 right-0 h-2 w-2 bg-brand-gold rounded-full"></span>
+                    </div>
+                    <div className="ml-6 flex items-center">
+                        <img src="/path-to-admin-avatar.jpg" alt="Admin User" className="h-10 w-10 rounded-full"/>
+                        <div className="ml-3">
+                            <p className="text-sm font-semibold text-brand-navy">Admin User</p>
+                            <p className="text-xs text-gray-500">System Administrator</p>
+                        </div>
+                    </div>
                 </div>
               </div>
             </header>
 
-            <main className="flex-1 overflow-auto bg-brand-muted px-8 py-6">
+            <main className="flex-1 overflow-auto p-6 bg-gray-50">
               {children}
             </main>
           </div>
