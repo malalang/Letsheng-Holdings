@@ -53,7 +53,7 @@ const sampleOrders = [
   },
 ];
 
-const getStatusBadge = (status) => {
+const getStatusBadge = (status: string) => {
   switch (status) {
     case "Proof Pending":
       return "bg-amber-500/20 text-amber-400 border-amber-500/50";

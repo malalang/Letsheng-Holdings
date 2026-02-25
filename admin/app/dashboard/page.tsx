@@ -69,7 +69,7 @@ const recentActivity = [
   },
 ];
 
-const KpiCard = ({ item }) => (
+const KpiCard = ({ item }: { item: typeof kpiData[0] }) => (
   <Card className="bg-brand-navy/50 text-white border-brand-gold/20 shadow-lg backdrop-blur-md">
     <CardHeader className="flex flex-row items-center justify-between pb-2">
       <CardTitle className="text-sm font-medium text-gray-300">

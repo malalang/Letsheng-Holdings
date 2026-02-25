@@ -19,7 +19,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-const getOrderDetails = (id) => {
+const getOrderDetails = (id: string) => {
   // Mock data fetch
   return {
     id: "PRJ-007",
@@ -43,7 +43,7 @@ const getOrderDetails = (id) => {
   };
 };
 
-const getStatusBadge = (status) => {
+const getStatusBadge = (status: string) => {
   switch (status) {
     case "Proof Pending":
       return "bg-amber-500/20 text-amber-400 border-amber-500/50";
@@ -56,7 +56,7 @@ const getStatusBadge = (status) => {
   }
 };
 
-export default function OrderDetailPage({ params }) {
+export default function OrderDetailPage({ params }: { params: { id: string } }) {
   const order = getOrderDetails(params.id);
 
   return (
@@ -173,7 +173,7 @@ export default function OrderDetailPage({ params }) {
   );
 }
 
-const DetailItem = ({ icon, label, value }) => (
+const DetailItem = ({ icon, label, value }: { icon: React.ReactElement, label: string, value: string | number }) => (
   <div className="flex items-center">
     <div className="w-8 h-8 flex-shrink-0 flex items-center justify-center bg-brand-gold/10 text-brand-gold rounded-lg mr-3">
       {icon}
