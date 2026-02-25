@@ -8,6 +8,13 @@ import {
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  CardFooter,
+  CardTitle,
+} from "@/components/ui/card";
 
 interface Product {
   title: string;
@@ -65,7 +72,7 @@ const comingSoonProducts: ComingSoonProduct[] = [
 ];
 
 const ProductCard = ({ product }: { product: Product }) => (
-  <div className="bg-white/60 backdrop-blur-lg rounded-2xl shadow-lg border border-black/10 overflow-hidden group flex flex-col">
+  <Card className="rounded-2xl shadow-lg border border-black/10 overflow-hidden group flex flex-col">
     <div className="relative h-64 bg-gray-300">
       <img
         src={product.image}
@@ -82,7 +89,8 @@ const ProductCard = ({ product }: { product: Product }) => (
         </h3>
       </div>
     </div>
-    <div className="p-6 flex-grow">
+
+    <CardContent className="flex-grow">
       <p className="text-gray-700 leading-relaxed">{product.description}</p>
       <div className="mt-4 space-y-2">
         {product.specs.map((spec: { label: string; value: string }) => (
@@ -92,36 +100,45 @@ const ProductCard = ({ product }: { product: Product }) => (
           </div>
         ))}
       </div>
-    </div>
-    <div className="bg-gray-50/50 px-6 py-4 mt-auto">
+    </CardContent>
+
+    <CardFooter className="bg-gray-50/50 px-6 py-4 mt-auto">
       <Link href="/printing/order">
         <Button className="w-full bg-brand-navy text-white hover:bg-opacity-90 font-bold transition-transform transform hover:scale-105">
           Initiate a Project Inquiry
           <ArrowRight className="h-4 w-4 ml-2" />
         </Button>
       </Link>
-    </div>
-  </div>
+    </CardFooter>
+  </Card>
 );
 
 const ComingSoonCard = ({ product }: { product: ComingSoonProduct }) => (
-  <div className="bg-brand-navy/80 backdrop-blur-lg rounded-2xl shadow-xl border-2 border-brand-gold/50 p-8 flex flex-col items-center text-center text-white h-full">
-    <Badge className="bg-brand-gold/20 text-brand-gold font-bold border border-brand-gold/50">
-      {product.category}
-    </Badge>
-    <product.icon className="h-16 w-16 text-brand-gold my-6" />
-    <h3 className="text-2xl font-bold">{product.title}</h3>
-    <p className="mt-4 text-gray-300 leading-relaxed flex-grow">
-      {product.description}
-    </p>
-    <Button
-      disabled
-      variant="outline"
-      className="mt-6 w-full border-gray-500 text-gray-400 cursor-not-allowed"
-    >
-      Services Launching Soon
-    </Button>
-  </div>
+  <Card className="bg-brand-navy/80 backdrop-blur-lg rounded-2xl shadow-xl border-2 border-brand-gold/50 p-8 flex flex-col items-center text-center text-white h-full">
+    <CardHeader className="items-center">
+      <Badge className="bg-brand-gold/20 text-brand-gold font-bold border border-brand-gold/50">
+        {product.category}
+      </Badge>
+    </CardHeader>
+
+    <CardContent className="flex flex-col items-center text-white">
+      <product.icon className="h-16 w-16 text-brand-gold my-6" />
+      <h3 className="text-2xl font-bold">{product.title}</h3>
+      <p className="mt-4 text-gray-300 leading-relaxed flex-grow">
+        {product.description}
+      </p>
+    </CardContent>
+
+    <CardFooter className="w-full">
+      <Button
+        disabled
+        variant="outline"
+        className="mt-6 w-full border-gray-500 text-gray-400 cursor-not-allowed"
+      >
+        Services Launching Soon
+      </Button>
+    </CardFooter>
+  </Card>
 );
 
 export default function PrintingPage() {

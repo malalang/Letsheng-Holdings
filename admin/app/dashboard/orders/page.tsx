@@ -1,8 +1,20 @@
-
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { MoreHorizontal } from "lucide-react";
 import Link from "next/link";
 
@@ -31,7 +43,7 @@ const sampleOrders = [
     status: "Shipped",
     total: 800,
   },
-   {
+  {
     id: "ORD-004",
     customer: "Samuel Wilson",
     company: "Daily Planet",
@@ -40,7 +52,6 @@ const sampleOrders = [
     total: 2100,
   },
 ];
-
 
 const getStatusBadgeVariant = (status: string) => {
   switch (status) {
@@ -55,7 +66,6 @@ const getStatusBadgeVariant = (status: string) => {
       return "outline";
   }
 };
-
 
 export default function PrintOrdersPage() {
   return (
@@ -83,20 +93,24 @@ export default function PrintOrdersPage() {
               <TableRow key={order.id}>
                 <TableCell className="font-mono">{order.id}</TableCell>
                 <TableCell>
-                    <div className="font-medium">{order.customer}</div>
-                    <div className="text-sm text-gray-500">{order.company}</div>
+                  <div className="font-medium">{order.customer}</div>
+                  <div className="text-sm text-gray-500">{order.company}</div>
                 </TableCell>
                 <TableCell>{order.date}</TableCell>
                 <TableCell>
-                  <Badge variant={getStatusBadgeVariant(order.status)}>{order.status}</Badge>
+                  <Badge variant={getStatusBadgeVariant(order.status)}>
+                    {order.status}
+                  </Badge>
                 </TableCell>
-                <TableCell className="text-right font-semibold">R{order.total.toLocaleString()}</TableCell>
+                <TableCell className="text-right font-semibold">
+                  R{order.total.toLocaleString()}
+                </TableCell>
                 <TableCell className="text-center">
-                    <Link href={`/dashboard/orders/${order.id}`}>
-                        <Button variant="outline" size="icon">
-                           <MoreHorizontal className="h-4 w-4" />
-                        </Button>
-                    </Link>
+                  <Link href={`/dashboard/orders/${order.id}`}>
+                    <Button variant="outline" size="icon">
+                      <MoreHorizontal className="h-4 w-4" />
+                    </Button>
+                  </Link>
                 </TableCell>
               </TableRow>
             ))}

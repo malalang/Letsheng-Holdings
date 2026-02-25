@@ -24,3 +24,27 @@
     @apply text-brand-navy font-bold;
   }
 }
+
+/* Admin brand utilities */
+:root {
+  --brand-navy: #002147;
+  --brand-gold: #FFD700;
+}
+
+.glass-card {
+  background: rgba(0,33,71,0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,215,0,0.08);
+}
+
+.admin-cta {
+  border: 2px solid var(--brand-gold);
+  color: var(--brand-navy);
+  background: var(--brand-gold);
+}
+
+.admin-cta:hover {
+  background: rgba(0,33,71,0.95);
+  color: white;
+}

@@ -1,5 +1,6 @@
 import { Briefcase, Printer, Building } from "lucide-react";
 import type React from "react";
+import { Button } from "@/components/ui/button";
 
 const FeatureCard = ({
   icon,
@@ -123,9 +124,12 @@ export default function AboutPage() {
             or strategic partnerships, please connect with our Business
             Development office.
           </p>
-          <button type="button" className="mt-6 bg-brand-gold text-brand-navy font-bold py-3 px-8 rounded-lg hover:bg-opacity-90 transition-transform transform hover:scale-105 shadow-lg">
+          <Button
+            type="button"
+            className="mt-6 bg-brand-gold text-brand-navy font-bold py-3 px-8 rounded-lg hover:bg-opacity-90 transition-transform transform hover:scale-105 shadow-lg"
+          >
             Contact Business Services
-          </button>
+          </Button>
         </footer>
       </main>
     </div>

@@ -1,7 +1,9 @@
 import type { Property } from "@/lib/types/database.types";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { CircleDollarSign, Landmark, AlertTriangle } from "lucide-react";
+import TermsOfTenancy from "@/components/terms/TermsOfTenancy";
 
 const sampleProperties: Omit<
   Property,
@@ -36,42 +38,7 @@ const sampleProperties: Omit<
   },
 ];
 
-const TermsOfTenancy = () => (
-  <div className="bg-brand-navy/5 border-2 border-brand-gold/50 rounded-lg p-6 my-12 backdrop-blur-sm shadow-lg">
-    <div className="flex items-center">
-      <AlertTriangle className="h-8 w-8 text-brand-gold mr-4" />
-      <h2 className="text-2xl font-bold text-brand-navy">
-        Terms of Tenancy Agreement
-      </h2>
-    </div>
-    <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-700">
-      <div>
-        <h4 className="font-semibold text-lg text-brand-navy">
-          Monthly Payment Obligation
-        </h4>
-        <p className="mt-1">
-          All lease payments are due on or before the{" "}
-          <strong className="text-brand-navy">
-            7th day of each calendar month.
-          </strong>{" "}
-          This policy is strictly enforced to ensure operational consistency
-          across our portfolio.
-        </p>
-      </div>
-      <div>
-        <h4 className="font-semibold text-lg text-brand-navy">
-          Lease Lapse & Renewal Policy
-        </h4>
-        <p className="mt-1">
-          Lease agreements that lapse beyond a continuous{" "}
-          <strong className="text-brand-navy">three-month period</strong>{" "}
-          without renewal or payment will be subject to termination and
-          repossession protocols as per the signed contract.
-        </p>
-      </div>
-    </div>
-  </div>
-);
+// Using shared TermsOfTenancy component (imported above)
 
 export default function PropertiesPage() {
   return (
@@ -91,14 +58,13 @@ export default function PropertiesPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {sampleProperties.map((p) => (
-          <div
+          <Card
             key={p.id}
-            className="bg-white/60 backdrop-blur-lg rounded-xl shadow-lg border border-gray-200/50 overflow-hidden transform hover:-translate-y-2 transition-transform duration-300"
+            className="rounded-xl shadow-lg border border-gray-200/50 overflow-hidden transform hover:-translate-y-2 transition-transform duration-300"
           >
-            <div className="h-48 bg-gray-200">
-              {/* Placeholder for an image gallery */}
-            </div>
-            <div className="p-6">
+            <div className="h-48 bg-gray-200">{/* Placeholder for an image gallery */}</div>
+
+            <CardContent>
               <div className="flex justify-between items-start">
                 <h3 className="text-2xl font-bold text-brand-navy leading-tight">
                   {p.title}
@@ -111,18 +77,15 @@ export default function PropertiesPage() {
                 </Badge>
               </div>
               <p className="text-sm text-gray-500 mt-1">{p.location}</p>
-              <p className="mt-4 text-gray-700 leading-relaxed">
-                {p.description}
-              </p>
+              <p className="mt-4 text-gray-700 leading-relaxed">{p.description}</p>
               <div className="mt-6 flex items-center text-2xl font-bold text-brand-navy">
                 <CircleDollarSign className="h-6 w-6 mr-2 text-brand-gold" />R
                 {p.price.toLocaleString()}
-                <span className="text-sm font-normal text-gray-500 ml-2">
-                  / month
-                </span>
+                <span className="text-sm font-normal text-gray-500 ml-2">/ month</span>
               </div>
-            </div>
-            <div className="bg-gray-50/50 px-6 py-4 flex items-center justify-between">
+            </CardContent>
+
+            <CardFooter className="bg-gray-50/50 px-6 py-4 flex items-center justify-between">
               <Button
                 variant="outline"
                 className="border-2 border-brand-gold text-brand-gold bg-transparent hover:bg-brand-gold hover:text-brand-navy transition-all duration-300"
@@ -135,8 +98,8 @@ export default function PropertiesPage() {
               >
                 Apply to Lease
               </Button>
-            </div>
-          </div>
+            </CardFooter>
+          </Card>
         ))}
       </div>
     </div>

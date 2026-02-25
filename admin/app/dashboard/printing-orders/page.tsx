@@ -1,8 +1,20 @@
-
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { MoreHorizontal, PlusCircle, ListFilter } from "lucide-react";
 import Link from "next/link";
 
@@ -31,7 +43,7 @@ const sampleOrders = [
     status: "Shipped",
     total: 800,
   },
-   {
+  {
     id: "PRJ-004",
     customer: "Samuel Wilson",
     company: "Daily Planet",
@@ -66,16 +78,19 @@ export default function PrintOrdersPage() {
             Monitor and manage all incoming and ongoing printing projects.
           </CardDescription>
         </div>
-         <div className="flex items-center gap-4">
-            <Button variant="outline" className="bg-white/10 border-white/20 hover:bg-white/20">
-                <ListFilter className="mr-2 h-4 w-4"/> Filter Orders
+        <div className="flex items-center gap-4">
+          <Button
+            variant="outline"
+            className="bg-white/10 border-white/20 hover:bg-white/20"
+          >
+            <ListFilter className="mr-2 h-4 w-4" /> Filter Orders
+          </Button>
+          <Link href="/dashboard/printing-orders/new">
+            <Button className="bg-brand-gold text-brand-navy font-bold hover:bg-brand-gold/90">
+              <PlusCircle className="mr-2 h-4 w-4" />
+              Log New Project
             </Button>
-            <Link href="/dashboard/printing-orders/new">
-              <Button className="bg-brand-gold text-brand-navy font-bold hover:bg-brand-gold/90">
-                <PlusCircle className="mr-2 h-4 w-4" />
-                Log New Project
-              </Button>
-            </Link>
+          </Link>
         </div>
       </CardHeader>
       <CardContent>
@@ -86,29 +101,49 @@ export default function PrintOrdersPage() {
               <TableHead className="text-white/80">Customer</TableHead>
               <TableHead className="text-white/80">Submission Date</TableHead>
               <TableHead className="text-white/80">Status</TableHead>
-              <TableHead className="text-white/80 text-right">Value (ZAR)</TableHead>
-              <TableHead className="text-white/80 text-center">Actions</TableHead>
+              <TableHead className="text-white/80 text-right">
+                Value (ZAR)
+              </TableHead>
+              <TableHead className="text-white/80 text-center">
+                Actions
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {sampleOrders.map((order) => (
-              <TableRow key={order.id} className="border-b-white/10 hover:bg-white/5">
-                <TableCell className="font-mono text-sm text-gray-300">{order.id}</TableCell>
+              <TableRow
+                key={order.id}
+                className="border-b-white/10 hover:bg-white/5"
+              >
+                <TableCell className="font-mono text-sm text-gray-300">
+                  {order.id}
+                </TableCell>
                 <TableCell>
-                    <div className="font-medium text-white">{order.customer}</div>
-                    <div className="text-sm text-gray-400">{order.company}</div>
+                  <div className="font-medium text-white">{order.customer}</div>
+                  <div className="text-sm text-gray-400">{order.company}</div>
                 </TableCell>
                 <TableCell className="text-gray-400">{order.date}</TableCell>
                 <TableCell>
-                  <Badge variant="outline" className={`font-semibold ${getStatusBadge(order.status)}`}>{order.status}</Badge>
+                  <Badge
+                    variant="outline"
+                    className={`font-semibold ${getStatusBadge(order.status)}`}
+                  >
+                    {order.status}
+                  </Badge>
                 </TableCell>
-                <TableCell className="text-right font-semibold text-white">R {order.total.toLocaleString()}</TableCell>
+                <TableCell className="text-right font-semibold text-white">
+                  R {order.total.toLocaleString()}
+                </TableCell>
                 <TableCell className="text-center">
-                    <Link href={`/dashboard/printing-orders/${order.id}`}>
-                        <Button variant="outline" size="sm" className="border-brand-gold/50 text-brand-gold hover:bg-brand-gold hover:text-brand-navy">
-                           <MoreHorizontal className="h-4 w-4" />
-                        </Button>
-                    </Link>
+                  <Link href={`/dashboard/printing-orders/${order.id}`}>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="border-brand-gold/50 text-brand-gold hover:bg-brand-gold hover:text-brand-navy"
+                    >
+                      <MoreHorizontal className="h-4 w-4" />
+                    </Button>
+                  </Link>
                 </TableCell>
               </TableRow>
             ))}

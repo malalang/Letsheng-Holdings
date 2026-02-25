@@ -1,13 +1,24 @@
-
 import "./globals.css";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 // Placeholder for Lucide icons - in a real scenario, you'd import these
 const Icon = ({ name, className }: { name: string; className: string }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <svg
+    className={className}
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+  >
     {/* Basic placeholder icon shape - replace with actual Lucide icon paths */}
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M4 6h16M4 12h16M4 18h16"
+    />
   </svg>
 );
 
@@ -24,31 +35,43 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
           {/* Glassmorphic Sidebar */}
           <aside className="w-64 bg-brand-navy text-white flex flex-col shrink-0 backdrop-blur-lg bg-opacity-90 border-r border-brand-gold/20">
             <div className="flex items-center justify-center h-20 border-b border-brand-gold/20">
-                <div className="bg-brand-gold text-brand-navy font-bold rounded-full h-10 w-10 flex items-center justify-center text-md">
-                    LH
-                </div>
+              <div className="bg-brand-gold text-brand-navy font-bold rounded-full h-10 w-10 flex items-center justify-center text-md">
+                LH
+              </div>
               <h1 className="ml-3 text-xl font-bold">Admin Portal</h1>
             </div>
 
             <nav className="flex-grow px-4 py-6 space-y-2">
-              <a href="/dashboard" className="flex items-center px-4 py-3 rounded-lg text-gray-300 hover:bg-brand-gold hover:text-brand-navy transition-colors duration-300">
+              <Link
+                href="/dashboard"
+                className="flex items-center px-4 py-3 rounded-lg text-gray-300 hover:bg-brand-gold hover:text-brand-navy transition-colors duration-300"
+              >
                 <Icon name="LayoutDashboard" className="h-5 w-5 mr-3" />
                 Dashboard
-              </a>
-              <a href="/dashboard/properties" className="flex items-center px-4 py-3 rounded-lg text-gray-300 hover:bg-brand-gold hover:text-brand-navy transition-colors duration-300">
+              </Link>
+              <Link
+                href="/dashboard/properties"
+                className="flex items-center px-4 py-3 rounded-lg text-gray-300 hover:bg-brand-gold hover:text-brand-navy transition-colors duration-300"
+              >
                 <Icon name="Building2" className="h-5 w-5 mr-3" />
                 Properties
-              </a>
-              <a href="/dashboard/printing-orders" className="flex items-center px-4 py-3 rounded-lg text-gray-300 hover:bg-brand-gold hover:text-brand-navy transition-colors duration-300">
+              </Link>
+              <Link
+                href="/dashboard/printing-orders"
+                className="flex items-center px-4 py-3 rounded-lg text-gray-300 hover:bg-brand-gold hover:text-brand-navy transition-colors duration-300"
+              >
                 <Icon name="Printer" className="h-5 w-5 mr-3" />
                 Printing Orders
-              </a>
+              </Link>
             </nav>
 
             <div className="px-4 py-6 border-t border-brand-gold/20">
-              <a href="/login" className="w-full text-center border-2 border-brand-gold text-brand-gold px-4 py-3 rounded-lg font-semibold hover:bg-brand-gold hover:text-brand-navy transition-all duration-300">
-                Logout
-              </a>
+              <Button
+                asChild
+                className="w-full justify-center border-2 border-brand-gold text-brand-gold px-4 py-3 rounded-lg font-semibold hover:bg-brand-gold hover:text-brand-navy transition-all duration-300"
+              >
+                <Link href="/login">Logout</Link>
+              </Button>
             </div>
           </aside>
 
@@ -59,20 +82,30 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
                 <div>
                   {/* Breadcrumb would be dynamically generated here */}
                   <p className="text-sm text-gray-500">Dashboard /</p>
-                  <h2 className="text-xl font-bold text-brand-navy">Overview</h2>
+                  <h2 className="text-xl font-bold text-brand-navy">
+                    Overview
+                  </h2>
                 </div>
                 <div className="flex items-center">
-                    <div className="relative">
-                        <Icon name="Bell" className="h-6 w-6 text-gray-500"/>
-                        <span className="absolute top-0 right-0 h-2 w-2 bg-brand-gold rounded-full"></span>
+                  <div className="relative">
+                    <Icon name="Bell" className="h-6 w-6 text-gray-500" />
+                    <span className="absolute top-0 right-0 h-2 w-2 bg-brand-gold rounded-full"></span>
+                  </div>
+                  <div className="ml-6 flex items-center">
+                    <img
+                      src="/path-to-admin-avatar.jpg"
+                      alt="Admin User"
+                      className="h-10 w-10 rounded-full"
+                    />
+                    <div className="ml-3">
+                      <p className="text-sm font-semibold text-brand-navy">
+                        Admin User
+                      </p>
+                      <p className="text-xs text-gray-500">
+                        System Administrator
+                      </p>
                     </div>
-                    <div className="ml-6 flex items-center">
-                        <img src="/path-to-admin-avatar.jpg" alt="Admin User" className="h-10 w-10 rounded-full"/>
-                        <div className="ml-3">
-                            <p className="text-sm font-semibold text-brand-navy">Admin User</p>
-                            <p className="text-xs text-gray-500">System Administrator</p>
-                        </div>
-                    </div>
+                  </div>
                 </div>
               </div>
             </header>

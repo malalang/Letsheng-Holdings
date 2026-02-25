@@ -24,3 +24,37 @@
     @apply text-brand-navy font-bold;
   }
 }
+
+/* Brand utilities and glassmorphism helpers */
+:root {
+  --brand-navy: #002147;
+  --brand-gold: #FFD700;
+}
+
+.glass-card {
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+.btn-gold-outline {
+  border: 2px solid var(--brand-gold);
+  color: var(--brand-gold);
+  background: transparent;
+}
+.btn-gold-outline:hover {
+  background: var(--brand-navy);
+  color: white;
+}
+
+.hero-navy {
+  background-color: var(--brand-navy);
+  color: white;
+}
+
+.glass-overlay {
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,215,0,0.12);
+  backdrop-filter: blur(6px);
+}

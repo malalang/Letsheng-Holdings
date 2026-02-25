@@ -1,9 +1,9 @@
-
 "use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { LayoutDashboard, Briefcase, Printer, LogOut } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const navLinks = [
   {
@@ -23,7 +23,11 @@ const navLinks = [
   },
 ];
 
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+export default function DashboardLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const pathname = usePathname();
 
   return (
@@ -52,16 +56,21 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             );
           })}
         </nav>
-         <div className="mt-auto">
-             <button className="flex items-center p-3 rounded-lg transition-colors w-full text-left hover:bg-brand-navy-light/50">
-                <LogOut className="mr-3 h-5 w-5" />
-                Logout
-             </button>
+        <div className="mt-auto">
+          <Button
+            className="w-full justify-start flex items-center"
+            variant="ghost"
+            onClick={() => {
+              localStorage.removeItem("admin-token");
+              window.location.href = "/admin/login";
+            }}
+          >
+            <LogOut className="mr-3 h-5 w-5" />
+            Logout
+          </Button>
         </div>
       </aside>
-      <main className="flex-1 p-8 ml-64">
-        {children}
-      </main>
+      <main className="flex-1 p-8 ml-64">{children}</main>
     </div>
   );
 }
