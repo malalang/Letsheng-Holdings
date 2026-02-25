@@ -15,6 +15,7 @@ import {
   CardFooter,
   CardTitle,
 } from "@/components/ui/card";
+import Image from "next/image";
 
 interface Product {
   title: string;
@@ -39,7 +40,7 @@ const products: Product[] = [
     description:
       "The cornerstone of a professional wardrobe. Woven from ultra-soft, 180gsm combed cotton for superior comfort and a premium feel. Features a classic fit with a reinforced collar and shoulder-to-shoulder taping for lasting durability. Ideal for team uniforms and corporate events.",
     icon: Shirt,
-    image: "/placeholders/stock-printing-1.jpg",
+    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=2080&auto=format&fit=crop",
     specs: [
       { label: "Material", value: "100% Combed Cotton" },
       { label: "Weight", value: "180gsm" },
@@ -52,7 +53,7 @@ const products: Product[] = [
     description:
       "A powerful statement piece for any desk. This 11oz ceramic mug is finished with a high-gloss, scratch-resistant coating, ensuring your branding remains vibrant and pristine. Dishwasher and microwave safe. Perfect for client gifts and internal brand reinforcement.",
     icon: Coffee,
-    image: "/placeholders/stock-printing-2.jpg",
+    image: "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=80&w=2070&auto=format&fit=crop",
     specs: [
       { label: "Capacity", value: "11oz (325ml)" },
       { label: "Material", value: "AAA Grade Ceramic" },
@@ -72,45 +73,46 @@ const comingSoonProducts: ComingSoonProduct[] = [
 ];
 
 const ProductCard = ({ product }: { product: Product }) => (
-  <Card className="rounded-2xl shadow-lg border border-black/10 overflow-hidden group flex flex-col">
-    <div className="relative h-64 bg-gray-300">
-      <img
-        src={product.image}
-        alt={product.title}
-        className="w-full h-full object-cover"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-      <div className="absolute bottom-0 left-0 p-6">
-        <Badge className="bg-brand-gold text-brand-navy font-semibold">
-          {product.category}
-        </Badge>
-        <h3 className="text-2xl font-bold text-white mt-2 drop-shadow-lg">
-          {product.title}
-        </h3>
-      </div>
-    </div>
+    <Card className="rounded-2xl shadow-lg border border-black/10 overflow-hidden group flex flex-col">
+        <div className="relative h-64 bg-gray-300">
+            <Image
+                src={product.image}
+                alt={product.title}
+                fill
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+            <div className="absolute bottom-0 left-0 p-6">
+                <Badge className="bg-brand-gold text-brand-navy font-semibold">
+                    {product.category}
+                </Badge>
+                <h3 className="text-2xl font-bold text-white mt-2 drop-shadow-lg">
+                    {product.title}
+                </h3>
+            </div>
+        </div>
 
-    <CardContent className="flex-grow">
-      <p className="text-gray-700 leading-relaxed">{product.description}</p>
-      <div className="mt-4 space-y-2">
-        {product.specs.map((spec: { label: string; value: string }) => (
-          <div key={spec.label} className="flex justify-between text-sm">
-            <span className="font-semibold text-gray-600">{spec.label}:</span>
-            <span className="text-gray-800">{spec.value}</span>
-          </div>
-        ))}
-      </div>
-    </CardContent>
+        <CardContent className="p-6 flex-grow">
+            <p className="text-gray-700 leading-relaxed">{product.description}</p>
+            <div className="mt-4 space-y-2">
+                {product.specs.map((spec: { label: string; value: string }) => (
+                <div key={spec.label} className="flex justify-between text-sm">
+                    <span className="font-semibold text-gray-600">{spec.label}:</span>
+                    <span className="text-gray-800">{spec.value}</span>
+                </div>
+                ))}
+            </div>
+        </CardContent>
 
-    <CardFooter className="bg-gray-50/50 px-6 py-4 mt-auto">
-      <Link href="/printing/order">
-        <Button className="w-full bg-brand-navy text-white hover:bg-opacity-90 font-bold transition-transform transform hover:scale-105">
-          Initiate a Project Inquiry
-          <ArrowRight className="h-4 w-4 ml-2" />
-        </Button>
-      </Link>
-    </CardFooter>
-  </Card>
+        <CardFooter className="bg-gray-50/50 px-6 py-4 mt-auto">
+            <Link href="/printing/order">
+                <Button className="w-full bg-brand-navy text-white hover:bg-opacity-90 font-bold transition-transform transform hover:scale-105">
+                Initiate a Project Inquiry
+                <ArrowRight className="h-4 w-4 ml-2" />
+                </Button>
+            </Link>
+        </CardFooter>
+    </Card>
 );
 
 const ComingSoonCard = ({ product }: { product: ComingSoonProduct }) => (
@@ -141,6 +143,15 @@ const ComingSoonCard = ({ product }: { product: ComingSoonProduct }) => (
   </Card>
 );
 
+const galleryImages = [
+    { src: "https://picsum.photos/id/101/800/600", alt: "Assorted branded stationary" },
+    { src: "https://picsum.photos/id/203/800/600", alt: "Close-up of a custom-printed t-shirt" },
+    { src: "https://picsum.photos/id/249/800/600", alt: "High-quality printing press in action" },
+    { src: "https://picsum.photos/id/431/800/600", alt: "A stack of freshly printed business cards" },
+    { src: "https://picsum.photos/id/447/800/600", alt: "A person wearing a branded cap" },
+    { src: "https://picsum.photos/id/453/800/600", alt: "Promotional mugs with a company logo" },
+]
+
 export default function PrintingPage() {
   return (
     <div className="animate-fade-in">
@@ -168,6 +179,23 @@ export default function PrintingPage() {
           ))}
         </div>
       </div>
+
+        <section className="mb-20">
+            <h2 className="text-3xl font-bold text-center text-brand-navy mb-10">Our Commitment to Quality Finishes</h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                {galleryImages.map((img, i) => (
+                    <div key={i} className="relative aspect-w-4 aspect-h-3 rounded-lg overflow-hidden shadow-lg group">
+                         <Image 
+                            src={img.src} 
+                            alt={img.alt} 
+                            fill
+                            className="object-cover transition-transform duration-300 group-hover:scale-110"
+                        />
+                         <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors"/>
+                    </div>
+                ))}
+            </div>
+        </section>
 
       <div className="bg-brand-navy text-white rounded-2xl p-12 shadow-2xl">
         <h2 className="text-center text-4xl font-bold mb-10">

@@ -10,6 +10,7 @@ import Link from "next/link";
 import type React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Image from "next/image";
 
 const ServiceCard = ({
   icon,
@@ -64,37 +65,43 @@ const StandardPillar = ({
 export default function HomePage() {
   return (
     <div className="animate-fade-in space-y-20">
-      <section className="text-center pt-16 pb-20 bg-gradient-to-br from-brand-navy via-black to-brand-navy/90 rounded-3xl text-white shadow-2xl -mx-4 md:-mx-8">
-        <div className="max-w-4xl mx-auto px-4">
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-brand-gold/80">
-            Elevating Ambitions
-          </h1>
-          <p className="mt-6 text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto">
-            Letsheng Holdings is your strategic partner for premium residential
-            estates and high-fidelity corporate branding. We build environments
-            and create identities that empower success.
-          </p>
-          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/properties">
-              <Button
-                size="lg"
-                className="w-full sm:w-auto bg-brand-gold text-brand-navy font-bold hover:bg-brand-gold/90 transition-transform transform hover:scale-105"
-              >
-                Explore Residential Estates
-              </Button>
-            </Link>
-            <Link href="/printing/order">
-              <Button
-                size="lg"
-                variant="outline"
-                className="w-full sm:w-auto text-white border-white/50 hover:bg-white/10 hover:text-white transition-transform transform hover:scale-105"
-              >
-                Initiate a Branding Project
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
+        <section className="relative text-center pt-16 pb-20 bg-gradient-to-br from-brand-navy via-black to-brand-navy/90 rounded-3xl text-white shadow-2xl overflow-hidden mx-4">
+            <Image 
+                src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=2070&auto=format&fit=crop"
+                alt="Modern architectural home at dusk"
+                fill
+                className="object-cover opacity-20"
+            />
+            <div className="relative max-w-4xl mx-auto px-4">
+                <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-brand-gold/80">
+                    Elevating Ambitions
+                </h1>
+                <p className="mt-6 text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto">
+                    Letsheng Holdings is your strategic partner for premium residential
+                    estates and high-fidelity corporate branding. We build environments
+                    and create identities that empower success.
+                </p>
+                <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+                    <Link href="/properties">
+                    <Button
+                        size="lg"
+                        className="w-full sm:w-auto bg-brand-gold text-brand-navy font-bold hover:bg-brand-gold/90 transition-transform transform hover:scale-105"
+                    >
+                        Explore Residential Estates
+                    </Button>
+                    </Link>
+                    <Link href="/printing/order">
+                    <Button
+                        size="lg"
+                        variant="outline"
+                        className="w-full sm:w-auto text-white border-white/50 hover:bg-white/10 hover:text-white transition-transform transform hover:scale-105"
+                    >
+                        Initiate a Branding Project
+                    </Button>
+                    </Link>
+                </div>
+            </div>
+        </section>
 
       <section>
         <div className="text-center mb-12">

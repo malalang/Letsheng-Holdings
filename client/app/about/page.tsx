@@ -11,28 +11,28 @@ const FeatureCard = ({
   title: string;
   children: React.ReactNode;
 }) => (
-  <div className="bg-white/10 backdrop-blur-lg border border-brand-gold/20 rounded-xl p-6 shadow-lg">
+  <div className="bg-white/5 backdrop-blur-sm border border-brand-gold/20 rounded-xl p-6 shadow-md">
     <div className="flex items-center text-brand-gold mb-4">
       {icon}
-      <h3 className="text-xl font-bold ml-3">{title}</h3>
+      <h3 className="text-xl font-bold ml-3 text-white">{title}</h3>
     </div>
-    <p className="text-gray-300">{children}</p>
+    <p className="text-gray-200">{children}</p>
   </div>
 );
 
 export default function AboutPage() {
   return (
-    <div className="animate-fade-in space-y-12">
+    <div className="animate-fade-in space-y-12 text-white">
       <header
-        className="bg-brand-navy text-white p-12 rounded-2xl shadow-2xl"
+        className="bg-brand-navy p-12 rounded-2xl shadow-2xl"
         style={{
           backgroundImage: `radial-gradient(circle at top right, #FFD70020, transparent), radial-gradient(circle at bottom left, #002147, #001a38)`,
         }}
       >
-        <h1 className="text-5xl font-extrabold tracking-tight">
+        <h1 className="text-5xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-brand-gold/80 drop-shadow-lg">
           Our Philosophy: The Letsheng Standard
         </h1>
-        <p className="mt-4 text-xl text-gray-300 max-w-4xl">
+        <p className="mt-4 text-xl text-gray-200 max-w-4xl">
           Letsheng Holdings is built on a foundation of unwavering discipline
           and operational excellence. We operate two synergistic divisions,
           Estates and Printing, united by a singular commitment: to deliver
@@ -41,19 +41,19 @@ export default function AboutPage() {
       </header>
 
       <main className="space-y-12">
-        <section className="p-8 bg-brand-navy/90 text-white rounded-2xl border border-brand-gold/30 shadow-xl">
+        <section className="p-8 bg-brand-navy/90 rounded-2xl border border-brand-gold/30 shadow-xl">
           <h2 className="text-3xl font-bold text-center mb-8">
             Two Divisions, One Vision
           </h2>
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-white/5 p-6 rounded-lg">
+            <div className="bg-white/10 p-6 rounded-lg">
               <div className="flex items-center mb-3">
                 <Building className="h-8 w-8 text-brand-gold" />
                 <h3 className="text-2xl font-semibold ml-4">
                   Letsheng Estates
                 </h3>
               </div>
-              <p className="text-gray-400">
+              <p className="text-gray-300">
                 Our Estates division is dedicated to curating and managing
                 premium residential properties. We believe that a home is a
                 sanctuary, and our commitment is to provide secure,
@@ -62,14 +62,14 @@ export default function AboutPage() {
                 all our residents.
               </p>
             </div>
-            <div className="bg-white/5 p-6 rounded-lg">
+            <div className="bg-white/10 p-6 rounded-lg">
               <div className="flex items-center mb-3">
                 <Printer className="h-8 w-8 text-brand-gold" />
                 <h3 className="text-2xl font-semibold ml-4">
                   Letsheng Printing
                 </h3>
               </div>
-              <p className="text-gray-400">
+              <p className="text-gray-300">
                 The Printing division provides high-fidelity branding and
                 marketing materials for discerning businesses. From corporate
                 apparel to promotional merchandise, we combine state-of-the-art
@@ -80,8 +80,8 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section>
-          <h2 className="text-3xl font-bold text-center text-brand-navy mb-8">
+        <section className="p-8 bg-brand-navy/90 rounded-2xl border border-brand-gold/30 shadow-xl">
+          <h2 className="text-3xl font-bold text-center text-white mb-8">
             The Pillars of Our Growth
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

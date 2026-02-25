@@ -4,11 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { CircleDollarSign, Landmark, AlertTriangle } from "lucide-react";
 import TermsOfTenancy from "@/components/terms/TermsOfTenancy";
+import Image from "next/image";
 
-const sampleProperties: Omit<
-  Property,
-  "created_at" | "image_urls" | "owner_id"
->[] = [
+const sampleProperties = [
   {
     id: "1",
     title: "Executive Waterfront Residence, Harbour View",
@@ -17,15 +15,17 @@ const sampleProperties: Omit<
     price: 35000,
     location: "V&A Waterfront, Cape Town",
     availability: true,
+    image_url: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
   },
   {
     id: "2",
     title: "Metropolitan Loft, Financial District",
     description:
-      "A chic, fully-serviced loft situated in the heart of the financial district. With soaring ceilings and industrial-luxe design, this space is crafted for productivity and style. Includes access to our resident's lounge.",
+      "A chic, fully-serviced loft situated in the heart of the financial district. With soaring ceilings and industrial-luxe design, this space is crafted for productivity and style. Includes access to our resident\'s lounge.",
     price: 22000,
     location: "Sandton, Johannesburg",
     availability: false,
+    image_url: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070&auto=format&fit=crop",
   },
   {
     id: "3",
@@ -35,6 +35,7 @@ const sampleProperties: Omit<
     price: 12500,
     location: "Constantia, Cape Town",
     availability: true,
+    image_url: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=1974&auto=format&fit=crop",
   },
 ];
 
@@ -60,11 +61,18 @@ export default function PropertiesPage() {
         {sampleProperties.map((p) => (
           <Card
             key={p.id}
-            className="rounded-xl shadow-lg border border-gray-200/50 overflow-hidden transform hover:-translate-y-2 transition-transform duration-300"
+            className="group rounded-xl shadow-lg border border-gray-200/50 overflow-hidden transform hover:-translate-y-2 transition-transform duration-300"
           >
-            <div className="h-48 bg-gray-200">{/* Placeholder for an image gallery */}</div>
+            <div className="relative h-48">
+                <Image 
+                    src={p.image_url}
+                    alt={p.title}
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+            </div>
 
-            <CardContent>
+            <CardContent className="p-6">
               <div className="flex justify-between items-start">
                 <h3 className="text-2xl font-bold text-brand-navy leading-tight">
                   {p.title}
