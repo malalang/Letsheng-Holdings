@@ -8,10 +8,15 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Letsheng Holdings | Premium Estates & Corporate Branding",
-  description: "Your strategic partner for premium residential estates and high-fidelity corporate branding. We build environments and create identities that empower success.",
+  description:
+    "Your strategic partner for premium residential estates and high-fidelity corporate branding. We build environments and create identities that empower success.",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <body className={`${inter.className} bg-gray-50/80 text-gray-800`}>
