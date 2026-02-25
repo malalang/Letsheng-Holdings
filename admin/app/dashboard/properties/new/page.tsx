@@ -193,7 +193,7 @@ export default function NewPropertyPage() {
             </Button>
             <Button
               type="submit"
-              className="bg-brand-navy text-white hover:bg-opacity-90"
+              variant="default"
             >
               Create Property
             </Button>

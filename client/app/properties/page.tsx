@@ -67,14 +67,14 @@ export default function PropertiesPage() {
         {sampleProperties.map((p) => (
           <Card
             key={p.id}
-            className="group rounded-xl shadow-lg border-gray-200/50 overflow-hidden flex flex-col"
+            className="rounded-xl shadow-lg border-gray-200/50 overflow-hidden flex flex-col"
           >
             <div className="relative h-48">
               <Image
                 src={p.image_url}
                 alt={p.title}
                 fill
-                className="object-cover transition-transform duration-300 group-hover:scale-105"
+                className="object-cover"
               />
             </div>
 

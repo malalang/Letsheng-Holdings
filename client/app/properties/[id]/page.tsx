@@ -99,12 +99,11 @@ export default function PropertyDetailPage({
 
   return (
     <div className="animate-fade-in">
-      <Link
-        href="/properties"
-        className="inline-flex items-center text-brand-navy font-semibold mb-6 hover:underline"
-      >
-        <ArrowLeft className="h-4 w-4 mr-2" />
-        Back to All Properties
+      <Link href="/properties">
+        <Button variant="outline" className="mb-6">
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Back to All Properties
+        </Button>
       </Link>
 
       <header className="mb-8">
@@ -147,7 +146,7 @@ export default function PropertyDetailPage({
               </div>
               <Badge
                 variant={property.availability ? "default" : "destructive"}
-                className={`w-full text-center justify-center py-2 text-md font-bold ${property.availability ? "bg-green-600/80 border-green-400 text-white" : "bg-red-600/80 border-red-400 text-white"}`}
+                className="w-full text-center justify-center py-2 text-md font-bold"
               >
                 {property.availability
                   ? "Available for Immediate Lease"
@@ -156,14 +155,14 @@ export default function PropertyDetailPage({
               <div className="mt-6 grid grid-cols-2 gap-4">
                 <Button
                   variant="outline"
-                  className="w-full border-2 border-brand-gold text-brand-gold bg-transparent hover:bg-brand-gold hover:text-brand-navy font-bold transition-all duration-300"
+                  className="w-full"
                 >
                   <Eye className="h-4 w-4 mr-2" />
                   Request Viewing
                 </Button>
                 <Button
                   variant="default"
-                  className="w-full bg-brand-navy text-white hover:bg-opacity-90 font-bold transition-opacity"
+                  className="w-full"
                 >
                   <FileText className="h-4 w-4 mr-2" />
                   Proceed to Application

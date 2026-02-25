@@ -36,28 +36,28 @@ const projectInquirySchema = z.object({
 type InquiryFormData = z.infer<typeof projectInquirySchema>;
 
 const NextStepsInfo = () => (
-  <Card className="bg-brand-navy/90 border-2 border-brand-gold/50 rounded-2xl backdrop-blur-xl shadow-2xl h-full">
+  <Card className="h-full">
     <CardHeader>
-      <CardTitle className="text-white text-lg font-semibold">Next Steps</CardTitle>
+      <CardTitle className="text-lg font-semibold">Next Steps</CardTitle>
     </CardHeader>
     <CardContent>
-      <ol className="space-y-4 text-sm text-gray-100">
+      <ol className="space-y-4 text-sm">
         <li className="flex items-start">
           <strong className="bg-brand-gold text-brand-navy rounded-full h-8 w-8 text-center shrink-0 leading-8 font-bold mr-4">1</strong>
           <div>
-            <strong className="text-white">Consultation & Quote:</strong> We review your submission and provide a tailored quote and timeline.
+            <strong>Consultation & Quote:</strong> We review your submission and provide a tailored quote and timeline.
           </div>
         </li>
         <li className="flex items-start">
           <strong className="bg-brand-gold text-brand-navy rounded-full h-8 w-8 text-center shrink-0 leading-8 font-bold mr-4">2</strong>
           <div>
-            <strong className="text-white">Review & Approval:</strong> You will receive proofs for approval and can request final adjustments before production.
+            <strong>Review & Approval:</strong> You will receive proofs for approval and can request final adjustments before production.
           </div>
         </li>
         <li className="flex items-start">
           <strong className="bg-brand-gold text-brand-navy rounded-full h-8 w-8 text-center shrink-0 leading-8 font-bold mr-4">3</strong>
           <div>
-            <strong className="text-white">Production & Fulfillment:</strong> After approval and payment, we move into production and manage fulfillment end-to-end.
+            <strong>Production & Fulfillment:</strong> After approval and payment, we move into production and manage fulfillment end-to-end.
           </div>
         </li>
       </ol>
@@ -101,7 +101,7 @@ export default function PrintOrderPage() {
         <div className="lg:col-span-2">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-              <Card className="bg-white/60 backdrop-blur-lg border-black/10 shadow-lg">
+              <Card>
                 <CardHeader>
                   <CardTitle className="text-2xl flex items-center text-brand-navy">
                     <User className="mr-3" />
@@ -158,7 +158,7 @@ export default function PrintOrderPage() {
                 </CardContent>
               </Card>
 
-              <Card className="bg-white/60 backdrop-blur-lg border-black/10 shadow-lg">
+              <Card>
                 <CardHeader>
                   <CardTitle className="text-2xl flex items-center text-brand-navy">
                     <Package className="mr-3" />
@@ -257,7 +257,7 @@ export default function PrintOrderPage() {
                   type="submit"
                   size="lg"
                   variant="default"
-                  className="w-full md:w-auto font-bold transition-transform transform hover:scale-105 shadow-lg"
+                  className="w-full md:w-auto"
                 >
                   Submit Project Inquiry
                   <ArrowRight className="h-5 w-5 ml-3" />

@@ -27,7 +27,7 @@
 
 /* Brand utilities and glassmorphism helpers */
 :root {
-  --brand-navy: #002147;
+  --brand-navy: lch(12.88% 27.65 282.12);
   --brand-gold: #FFD700;
 }
 
