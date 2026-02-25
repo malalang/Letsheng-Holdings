@@ -8,6 +8,7 @@ import {
   Twitter,
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 const FooterLink = ({
   href,
@@ -47,11 +48,18 @@ export default function Footer() {
     <footer className="bg-brand-navy text-white pt-16 pb-8 -mx-4 md:-mx-8">
       <div className="container mx-auto px-4 md:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-          <div className="md:col-span-1">
-            <h3 className="text-xl font-bold text-brand-gold mb-4">
+          <div className="md:col-span-1 flex flex-col items-center md:items-start">
+            <Image
+              src="/logo.jpg"
+              alt="Letsheng Holdings Logo"
+              width={80}
+              height={80}
+              className="rounded-full shadow-lg mb-4"
+            />
+            <h3 className="text-xl font-bold text-brand-gold mb-2">
               Letsheng Holdings
             </h3>
-            <p className="text-gray-300 text-sm">
+            <p className="text-gray-300 text-sm text-center md:text-left">
               A premier holding company dedicated to superior residential
               property management and high-fidelity corporate branding
               solutions.

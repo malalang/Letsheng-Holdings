@@ -5,6 +5,7 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
+import Image from "next/image";
 
 const NavLink = ({
   href,
@@ -34,9 +35,13 @@ export default function Header() {
       <div className="container mx-auto px-4 md:px-8">
         <div className="flex items-center justify-between h-20">
           <Link href="/" className="flex items-center gap-3">
-            <div className="bg-brand-gold text-brand-navy font-bold rounded-full h-12 w-12 flex items-center justify-center text-lg shadow-md">
-              LH
-            </div>
+            <Image
+              src="/logo.jpg"
+              alt="Letsheng Holdings Logo"
+              width={48}
+              height={48}
+              className="rounded-full shadow-md"
+            />
             <span className="text-2xl font-bold text-white hidden sm:block">
               Letsheng Holdings
             </span>

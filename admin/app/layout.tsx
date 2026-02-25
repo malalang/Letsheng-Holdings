@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 // Placeholder for Lucide icons - in a real scenario, you'd import these
 const Icon = ({ name, className }: { name: string; className: string }) => (
@@ -35,9 +36,13 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
           {/* Glassmorphic Sidebar */}
           <aside className="w-64 bg-brand-navy text-white flex flex-col shrink-0 backdrop-blur-lg bg-opacity-90 border-r border-brand-gold/20">
             <div className="flex items-center justify-center h-20 border-b border-brand-gold/20">
-              <div className="bg-brand-gold text-brand-navy font-bold rounded-full h-10 w-10 flex items-center justify-center text-md">
-                LH
-              </div>
+              <Image
+                src="/logo.jpg"
+                alt="Letsheng Holdings Logo"
+                width={40}
+                height={40}
+                className="rounded-full"
+              />
               <h1 className="ml-3 text-xl font-bold">Admin Portal</h1>
             </div>
 
