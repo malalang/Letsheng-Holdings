@@ -22,44 +22,47 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Upload, ArrowRight, BadgeCheck, User, Package } from "lucide-react";
-import type React from "react";
+import { Upload, ArrowRight, User, Package } from "lucide-react";
 
 const projectInquirySchema = z.object({
-  customer_name: z.string().min(2),
+  customer_name: z.string().min(2, "A name is required."),
   company_name: z.string().optional(),
-  email: z.string().email(),
-  product_type: z.enum(["t-shirt", "mug"]),
-  quantity: z.number().int().positive(),
-  project_details: z.string().min(10),
+  email: z.string().email("Invalid email address."),
+  product_type: z.enum(["t-shirt", "mug"], { error: "Please select a product." }),
+  quantity: z.number().int().positive("Quantity must be at least 1."),
+  project_details: z.string().min(10, "Please provide more details."),
 });
 
 type InquiryFormData = z.infer<typeof projectInquirySchema>;
 
 const NextStepsInfo = () => (
-  <div className="bg-brand-navy/90 border-2 border-brand-gold/50 rounded-2xl p-8 backdrop-blur-xl shadow-2xl h-full">
-    <h3 className="text-white text-lg font-semibold mb-4">Next Steps</h3>
-    <ol className="space-y-4 text-sm text-gray-100">
-      <li className="flex items-start">
-        <strong className="bg-brand-gold text-brand-navy rounded-full h-8 w-8 text-center shrink-0 leading-8 font-bold mr-4">1</strong>
-        <div>
-          <strong className="text-white">Consultation & Quote:</strong> We review your submission and provide a tailored quote and timeline.
-        </div>
-      </li>
-      <li className="flex items-start">
-        <strong className="bg-brand-gold text-brand-navy rounded-full h-8 w-8 text-center shrink-0 leading-8 font-bold mr-4">2</strong>
-        <div>
-          <strong className="text-white">Review & Approval:</strong> You'll receive proofs for approval and can request final adjustments before production.
-        </div>
-      </li>
-      <li className="flex items-start">
-        <strong className="bg-brand-gold text-brand-navy rounded-full h-8 w-8 text-center shrink-0 leading-8 font-bold mr-4">3</strong>
-        <div>
-          <strong className="text-white">Production & Fulfillment:</strong> After approval and payment, we move into production and manage fulfillment end-to-end.
-        </div>
-      </li>
-    </ol>
-  </div>
+  <Card className="bg-brand-navy/90 border-2 border-brand-gold/50 rounded-2xl backdrop-blur-xl shadow-2xl h-full">
+    <CardHeader>
+      <CardTitle className="text-white text-lg font-semibold">Next Steps</CardTitle>
+    </CardHeader>
+    <CardContent>
+      <ol className="space-y-4 text-sm text-gray-100">
+        <li className="flex items-start">
+          <strong className="bg-brand-gold text-brand-navy rounded-full h-8 w-8 text-center shrink-0 leading-8 font-bold mr-4">1</strong>
+          <div>
+            <strong className="text-white">Consultation & Quote:</strong> We review your submission and provide a tailored quote and timeline.
+          </div>
+        </li>
+        <li className="flex items-start">
+          <strong className="bg-brand-gold text-brand-navy rounded-full h-8 w-8 text-center shrink-0 leading-8 font-bold mr-4">2</strong>
+          <div>
+            <strong className="text-white">Review & Approval:</strong> You will receive proofs for approval and can request final adjustments before production.
+          </div>
+        </li>
+        <li className="flex items-start">
+          <strong className="bg-brand-gold text-brand-navy rounded-full h-8 w-8 text-center shrink-0 leading-8 font-bold mr-4">3</strong>
+          <div>
+            <strong className="text-white">Production & Fulfillment:</strong> After approval and payment, we move into production and manage fulfillment end-to-end.
+          </div>
+        </li>
+      </ol>
+    </CardContent>
+  </Card>
 );
 
 export default function PrintOrderPage() {
@@ -106,52 +109,52 @@ export default function PrintOrderPage() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <FormField
-                    control={form.control}
-                    name="customer_name"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Full Name</FormLabel>
-                        <FormControl>
-                          <Input placeholder="e.g., Jane Doe" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Email Address</FormLabel>
-                        <FormControl>
-                          <Input
-                            type="email"
-                            placeholder="jane.doe@example.com"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="company_name"
-                    render={({ field }) => (
-                      <FormItem className="md:col-span-2">
-                        <FormLabel>Company Name (Optional)</FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="e.g., Acme Corporation"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                    <FormField
+                        control={form.control}
+                        name="customer_name"
+                        render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Full Name</FormLabel>
+                            <FormControl>
+                            <Input placeholder="e.g., Jane Doe" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="email"
+                        render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Email Address</FormLabel>
+                            <FormControl>
+                            <Input
+                                type="email"
+                                placeholder="jane.doe@example.com"
+                                {...field}
+                            />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="company_name"
+                        render={({ field }) => (
+                        <FormItem className="md:col-span-2">
+                            <FormLabel>Company Name (Optional)</FormLabel>
+                            <FormControl>
+                            <Input
+                                placeholder="e.g., Acme Corporation"
+                                {...field}
+                            />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                        )}
+                    />
                 </CardContent>
               </Card>
 
@@ -163,89 +166,89 @@ export default function PrintOrderPage() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-6">
-                  <FormField
-                    control={form.control}
-                    name="product_type"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Product Type</FormLabel>
-                        <Select
-                          onValueChange={field.onChange}
-                          defaultValue={field.value}
-                        >
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select a product..." />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            <SelectItem value="t-shirt">
-                              Executive Crewneck T-Shirt
-                            </SelectItem>
-                            <SelectItem value="mug">
-                              Ceramic Branding Mug
-                            </SelectItem>
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="quantity"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Estimated Quantity</FormLabel>
+                    <FormField
+                        control={form.control}
+                        name="product_type"
+                        render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Product Type</FormLabel>
+                            <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                            >
+                            <FormControl>
+                                <SelectTrigger>
+                                <SelectValue placeholder="Select a product..." />
+                                </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                                <SelectItem value="t-shirt">
+                                Executive Crewneck T-Shirt
+                                </SelectItem>
+                                <SelectItem value="mug">
+                                Ceramic Branding Mug
+                                </SelectItem>
+                            </SelectContent>
+                            </Select>
+                            <FormMessage />
+                        </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="quantity"
+                        render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Estimated Quantity</FormLabel>
+                            <FormControl>
+                            <Input
+                                type="number"
+                                min="1"
+                                placeholder="Minimum 1"
+                                {...field}
+                                onChange={(e) => field.onChange(+e.target.value)}
+                            />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="project_details"
+                        render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Project Brief & Design Notes</FormLabel>
+                            <FormControl>
+                            <Textarea
+                                rows={6}
+                                placeholder="Please describe your project, including desired colors, branding placement, and any critical deadlines..."
+                                {...field}
+                            />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                        )}
+                    />
+                    <FormItem>
+                        <FormLabel>Artwork & Logo Files</FormLabel>
                         <FormControl>
-                          <Input
-                            type="number"
-                            min="1"
-                            placeholder="Minimum 1"
-                            {...field}
-                            onChange={(e) => field.onChange(+e.target.value)}
-                          />
+                            <Card className="border-2 border-dashed border-gray-300 rounded-xl p-8 flex flex-col items-center justify-center text-center hover:border-brand-gold transition-colors duration-300">
+                                <Upload className="h-12 w-12 text-gray-400 mb-4" />
+                                <p className="text-gray-700 font-semibold mb-2">
+                                Drag & drop your vector artwork, or
+                                </p>
+                                <Button type="button" variant="outline">
+                                Browse Files
+                                </Button>
+                                <p className="text-xs text-gray-500 mt-4">
+                                Recommended formats: PDF, AI, EPS, SVG.
+                                High-resolution raster images (PNG) are also accepted.
+                                </p>
+                            </Card>
                         </FormControl>
                         <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="project_details"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Project Brief & Design Notes</FormLabel>
-                        <FormControl>
-                          <Textarea
-                            rows={6}
-                            placeholder="Please describe your project, including desired colors, branding placement, and any critical deadlines..."
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormItem>
-                    <FormLabel>Artwork & Logo Files</FormLabel>
-                    <FormControl>
-                      <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 flex flex-col items-center justify-center text-center hover:border-brand-gold hover:bg-white/50 transition-colors duration-300">
-                        <Upload className="h-12 w-12 text-gray-400 mb-4" />
-                        <p className="text-gray-700 font-semibold mb-2">
-                          Drag & drop your vector artwork, or
-                        </p>
-                        <Button type="button" variant="outline">
-                          Browse Files
-                        </Button>
-                        <p className="text-xs text-gray-500 mt-4">
-                          Recommended formats: PDF, AI, EPS, SVG.
-                          High-resolution raster images (PNG) are also accepted.
-                        </p>
-                      </div>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
+                    </FormItem>
                 </CardContent>
               </Card>
 
@@ -253,7 +256,8 @@ export default function PrintOrderPage() {
                 <Button
                   type="submit"
                   size="lg"
-                  className="w-full md:w-auto bg-brand-navy text-white font-bold hover:bg-opacity-90 transition-transform transform hover:scale-105 shadow-lg"
+                  variant="default"
+                  className="w-full md:w-auto font-bold transition-transform transform hover:scale-105 shadow-lg"
                 >
                   Submit Project Inquiry
                   <ArrowRight className="h-5 w-5 ml-3" />

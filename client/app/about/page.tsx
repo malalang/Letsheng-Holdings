@@ -1,7 +1,9 @@
 import { Briefcase, Printer, Building } from "lucide-react";
 import type React from "react";
 import { Button } from "@/components/ui/button";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
+// Re-usable FeatureCard, now built with the official Card component
 const FeatureCard = ({
   icon,
   title,
@@ -11,13 +13,15 @@ const FeatureCard = ({
   title: string;
   children: React.ReactNode;
 }) => (
-  <div className="bg-white/5 backdrop-blur-sm border border-brand-gold/20 rounded-xl p-6 shadow-md">
-    <div className="flex items-center text-brand-gold mb-4">
+  <Card className="bg-white/5 backdrop-blur-sm border-brand-gold/20 text-white shadow-md">
+    <CardHeader className="flex-row items-center text-brand-gold">
       {icon}
-      <h3 className="text-xl font-bold ml-3 text-white">{title}</h3>
-    </div>
-    <p className="text-gray-200">{children}</p>
-  </div>
+      <CardTitle className="ml-3 text-xl font-bold">{title}</CardTitle>
+    </CardHeader>
+    <CardContent>
+      <p className="text-gray-200">{children}</p>
+    </CardContent>
+  </Card>
 );
 
 export default function AboutPage() {
@@ -46,37 +50,43 @@ export default function AboutPage() {
             Two Divisions, One Vision
           </h2>
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-white/10 p-6 rounded-lg">
-              <div className="flex items-center mb-3">
+            {/* Refactored to use the Card component */}
+            <Card className="bg-white/10 border-0 text-white">
+              <CardHeader className="flex-row items-center">
                 <Building className="h-8 w-8 text-brand-gold" />
-                <h3 className="text-2xl font-semibold ml-4">
+                <CardTitle className="ml-4 text-2xl font-semibold">
                   Letsheng Estates
-                </h3>
-              </div>
-              <p className="text-gray-300">
-                Our Estates division is dedicated to curating and managing
-                premium residential properties. We believe that a home is a
-                sanctuary, and our commitment is to provide secure,
-                well-maintained, and desirable living spaces. Our transparent
-                tenancy terms and proactive management ensure peace of mind for
-                all our residents.
-              </p>
-            </div>
-            <div className="bg-white/10 p-6 rounded-lg">
-              <div className="flex items-center mb-3">
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-300">
+                  Our Estates division is dedicated to curating and managing
+                  premium residential properties. We believe that a home is a
+                  sanctuary, and our commitment is to provide secure,
+                  well-maintained, and desirable living spaces. Our transparent
+                  tenancy terms and proactive management ensure peace of mind for
+                  all our residents.
+                </p>
+              </CardContent>
+            </Card>
+            {/* Refactored to use the Card component */}
+            <Card className="bg-white/10 border-0 text-white">
+              <CardHeader className="flex-row items-center">
                 <Printer className="h-8 w-8 text-brand-gold" />
-                <h3 className="text-2xl font-semibold ml-4">
+                <CardTitle className="ml-4 text-2xl font-semibold">
                   Letsheng Printing
-                </h3>
-              </div>
-              <p className="text-gray-300">
-                The Printing division provides high-fidelity branding and
-                marketing materials for discerning businesses. From corporate
-                apparel to promotional merchandise, we combine state-of-the-art
-                technology with meticulous craftsmanship to bring your brand's
-                vision to life with precision and impact.
-              </p>
-            </div>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-300">
+                  The Printing division provides high-fidelity branding and
+                  marketing materials for discerning businesses. From corporate
+                  apparel to promotional merchandise, we combine state-of-the-art
+                  technology with meticulous craftsmanship to bring your brand's
+                  vision to life with precision and impact.
+                </p>
+              </CardContent>
+            </Card>
           </div>
         </section>
 
@@ -124,9 +134,11 @@ export default function AboutPage() {
             or strategic partnerships, please connect with our Business
             Development office.
           </p>
+          {/* Refactored to use the default button variant */}
           <Button
-            type="button"
-            className="mt-6 bg-brand-gold text-brand-navy font-bold py-3 px-8 rounded-lg hover:bg-opacity-90 transition-transform transform hover:scale-105 shadow-lg"
+            size="lg"
+            variant="default"
+            className="mt-6 font-bold transition-transform transform hover:scale-105"
           >
             Contact Business Services
           </Button>

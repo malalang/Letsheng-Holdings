@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
 
+// Re-usable ServiceCard now fully relies on UI components
 const ServiceCard = ({
   icon,
   title,
@@ -33,10 +34,8 @@ const ServiceCard = ({
     <CardContent className="flex flex-col flex-grow">
       <p className="text-gray-600 flex-grow">{description}</p>
       <Link href={link} className="mt-6">
-        <Button
-          variant="outline"
-          className="w-full border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-brand-navy"
-        >
+        {/* secondary action button using outline variant */}
+        <Button variant="outline" className="w-full">
           {cta} <ArrowRight className="h-4 w-4 ml-2" />
         </Button>
       </Link>
@@ -44,6 +43,7 @@ const ServiceCard = ({
   </Card>
 );
 
+// Re-usable StandardPillar - structure maintained
 const StandardPillar = ({
   icon,
   title,
@@ -83,21 +83,24 @@ export default function HomePage() {
                 </p>
                 <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
                     <Link href="/properties">
-                    <Button
-                        size="lg"
-                        className="w-full sm:w-auto bg-brand-gold text-brand-navy font-bold hover:bg-brand-gold/90 transition-transform transform hover:scale-105"
-                    >
-                        Explore Residential Estates
-                    </Button>
+                      {/* Primary action button using default variant */}
+                      <Button
+                          size="lg"
+                          variant="default"
+                          className="w-full sm:w-auto font-bold transition-transform transform hover:scale-105"
+                      >
+                          Explore Residential Estates
+                      </Button>
                     </Link>
                     <Link href="/printing/order">
-                    <Button
-                        size="lg"
-                        variant="outline"
-                        className="w-full sm:w-auto text-white border-white/50 hover:bg-white/10 hover:text-white transition-transform transform hover:scale-105"
-                    >
-                        Initiate a Branding Project
-                    </Button>
+                      {/* Secondary action on dark background */}
+                      <Button
+                          size="lg"
+                          variant="outline"
+                          className="w-full sm:w-auto border-brand-gold text-white hover:bg-brand-gold hover:text-brand-navy transition-transform transform hover:scale-105"
+                      >
+                          Initiate a Branding Project
+                      </Button>
                     </Link>
                 </div>
             </div>

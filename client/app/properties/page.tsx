@@ -1,8 +1,14 @@
 import type { Property } from "@/lib/types/database.types";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { CircleDollarSign, Landmark, AlertTriangle } from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { CircleDollarSign } from "lucide-react";
 import TermsOfTenancy from "@/components/terms/TermsOfTenancy";
 import Image from "next/image";
 
@@ -21,7 +27,7 @@ const sampleProperties = [
     id: "2",
     title: "Metropolitan Loft, Financial District",
     description:
-      "A chic, fully-serviced loft situated in the heart of the financial district. With soaring ceilings and industrial-luxe design, this space is crafted for productivity and style. Includes access to our resident\'s lounge.",
+      "A chic, fully-serviced loft situated in the heart of the financial district. With soaring ceilings and industrial-luxe design, this space is crafted for productivity and style. Includes access to our resident\"s lounge.",
     price: 22000,
     location: "Sandton, Johannesburg",
     availability: false,
@@ -57,55 +63,50 @@ export default function PropertiesPage() {
 
       <TermsOfTenancy />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
         {sampleProperties.map((p) => (
           <Card
             key={p.id}
-            className="group rounded-xl shadow-lg border border-gray-200/50 overflow-hidden transform hover:-translate-y-2 transition-transform duration-300"
+            className="group rounded-xl shadow-lg border-gray-200/50 overflow-hidden flex flex-col"
           >
             <div className="relative h-48">
-                <Image 
-                    src={p.image_url}
-                    alt={p.title}
-                    fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
-                />
+              <Image
+                src={p.image_url}
+                alt={p.title}
+                fill
+                className="object-cover transition-transform duration-300 group-hover:scale-105"
+              />
             </div>
 
-            <CardContent className="p-6">
+            <CardHeader>
               <div className="flex justify-between items-start">
-                <h3 className="text-2xl font-bold text-brand-navy leading-tight">
+                <CardTitle className="text-2xl font-bold text-brand-navy leading-tight">
                   {p.title}
-                </h3>
+                </CardTitle>
                 <Badge
                   variant={p.availability ? "default" : "destructive"}
-                  className={`shrink-0 ${p.availability ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}`}
+                  className="shrink-0"
                 >
                   {p.availability ? "Available" : "Occupied"}
                 </Badge>
               </div>
-              <p className="text-sm text-gray-500 mt-1">{p.location}</p>
-              <p className="mt-4 text-gray-700 leading-relaxed">{p.description}</p>
+              <p className="text-sm text-gray-500 pt-1">{p.location}</p>
+            </CardHeader>
+
+            <CardContent className="flex-grow">
+              <p className="text-gray-700 leading-relaxed">{p.description}</p>
               <div className="mt-6 flex items-center text-2xl font-bold text-brand-navy">
                 <CircleDollarSign className="h-6 w-6 mr-2 text-brand-gold" />R
                 {p.price.toLocaleString()}
-                <span className="text-sm font-normal text-gray-500 ml-2">/ month</span>
+                <span className="text-sm font-normal text-gray-500 ml-2">
+                  / month
+                </span>
               </div>
             </CardContent>
 
-            <CardFooter className="bg-gray-50/50 px-6 py-4 flex items-center justify-between">
-              <Button
-                variant="outline"
-                className="border-2 border-brand-gold text-brand-gold bg-transparent hover:bg-brand-gold hover:text-brand-navy transition-all duration-300"
-              >
-                Request a Viewing
-              </Button>
-              <Button
-                variant="default"
-                className="bg-brand-navy text-white hover:bg-opacity-90 transition-opacity"
-              >
-                Apply to Lease
-              </Button>
+            <CardFooter className="bg-gray-50/50 px-6 py-4 flex items-center justify-between mt-auto">
+              <Button variant="outline">Request a Viewing</Button>
+              <Button variant="default">Apply to Lease</Button>
             </CardFooter>
           </Card>
         ))}
