@@ -5,7 +5,8 @@ import {
   Linkedin,
   Phone,
   Printer,
-  Twitter,
+  Mail,
+  MapPin,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -37,6 +38,8 @@ const SocialIcon = ({
 }) => (
   <Link
     href={href}
+    target="_blank"
+    rel="noopener noreferrer"
     className="text-gray-400 hover:text-brand-Blue transition-colors"
   >
     {children}
@@ -57,12 +60,12 @@ export default function Footer() {
               className="rounded-full shadow-lg mb-4"
             />
             <h3 className="text-xl font-bold text-brand-Blue mb-2">
-              Letsheng Holdings
+              LETSHENG HOLDINGS
             </h3>
             <p className="text-gray-300 text-sm text-center md:text-left">
-              A premier holding company dedicated to superior residential
-              property management and high-fidelity corporate branding
-              solutions.
+              A premier holding company established in 2023, dedicated to
+              superior residential property management and high-fidelity
+              corporate branding solutions.
             </p>
           </div>
           <div>
@@ -117,17 +120,23 @@ export default function Footer() {
               Contact Information
             </h3>
             <ul className="space-y-3 text-sm">
-              <li className="flex items-center gap-3">
-                <span>Email:</span>{" "}
-                <span className="text-gray-300">info@letsheng.co.za</span>
+              <li className="flex items-start gap-3">
+                <MapPin className="h-5 w-5 text-brand-Blue/60 mt-1 flex-shrink-0" />
+                <span className="text-gray-300">
+                  39 Mvubu Street, Soshanguve South, Pretoria, 0152
+                </span>
               </li>
               <li className="flex items-center gap-3">
-                <span>Phone:</span>{" "}
-                <span className="text-gray-300">+27 11 123 4567</span>
+                <Phone className="h-5 w-5 text-brand-Blue/60" />
+                <span className="text-gray-300">
+                  +27 76 348 9454 / +27 67 019 1941
+                </span>
               </li>
-              <li className="flex items-center gap-3">
-                <span>Office:</span>{" "}
-                <span className="text-gray-300">Sandton, Johannesburg</span>
+              <li className="flex items-start gap-3">
+                <Mail className="h-5 w-5 text-brand-Blue/60 mt-1 flex-shrink-0" />
+                <span className="text-gray-300 break-all">
+                  letshengholdings@gmail.com info@letshengholdings.co.za
+                </span>
               </li>
             </ul>
           </div>
@@ -136,13 +145,10 @@ export default function Footer() {
               Follow Our Journey
             </h3>
             <div className="flex space-x-4 mt-4">
-              <SocialIcon href="#">
-                <Twitter className="h-6 w-6" />
-              </SocialIcon>
-              <SocialIcon href="#">
+              <SocialIcon href="https://www.linkedin.com/company/letsheng-holdings">
                 <Linkedin className="h-6 w-6" />
               </SocialIcon>
-              <SocialIcon href="#">
+              <SocialIcon href="https://www.facebook.com/profile.php?id=100088899263799">
                 <Facebook className="h-6 w-6" />
               </SocialIcon>
             </div>
@@ -150,7 +156,7 @@ export default function Footer() {
         </div>
         <div className="border-t border-brand-Blue/20 mt-12 pt-6 text-center text-gray-400 text-sm">
           <p>
-            &copy; {new Date().getFullYear()} Letsheng Holdings (Pty) Ltd. All
+            &copy; {new Date().getFullYear()} LETSHENG HOLDINGS (Pty) Ltd. All
             Rights Reserved.
           </p>
         </div>
