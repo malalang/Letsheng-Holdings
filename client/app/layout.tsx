@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 const WhatsAppButton = () => (
   <Link
-    href="https://wa.me/27763489454"
+    href="https://wa.me/27682045095"
     target="_blank"
     rel="noopener noreferrer"
     className="fixed bottom-8 right-8 z-50 p-4 rounded-full shadow-lg transition-transform transform hover:scale-110"
