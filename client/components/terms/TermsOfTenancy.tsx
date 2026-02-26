@@ -1,21 +1,19 @@
-import React from "react";
-
 export default function TermsOfTenancy() {
   return (
-    <section className="glass-overlay border-brand-gold/30 rounded-lg p-6">
+    <section className="glass-overlay border-brand-Blue/30 rounded-lg p-6">
       <h3 className="text-2xl font-bold text-brand-navy">Terms of Tenancy</h3>
       <p className="mt-3 text-gray-700">
         Letsheng Holdings operates a strict and transparent tenancy policy to
-        protect both residents and the integrity of our portfolio. The
-        following terms apply to all residential leases unless explicitly
-        amended in writing:
+        protect both residents and the integrity of our portfolio. The following
+        terms apply to all residential leases unless explicitly amended in
+        writing:
       </p>
 
       <ol className="mt-4 list-decimal pl-5 text-gray-700 space-y-3">
         <li>
-          Monthly Payments: Rent is due on or before the <strong>7th</strong> day
-          of each calendar month. Late payments may incur administrative fees
-          and affect the standing of the lease.
+          Monthly Payments: Rent is due on or before the <strong>7th</strong>{" "}
+          day of each calendar month. Late payments may incur administrative
+          fees and affect the standing of the lease.
         </li>
         <li>
           Lapse & Termination: A lease will be considered lapsed and subject to
@@ -29,8 +27,8 @@ export default function TermsOfTenancy() {
         </li>
         <li>
           Enforcement: Letsheng Holdings reserves the right to pursue
-          repossession and recover outstanding balances where appropriate and
-          in accordance with applicable law.
+          repossession and recover outstanding balances where appropriate and in
+          accordance with applicable law.
         </li>
       </ol>
 

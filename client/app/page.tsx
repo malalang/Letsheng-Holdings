@@ -6,11 +6,11 @@ import {
   Printer,
   ShieldCheck,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import type React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import Image from "next/image";
 
 // Re-usable ServiceCard now fully relies on UI components
 const ServiceCard = ({
@@ -54,7 +54,7 @@ const StandardPillar = ({
   description: string;
 }) => (
   <div className="text-center">
-    <div className="w-16 h-16 bg-brand-gold/10 text-brand-gold rounded-full mx-auto flex items-center justify-center mb-4">
+    <div className="w-16 h-16 bg-brand-Blue/10 text-brand-Blue rounded-full mx-auto flex items-center justify-center mb-4">
       {icon}
     </div>
     <h4 className="font-bold text-lg text-brand-navy">{title}</h4>
@@ -65,46 +65,51 @@ const StandardPillar = ({
 export default function HomePage() {
   return (
     <div className="animate-fade-in space-y-20">
-        <section className="relative text-center pt-16 pb-20 bg-gradient-to-br from-brand-navy via-black to-brand-navy/90 rounded-3xl text-white shadow-2xl overflow-hidden mx-4">
-            <Image 
-                src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=2070&auto=format&fit=crop"
-                alt="Modern architectural home at dusk"
-                fill
-                className="object-cover opacity-20"
-            />
-            <div className="relative max-w-4xl mx-auto px-4">
-                <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-brand-gold/80">
-                    Elevating Ambitions
-                </h1>
-                <p className="mt-6 text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto">
-                    Letsheng Holdings is your strategic partner for premium residential
-                    estates and high-fidelity corporate branding. We build environments
-                    and create identities that empower success.
-                </p>
-                <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-                    <Link href="/properties">
-                      {/* Primary action button using default variant */}
-                      <Button
-                          size="lg"
-                          variant="default"
-                          className="w-full sm:w-auto font-bold transition-transform transform hover:scale-105"
-                      >
-                          Explore Residential Estates
-                      </Button>
-                    </Link>
-                    <Link href="/printing/order">
-                      {/* Secondary action on dark background */}
-                      <Button
-                          size="lg"
-                          variant="outline"
-                          className="w-full sm:w-auto border-brand-gold text-white hover:bg-brand-gold hover:text-brand-navy transition-transform transform hover:scale-105"
-                      >
-                          Initiate a Branding Project
-                      </Button>
-                    </Link>
-                </div>
-            </div>
-        </section>
+      <header
+        className="relative bg-brand-navy rounded-2xl shadow-2xl overflow-hidden"
+        style={{
+          backgroundImage: `radial-gradient(circle at top right, #FFD70020, transparent), radial-gradient(circle at bottom left, #002147, #001a38)`,
+        }}
+      >
+        <Image
+          src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=2070&auto=format&fit=crop"
+          alt="Modern architectural home at dusk"
+          fill
+          className="object-cover opacity-20"
+        />
+        <div className="relative max-w-4xl mx-auto p-12 px-4">
+          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-brand-Blue/80">
+            Elevating Ambitions
+          </h1>
+          <p className="mt-6 text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto">
+            Letsheng Holdings is your strategic partner for premium residential
+            estates and high-fidelity corporate branding. We build environments
+            and create identities that empower success.
+          </p>
+          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/properties">
+              {/* Primary action button using default variant */}
+              <Button
+                size="lg"
+                variant="default"
+                className="w-full sm:w-auto font-bold transition-transform transform hover:scale-105"
+              >
+                Explore Residential Estates
+              </Button>
+            </Link>
+            <Link href="/printing/order">
+              {/* Secondary action on dark background */}
+              <Button
+                size="lg"
+                variant="outline"
+                className="w-full sm:w-auto border-brand-Blue text-white hover:bg-brand-Blue hover:text-brand-navy transition-transform transform hover:scale-105"
+              >
+                Initiate a Branding Project
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </header>
 
       <section>
         <div className="text-center mb-12">
@@ -118,14 +123,14 @@ export default function HomePage() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           <ServiceCard
-            icon={<Building2 className="w-10 h-10 text-brand-gold" />}
+            icon={<Building2 className="w-10 h-10 text-brand-Blue" />}
             title="Letsheng Estates"
             description="Secure, premium residential properties designed for professionals seeking comfort and convenience. Our portfolio offers thoughtfully managed living spaces in prime locations."
             link="/properties"
             cta="View Portfolio"
           />
           <ServiceCard
-            icon={<Printer className="w-10 h-10 text-brand-gold" />}
+            icon={<Printer className="w-10 h-10 text-brand-Blue" />}
             title="Letsheng Print"
             description="High-fidelity printing for corporate apparel and promotional merchandise. We translate your brand identity into tangible assets with precision and professional quality."
             link="/printing"

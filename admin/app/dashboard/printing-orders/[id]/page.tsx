@@ -1,25 +1,18 @@
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
-import {
+import { 
   ArrowLeft,
-  Edit,
-  MessageSquare,
-  Upload,
   CheckCircle,
-  Package,
-  User,
   DollarSign,
+  MessageSquare,
+  Package,
+  Upload,
+  User,
 } from "lucide-react";
 import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-const getOrderDetails = (id: string) => {
+const getOrderDetails = (_id: string) => {
   // Mock data fetch
   return {
     id: "PRJ-007",
@@ -56,7 +49,11 @@ const getStatusBadge = (status: string) => {
   }
 };
 
-export default function OrderDetailPage({ params }: { params: { id: string } }) {
+export default function OrderDetailPage({
+  params,
+}: {
+  params: { id: string };
+}) {
   const order = getOrderDetails(params.id);
 
   return (
@@ -76,7 +73,7 @@ export default function OrderDetailPage({ params }: { params: { id: string } }) 
           >
             <Upload className="h-4 w-4 mr-2" /> Upload Final Artwork
           </Button>
-          <Button className="bg-brand-gold text-brand-navy font-bold hover:bg-brand-gold/90">
+          <Button className="bg-brand-Blue text-brand-navy font-bold hover:bg-brand-Blue/90">
             <MessageSquare className="h-4 w-4 mr-2" /> Log a Client Note
           </Button>
         </div>
@@ -93,7 +90,7 @@ export default function OrderDetailPage({ params }: { params: { id: string } }) 
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-8">
-          <Card className="bg-brand-navy/50 border-brand-gold/20 backdrop-blur-md">
+          <Card className="bg-brand-navy/50 border-brand-Blue/20 backdrop-blur-md">
             <CardHeader>
               <CardTitle>Project Timeline & Status</CardTitle>
             </CardHeader>
@@ -125,7 +122,7 @@ export default function OrderDetailPage({ params }: { params: { id: string } }) 
         </div>
 
         <div className="space-y-8">
-          <Card className="bg-brand-navy/50 border-brand-gold/20 backdrop-blur-md">
+          <Card className="bg-brand-navy/50 border-brand-Blue/20 backdrop-blur-md">
             <CardHeader>
               <CardTitle>Current Status</CardTitle>
             </CardHeader>
@@ -140,7 +137,7 @@ export default function OrderDetailPage({ params }: { params: { id: string } }) 
               </Button>
             </CardContent>
           </Card>
-          <Card className="bg-brand-navy/50 border-brand-gold/20 backdrop-blur-md">
+          <Card className="bg-brand-navy/50 border-brand-Blue/20 backdrop-blur-md">
             <CardHeader>
               <CardTitle>Order Summary</CardTitle>
             </CardHeader>
@@ -173,9 +170,17 @@ export default function OrderDetailPage({ params }: { params: { id: string } }) 
   );
 }
 
-const DetailItem = ({ icon, label, value }: { icon: React.ReactElement, label: string, value: string | number }) => (
+const DetailItem = ({
+  icon,
+  label,
+  value,
+}: {
+  icon: React.ReactElement;
+  label: string;
+  value: string | number;
+}) => (
   <div className="flex items-center">
-    <div className="w-8 h-8 flex-shrink-0 flex items-center justify-center bg-brand-gold/10 text-brand-gold rounded-lg mr-3">
+    <div className="w-8 h-8 flex-shrink-0 flex items-center justify-center bg-brand-Blue/10 text-brand-Blue rounded-lg mr-3">
       {icon}
     </div>
     <div>

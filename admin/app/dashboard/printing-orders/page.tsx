@@ -1,3 +1,5 @@
+import { ListFilter, MoreHorizontal, PlusCircle } from "lucide-react";
+import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,8 +17,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { MoreHorizontal, PlusCircle, ListFilter } from "lucide-react";
-import Link from "next/link";
 
 const sampleOrders = [
   {
@@ -70,7 +70,7 @@ const getStatusBadge = (status: string) => {
 
 export default function PrintOrdersPage() {
   return (
-    <Card className="bg-brand-navy/50 text-white border-brand-gold/20 shadow-lg backdrop-blur-md">
+    <Card className="bg-brand-navy/50 text-white border-brand-Blue/20 shadow-lg backdrop-blur-md">
       <CardHeader className="flex flex-row items-center justify-between">
         <div>
           <CardTitle className="text-2xl">Print Operations Hub</CardTitle>
@@ -86,7 +86,7 @@ export default function PrintOrdersPage() {
             <ListFilter className="mr-2 h-4 w-4" /> Filter Orders
           </Button>
           <Link href="/dashboard/printing-orders/new">
-            <Button className="bg-brand-gold text-brand-navy font-bold hover:bg-brand-gold/90">
+            <Button className="bg-brand-Blue text-brand-navy font-bold hover:bg-brand-Blue/90">
               <PlusCircle className="mr-2 h-4 w-4" />
               Log New Project
             </Button>
@@ -139,7 +139,7 @@ export default function PrintOrdersPage() {
                     <Button
                       variant="outline"
                       size="sm"
-                      className="border-brand-gold/50 text-brand-gold hover:bg-brand-gold hover:text-brand-navy"
+                      className="border-brand-Blue/50 text-brand-Blue hover:bg-brand-Blue hover:text-brand-navy"
                     >
                       <MoreHorizontal className="h-4 w-4" />
                     </Button>

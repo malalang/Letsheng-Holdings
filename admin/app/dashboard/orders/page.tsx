@@ -1,3 +1,5 @@
+import { MoreHorizontal } from "lucide-react";
+import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,8 +17,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { MoreHorizontal } from "lucide-react";
-import Link from "next/link";
 
 const sampleOrders = [
   {

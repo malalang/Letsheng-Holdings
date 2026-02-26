@@ -1,4 +1,6 @@
-import type { Property } from "@/lib/types/database.types";
+import { CircleDollarSign } from "lucide-react";
+import Image from "next/image";
+import TermsOfTenancy from "@/components/terms/TermsOfTenancy";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -8,9 +10,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { CircleDollarSign } from "lucide-react";
-import TermsOfTenancy from "@/components/terms/TermsOfTenancy";
-import Image from "next/image";
 
 const sampleProperties = [
   {
@@ -21,17 +20,19 @@ const sampleProperties = [
     price: 35000,
     location: "V&A Waterfront, Cape Town",
     availability: true,
-    image_url: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
+    image_url:
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
   },
   {
     id: "2",
     title: "Metropolitan Loft, Financial District",
     description:
-      "A chic, fully-serviced loft situated in the heart of the financial district. With soaring ceilings and industrial-luxe design, this space is crafted for productivity and style. Includes access to our resident\"s lounge.",
+      'A chic, fully-serviced loft situated in the heart of the financial district. With soaring ceilings and industrial-luxe design, this space is crafted for productivity and style. Includes access to our resident"s lounge.',
     price: 22000,
     location: "Sandton, Johannesburg",
     availability: false,
-    image_url: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070&auto=format&fit=crop",
+    image_url:
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070&auto=format&fit=crop",
   },
   {
     id: "3",
@@ -41,7 +42,8 @@ const sampleProperties = [
     price: 12500,
     location: "Constantia, Cape Town",
     availability: true,
-    image_url: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=1974&auto=format&fit=crop",
+    image_url:
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=1974&auto=format&fit=crop",
   },
 ];
 
@@ -61,7 +63,7 @@ export default function PropertiesPage() {
         </p>
       </div>
 
-      <TermsOfTenancy />
+    
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
         {sampleProperties.map((p) => (
@@ -96,7 +98,7 @@ export default function PropertiesPage() {
             <CardContent className="flex-grow">
               <p className="text-gray-700 leading-relaxed">{p.description}</p>
               <div className="mt-6 flex items-center text-2xl font-bold text-brand-navy">
-                <CircleDollarSign className="h-6 w-6 mr-2 text-brand-gold" />R
+                <CircleDollarSign className="h-6 w-6 mr-2 text-brand-Blue" />R
                 {p.price.toLocaleString()}
                 <span className="text-sm font-normal text-gray-500 ml-2">
                   / month
@@ -111,6 +113,7 @@ export default function PropertiesPage() {
           </Card>
         ))}
       </div>
+      <TermsOfTenancy />
     </div>
   );
 }

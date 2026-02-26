@@ -7,8 +7,8 @@ import {
   Printer,
   Twitter,
 } from "lucide-react";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 
 const FooterLink = ({
   href,
@@ -21,7 +21,7 @@ const FooterLink = ({
 }) => (
   <Link
     href={href}
-    className="flex items-center text-gray-300 hover:text-brand-gold transition-colors group"
+    className="flex items-center text-gray-300 hover:text-brand-Blue transition-colors group"
   >
     {icon}
     {children}
@@ -37,7 +37,7 @@ const SocialIcon = ({
 }) => (
   <Link
     href={href}
-    className="text-gray-400 hover:text-brand-gold transition-colors"
+    className="text-gray-400 hover:text-brand-Blue transition-colors"
   >
     {children}
   </Link>
@@ -45,8 +45,8 @@ const SocialIcon = ({
 
 export default function Footer() {
   return (
-    <footer className="bg-brand-navy text-white pt-16 pb-8 -mx-4 md:-mx-8">
-      <div className="container mx-auto px-4 md:px-8">
+    <footer className="bg-brand-navy text-white pt-16 px-4 pb-8">
+      <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div className="md:col-span-1 flex flex-col items-center md:items-start">
             <Image
@@ -56,7 +56,7 @@ export default function Footer() {
               height={80}
               className="rounded-full shadow-lg mb-4"
             />
-            <h3 className="text-xl font-bold text-brand-gold mb-2">
+            <h3 className="text-xl font-bold text-brand-Blue mb-2">
               Letsheng Holdings
             </h3>
             <p className="text-gray-300 text-sm text-center md:text-left">
@@ -66,7 +66,7 @@ export default function Footer() {
             </p>
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-brand-gold mb-4">
+            <h3 className="text-lg font-semibold text-brand-Blue mb-4">
               Site Map
             </h3>
             <ul className="space-y-3">
@@ -74,7 +74,7 @@ export default function Footer() {
                 <FooterLink
                   href="/properties"
                   icon={
-                    <Building2 className="h-5 w-5 mr-3 text-brand-gold/60 group-hover:text-brand-gold transition-colors" />
+                    <Building2 className="h-5 w-5 mr-3 text-brand-Blue/60 group-hover:text-brand-Blue transition-colors" />
                   }
                 >
                   Estates
@@ -84,7 +84,7 @@ export default function Footer() {
                 <FooterLink
                   href="/printing"
                   icon={
-                    <Printer className="h-5 w-5 mr-3 text-brand-gold/60 group-hover:text-brand-gold transition-colors" />
+                    <Printer className="h-5 w-5 mr-3 text-brand-Blue/60 group-hover:text-brand-Blue transition-colors" />
                   }
                 >
                   Printing
@@ -94,7 +94,7 @@ export default function Footer() {
                 <FooterLink
                   href="/about"
                   icon={
-                    <Info className="h-5 w-5 mr-3 text-brand-gold/60 group-hover:text-brand-gold transition-colors" />
+                    <Info className="h-5 w-5 mr-3 text-brand-Blue/60 group-hover:text-brand-Blue transition-colors" />
                   }
                 >
                   About Us
@@ -104,7 +104,7 @@ export default function Footer() {
                 <FooterLink
                   href="/contact"
                   icon={
-                    <Phone className="h-5 w-5 mr-3 text-brand-gold/60 group-hover:text-brand-gold transition-colors" />
+                    <Phone className="h-5 w-5 mr-3 text-brand-Blue/60 group-hover:text-brand-Blue transition-colors" />
                   }
                 >
                   Contact
@@ -113,7 +113,7 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-brand-gold mb-4">
+            <h3 className="text-lg font-semibold text-brand-Blue mb-4">
               Contact Information
             </h3>
             <ul className="space-y-3 text-sm">
@@ -132,7 +132,7 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-brand-gold mb-4">
+            <h3 className="text-lg font-semibold text-brand-Blue mb-4">
               Follow Our Journey
             </h3>
             <div className="flex space-x-4 mt-4">
@@ -148,7 +148,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="border-t border-brand-gold/20 mt-12 pt-6 text-center text-gray-400 text-sm">
+        <div className="border-t border-brand-Blue/20 mt-12 pt-6 text-center text-gray-400 text-sm">
           <p>
             &copy; {new Date().getFullYear()} Letsheng Holdings (Pty) Ltd. All
             Rights Reserved.

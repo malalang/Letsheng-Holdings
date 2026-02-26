@@ -1,42 +1,42 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import {
-  Building,
-  Printer,
-  Users,
   AlertTriangle,
   ArrowRight,
+  Building,
   PlusCircle,
+  Printer,
+  Users,
 } from "lucide-react";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const kpiData = [
   {
     title: "Managed Properties",
     value: "18",
     icon: Building,
-    link: "/dashboard/properties",
+    link: "/admin/dashboard/properties",
     color: "text-sky-500",
   },
   {
     title: "Active Print Orders",
     value: "5",
     icon: Printer,
-    link: "/dashboard/printing-orders",
+    link: "/admin/dashboard/printing-orders",
     color: "text-emerald-500",
   },
   {
     title: "System Users",
     value: "126",
     icon: Users,
-    link: "/dashboard/users",
+    link: "/admin/dashboard/users",
     color: "text-amber-500",
   },
   {
     title: "Critical Alerts",
     value: "2",
     icon: AlertTriangle,
-    link: "/dashboard/alerts",
+    link: "/admin/dashboard/alerts",
     color: "text-red-500",
   },
 ];
@@ -69,8 +69,8 @@ const recentActivity = [
   },
 ];
 
-const KpiCard = ({ item }: { item: typeof kpiData[0] }) => (
-  <Card className="bg-brand-navy/50 text-white border-brand-gold/20 shadow-lg backdrop-blur-md">
+const KpiCard = ({ item }: { item: (typeof kpiData)[0] }) => (
+  <Card className="bg-brand-navy/50 text-white border-brand-Blue/20 shadow-lg backdrop-blur-md">
     <CardHeader className="flex flex-row items-center justify-between pb-2">
       <CardTitle className="text-sm font-medium text-gray-300">
         {item.title}
@@ -109,7 +109,7 @@ export default function DashboardPage() {
       </div>
 
       <div className="grid gap-8 md:grid-cols-3">
-        <Card className="md:col-span-2 bg-brand-navy/50 text-white border-brand-gold/20 shadow-lg backdrop-blur-md">
+        <Card className="md:col-span-2 bg-brand-navy/50 text-white border-brand-Blue/20 shadow-lg backdrop-blur-md">
           <CardHeader>
             <CardTitle className="text-xl">Recent Operational Feed</CardTitle>
           </CardHeader>
@@ -118,7 +118,7 @@ export default function DashboardPage() {
               {recentActivity.map((activity) => (
                 <div key={activity.id} className="flex items-center space-x-4">
                   <div className="w-12 text-center">
-                    <span className="font-bold text-xs bg-brand-gold/10 text-brand-gold border border-brand-gold/30 rounded-full px-2 py-1">
+                    <span className="font-bold text-xs bg-brand-Blue/10 text-brand-Blue border border-brand-Blue/30 rounded-full px-2 py-1">
                       {activity.type}
                     </span>
                   </div>
@@ -135,12 +135,12 @@ export default function DashboardPage() {
             </div>
           </CardContent>
         </Card>
-        <Card className="bg-brand-navy/50 text-white border-brand-gold/20 shadow-lg backdrop-blur-md">
+        <Card className="bg-brand-navy/50 text-white border-brand-Blue/20 shadow-lg backdrop-blur-md">
           <CardHeader>
             <CardTitle className="text-xl">Quick Actions</CardTitle>
           </CardHeader>
           <CardContent className="flex flex-col space-y-3">
-            <Link href="/dashboard/properties/new">
+            <Link href="/admin/dashboard/properties/new">
               <Button
                 variant="secondary"
                 className="w-full justify-start bg-white/10 hover:bg-white/20 text-white border-white/20"
@@ -148,7 +148,7 @@ export default function DashboardPage() {
                 <PlusCircle className="h-4 w-4 mr-3" /> Add New Property Listing
               </Button>
             </Link>
-            <Link href="/dashboard/printing-orders/new">
+            <Link href="/admin/dashboard/printing-orders/new">
               <Button
                 variant="secondary"
                 className="w-full justify-start bg-white/10 hover:bg-white/20 text-white border-white/20"
@@ -157,7 +157,7 @@ export default function DashboardPage() {
                 Log New Print Project
               </Button>
             </Link>
-            <Link href="/dashboard/users/invite">
+            <Link href="/admin/dashboard/users/invite">
               <Button
                 variant="secondary"
                 className="w-full justify-start bg-white/10 hover:bg-white/20 text-white border-white/20"

@@ -1,9 +1,9 @@
 "use client";
 
-import * as React from "react";
 import * as SheetPrimitive from "@radix-ui/react-dialog";
 import { cva, type VariantProps } from "class-variance-authority";
 import { X } from "lucide-react";
+import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -63,7 +63,11 @@ const SheetContent = React.forwardRef<
     <SheetOverlay />
     <SheetPrimitive.Content
       ref={ref}
-      className={cn(sheetVariants({ side }), "glass-card border-brand-gold/20", className)}
+      className={cn(
+        sheetVariants({ side }),
+        " border-brand-Blue/20",
+        className,
+      )}
       {...props}
     >
       {children}

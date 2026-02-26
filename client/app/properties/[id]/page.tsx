@@ -1,19 +1,20 @@
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
+import { 
   ArrowLeft,
-  BedDouble,
   Bath,
+  BedDouble,
   Car,
-  Ruler,
-  MapPin,
   DollarSign,
   Eye,
   FileText,
+  MapPin,
+  Ruler,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import type React from "react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface Property {
   id: string;
@@ -101,8 +102,8 @@ export default function PropertyDetailPage({
     <div className="animate-fade-in">
       <Link href="/properties">
         <Button variant="outline" className="mb-6">
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to All Properties
+          <ArrowLeft className="h-4 w-4 mr-2" />
+          Back to All Properties
         </Button>
       </Link>
 
@@ -120,9 +121,11 @@ export default function PropertyDetailPage({
         <div className="lg:col-span-2">
           <div className="grid grid-cols-3 grid-rows-2 gap-2 h-[500px]">
             <div className="col-span-3 row-span-2 bg-gray-300 rounded-xl overflow-hidden">
-              <img
+              <Image
                 src={property.images[0]}
                 alt={property.title}
+                width={800}
+                height={600}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -138,7 +141,7 @@ export default function PropertyDetailPage({
             </CardHeader>
             <CardContent>
               <div className="flex items-baseline text-4xl font-bold text-brand-navy mb-4">
-                <DollarSign className="h-8 w-8 mr-2 text-brand-gold" />
+                <DollarSign className="h-8 w-8 mr-2 text-brand-Blue" />
                 {property.price.toLocaleString()}
                 <span className="text-lg font-medium text-gray-500 ml-2">
                   / month
@@ -153,17 +156,11 @@ export default function PropertyDetailPage({
                   : "Currently Occupied"}
               </Badge>
               <div className="mt-6 grid grid-cols-2 gap-4">
-                <Button
-                  variant="outline"
-                  className="w-full"
-                >
+                <Button variant="outline" className="w-full">
                   <Eye className="h-4 w-4 mr-2" />
                   Request Viewing
                 </Button>
-                <Button
-                  variant="default"
-                  className="w-full"
-                >
+                <Button variant="default" className="w-full">
                   <FileText className="h-4 w-4 mr-2" />
                   Proceed to Application
                 </Button>
@@ -178,22 +175,22 @@ export default function PropertyDetailPage({
             </CardHeader>
             <CardContent className="grid grid-cols-2 gap-6">
               <DetailItem
-                icon={<BedDouble className="h-6 w-6 text-brand-gold" />}
+                icon={<BedDouble className="h-6 w-6 text-brand-Blue" />}
                 label="Bedrooms"
                 value={`${property.details.bedrooms} Rooms`}
               />
               <DetailItem
-                icon={<Bath className="h-6 w-6 text-brand-gold" />}
+                icon={<Bath className="h-6 w-6 text-brand-Blue" />}
                 label="Bathrooms"
                 value={`${property.details.bathrooms} Full`}
               />
               <DetailItem
-                icon={<Car className="h-6 w-6 text-brand-gold" />}
+                icon={<Car className="h-6 w-6 text-brand-Blue" />}
                 label="Garages"
                 value={`${property.details.garages} Vehicles`}
               />
               <DetailItem
-                icon={<Ruler className="h-6 w-6 text-brand-gold" />}
+                icon={<Ruler className="h-6 w-6 text-brand-Blue" />}
                 label="Living Area"
                 value={property.details.size}
               />

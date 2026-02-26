@@ -1,11 +1,10 @@
 "use client";
 
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { propertySchema, Property } from "@/lib/validations/schemas";
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
+import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import {
   Card,
   CardContent,
@@ -21,6 +20,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -28,8 +28,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ArrowLeft } from "lucide-react";
-import Link from "next/link";
+import { Textarea } from "@/components/ui/textarea";
+import { type Property, propertySchema } from "@/lib/validations/schemas";
 
 export default function NewPropertyPage() {
   const form = useForm<Property>({
@@ -96,6 +96,7 @@ export default function NewPropertyPage() {
                         placeholder="Provide a compelling, sales-ready description of the property..."
                         rows={5}
                         {...field}
+                        value={field.value ?? ""}
                       />
                     </FormControl>
                     <FormMessage />
@@ -120,6 +121,7 @@ export default function NewPropertyPage() {
                       <Input
                         placeholder="e.g., Sandton, Johannesburg"
                         {...field}
+                        value={field.value ?? ""}
                       />
                     </FormControl>
                     <FormMessage />
@@ -191,10 +193,7 @@ export default function NewPropertyPage() {
             >
               Reset Form
             </Button>
-            <Button
-              type="submit"
-              variant="default"
-            >
+            <Button type="submit" variant="default">
               Create Property
             </Button>
           </div>

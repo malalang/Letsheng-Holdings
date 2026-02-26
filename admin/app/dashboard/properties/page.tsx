@@ -1,3 +1,4 @@
+import { Edit, ListFilter, PlusCircle } from "lucide-react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -16,7 +17,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { PlusCircle, Edit, ListFilter } from "lucide-react";
 
 const sampleProperties = [
   {
@@ -49,7 +49,7 @@ const sampleProperties = [
   },
 ];
 
-const getStatusBadge = (status) => {
+const getStatusBadge = (status: string) => {
   switch (status) {
     case "Available":
       return "bg-emerald-500/20 text-emerald-400 border-emerald-500/50";
@@ -64,7 +64,7 @@ const getStatusBadge = (status) => {
 
 export default function AdminPropertiesPage() {
   return (
-    <Card className="bg-brand-navy/50 text-white border-brand-gold/20 shadow-lg backdrop-blur-md">
+    <Card className="bg-brand-navy/50 text-white border-brand-Blue/20 shadow-lg backdrop-blur-md">
       <CardHeader className="flex flex-row items-center justify-between">
         <div>
           <CardTitle className="text-2xl">Estates Command Center</CardTitle>
@@ -78,11 +78,11 @@ export default function AdminPropertiesPage() {
             variant="outline"
             className="bg-white/10 border-white/20 hover:bg-white/20"
           >
-            <ListFilter className="mr-2 h-4 w-4" /> Filter Properties
+            <ListFilter className="mr-2 h-4 w-4"></ListFilter> Filter Properties
           </Button>
-          <Link href="/dashboard/properties/new">
-            <Button className="bg-brand-gold text-brand-navy font-bold hover:bg-brand-gold/90">
-              <PlusCircle className="mr-2 h-4 w-4" />
+          <Link href="/admin/dashboard/properties/new">
+            <Button className="bg-brand-Blue text-brand-navy font-bold hover:bg-brand-Blue/90">
+              <PlusCircle className="mr-2 h-4 w-4"></PlusCircle>
               Add New Property
             </Button>
           </Link>
@@ -131,13 +131,13 @@ export default function AdminPropertiesPage() {
                   R {prop.monthly_rate.toLocaleString()}
                 </TableCell>
                 <TableCell className="text-center">
-                  <Link href={`/dashboard/properties/${prop.id}`}>
+                  <Link href={`/admin/dashboard/properties/${prop.id}`}>
                     <Button
                       variant="outline"
                       size="sm"
-                      className="border-brand-gold/50 text-brand-gold hover:bg-brand-gold hover:text-brand-navy font-bold"
+                      className="border-brand-Blue/50 text-brand-Blue hover:bg-brand-Blue hover:text-brand-navy font-bold"
                     >
-                      <Edit className="mr-2 h-3 w-3" /> Manage
+                      <Edit className="mr-2 h-3 w-3"></Edit> Manage
                     </Button>
                   </Link>
                 </TableCell>

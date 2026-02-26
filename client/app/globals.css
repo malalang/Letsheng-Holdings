@@ -2,7 +2,7 @@
 
 @theme {
   --color-brand-navy: #002147;
-  --color-brand-gold: #ffd700;
+  --color-brand-Blue: #49b3e0;
   --color-brand-muted: #f3f4f6;
   --color-brand-white: #ffffff;
 }
@@ -27,20 +27,20 @@
 
 /* Brand utilities and glassmorphism helpers */
 :root {
-  --brand-navy: lch(12.88% 27.65 282.12);
-  --brand-gold: #FFD700;
+  --brand-navy: rgb(0, 33, 71);
+  --brand-Blue: #49b3e0;;
 }
 
 .glass-card {
-  background: rgba(255,255,255,0.6);
+  background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(0,0,0,0.06);
+  border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .btn-gold-outline {
-  border: 2px solid var(--brand-gold);
-  color: var(--brand-gold);
+  border: 2px solid var(--brand-Blue);
+  color: var(--brand-Blue);
   background: transparent;
 }
 .btn-gold-outline:hover {
@@ -54,7 +54,11 @@
 }
 
 .glass-overlay {
-  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-  border: 1px solid rgba(255,215,0,0.12);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.06),
+    rgba(255, 255, 255, 0.02)
+  );
+  border: 1px solid rgba(255, 215, 0, 0.12);
   backdrop-filter: blur(6px);
 }

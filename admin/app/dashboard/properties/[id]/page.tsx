@@ -1,26 +1,21 @@
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
-import TermsOfTenancy from "@/components/terms/TermsOfTenancy";
-import {
-  ArrowLeft,
-  Edit,
   Archive,
-  User,
+  ArrowLeft,
   Calendar,
-  FileText,
   DollarSign,
+  Edit,
+  FileText,
   ListChecks,
+  User,
 } from "lucide-react";
 import Link from "next/link";
+import type { ReactNode } from "react";
+import TermsOfTenancy from "@/components/terms/TermsOfTenancy";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-const getPropertyDetails = (id) => {
+const getPropertyDetails = (_id: string) => {
   // Mock data fetch.
   return {
     id: "PROP-001",
@@ -42,9 +37,17 @@ const getPropertyDetails = (id) => {
   };
 };
 
-const DetailRow = ({ label, value, icon }) => (
+const DetailRow = ({
+  label,
+  value,
+  icon,
+}: {
+  label: string;
+  value: ReactNode;
+  icon: ReactNode;
+}) => (
   <div className="flex items-start">
-    <div className="w-8 h-8 flex items-center justify-center bg-brand-gold/10 text-brand-gold rounded-lg mr-4">
+    <div className="w-8 h-8 flex items-center justify-center bg-brand-Blue/10 text-brand-Blue rounded-lg mr-4">
       {icon}
     </div>
     <div>
@@ -54,7 +57,11 @@ const DetailRow = ({ label, value, icon }) => (
   </div>
 );
 
-export default function EditPropertyPage({ params }) {
+export default function EditPropertyPage({
+  params,
+}: {
+  params: { id: string };
+}) {
   const property = getPropertyDetails(params.id);
 
   return (
@@ -94,7 +101,7 @@ export default function EditPropertyPage({ params }) {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-8">
-          <Card className="bg-brand-navy/50 border-brand-gold/20 backdrop-blur-md">
+          <Card className="bg-brand-navy/50 border-brand-Blue/20 backdrop-blur-md">
             <CardHeader>
               <CardTitle>Lease & Tenant Details</CardTitle>
             </CardHeader>
@@ -107,13 +114,17 @@ export default function EditPropertyPage({ params }) {
               <DetailRow
                 icon={<Calendar />}
                 label="Lease Period"
-                value={`${new Date(property.tenant.lease_start).toLocaleDateString()} - ${new Date(property.tenant.lease_end).toLocaleDateString()}`}
+                value={`${new Date(
+                  property.tenant.lease_start,
+                ).toLocaleDateString()} - ${new Date(
+                  property.tenant.lease_end,
+                ).toLocaleDateString()}`}
               />
               <DetailRow
                 icon={<FileText />}
                 label="Lease Agreement"
                 value={
-                  <Link href="#" className="underline hover:text-brand-gold">
+                  <Link href="#" className="underline hover:text-brand-Blue">
                     View Document
                   </Link>
                 }
@@ -126,7 +137,7 @@ export default function EditPropertyPage({ params }) {
 
           <TermsOfTenancy />
 
-          <Card className="bg-brand-navy/50 border-brand-gold/20 backdrop-blur-md">
+          <Card className="bg-brand-navy/50 border-brand-Blue/20 backdrop-blur-md">
             <CardHeader>
               <CardTitle>Financial Overview</CardTitle>
             </CardHeader>
@@ -139,7 +150,9 @@ export default function EditPropertyPage({ params }) {
               <DetailRow
                 icon={<DollarSign />}
                 label="Last Payment Received"
-                value={`R ${property.financials.amount.toLocaleString()} on ${new Date(property.financials.last_payment).toLocaleDateString()}`}
+                value={`R ${property.financials.amount.toLocaleString()} on ${new Date(
+                  property.financials.last_payment,
+                ).toLocaleDateString()}`}
               />
               <DetailRow
                 icon={<Calendar />}
@@ -153,7 +166,7 @@ export default function EditPropertyPage({ params }) {
         </div>
 
         <div className="space-y-8">
-          <Card className="bg-brand-navy/50 border-brand-gold/20 backdrop-blur-md">
+          <Card className="bg-brand-navy/50 border-brand-Blue/20 backdrop-blur-md">
             <CardHeader>
               <CardTitle>Property Status</CardTitle>
             </CardHeader>
@@ -161,12 +174,12 @@ export default function EditPropertyPage({ params }) {
               <Badge className="w-full justify-center py-3 text-lg font-bold bg-red-500/20 text-red-400 border-red-500/50">
                 {property.status}
               </Badge>
-              <Button className="w-full mt-4 bg-white/10 border-white/20 hover:bg-white/20">
+.              <Button className="w-full mt-4 bg-white/10 border-white/20 hover:bg-white/20">
                 Change Status
               </Button>
             </CardContent>
           </Card>
-          <Card className="bg-brand-navy/50 border-brand-gold/20 backdrop-blur-md">
+          <Card className="bg-brand-navy/50 border-brand-Blue/20 backdrop-blur-md">
             <CardHeader>
               <CardTitle>Management Actions</CardTitle>
             </CardHeader>

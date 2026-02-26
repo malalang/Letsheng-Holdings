@@ -1,11 +1,11 @@
 "use client";
 
+import { Menu } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu } from "lucide-react";
-import Image from "next/image";
 
 const NavLink = ({
   href,
@@ -16,13 +16,12 @@ const NavLink = ({
   children: React.ReactNode;
   onLinkClick: () => void;
 }) => (
-  <Link href={href}>
-    <span
-      onClick={onLinkClick}
-      className="block md:inline-block text-white px-3 py-2 rounded-md text-base font-medium hover:bg-brand-gold/10 hover:text-brand-gold transition-colors"
-    >
-      {children}
-    </span>
+  <Link
+    href={href}
+    onClick={onLinkClick}
+    className="block md:inline-block text-white px-3 py-2 rounded-md text-brand-navy text-base font-medium hover:bg-brand-blue/10 hover:text-brand-Blue transition-colors"
+  >
+    {children}
   </Link>
 );
 
@@ -31,7 +30,7 @@ export default function Header() {
   const onLinkClick = () => setIsOpen(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-brand-navy/80 backdrop-blur-lg border-b border-brand-gold/20 shadow-lg">
+    <header className="sticky top-0 z-50 bg-brand-navy/80 backdrop-blur-lg border-b border-brand-Blue/20 shadow-lg">
       <div className="container mx-auto px-4 md:px-8">
         <div className="flex items-center justify-between h-20">
           <Link href="/" className="flex items-center gap-3">
@@ -62,7 +61,7 @@ export default function Header() {
           </nav>
           <div className="flex items-center gap-4">
             <Link href="/contact" className="hidden md:block">
-              <Button className="bg-brand-gold text-brand-navy font-bold hover:bg-brand-gold/90">
+              <Button className="bg-brand-Blue text-brand-navy font-bold hover:bg-brand-Blue/90">
                 Contact Us
               </Button>
             </Link>
@@ -79,7 +78,7 @@ export default function Header() {
               </SheetTrigger>
               <SheetContent
                 side="right"
-                className="bg-brand-navy text-white border-l-brand-gold/30"
+                className="bg-brand-navy/80 backdrop-blur-lg text-white border-l-brand-Blue/30"
               >
                 <div className="flex flex-col space-y-4 pt-10">
                   <NavLink href="/" onLinkClick={onLinkClick}>
@@ -95,7 +94,7 @@ export default function Header() {
                     About Us
                   </NavLink>
                   <Link href="/contact" className="mt-4">
-                    <Button className="w-full bg-brand-gold text-brand-navy font-bold hover:bg-brand-gold/90">
+                    <Button className="w-full bg-brand-Blue text-brand-navy font-bold hover:bg-brand-Blue/90">
                       Contact Us
                     </Button>
                   </Link>

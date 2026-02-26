@@ -2,7 +2,7 @@
 
 @theme {
   --color-brand-navy: #002147;
-  --color-brand-gold: #ffd700;
+  --color-brand-Blue: #ffd700;
   --color-brand-muted: #f3f4f6;
   --color-brand-white: #ffffff;
 }
@@ -28,23 +28,23 @@
 /* Admin brand utilities */
 :root {
   --brand-navy: #002147;
-  --brand-gold: #FFD700;
+  --brand-Blue: #ffd700;
 }
 
 .glass-card {
-  background: rgba(0,33,71,0.55);
+  background: rgba(0, 33, 71, 0.55);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255,215,0,0.08);
+  border: 1px solid rgba(255, 215, 0, 0.08);
 }
 
 .admin-cta {
-  border: 2px solid var(--brand-gold);
+  border: 2px solid var(--brand-Blue);
   color: var(--brand-navy);
-  background: var(--brand-gold);
+  background: var(--brand-Blue);
 }
 
 .admin-cta:hover {
-  background: rgba(0,33,71,0.95);
+  background: rgba(0, 33, 71, 0.95);
   color: white;
 }

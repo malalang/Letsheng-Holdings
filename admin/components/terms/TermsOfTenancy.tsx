@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function TermsOfTenancy() {
   return (
     <section className="glass-card rounded-lg p-5">
