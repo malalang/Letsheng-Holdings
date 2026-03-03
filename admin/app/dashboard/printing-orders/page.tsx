@@ -53,40 +53,37 @@ const sampleOrders = [
   },
 ];
 
-const getStatusBadge = (status: string) => {
+const getStatusBadgeVariant = (status: string) => {
   switch (status) {
     case "Proof Pending":
-      return "bg-amber-500/20 text-amber-400 border-amber-500/50";
+      return "secondary";
     case "In Production":
-      return "bg-blue-500/20 text-blue-400 border-blue-500/50";
+      return "default";
     case "Shipped":
-      return "bg-purple-500/20 text-purple-400 border-purple-500/50";
+      return "default";
     case "Completed":
-      return "bg-emerald-500/20 text-emerald-400 border-emerald-500/50";
+      return "outline";
     default:
-      return "bg-gray-500/20 text-gray-400 border-gray-500/50";
+      return "outline";
   }
 };
 
 export default function PrintOrdersPage() {
   return (
-    <Card className="bg-brand-navy/50 text-white border-brand-Blue/20 shadow-lg backdrop-blur-md">
+    <Card>
       <CardHeader className="flex flex-row items-center justify-between">
         <div>
           <CardTitle className="text-2xl">Print Operations Hub</CardTitle>
-          <CardDescription className="text-gray-400 mt-1">
+          <CardDescription className="mt-1">
             Monitor and manage all incoming and ongoing printing projects.
           </CardDescription>
         </div>
         <div className="flex items-center gap-4">
-          <Button
-            variant="outline"
-            className="bg-white/10 border-white/20 hover:bg-white/20"
-          >
+          <Button variant="outline">
             <ListFilter className="mr-2 h-4 w-4" /> Filter Orders
           </Button>
           <Link href="/dashboard/printing-orders/new">
-            <Button className="bg-brand-Blue text-brand-navy font-bold hover:bg-brand-Blue/90">
+            <Button>
               <PlusCircle className="mr-2 h-4 w-4" />
               Log New Project
             </Button>
@@ -96,51 +93,37 @@ export default function PrintOrdersPage() {
       <CardContent>
         <Table>
           <TableHeader>
-            <TableRow className="border-b-white/10">
-              <TableHead className="text-white/80">Project ID</TableHead>
-              <TableHead className="text-white/80">Customer</TableHead>
-              <TableHead className="text-white/80">Submission Date</TableHead>
-              <TableHead className="text-white/80">Status</TableHead>
-              <TableHead className="text-white/80 text-right">
-                Value (ZAR)
-              </TableHead>
-              <TableHead className="text-white/80 text-center">
-                Actions
-              </TableHead>
+            <TableRow>
+              <TableHead>Project ID</TableHead>
+              <TableHead>Customer</TableHead>
+              <TableHead>Submission Date</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead className="text-right">Value (ZAR)</TableHead>
+              <TableHead className="text-center">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {sampleOrders.map((order) => (
-              <TableRow
-                key={order.id}
-                className="border-b-white/10 hover:bg-white/5"
-              >
-                <TableCell className="font-mono text-sm text-gray-300">
+              <TableRow key={order.id}>
+                <TableCell className="font-mono text-sm text-gray-600">
                   {order.id}
                 </TableCell>
                 <TableCell>
-                  <div className="font-medium text-white">{order.customer}</div>
-                  <div className="text-sm text-gray-400">{order.company}</div>
+                  <div className="font-medium">{order.customer}</div>
+                  <div className="text-sm text-gray-500">{order.company}</div>
                 </TableCell>
-                <TableCell className="text-gray-400">{order.date}</TableCell>
+                <TableCell className="text-gray-600">{order.date}</TableCell>
                 <TableCell>
-                  <Badge
-                    variant="outline"
-                    className={`font-semibold ${getStatusBadge(order.status)}`}
-                  >
+                  <Badge variant={getStatusBadgeVariant(order.status)}>
                     {order.status}
                   </Badge>
                 </TableCell>
-                <TableCell className="text-right font-semibold text-white">
+                <TableCell className="text-right font-semibold">
                   R {order.total.toLocaleString()}
                 </TableCell>
                 <TableCell className="text-center">
                   <Link href={`/dashboard/printing-orders/${order.id}`}>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="border-brand-Blue/50 text-brand-Blue hover:bg-brand-Blue hover:text-brand-navy"
-                    >
+                    <Button variant="outline" size="sm">
                       <MoreHorizontal className="h-4 w-4" />
                     </Button>
                   </Link>

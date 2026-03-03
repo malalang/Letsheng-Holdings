@@ -10,19 +10,21 @@ export default function LoginPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === "password") {
-      localStorage.setItem("admin-token", "secret");
-      alert("Logged in (demo)");
+    // IMPORTANT: This is a mock authentication for front-end demo purposes only.
+    // In a real application, this logic would be handled securely on the server.
+    if (password === "letcheng-admin-2024") {
+      localStorage.setItem("admin-token", "__mock_secure_token__");
+      window.location.href = "/dashboard";
     } else {
-      alert("Incorrect password");
+      alert("Incorrect password. Please try again.");
     }
   };
 
   return (
-    <div className="max-w-md mx-auto p-6">
-      <Card className="glass-card">
-        <CardHeader>
-          <CardTitle>Administrator Login</CardTitle>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <Card className="w-full max-w-md shadow-lg">
+        <CardHeader className="text-center">
+          <CardTitle className="text-2xl font-bold">Administrator Login</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">

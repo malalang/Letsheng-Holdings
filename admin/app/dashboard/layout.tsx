@@ -1,23 +1,33 @@
 "use client";
 
-import { Briefcase, LayoutDashboard, LogOut, Printer } from "lucide-react";
+import { Briefcase, LayoutDashboard, LogOut, Printer, FileText, Palette } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
   {
-    href: "/admin/dashboard",
+    href: "/dashboard",
     icon: LayoutDashboard,
     label: "Dashboard",
   },
   {
-    href: "/admin/dashboard/properties",
+    href: "/dashboard/properties",
     icon: Briefcase,
     label: "Properties",
   },
   {
-    href: "/admin/dashboard/printing-orders",
+    href: "/dashboard/branding",
+    icon: Palette,
+    label: "Branding",
+  },
+  {
+    href: "/dashboard/submissions",
+    icon: FileText,
+    label: "Submissions",
+  },
+  {
+    href: "/dashboard/printing-orders",
     icon: Printer,
     label: "Print Orders",
   },
@@ -31,16 +41,16 @@ export default function DashboardLayout({
   const pathname = usePathname();
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
-      <aside className="w-64 bg-brand-navy text-white flex flex-col p-4 fixed h-full">
+    <div className="flex min-h-screen bg-gray-100">
+      <aside className="w-64 bg-white border-r border-gray-200 flex flex-col p-4 fixed h-full">
         <div className="text-center py-4 mb-8">
-          <h1 className="text-2xl font-bold text-brand-Blue">LETSHENG</h1>
-          <p className="text-sm text-gray-300">Admin Portal</p>
+          <h1 className="text-2xl font-bold text-brand-navy">LETSHENG</h1>
+          <p className="text-sm text-gray-500">Admin Portal</p>
         </div>
         <nav className="flex flex-col space-y-2">
           {navLinks.map((link) => {
             const isActive =
-              link.href === "/admin/dashboard"
+              link.href === "/dashboard"
                 ? pathname === link.href
                 : pathname.startsWith(link.href);
             return (
@@ -49,11 +59,11 @@ export default function DashboardLayout({
                 href={link.href}
                 className={`flex items-center p-3 rounded-lg transition-colors ${
                   isActive
-                    ? "bg-brand-Blue text-brand-navy font-semibold"
-                    : "hover:bg-white/10"
+                    ? "bg-brand-Blue text-white font-semibold"
+                    : "hover:bg-gray-100"
                 }`}
               >
-                <link.icon className="mr-3 h-5 w-5"></link.icon>
+                <link.icon className="mr-3 h-5 w-5" />
                 {link.label}
               </Link>
             );
@@ -61,14 +71,15 @@ export default function DashboardLayout({
         </nav>
         <div className="mt-auto">
           <Button
-            className="w-full justify-start flex items-center"
+            className="w-full justify-start flex items-center text-gray-600 hover:bg-gray-100"
             variant="ghost"
             onClick={() => {
+              // In a real app, you'd call an auth service here.
               localStorage.removeItem("admin-token");
-              window.location.href = "/admin/login";
+              window.location.href = "/login";
             }}
           >
-            <LogOut className="mr-3 h-5 w-5"></LogOut>
+            <LogOut className="mr-3 h-5 w-5" />
             Logout
           </Button>
         </div>

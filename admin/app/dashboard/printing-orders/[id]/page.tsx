@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const getOrderDetails = (_id: string) => {
-  // Mock data fetch
+  // Mock data fetch. In a real app, you'd fetch this from an API.
   return {
     id: "PRJ-007",
     customer: {
@@ -36,44 +36,37 @@ const getOrderDetails = (_id: string) => {
   };
 };
 
-const getStatusBadge = (status: string) => {
+const getStatusBadgeVariant = (status: string) => {
   switch (status) {
     case "Proof Pending":
-      return "bg-amber-500/20 text-amber-400 border-amber-500/50";
+      return "secondary";
     case "In Production":
-      return "bg-blue-500/20 text-blue-400 border-blue-500/50";
+      return "default";
     case "Completed & Shipped":
-      return "bg-emerald-500/20 text-emerald-400 border-emerald-500/50";
+      return "default";
     default:
-      return "bg-gray-500/20 text-gray-400 border-gray-500/50";
+      return "outline";
   }
 };
 
-export default function OrderDetailPage({
-  params,
-}: {
-  params: { id: string };
-}) {
+export default function OrderDetailPage({ params }: { params: { id: string } }) {
   const order = getOrderDetails(params.id);
 
   return (
-    <div className="animate-fade-in text-white">
+    <div className="animate-fade-in">
       <div className="flex justify-between items-center mb-8">
         <Link
           href="/dashboard/printing-orders"
-          className="flex items-center text-gray-300 hover:text-white transition-colors"
+          className="flex items-center text-gray-600 hover:text-gray-900 transition-colors"
         >
           <ArrowLeft className="h-5 w-5 mr-3" />
           Back to Orders List
         </Link>
         <div className="flex items-center gap-4">
-          <Button
-            variant="outline"
-            className="bg-white/10 border-white/20 hover:bg-white/20"
-          >
+          <Button variant="outline">
             <Upload className="h-4 w-4 mr-2" /> Upload Final Artwork
           </Button>
-          <Button className="bg-brand-Blue text-brand-navy font-bold hover:bg-brand-Blue/90">
+          <Button>
             <MessageSquare className="h-4 w-4 mr-2" /> Log a Client Note
           </Button>
         </div>
@@ -83,14 +76,12 @@ export default function OrderDetailPage({
         <h1 className="text-4xl font-extrabold tracking-tight">
           Project Dossier: {order.id}
         </h1>
-        <p className="text-lg text-gray-400 mt-1">
-          For {order.customer.company}
-        </p>
+        <p className="text-lg text-gray-600 mt-1">For {order.customer.company}</p>
       </header>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-8">
-          <Card className="bg-brand-navy/50 border-brand-Blue/20 backdrop-blur-md">
+          <Card>
             <CardHeader>
               <CardTitle>Project Timeline & Status</CardTitle>
             </CardHeader>
@@ -98,19 +89,25 @@ export default function OrderDetailPage({
               {order.timeline.map((step) => (
                 <div
                   key={step.stage}
-                  className={`flex items-center p-3 rounded-lg ${step.done ? "bg-white/5" : "bg-transparent"}`}
+                  className={`flex items-center p-3 rounded-lg ${
+                    step.done ? "bg-gray-50" : "bg-transparent"
+                  }`}
                 >
                   <CheckCircle
-                    className={`h-6 w-6 mr-4 ${step.done ? "text-emerald-400" : "text-gray-600"}`}
+                    className={`h-6 w-6 mr-4 ${
+                      step.done ? "text-emerald-500" : "text-gray-400"
+                    }`}
                   />
                   <div>
                     <p
-                      className={`font-semibold ${step.done ? "text-white" : "text-gray-500"}`}
+                      className={`font-semibold ${
+                        step.done ? "text-gray-800" : "text-gray-500"
+                      }`}
                     >
                       {step.stage}
                     </p>
                     {step.date && (
-                      <p className="text-sm text-gray-400">
+                      <p className="text-sm text-gray-500">
                         {new Date(step.date).toLocaleDateString()}
                       </p>
                     )}
@@ -122,22 +119,23 @@ export default function OrderDetailPage({
         </div>
 
         <div className="space-y-8">
-          <Card className="bg-brand-navy/50 border-brand-Blue/20 backdrop-blur-md">
+          <Card>
             <CardHeader>
               <CardTitle>Current Status</CardTitle>
             </CardHeader>
             <CardContent>
               <Badge
-                className={`w-full justify-center py-3 text-lg font-bold ${getStatusBadge(order.status)}`}
+                className={`w-full justify-center py-3 text-lg font-bold`}
+                variant={getStatusBadgeVariant(order.status)}
               >
                 {order.status}
               </Badge>
-              <Button className="w-full mt-4 bg-white/10 border-white/20 hover:bg-white/20">
+              <Button className="w-full mt-4" variant="outline">
                 Update Status
               </Button>
             </CardContent>
           </Card>
-          <Card className="bg-brand-navy/50 border-brand-Blue/20 backdrop-blur-md">
+          <Card>
             <CardHeader>
               <CardTitle>Order Summary</CardTitle>
             </CardHeader>
@@ -184,10 +182,10 @@ const DetailItem = ({
       {icon}
     </div>
     <div>
-      <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
+      <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
         {label}
       </p>
-      <p className="font-bold text-white text-sm">{value}</p>
+      <p className="font-bold text-gray-800 text-sm">{value}</p>
     </div>
   </div>
 );

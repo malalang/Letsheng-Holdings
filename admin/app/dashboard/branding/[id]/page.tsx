@@ -29,28 +29,28 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { type Property, propertySchema } from "@/lib/validations/schemas";
-import { sampleProperties } from "../data";
+import { Switch } from "@/components/ui/switch";
+import { type Branding, brandingSchema } from "@/lib/validations/schemas";
+import { brandingData } from "../data";
 
-export default function PropertyFormPage({ 
+export default function BrandingFormPage({ 
     params 
 }: {
     params: { id: string };
 }) {
-  const property = sampleProperties.find((p) => p.id === params.id);
+  const brandingItem = brandingData.find((p) => p.id === params.id);
 
-  const form = useForm<Property>({
-    resolver: zodResolver(propertySchema),
-    defaultValues: property || {
+  const form = useForm<Branding>({
+    resolver: zodResolver(brandingSchema),
+    defaultValues: brandingItem || {
       title: "",
       description: "",
-      price: 0,
-      location: "",
-      availability: true,
+      category: "",
+      isFeatured: false,
     },
   });
 
-  function onSubmit(data: Property) {
+  function onSubmit(data: Branding) {
     console.log("Form submitted with data:", data);
     // Here you would typically send the data to your backend API
   }
@@ -58,19 +58,19 @@ export default function PropertyFormPage({
   return (
     <div>
       <div className="mb-6">
-        <Link href="/dashboard/properties">
+        <Link href="/dashboard/branding">
           <Button variant="outline" className="mb-4">
             <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Properties
+            Back to Branding
           </Button>
         </Link>
         <CardTitle>
-          {property ? "Edit Property" : "Create a New Property Listing"}
+          {brandingItem ? "Edit Branding Item" : "Create a New Branding Item"}
         </CardTitle>
         <CardDescription>
-          {property
-            ? "Edit the details of the property below."
-            : "Fill out the details below to add a new property to the portfolio."}
+          {brandingItem
+            ? "Edit the details of the branding item below."
+            : "Fill out the details below to add a new branding item to the portfolio."}
         </CardDescription>
       </div>
       <Form {...form}>
@@ -85,10 +85,10 @@ export default function PropertyFormPage({
                 name="title"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Property Title</FormLabel>
+                    <FormLabel>Title</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="e.g., Executive Waterfront Residence"
+                        placeholder="e.g., Executive Crewneck T-Shirt"
                         {...field}
                       />
                     </FormControl>
@@ -101,10 +101,10 @@ export default function PropertyFormPage({
                 name="description"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Detailed Description</FormLabel>
+                    <FormLabel>Description</FormLabel>
                     <FormControl>
                       <Textarea
-                        placeholder="Provide a compelling, sales-ready description of the property..."
+                        placeholder="Provide a compelling description of the branding item..."
                         rows={5}
                         {...field}
                         value={field.value ?? ""}
@@ -119,18 +119,18 @@ export default function PropertyFormPage({
 
           <Card>
             <CardHeader>
-              <h3 className="text-lg font-semibold">Location & Pricing</h3>
+              <h3 className="text-lg font-semibold">Categorization</h3>
             </CardHeader>
             <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <FormField
                 control={form.control}
-                name="location"
+                name="category"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Location</FormLabel>
+                    <FormLabel>Category</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="e.g., Sandton, Johannesburg"
+                        placeholder="e.g., Corporate Apparel"
                         {...field}
                         value={field.value ?? ""}
                       />
@@ -141,55 +141,21 @@ export default function PropertyFormPage({
               />
               <FormField
                 control={form.control}
-                name="price"
+                name="isFeatured"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Monthly Rate (ZAR)</FormLabel>
+                  <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                    <div className="space-y-0.5">
+                      <FormLabel className="text-base">Featured</FormLabel>
+                      <p className="text-sm text-muted-foreground">
+                        Featured items will be displayed prominently.
+                      </p>
+                    </div>
                     <FormControl>
-                      <Input
-                        type="number"
-                        placeholder="e.g., 22000"
-                        {...field}
-                        onChange={(e) =>
-                          field.onChange(parseInt(e.target.value, 10) || 0)
-                        }
+                      <Switch
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
                       />
                     </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <h3 className="text-lg font-semibold">Availability & Status</h3>
-            </CardHeader>
-            <CardContent>
-              <FormField
-                control={form.control}
-                name="availability"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Availability Status</FormLabel>
-                    <Select
-                      onValueChange={(value) => field.onChange(value === "true")}
-                      defaultValue={String(field.value)}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select a status" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="true">Available</SelectItem>
-                        <SelectItem value="false">
-                          Occupied / Unavailable
-                        </SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -205,7 +171,7 @@ export default function PropertyFormPage({
               Reset Form
             </Button>
             <Button type="submit" variant="default">
-              {property ? "Save Changes" : "Create Property"}
+              {brandingItem ? "Save Changes" : "Create Branding Item"}
             </Button>
           </div>
         </form>

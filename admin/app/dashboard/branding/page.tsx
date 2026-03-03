@@ -17,31 +17,27 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { sampleProperties } from "./data";
+import { brandingData } from "./data";
 
-const getStatusBadgeVariant = (isAvailable: boolean) => {
-  return isAvailable ? "default" : "destructive";
-};
-
-export default function AdminPropertiesPage() {
+export default function AdminBrandingPage() {
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between">
         <div>
-          <CardTitle className="text-2xl">Estates Command Center</CardTitle>
+          <CardTitle className="text-2xl">Branding Command Center</CardTitle>
           <CardDescription className="mt-1">
-            Manage your entire real estate portfolio from this centralized
+            Manage your entire branding portfolio from this centralized
             dashboard.
           </CardDescription>
         </div>
         <div className="flex items-center gap-4">
           <Button variant="outline">
-            <ListFilter className="mr-2 h-4 w-4"></ListFilter> Filter Properties
+            <ListFilter className="mr-2 h-4 w-4"></ListFilter> Filter Branding
           </Button>
-          <Link href="/dashboard/properties/new">
+          <Link href="/dashboard/branding/new">
             <Button>
               <PlusCircle className="mr-2 h-4 w-4"></PlusCircle>
-              Add New Property
+              Add New Branding
             </Button>
           </Link>
         </div>
@@ -50,28 +46,24 @@ export default function AdminPropertiesPage() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Property Title</TableHead>
-              <TableHead>Location</TableHead>
-              <TableHead className="text-center">Status</TableHead>
-              <TableHead className="text-right">Monthly Rate (ZAR)</TableHead>
+              <TableHead>Branding Title</TableHead>
+              <TableHead>Category</TableHead>
+              <TableHead className="text-center">Featured</TableHead>
               <TableHead className="text-center">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {sampleProperties.map((prop) => (
-              <TableRow key={prop.id}>
-                <TableCell className="font-medium">{prop.title}</TableCell>
-                <TableCell className="text-gray-600">{prop.location}</TableCell>
+            {brandingData.map((item) => (
+              <TableRow key={item.id}>
+                <TableCell className="font-medium">{item.title}</TableCell>
+                <TableCell className="text-gray-600">{item.category}</TableCell>
                 <TableCell className="text-center">
-                  <Badge variant={getStatusBadgeVariant(prop.availability)}>
-                    {prop.availability ? "Available" : "Occupied"}
+                  <Badge variant={item.isFeatured ? "default" : "secondary"}>
+                    {item.isFeatured ? "Yes" : "No"}
                   </Badge>
                 </TableCell>
-                <TableCell className="text-right font-semibold">
-                  R {prop.price.toLocaleString()}
-                </TableCell>
                 <TableCell className="text-center">
-                  <Link href={`/dashboard/properties/${prop.id}`}>
+                  <Link href={`/dashboard/branding/${item.id}`}>
                     <Button variant="outline" size="sm">
                       <Edit className="mr-2 h-3 w-3"></Edit> Manage
                     </Button>
