@@ -3,10 +3,10 @@ import {
   Facebook,
   Info,
   Linkedin,
-  Phone,
-  Printer,
   Mail,
   MapPin,
+  Phone,
+  Printer,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -135,7 +135,7 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <Mail className="h-5 w-5 text-brand-Blue/60 mt-1 flex-shrink-0" />
                 <span className="text-gray-300 break-all">
-                  letshengholdings@gmail.com info@letshengholdings.co.za
+                  info@letshengholdings.co.za
                 </span>
               </li>
             </ul>

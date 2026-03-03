@@ -28,7 +28,7 @@
 /* Brand utilities and glassmorphism helpers */
 :root {
   --brand-navy: rgb(0, 33, 71);
-  --brand-Blue: #49b3e0;;
+  --brand-Blue: #49b3e0;
 }
 
 .glass-card {

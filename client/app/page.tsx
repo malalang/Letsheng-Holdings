@@ -1,50 +1,142 @@
 import {
   ArrowRight,
-  Building2,
-  Clock,
-  Gem,
-  Printer,
-  ShieldCheck
+  Bath,
+  Bed,
+  FileText,
+  Search,
+  Star,
+  Users,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import type React from "react";
+
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-// Re-usable ServiceCard now fully relies on UI components
-const ServiceCard = ({
-  icon,
+import { products } from "./branding/data";
+import { sampleProperties } from "./properties/data";
+
+const FeaturedPropertyCard = ({
+  id,
+  imageUrl,
   title,
+  price,
+  bedrooms,
+  bathrooms,
   description,
-  link,
-  cta,
 }: {
-  icon: React.ReactNode;
+  id: string;
+  imageUrl: string;
   title: string;
+  price: string;
+  bedrooms: number;
+  bathrooms: number;
   description: string;
-  link: string;
-  cta: string;
 }) => (
-  <Card className="bg-white/60 backdrop-blur-lg border-black/10 shadow-lg h-full flex flex-col">
-    <CardHeader className="flex-row items-center">
-      {icon}
-      <CardTitle className="ml-4 text-brand-navy">{title}</CardTitle>
+  <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
+    <div className="relative h-56">
+      <Image src={imageUrl} alt={title} fill className="object-cover" />
+    </div>
+    <CardHeader>
+      <CardTitle className="text-brand-navy">{title}</CardTitle>
     </CardHeader>
     <CardContent className="flex flex-col flex-grow">
-      <p className="text-gray-600 flex-grow">{description}</p>
-      <Link href={link} className="mt-6">
-        {/* secondary action button using outline variant */}
+      <p className="text-gray-600 mb-4 line-clamp-3 flex-grow">{description}</p>
+      <div className="flex items-center text-gray-600 space-x-4 mb-4">
+        <div className="flex items-center">
+          <Bed className="h-5 w-5 mr-2" />
+          <span>{bedrooms} Beds</span>
+        </div>
+        <div className="flex items-center">
+          <Bath className="h-5 w-5 mr-2" />
+          <span>{bathrooms} Baths</span>
+        </div>
+      </div>
+      <p className="font-bold text-lg text-brand-Blue mb-4">{price}</p>
+      <Link href={`/properties/${id}`} className="mt-auto block">
         <Button variant="outline" className="w-full">
-          {cta} <ArrowRight className="h-4 w-4 ml-2" />
+          View Details
         </Button>
       </Link>
     </CardContent>
   </Card>
 );
 
-// Re-usable StandardPillar - structure maintained
-const StandardPillar = ({
+const FeaturedProductCard = ({
+  id,
+  image,
+  title,
+  category,
+  description,
+}: {
+  id: string;
+  image: string;
+  title: string;
+  category: string;
+  description: string;
+}) => (
+  <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
+    <div className="relative h-80 lg:h-auto lg:w-1/2">
+      <Image src={image} alt={title} fill className="object-cover" />
+    </div>
+    <CardHeader>
+      <Badge variant="default" className="font-semibold mb-2 w-fit">
+        {category}
+      </Badge>
+      <CardTitle className="text-brand-navy">{title}</CardTitle>
+    </CardHeader>
+    <CardContent className="flex flex-col flex-grow">
+      <p className="text-gray-600 line-clamp-3 flex-grow">{description}</p>
+      <Link href={`/branding/${id}`} className="mt-4 block">
+        <Button variant="outline" className="w-full">
+          View Product Details
+        </Button>
+      </Link>
+    </CardContent>
+  </Card>
+);
+
+const TestimonialCard = ({
+  quote,
+  author,
+  authorRole,
+}: {
+  quote: string;
+  author: string;
+  authorRole: string;
+}) => (
+  <Card className="bg-white/60 p-6 text-center">
+    <div className="flex justify-center mb-4">
+      <Star
+        key={`${author}-${quote}-${authorRole}-star-1`}
+        className="h-5 w-5 text-yellow-400 fill-current"
+      />
+      <Star
+        key={`${author}-${quote}-${authorRole}-star-2`}
+        className="h-5 w-5 text-yellow-400 fill-current"
+      />
+      <Star
+        key={`${author}-${quote}-${authorRole}-star-3`}
+        className="h-5 w-5 text-yellow-400 fill-current"
+      />
+      <Star
+        key={`${author}-${quote}-${authorRole}-star-4`}
+        className="h-5 w-5 text-yellow-400 fill-current"
+      />
+      <Star
+        key={`${author}-${quote}-${authorRole}-star-5`}
+        className="h-5 w-5 text-yellow-400 fill-current"
+      />
+    </div>
+    <p className="text-gray-600 italic mb-4">\"{quote}\"</p>
+    <p className="font-bold text-brand-navy">{author}</p>
+    <p className="text-sm text-gray-500">{authorRole}</p>
+  </Card>
+);
+
+const NextStep = ({
   icon,
   title,
   description,
@@ -53,117 +145,181 @@ const StandardPillar = ({
   title: string;
   description: string;
 }) => (
-  <div className="text-center">
-    <div className="w-16 h-16 bg-brand-Blue/10 text-brand-Blue rounded-full mx-auto flex items-center justify-center mb-4">
+  <div className="flex items-start">
+    <div className="w-12 h-12 bg-brand-Blue/10 text-brand-Blue rounded-full flex items-center justify-center mr-6 flex-shrink-0">
       {icon}
     </div>
-    <h4 className="font-bold text-lg text-brand-navy">{title}</h4>
-    <p className="text-sm text-gray-600 mt-1">{description}</p>
+    <div>
+      <h4 className="font-bold text-lg text-brand-navy">{title}</h4>
+      <p className="text-gray-600">{description}</p>
+    </div>
   </div>
 );
 
 export default function HomePage() {
+  const featuredProperties = sampleProperties.filter((p) => p.isFeatured);
+  const featuredProducts = products.filter((p) => p.isFeatured);
+
   return (
-    <div className="animate-fade-in space-y-20">
+    <div className="animate-fade-in space-y-24">
+      {/* Header */}
       <header
-        className="relative bg-brand-navy rounded-2xl shadow-2xl overflow-hidden"
+        className="relative bg-brand-navy rounded-2xl shadow-2xl overflow-hidden -mt-4"
         style={{
-          backgroundImage: `radial-gradient(circle at top right, #FFD70020, transparent), radial-gradient(circle at bottom left, #002147, #001a38)`,
+          backgroundImage: `radial-gradient(circle at top right,rgba(6, 61, 68, 0.6), transparent), radial-gradient(circle at bottom left, #002147, #001a38)`,
         }}
       >
         <Image
           src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=2070&auto=format&fit=crop"
           alt="Modern architectural home at dusk"
           fill
-          className="object-cover opacity-20"
+          className="object-cover opacity-40"
         />
-        <div className="relative max-w-4xl mx-auto p-12 px-4">
+        <div className="relative text-center p-12">
           <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-brand-Blue/80">
             Elevating Ambitions
           </h1>
           <p className="mt-6 text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto">
-            Letsheng Holdings is your strategic partner for premium residential
-            estates and high-fidelity corporate branding. We build environments
-            and create identities that empower success.
+            Your strategic partner for premium residential estates and
+            high-fidelity corporate branding.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/properties">
-              {/* Primary action button using default variant */}
-              <Button
-                size="lg"
-                variant="default"
-                className="w-full sm:w-auto font-bold transition-transform transform hover:scale-105"
-              >
-                Explore Residential Estates
-              </Button>
-            </Link>
-            <Link href="/printing/order">
-              {/* Secondary action on dark background */}
-              <Button
-                size="lg"
-                variant="outline"
-                className="w-full sm:w-auto border-brand-Blue text-white hover:bg-brand-Blue hover:text-brand-navy transition-transform transform hover:scale-105"
-              >
-                Initiate a Branding Project
-              </Button>
-            </Link>
+            <Button size="lg" asChild>
+              <Link href="/properties">Explore Residential Estates</Link>
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-brand-Blue text-white hover:bg-brand-Blue hover:text-brand-navy"
+              asChild
+            >
+              <Link href="/branding">Discover Branding Solutions</Link>
+            </Button>
           </div>
         </div>
       </header>
 
+      {/* Featured Estates */}
       <section>
         <div className="text-center mb-12">
           <h2 className="text-4xl font-extrabold text-brand-navy">
-            Integrated Services for Modern Enterprise
+            Featured Estates
           </h2>
           <p className="mt-3 text-lg text-gray-600 max-w-2xl mx-auto">
-            Two divisions, one standard of excellence. We provide the physical
-            and brand assets you need to thrive.
+            Discover our premier properties, offering unparalleled comfort and
+            modern living.
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          <ServiceCard
-            icon={<Building2 className="w-10 h-10 text-brand-Blue" />}
-            title="Letsheng Estates"
-            description="Secure, premium residential properties designed for professionals seeking comfort and convenience. Our portfolio offers thoughtfully managed living spaces in prime locations."
-            link="/properties"
-            cta="View Portfolio"
+        <div className="grid grid-cols-1 md:grid-col-s-2 lg:grid-cols-3 gap-8">
+          {featuredProperties.map((p) => (
+            <FeaturedPropertyCard
+              key={p.id}
+              id={p.id}
+              imageUrl={p.image_url}
+              title={p.title}
+              price={`R ${p.price.toLocaleString()}`}
+              bedrooms={p.bedrooms}
+              bathrooms={p.bathrooms}
+              description={p.description}
+            />
+          ))}
+        </div>
+        <div className="text-center mt-12">
+          <Link href="/properties">
+            <Button>
+              Explore All Properties <ArrowRight className="h-4 w-4 ml-2" />
+            </Button>
+          </Link>
+        </div>
+      </section>
+
+      {/* Featured Products */}
+      <section>
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-extrabold text-brand-navy">
+            Featured Products
+          </h2>
+          <p className="mt-3 text-lg text-gray-600 max-w-2xl mx-auto">
+            Explore our flagship branded products, crafted with quality and
+            precision.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {featuredProducts.map((p) => (
+            <FeaturedProductCard
+              key={p.id}
+              id={p.id}
+              image={p.image}
+              title={p.title}
+              category={p.category}
+              description={p.description}
+            />
+          ))}
+        </div>
+        <div className="text-center mt-12">
+          <Link href="/branding">
+            <Button>
+              Discover All Products <ArrowRight className="h-4 w-4 ml-2" />
+            </Button>
+          </Link>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section>
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-extrabold text-brand-navy">
+            Partnerships Rooted in Quality
+          </h2>
+          <p className="mt-3 text-lg text-gray-600 max-w-2xl mx-auto">
+            Our success is measured by the success of our clients and tenants.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <TestimonialCard
+            quote="The leasing process was transparent and the property management is top-notch. Highly recommended for professionals."
+            author="Thabo Ndlovu"
+            authorRole="Tenant, Soshanguve South"
           />
-          <ServiceCard
-            icon={<Printer className="w-10 h-10 text-brand-Blue" />}
-            title="Letsheng Print"
-            description="High-fidelity printing for corporate apparel and promotional merchandise. We translate your brand identity into tangible assets with precision and professional quality."
-            link="/printing"
-            cta="Discover Services"
+          <TestimonialCard
+            quote="Letsheng Branding delivered our branded merchandise ahead of schedule with impeccable quality. A reliable partner."
+            author="Jane Smith"
+            authorRole="Marketing Manager, ABC Corp"
+          />
+          <TestimonialCard
+            quote="A seamless experience from start to finish. The attention to detail in their properties is evident."
+            author="Priya Patel"
+            authorRole="Resident, Centurion"
           />
         </div>
       </section>
 
+      {/* Next Steps Guide */}
       <section className="bg-gray-50/80 rounded-2xl py-16 -mx-4 md:-mx-8 px-4">
         <div className="text-center mb-12">
-          <h3 className="text-4xl font-extrabold text-brand-navy">
-            The Letsheng Standard
-          </h3>
+          <h2 className="text-4xl font-extrabold text-brand-navy">
+            Your Path to Partnership
+          </h2>
           <p className="mt-3 text-lg text-gray-600 max-w-2xl mx-auto">
-            Our operational pillars ensure reliability and quality across all
-            our ventures.
+            Engaging with us is a straightforward process. Here\'s how you can
+            get started.
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-6xl mx-auto">
-          <StandardPillar
-            icon={<ShieldCheck className="w-8 h-8" />}
-            title="Uncompromising Quality"
-            description="From property maintenance to print production, we enforce rigorous quality controls to deliver a premium, defect-free experience."
+        <div className="max-w-4xl mx-auto space-y-10">
+          <NextStep
+            icon={<Search className="w-6 h-6" />}
+            title="1. Explore"
+            description="Browse our available properties or review our corporate branding services to identify what fits your needs."
           />
-          <StandardPillar
-            icon={<Gem className="w-8 h-8" />}
-            title="Transparent Operations"
-            description="Clear contracts, upfront pricing, and open communication are the cornerstones of our client relationships. No surprises, just results."
+          <NextStep
+            icon={<FileText className="w-6 h-6" />}
+            title="2. Inquire"
+            description="Request a property viewing through our contact form or submit a detailed brief for your branding project."
           />
-          <StandardPillar
-            icon={<Clock className="w-8 h-8" />}
-            title="Reliable Delivery"
-            description="We respect your time. Our documented processes and dedicated teams ensure that all timelines are met with professional consistency."
+          <NextStep
+            icon={<Users className="w-6 h-6" />}
+            title="3. Partner"
+            description="We finalize the lease agreement or execute the branding project, welcoming you as a valued partner."
           />
         </div>
       </section>

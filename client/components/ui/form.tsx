@@ -1,3 +1,4 @@
+"use client";
 import { Slot } from "@radix-ui/react-slot";
 import React from "react";
 import type { ControllerProps, FieldPath, FieldValues } from "react-hook-form";

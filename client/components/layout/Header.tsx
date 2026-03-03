@@ -19,7 +19,7 @@ const NavLink = ({
   <Link
     href={href}
     onClick={onLinkClick}
-    className="block md:inline-block text-white px-3 py-2 rounded-md text-brand-navy text-base font-medium hover:bg-brand-blue/10 hover:text-brand-Blue transition-colors"
+    className="block md:inline-block text-white px-3 py-2 rounded-md text-brand-navy text-base font-medium hover:bg-brand-Blue/10 hover:text-brand-Blue transition-colors"
   >
     {children}
   </Link>
@@ -52,8 +52,8 @@ export default function Header() {
             <NavLink href="/properties" onLinkClick={onLinkClick}>
               Estates
             </NavLink>
-            <NavLink href="/printing" onLinkClick={onLinkClick}>
-              Printing
+            <NavLink href="/branding" onLinkClick={onLinkClick}>
+              branding
             </NavLink>
             <NavLink href="/about" onLinkClick={onLinkClick}>
               About
@@ -87,8 +87,8 @@ export default function Header() {
                   <NavLink href="/properties" onLinkClick={onLinkClick}>
                     Estates
                   </NavLink>
-                  <NavLink href="/printing" onLinkClick={onLinkClick}>
-                    Printing
+                  <NavLink href="/branding" onLinkClick={onLinkClick}>
+                    branding
                   </NavLink>
                   <NavLink href="/about" onLinkClick={onLinkClick}>
                     About Us

@@ -1,5 +1,7 @@
-import { CircleDollarSign } from "lucide-react";
+import { Bath, Bed, CircleDollarSign, Home } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+
 import TermsOfTenancy from "@/components/terms/TermsOfTenancy";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -11,43 +13,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-const sampleProperties = [
-  {
-    id: "1",
-    title: "Executive Waterfront Residence, Harbour View",
-    description:
-      "Experience unparalleled luxury in our executive waterfront suite. Offering breathtaking panoramic views of the marina, this residence features state-of-the-art amenities and bespoke furnishings. Ideal for the discerning professional.",
-    price: 35000,
-    location: "V&A Waterfront, Cape Town",
-    availability: true,
-    image_url:
-      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
-  },
-  {
-    id: "2",
-    title: "Metropolitan Loft, Financial District",
-    description:
-      'A chic, fully-serviced loft situated in the heart of the financial district. With soaring ceilings and industrial-luxe design, this space is crafted for productivity and style. Includes access to our resident"s lounge.',
-    price: 22000,
-    location: "Sandton, Johannesburg",
-    availability: false,
-    image_url:
-      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070&auto=format&fit=crop",
-  },
-  {
-    id: "3",
-    title: "Tranquil Garden Cottage",
-    description:
-      "A serene and private garden cottage nestled in a quiet suburban neighbourhood. Perfect for those seeking peace and quiet with easy access to city amenities. Features a private garden and modern finishes.",
-    price: 12500,
-    location: "Constantia, Cape Town",
-    availability: true,
-    image_url:
-      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=1974&auto=format&fit=crop",
-  },
-];
-
-// Using shared TermsOfTenancy component (imported above)
+import { sampleProperties } from "./data";
 
 export default function PropertiesPage() {
   return (
@@ -63,8 +29,6 @@ export default function PropertiesPage() {
         </p>
       </div>
 
-    
-
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
         {sampleProperties.map((p) => (
           <Card
@@ -72,12 +36,14 @@ export default function PropertiesPage() {
             className="rounded-xl shadow-lg border-gray-200/50 overflow-hidden flex flex-col"
           >
             <div className="relative h-48">
-              <Image
-                src={p.image_url}
-                alt={p.title}
-                fill
-                className="object-cover"
-              />
+              <Link href={`/properties/${p.id}`}>
+                <Image
+                  src={p.image_url}
+                  alt={p.title}
+                  fill
+                  className="object-cover"
+                />
+              </Link>
             </div>
 
             <CardHeader>
@@ -96,6 +62,20 @@ export default function PropertiesPage() {
             </CardHeader>
 
             <CardContent className="flex-grow">
+              <div className="flex items-center text-gray-600 space-x-4 mb-4">
+                <div className="flex items-center">
+                  <Bed className="h-5 w-5 mr-2" />
+                  <span>{p.bedrooms}</span>
+                </div>
+                <div className="flex items-center">
+                  <Bath className="h-5 w-5 mr-2" />
+                  <span>{p.bathrooms}</span>
+                </div>
+                <div className="flex items-center">
+                  <Home className="h-5 w-5 mr-2" />
+                  <span>{p.type}</span>
+                </div>
+              </div>
               <p className="text-gray-700 leading-relaxed">{p.description}</p>
               <div className="mt-6 flex items-center text-2xl font-bold text-brand-navy">
                 <CircleDollarSign className="h-6 w-6 mr-2 text-brand-Blue" />R
@@ -107,8 +87,12 @@ export default function PropertiesPage() {
             </CardContent>
 
             <CardFooter className="bg-gray-50/50 px-6 py-4 flex items-center justify-between mt-auto">
-              <Button variant="outline">Request a Viewing</Button>
-              <Button variant="default">Apply to Lease</Button>
+              <Link href={`/properties/${p.id}`}>
+                <Button variant="outline">View Details</Button>
+              </Link>
+              <Link href={`/properties/${p.id}/apply-to-lease`}>
+                <Button variant="default">Apply to Lease</Button>
+              </Link>
             </CardFooter>
           </Card>
         ))}

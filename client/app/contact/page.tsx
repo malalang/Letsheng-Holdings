@@ -1,8 +1,9 @@
+import { Mail, MapPin, Phone } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
-import { Mail, Phone, MapPin } from "lucide-react";
 
 export default function ContactPage() {
   return (
@@ -12,7 +13,8 @@ export default function ContactPage() {
           Get in Touch
         </h1>
         <p className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
-          We're here to help. Whether you have a question about our services or want to discuss a partnership, we'd love to hear from you.
+          We're here to help. Whether you have a question about our services or
+          want to discuss a partnership, we'd love to hear from you.
         </p>
       </header>
 
@@ -23,24 +25,43 @@ export default function ContactPage() {
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Name
+              </label>
               <Input id="name" placeholder="Your Name" />
             </div>
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Email
+              </label>
               <Input id="email" type="email" placeholder="Your Email" />
             </div>
             <div>
-              <label htmlFor="message" className="block text-sm font-medium text-gray-700">Message</label>
+              <label
+                htmlFor="message"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Message
+              </label>
               <Textarea id="message" placeholder="Your Message" />
             </div>
-            <Button size="lg" className="w-full font-bold">Send Message</Button>
+            <Button size="lg" className="w-full font-bold">
+              Send Message
+            </Button>
           </CardContent>
         </Card>
 
         <Card className="shadow-lg">
           <CardHeader>
-            <CardTitle className="text-brand-navy">Contact Information</CardTitle>
+            <CardTitle className="text-brand-navy">
+              Contact Information
+            </CardTitle>
           </CardHeader>
           <CardContent className="space-y-6 text-gray-700">
             <div className="flex items-start gap-4">

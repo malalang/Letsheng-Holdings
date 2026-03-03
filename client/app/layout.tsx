@@ -1,10 +1,12 @@
 import "./globals.css";
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Footer from "@/components/layout/Footer";
-import Header from "@/components/layout/Header";
 import Link from "next/link";
 import { FaWhatsapp } from "react-icons/fa";
+
+import Footer from "@/components/layout/Footer";
+import Header from "@/components/layout/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,12 +22,11 @@ const WhatsAppButton = () => (
     target="_blank"
     rel="noopener noreferrer"
     className="fixed bottom-8 right-8 z-50 p-4 rounded-full shadow-lg transition-transform transform hover:scale-110"
-    style={{ backgroundColor: '#49b3e0' }}
+    style={{ backgroundColor: "#49b3e0" }}
   >
     <FaWhatsapp className="h-8 w-8 text-white" />
   </Link>
 );
-
 
 export default function RootLayout({
   children,
