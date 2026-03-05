@@ -9,8 +9,10 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        "brand-navy": "#002147",
-        "brand-Blue": "#FFD700",
+        "brand-navy": "var(--color-brand-navy)",
+        "brand-blue": "var(--color-brand-blue)",
+        "brand-background": "var(--color-brand-background)",
+        "brand-card": "var(--color-brand-card)",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

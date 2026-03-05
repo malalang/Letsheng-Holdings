@@ -1,3 +1,5 @@
+'use client';
+
 import { MoreHorizontal } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -35,15 +37,14 @@ export function BrandingInquiriesTable() {
     <Card>
       <CardHeader>
         <CardTitle>Branding Inquiries</CardTitle>
-        <CardDescription>Manage and respond to all branding product inquiries.</CardDescription>
+        <CardDescription>Review and manage all branding project inquiries.</CardDescription>
       </CardHeader>
       <CardContent>
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Product Title</TableHead>
+              <TableHead>Product</TableHead>
               <TableHead>Customer</TableHead>
-              <TableHead>Quantity</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Submitted On</TableHead>
               <TableHead>
@@ -59,7 +60,6 @@ export function BrandingInquiriesTable() {
                     <div className="font-medium">{inquiry.customerName}</div>
                     <div className="text-sm text-muted-foreground">{inquiry.email}</div>
                 </TableCell>
-                <TableCell>{inquiry.quantity}</TableCell>
                 <TableCell>
                   <Badge variant={statusVariantMap[inquiry.status]}>{inquiry.status}</Badge>
                 </TableCell>
@@ -76,7 +76,7 @@ export function BrandingInquiriesTable() {
                       <DropdownMenuLabel>Actions</DropdownMenuLabel>
                       <DropdownMenuItem>View Inquiry</DropdownMenuItem>
                       <DropdownMenuItem>Mark as Contacted</DropdownMenuItem>
-                      <DropdownMenuItem>Archive</DropdownMenuItem>
+                      <DropdownMenuItem>Delete</DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </TableCell>

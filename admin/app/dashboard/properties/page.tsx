@@ -1,87 +1,107 @@
-import { Edit, ListFilter, PlusCircle } from "lucide-react";
+import { Bath, Bed, CircleDollarSign, Edit, Eye, Home, MoreVertical, Trash2 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+  Card, CardContent, CardFooter, CardHeader, CardTitle,
 } from "@/components/ui/card";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { sampleProperties } from "./data";
-
-const getStatusBadgeVariant = (isAvailable: boolean) => {
-  return isAvailable ? "default" : "destructive";
-};
 
 export default function AdminPropertiesPage() {
   return (
-    <Card>
-      <CardHeader className="flex flex-row items-center justify-between">
-        <div>
-          <CardTitle className="text-2xl">Estates Command Center</CardTitle>
-          <CardDescription className="mt-1">
-            Manage your entire real estate portfolio from this centralized
-            dashboard.
-          </CardDescription>
+    <div>
+      <div className="flex items-center gap-4 mb-4">
+        <div className="flex-1">
+          <h1 className='text-2xl font-bold'>Estates Command</h1>
+          <p className='text-muted-foreground'>Manage your real estate portfolio.</p>
         </div>
-        <div className="flex items-center gap-4">
-          <Button variant="outline">
-            <ListFilter className="mr-2 h-4 w-4"></ListFilter> Filter Properties
-          </Button>
-          <Link href="/dashboard/properties/new">
-            <Button>
-              <PlusCircle className="mr-2 h-4 w-4"></PlusCircle>
-              Add New Property
-            </Button>
-          </Link>
-        </div>
-      </CardHeader>
-      <CardContent>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Property Title</TableHead>
-              <TableHead>Location</TableHead>
-              <TableHead className="text-center">Status</TableHead>
-              <TableHead className="text-right">Monthly Rate (ZAR)</TableHead>
-              <TableHead className="text-center">Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {sampleProperties.map((prop) => (
-              <TableRow key={prop.id}>
-                <TableCell className="font-medium">{prop.title}</TableCell>
-                <TableCell className="text-gray-600">{prop.location}</TableCell>
-                <TableCell className="text-center">
-                  <Badge variant={getStatusBadgeVariant(prop.availability)}>
-                    {prop.availability ? "Available" : "Occupied"}
-                  </Badge>
-                </TableCell>
-                <TableCell className="text-right font-semibold">
-                  R {prop.price.toLocaleString()}
-                </TableCell>
-                <TableCell className="text-center">
-                  <Link href={`/dashboard/properties/${prop.id}`}>
-                    <Button variant="outline" size="sm">
-                      <Edit className="mr-2 h-3 w-3"></Edit> Manage
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+        {sampleProperties.map((p) => (
+          <Card
+            key={p.id}
+            className="rounded-xl shadow-lg border-gray-200/50 overflow-hidden flex flex-col"
+          >
+            <div className="relative h-48">
+              <Link href={`/dashboard/properties/property/${p.id}`}>
+                <Image
+                  src={p.image_url}
+                  alt={p.title}
+                  fill
+                  className="object-cover"
+                />
+              </Link>
+              <div className="absolute top-2 right-2">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="secondary" size="icon">
+                      <MoreVertical className="h-4 w-4" />
                     </Button>
-                  </Link>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </CardContent>
-    </Card>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem>
+                      <Link href={`/dashboard/properties/property/${p.id}/edit`} className="flex items-center w-full">
+                        <Edit className="h-4 w-4 mr-2" />
+                        Edit
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                        <Eye className="h-4 w-4 mr-2" />
+                        View
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="text-red-500">
+                      <Trash2 className="h-4 w-4 mr-2" />
+                      Delete
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+            </div>
+
+            <CardHeader>
+              <div className="flex justify-between items-start">
+                <CardTitle className="text-2xl font-bold text-brand-navy leading-tight">
+                  {p.title}
+                </CardTitle>
+                <Badge
+                  variant={p.availability ? "default" : "destructive"}
+                  className="shrink-0"
+                >
+                  {p.availability ? "Available" : "Occupied"}
+                </Badge>
+              </div>
+              <p className="text-sm text-gray-500 pt-1">{p.location}</p>
+            </CardHeader>
+
+            <CardContent className="flex-grow">
+              <div className="flex items-center text-gray-600 space-x-4 mb-4">
+                <div className="flex items-center">
+                  <Bed className="h-5 w-5 mr-2" />
+                  <span>{p.bedrooms}</span>
+                </div>
+                <div className="flex items-center">
+                  <Bath className="h-5 w-5 mr-2" />
+                  <span>{p.bathrooms}</span>
+                </div>
+                <div className="flex items-center">
+                  <Home className="h-5 w-5 mr-2" />
+                  <span>{p.type}</span>
+                </div>
+              </div>
+              <p className="text-gray-700 leading-relaxed truncate">{p.description}</p>
+              <div className="mt-6 flex items-center text-2xl font-bold text-brand-navy">
+                <CircleDollarSign className="h-6 w-6 mr-2 text-brand-Blue" />R
+                {p.price.toLocaleString()}
+                <span className="text-sm font-normal text-gray-500 ml-2">
+                  / month
+                </span>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </div>
   );
 }

@@ -8,8 +8,22 @@ import { cn } from "@/lib/utils";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Admin Dashboard | Letsheng Holdings",
-  description: "Manage and monitor your operations with ease.",
+  title: {
+    default: "Admin Command Center | Letsheng Holdings",
+    template: "%s | Letsheng Holdings",
+  },
+  description: "Manage properties, printing orders, and system settings.",
+  metadataBase: new URL("https://your-domain.com"),
+  openGraph: {
+    type: "website",
+    locale: "en_ZA",
+    url: "https://your-domain.com",
+    siteName: "Letsheng Holdings",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
@@ -18,11 +32,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="h-full bg-white">
       <body
         className={cn(
-          "min-h-screen bg-gray-50/80 font-sans antialiased",
-          inter.className,
+          "h-full bg-brand-white font-sans antialiased",
+          inter.className
         )}
       >
         {children}

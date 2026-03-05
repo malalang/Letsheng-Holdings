@@ -1,161 +1,173 @@
-import { PlusCircle } from "lucide-react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-
 import {
-  AlertTriangle,
-  ArrowRight,
-  Building,
-  Printer,
+  ArrowUpRight,
+  Building2,
+  ClipboardList,
   Users,
+  Palette,
+  DollarSign,
+  Percent,
+  Package,
+  AlertCircle,
 } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { MoreHorizontal, Edit, Trash2 } from "lucide-react";
 
 const kpiData = [
   {
-    title: "Managed Properties",
-    value: "18",
-    icon: Building,
-    link: "/dashboard/properties",
-    color: "text-sky-500",
+    title: "Total Monthly Revenue",
+    value: "R450,231.89",
+    icon: DollarSign,
+    change: "+20.1% from last month",
   },
   {
-    title: "Active Print Orders",
-    value: "5",
-    icon: Printer,
-    link: "/dashboard/printing-orders",
-    color: "text-emerald-500",
+    title: "Occupancy Rate",
+    value: "88%",
+    icon: Percent,
+    change: "-1.2% from last month",
   },
   {
-    title: "System Users",
-    value: "126",
-    icon: Users,
-    link: "/dashboard/users",
-    color: "text-amber-500",
+    title: "Pending Printing Orders",
+    value: "25",
+    icon: Package,
+    change: "+5 since yesterday",
   },
   {
-    title: "Critical Alerts",
-    value: "2",
-    icon: AlertTriangle,
-    link: "/dashboard/alerts",
-    color: "text-red-500",
+    title: "Overdue Payments",
+    value: "R12,870.00",
+    icon: AlertCircle,
+    change: "3 tenants overdue",
   },
 ];
 
-const recentActivity = [
+const recentLeases = [
   {
-    id: 1,
-    type: "NEW PROPERTY",
-    description: "'Executive Waterfront Residence' was listed.",
-    timestamp: "1h ago",
+    id: "LS-001",
+    tenant: "Thabo Mbeki",
+    property: "Sandton Executive Suite",
+    amount: "R25,000/mo",
+    status: "Active",
   },
   {
-    id: 2,
-    type: "ORDER UPDATE",
-    description: "Order #PRJ-007 status changed to In Production.",
-    timestamp: "3h ago",
+    id: "LS-002",
+    tenant: "Naledi Pandor",
+    property: "Rosebank Penthouse",
+    amount: "R35,000/mo",
+    status: "Active",
   },
   {
-    id: 3,
-    type: "NEW USER",
-    description: "Client 'John Doe' created an account.",
-    timestamp: "8h ago",
+    id: "LS-003",
+    tenant: "Cyril Ramaphosa",
+    property: "Waterfall Estate Villa",
+    amount: "R55,000/mo",
+    status: "Late Payment",
   },
   {
-    id: 4,
-    type: "PAYMENT RECEIVED",
-    description: "Lease payment of R12,500 for 'Tranquil Garden Cottage' confirmed.",
-    timestamp: "1d ago",
+    id: "LS-004",
+    tenant: "Lindiwe Sisulu",
+    property: "Fourways Garden Cluster",
+    amount: "R18,000/mo",
+    status: "Active",
   },
 ];
 
 const KpiCard = ({ item }: { item: (typeof kpiData)[0] }) => (
-  <Card>
+  <Card className="bg-brand-card">
     <CardHeader className="flex flex-row items-center justify-between pb-2">
-      <CardTitle className="text-sm font-medium text-gray-500">
-        {item.title}
-      </CardTitle>
-      <item.icon className={`h-5 w-5 ${item.color}`} />
+      <CardTitle className="text-sm font-medium">{item.title}</CardTitle>
+      <item.icon className="h-4 w-4 text-muted-foreground" />
     </CardHeader>
     <CardContent>
-      <div className="text-4xl font-extrabold">{item.value}</div>
-      <Link href={item.link} className="mt-4 block">
-        <Button variant="outline" size="sm" className="w-full">
-          Manage <ArrowRight className="h-4 w-4 ml-2" />
-        </Button>
-      </Link>
+      <div className="text-2xl font-bold">{item.value}</div>
+      <p className="text-xs text-muted-foreground">{item.change}</p>
     </CardContent>
   </Card>
 );
 
 export default function DashboardPage() {
   return (
-    <div className="animate-fade-in space-y-8">
-      <div>
-        <h1 className="text-4xl font-bold">Administrator Dashboard</h1>
-        <p className="text-gray-600 mt-1">
-          Master overview of Letsheng Holdings operations.
-        </p>
-      </div>
-
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+    <div className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
+      <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
         {kpiData.map((item) => (
           <KpiCard key={item.title} item={item} />
         ))}
       </div>
-
-      <div className="grid gap-8 md:grid-cols-3">
-        <Card className="md:col-span-2">
-          <CardHeader>
-            <CardTitle className="text-xl">Recent Operational Feed</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {recentActivity.map((activity) => (
-                <div key={activity.id} className="flex items-center space-x-4">
-                  <div className="w-12 text-center">
-                    <span className="font-bold text-xs bg-brand-Blue/10 text-brand-Blue border border-brand-Blue/30 rounded-full px-2 py-1">
-                      {activity.type}
-                    </span>
-                  </div>
-                  <div className="flex-grow">
-                    <p className="font-semibold text-gray-800">
-                      {activity.description}
-                    </p>
-                  </div>
-                  <p className="text-xs text-gray-500 shrink-0">
-                    {activity.timestamp}
-                  </p>
-                </div>
+      <Card className="xl:col-span-2 bg-brand-card">
+        <CardHeader className="flex flex-row items-center">
+          <div className="grid gap-2">
+            <CardTitle>Recent Lease Agreements</CardTitle>
+          </div>
+          <Button asChild size="sm" className="ml-auto gap-1 bg-brand-blue">
+            <a href="/dashboard/properties">
+              View All
+              <ArrowUpRight className="h-4 w-4" />
+            </a>
+          </Button>
+        </CardHeader>
+        <CardContent>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Property</TableHead>
+                <TableHead>Tenant</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead className="text-right">Amount</TableHead>
+                <TableHead className="text-right">Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {recentLeases.map((lease) => (
+                <TableRow key={lease.id}>
+                  <TableCell>
+                    <div className="font-medium">{lease.property}</div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="font-medium">{lease.tenant}</div>
+                  </TableCell>
+                  <TableCell>
+                    <Badge
+                      className={lease.status === 'Late Payment' ? 'bg-red-500 text-white' : 'bg-green-500 text-white'}
+                    >
+                      {lease.status}
+                    </Badge>
+                  </TableCell>
+                  <TableCell className="text-right">{lease.amount}</TableCell>
+                  <TableCell className="text-right">
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button aria-haspopup="true" size="icon" variant="ghost">
+                          <MoreHorizontal className="h-4 w-4" />
+                          <span className="sr-only">Toggle menu</span>
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end">
+                        <DropdownMenuItem>
+                          <Edit className="h-4 w-4 mr-2" />
+                          Edit
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>
+                          <Trash2 className="h-4 w-4 mr-2" />
+                          Delete
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </TableCell>
+                </TableRow>
               ))}
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-xl">Quick Actions</CardTitle>
-          </CardHeader>
-          <CardContent className="flex flex-col space-y-3">
-            <Link href="/dashboard/properties/new">
-              <Button variant="secondary" className="w-full justify-start">
-                <PlusCircle className="h-4 w-4 mr-3" /> Add New Property
-              </Button>
-            </Link>
-            <Link href="/dashboard/printing-orders/new">
-              <Button variant="secondary" className="w-full justify-start">
-                <PlusCircle className="h-4 w-4 mr-3" />
-                Log New Print Project
-              </Button>
-            </Link>
-            <Link href="/dashboard/users/invite">
-              <Button variant="secondary" className="w-full justify-start">
-                <PlusCircle className="h-4 w-4 mr-3" />
-                Invite Admin User
-              </Button>
-            </Link>
-          </CardContent>
-        </Card>
-      </div>
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
     </div>
   );
 }

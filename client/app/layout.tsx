@@ -11,9 +11,22 @@ import Header from "@/components/layout/Header";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Letsheng Holdings | Premium Estates & Corporate Branding",
-  description:
-    "Your strategic partner for premium residential estates and high-fidelity corporate branding. We build environments and create identities that empower success.",
+  title: {
+    default: "Letsheng Holdings | Premium Estates & Corporate Branding",
+    template: "%s | Letsheng Holdings",
+  },
+  description: "Your strategic partner for premium residential estates and high-fidelity corporate branding. We build environments and create identities that empower success.",
+  metadataBase: new URL("https://your-domain.com"),
+  openGraph: {
+    type: "website",
+    locale: "en_ZA",
+    url: "https://your-domain.com",
+    siteName: "Letsheng Holdings",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 const WhatsAppButton = () => (

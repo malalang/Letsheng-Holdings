@@ -4,57 +4,155 @@ export type Json =
   | boolean
   | null
   | { [key: string]: Json | undefined }
-  | Json[];
+  | Json[]
 
-export type Database = {
+export interface Database {
   public: {
     Tables: {
       properties: {
         Row: {
-          id: string;
-          title: string;
-          description: string | null;
-          price: number;
-          location: string | null;
-          availability: boolean | null;
-          image_urls: string[] | null;
-          created_at: string | null;
-        };
+          id: string
+          created_at: string
+          title: string
+          description: string | null
+          price: number
+          location: string | null
+          availability: boolean | null
+          image_urls: string[] | null
+        }
         Insert: {
-          id?: string;
-          title: string;
-          description?: string | null;
-          price: number;
-          location?: string | null;
-          availability?: boolean | null;
-          image_urls?: string[] | null;
-          created_at?: string | null;
-        };
-      };
-      printing_orders: {
+          id?: string
+          created_at?: string
+          title: string
+          description?: string | null
+          price: number
+          location?: string | null
+          availability?: boolean | null
+          image_urls?: string[] | null
+        }
+        Update: {
+          id?: string
+          created_at?: string
+          title?: string
+          description?: string | null
+          price?: number
+          location?: string | null
+          availability?: boolean | null
+          image_urls?: string[] | null
+        }
+        Relationships: []
+      }
+      tenants: {
         Row: {
-          id: string;
-          customer_name: string;
-          email: string;
-          product_type: string;
-          quantity: number;
-          design_url: string | null;
-          status: string;
-          total_price: number;
-          created_at: string | null;
-        };
+          id: string
+          created_at: string
+          name: string
+          email: string
+          phone: string
+        }
         Insert: {
-          id?: string;
-          customer_name: string;
-          email: string;
-          product_type: string;
-          quantity: number;
-          design_url?: string | null;
-          status?: string;
-          total_price: number;
-          created_at?: string | null;
-        };
-      };
-    };
-  };
-};
+          id?: string
+          created_at?: string
+          name: string
+          email: string
+          phone: string
+        }
+        Update: {
+          id?: string
+          created_at?: string
+          name?: string
+          email?: string
+          phone?: string
+        }
+        Relationships: []
+      }
+      "printing-orders": {
+        Row: {
+          id: string
+          created_at: string
+          customer_name: string
+          email: string
+          product_type: "t-shirt" | "mug" | "banner" | "poster"
+          quantity: number
+          design_url: string | null
+          status: "pending" | "processing" | "completed"
+          total_price: number
+        }
+        Insert: {
+          id?: string
+          created_at?: string
+          customer_name: string
+          email: string
+          product_type: "t-shirt" | "mug" | "banner" | "poster"
+          quantity: number
+          design_url?: string | null
+          status?: "pending" | "processing" | "completed"
+          total_price: number
+        }
+        Update: {
+          id?: string
+          created_at?: string
+          customer_name?: string
+          email?: string
+          product_type?: "t-shirt" | "mug" | "banner" | "poster"
+          quantity?: number
+          design_url?: string | null
+          status?: "pending" | "processing" | "completed"
+          total_price?: number
+        }
+        Relationships: []
+      }
+      branding: {
+        Row: {
+          id: string
+          created_at: string
+          title: string
+          description: string | null
+          category: string
+          image: string | null
+          isFeatured: boolean
+          specs: Json | null
+          gallery: Json | null
+          reviews: Json | null
+        }
+        Insert: {
+          id?: string
+          created_at?: string
+          title: string
+          description?: string | null
+          category: string
+          image?: string | null
+          isFeatured: boolean
+          specs?: Json | null
+          gallery?: Json | null
+          reviews?: Json | null
+        }
+        Update: {
+          id?: string
+          created_at?: string
+          title?: string
+          description?: string | null
+          category?: string
+          image?: string | null
+          isFeatured?: boolean
+          specs?: Json | null
+          gallery?: Json | null
+          reviews?: Json | null
+        }
+        Relationships: []
+      }
+    }
+    Views: {
+      [_in_never]: never
+    }
+    Functions: {
+      [_in_never]: never
+    }
+    Enums: {
+      [_in_never]: never
+    }
+    CompositeTypes: {
+      [_in_never]: never
+    }
+  }
+}

@@ -1,3 +1,5 @@
+'use client';
+
 import { MoreHorizontal } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -24,6 +26,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { leaseApplications } from "./data";
+import { useRouter } from 'next/navigation';
 
 const statusVariantMap: { [key: string]: "default" | "secondary" | "destructive" } = {
     Pending: "secondary",
@@ -31,6 +34,12 @@ const statusVariantMap: { [key: string]: "default" | "secondary" | "destructive"
 };
 
 export function LeaseApplicationsTable() {
+  const router = useRouter();
+
+  const handleAddTenant = (applicantName: string, email: string) => {
+    router.push(`/dashboard/tenants/new?name=${encodeURIComponent(applicantName)}&email=${encodeURIComponent(email)}`);
+  };
+
   return (
     <Card>
       <CardHeader>
@@ -74,6 +83,9 @@ export function LeaseApplicationsTable() {
                       <DropdownMenuLabel>Actions</DropdownMenuLabel>
                       <DropdownMenuItem>View Application</DropdownMenuItem>
                       <DropdownMenuItem>Mark as Reviewed</DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => handleAddTenant(app.applicantName, app.email)}>
+                        Add as Tenant
+                      </DropdownMenuItem>
                       <DropdownMenuItem>Decline</DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
