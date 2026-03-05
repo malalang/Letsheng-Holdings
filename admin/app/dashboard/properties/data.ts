@@ -56,12 +56,14 @@ export const sampleProperties = [
     ],
     reviews: [
       {
+        id: "review-1",
         author: "John Doe",
         rating: 5,
         comment:
           "Absolutely stunning property with breathtaking views. The amenities are top-notch and the service is exceptional.",
       },
       {
+        id: "review-2",
         author: "Jane Smith",
         rating: 4,
         comment:
@@ -115,6 +117,7 @@ export const sampleProperties = [
     ],
     reviews: [
       {
+        id: "review-3",
         author: "Peter Jones",
         rating: 4,
         comment:

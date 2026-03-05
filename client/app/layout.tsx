@@ -15,7 +15,8 @@ export const metadata: Metadata = {
     default: "Letsheng Holdings | Premium Estates & Corporate Branding",
     template: "%s | Letsheng Holdings",
   },
-  description: "Your strategic partner for premium residential estates and high-fidelity corporate branding. We build environments and create identities that empower success.",
+  description:
+    "Your strategic partner for premium residential estates and high-fidelity corporate branding. We build environments and create identities that empower success.",
   metadataBase: new URL("https://your-domain.com"),
   openGraph: {
     type: "website",

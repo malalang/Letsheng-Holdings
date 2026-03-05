@@ -23,7 +23,10 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { sampleProperties } from "../../data";
 
-export default async function PropertyDetailsPage({params}: {params: Promise<{ id: string }>;
+export default async function PropertyDetailsPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
   const property = sampleProperties.find((p) => p.id === id);
@@ -149,7 +152,9 @@ export default async function PropertyDetailsPage({params}: {params: Promise<{ i
             <CardContent className="grid gap-4">
               <div className="flex items-center justify-between">
                 <span className="text-muted-foreground">Availability</span>
-                <Badge variant={property.availability ? "default" : "destructive"}>
+                <Badge
+                  variant={property.availability ? "default" : "destructive"}
+                >
                   {property.availability ? "Available" : "Occupied"}
                 </Badge>
               </div>
@@ -179,13 +184,13 @@ export default async function PropertyDetailsPage({params}: {params: Promise<{ i
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                {property.reviews.map((review, index) => (
-                  <div key={index} className="p-4 rounded-lg border">
+                {property.reviews.map((review) => (
+                  <div key={review.id} className="p-4 rounded-lg border">
                     <div className="flex items-center mb-2">
                       <div className="flex items-center">
                         {[...Array(review.rating)].map((_, i) => (
                           <Star
-                            key={i}
+                            key={`${review.id}-star-${i}`}
                             className="h-4 w-4 text-yellow-400 fill-current"
                           />
                         ))}

@@ -1,26 +1,24 @@
-import Link from "next/link";
 import {
-  Home,
-  Package,
-  Package2,
-  Users,
-  Settings,
-  ShoppingCart,
-  Building2,
-  FileText,
-  Briefcase,
-  BookUser,
   Archive,
-  UserCog,
+  BookUser,
+  Building2,
   Cog,
+  Home,
+  Package2,
+  ShoppingCart,
+  UserCog,
 } from "lucide-react";
+import Link from "next/link";
 
 const Sidebar = () => {
   return (
     <div className="hidden border-r bg-brand-navy text-white md:block">
       <div className="flex h-full max-h-screen flex-col gap-2">
         <div className="flex h-14 items-center border-b border-brand-blue/30 px-4 lg:h-[60px] lg:px-6">
-          <Link href="/" className="flex items-center gap-2 font-semibold text-white">
+          <Link
+            href="/"
+            className="flex items-center gap-2 font-semibold text-white"
+          >
             <Package2 className="h-6 w-6 text-brand-blue" />
             <span>Letsheng Inc.</span>
           </Link>
@@ -33,24 +31,42 @@ const Sidebar = () => {
             </SidebarLink>
 
             <SidebarSection title="Operations" />
-            <SidebarLink href="/dashboard/properties" icon={<Building2 className="h-4 w-4" />}>
+            <SidebarLink
+              href="/dashboard/properties"
+              icon={<Building2 className="h-4 w-4" />}
+            >
               Estates
             </SidebarLink>
-            <SidebarLink href="/dashboard/tenants" icon={<BookUser className="h-4 w-4" />}>
+            <SidebarLink
+              href="/dashboard/tenants"
+              icon={<BookUser className="h-4 w-4" />}
+            >
               Tenants
             </SidebarLink>
-            <SidebarLink href="/dashboard/orders" icon={<ShoppingCart className="h-4 w-4" />}>
+            <SidebarLink
+              href="/dashboard/branding"
+              icon={<ShoppingCart className="h-4 w-4" />}
+            >
               Branding Shop
             </SidebarLink>
 
             <SidebarSection title="Admin" />
-            <SidebarLink href="/dashboard/submissions" icon={<Archive className="h-4 w-4" />}>
+            <SidebarLink
+              href="/dashboard/submissions"
+              icon={<Archive className="h-4 w-4" />}
+            >
               Submissions
             </SidebarLink>
-            <SidebarLink href="/dashboard/users" icon={<UserCog className="h-4 w-4" />}>
+            <SidebarLink
+              href="/dashboard/users"
+              icon={<UserCog className="h-4 w-4" />}
+            >
               User Management
             </SidebarLink>
-            <SidebarLink href="/dashboard/settings" icon={<Cog className="h-4 w-4" />}>
+            <SidebarLink
+              href="/dashboard/settings"
+              icon={<Cog className="h-4 w-4" />}
+            >
               Settings
             </SidebarLink>
           </nav>
@@ -61,10 +77,20 @@ const Sidebar = () => {
 };
 
 const SidebarSection = ({ title }: { title: string }) => (
-  <h3 className="px-3 py-2 text-xs font-semibold uppercase text-brand-blue/50 tracking-wider">{title}</h3>
+  <h3 className="px-3 py-2 text-xs font-semibold uppercase text-brand-blue/50 tracking-wider">
+    {title}
+  </h3>
 );
 
-const SidebarLink = ({ href, icon, children }: { href: string; icon: React.ReactNode; children: React.ReactNode }) => (
+const SidebarLink = ({
+  href,
+  icon,
+  children,
+}: {
+  href: string;
+  icon: React.ReactNode;
+  children: React.ReactNode;
+}) => (
   <Link
     href={href}
     className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-300 transition-all hover:text-white hover:bg-brand-blue/20"

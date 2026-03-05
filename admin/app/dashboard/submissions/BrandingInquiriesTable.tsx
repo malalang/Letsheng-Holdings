@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { MoreHorizontal } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -11,6 +11,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
   Table,
   TableBody,
   TableCell,
@@ -18,18 +25,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { brandingInquiries } from "./data";
 
-const statusVariantMap: { [key: string]: "default" | "secondary" | "destructive" } = {
-    New: "secondary",
-    Contacted: "default",
+const statusVariantMap: {
+  [key: string]: "default" | "secondary" | "destructive";
+} = {
+  New: "secondary",
+  Contacted: "default",
 };
 
 export function BrandingInquiriesTable() {
@@ -37,7 +39,9 @@ export function BrandingInquiriesTable() {
     <Card>
       <CardHeader>
         <CardTitle>Branding Inquiries</CardTitle>
-        <CardDescription>Review and manage all branding project inquiries.</CardDescription>
+        <CardDescription>
+          Review and manage all branding project inquiries.
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <Table>
@@ -55,15 +59,23 @@ export function BrandingInquiriesTable() {
           <TableBody>
             {brandingInquiries.map((inquiry) => (
               <TableRow key={inquiry.id}>
-                <TableCell className="font-medium">{inquiry.productTitle}</TableCell>
-                <TableCell>
-                    <div className="font-medium">{inquiry.customerName}</div>
-                    <div className="text-sm text-muted-foreground">{inquiry.email}</div>
+                <TableCell className="font-medium">
+                  {inquiry.productTitle}
                 </TableCell>
                 <TableCell>
-                  <Badge variant={statusVariantMap[inquiry.status]}>{inquiry.status}</Badge>
+                  <div className="font-medium">{inquiry.customerName}</div>
+                  <div className="text-sm text-muted-foreground">
+                    {inquiry.email}
+                  </div>
                 </TableCell>
-                <TableCell>{inquiry.submittedAt.toLocaleDateString()}</TableCell>
+                <TableCell>
+                  <Badge variant={statusVariantMap[inquiry.status]}>
+                    {inquiry.status}
+                  </Badge>
+                </TableCell>
+                <TableCell>
+                  {inquiry.submittedAt.toLocaleDateString()}
+                </TableCell>
                 <TableCell>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>

@@ -1,12 +1,24 @@
-import { Bath, Bed, CircleDollarSign, Edit, Eye, Home, MoreVertical, Trash2 } from "lucide-react";
+import {
+  Bath,
+  Bed,
+  CircleDollarSign,
+  Edit,
+  Eye,
+  Home,
+  MoreVertical,
+  Trash2,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-  Card, CardContent, CardFooter, CardHeader, CardTitle,
-} from "@/components/ui/card";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { sampleProperties } from "./data";
 
 export default function AdminPropertiesPage() {
@@ -14,8 +26,10 @@ export default function AdminPropertiesPage() {
     <div>
       <div className="flex items-center gap-4 mb-4">
         <div className="flex-1">
-          <h1 className='text-2xl font-bold'>Estates Command</h1>
-          <p className='text-muted-foreground'>Manage your real estate portfolio.</p>
+          <h1 className="text-2xl font-bold">Estates Command</h1>
+          <p className="text-muted-foreground">
+            Manage your real estate portfolio.
+          </p>
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
@@ -42,14 +56,17 @@ export default function AdminPropertiesPage() {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
                     <DropdownMenuItem>
-                      <Link href={`/dashboard/properties/property/${p.id}/edit`} className="flex items-center w-full">
+                      <Link
+                        href={`/dashboard/properties/property/${p.id}/edit`}
+                        className="flex items-center w-full"
+                      >
                         <Edit className="h-4 w-4 mr-2" />
                         Edit
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem>
-                        <Eye className="h-4 w-4 mr-2" />
-                        View
+                      <Eye className="h-4 w-4 mr-2" />
+                      View
                     </DropdownMenuItem>
                     <DropdownMenuItem className="text-red-500">
                       <Trash2 className="h-4 w-4 mr-2" />
@@ -90,7 +107,9 @@ export default function AdminPropertiesPage() {
                   <span>{p.type}</span>
                 </div>
               </div>
-              <p className="text-gray-700 leading-relaxed truncate">{p.description}</p>
+              <p className="text-gray-700 leading-relaxed truncate">
+                {p.description}
+              </p>
               <div className="mt-6 flex items-center text-2xl font-bold text-brand-navy">
                 <CircleDollarSign className="h-6 w-6 mr-2 text-brand-Blue" />R
                 {p.price.toLocaleString()}

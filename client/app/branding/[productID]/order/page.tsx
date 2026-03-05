@@ -1,6 +1,6 @@
-import { products } from "../../data";
 import BrandingOrderForm from "@/components/branding/BrandingOrderForm";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { products } from "../../data";
 
 // --- Sidebar Component --- //
 const NextStepsInfo = () => (
@@ -55,7 +55,8 @@ export default async function BrandingOrderPage({
     return <div>Product not found</div>;
   }
 
-  const { icon, ...productForClient } = product;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { icon: _, ...productForClient } = product;
 
   return (
     <div className="animate-fade-in">

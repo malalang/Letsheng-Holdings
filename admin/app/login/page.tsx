@@ -1,29 +1,29 @@
-'use client';
-import type React from 'react';
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
+"use client";
+import { LogIn, Shield } from "lucide-react";
+import type React from "react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { LogIn, Shield } from 'lucide-react';
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 
 export default function LoginPage() {
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // IMPORTANT: This is a mock authentication for front-end demo purposes only.
     // In a real application, this logic would be handled securely on the server.
-    if (password === 'letcheng-admin-2024') {
-      localStorage.setItem('admin-token', '__mock_secure_token__');
-      window.location.href = '/dashboard';
+    if (password === "letcheng-admin-2024") {
+      localStorage.setItem("admin-token", "__mock_secure_token__");
+      window.location.href = "/dashboard";
     } else {
-      alert('Incorrect password. Please try again.');
+      alert("Incorrect password. Please try again.");
     }
   };
 

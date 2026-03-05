@@ -1,17 +1,18 @@
-import Link from "next/link";
 import {
+  Archive,
+  BookUser,
+  Building2,
   CircleUser,
+  Home,
   Menu,
   Package2,
-  Search,
   PlusCircle,
-  Building2,
+  Search,
   ShoppingCart,
 } from "lucide-react";
+import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,10 +21,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const Header = () => {
   return (
-    <header className="flex h-14 items-center gap-4 border-b bg-brand-card px-4 lg:h-[60px] lg:px-6">
+    <header className="flex h-14 items-center gap-4 border-b bg-brand-navy px-4 lg:h-[60px] lg:px-6">
       <Sheet>
         <SheetTrigger asChild>
           <Button variant="outline" size="icon" className="shrink-0 md:hidden">
@@ -31,7 +34,10 @@ const Header = () => {
             <span className="sr-only">Toggle navigation menu</span>
           </Button>
         </SheetTrigger>
-        <SheetContent side="left" className="flex flex-col bg-brand-navy text-white">
+        <SheetContent
+          side="left"
+          className="flex flex-col bg-brand-navy text-white"
+        >
           <nav className="grid gap-2 text-lg font-medium">
             <Link
               href="#"
@@ -44,7 +50,36 @@ const Header = () => {
               href="/dashboard"
               className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-gray-300 hover:text-white hover:bg-brand-blue/20"
             >
+              <Home className="h-4 w-4" />
               Dashboard
+            </Link>
+
+            <Link
+              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-gray-300 hover:text-white hover:bg-brand-blue/20"
+              href="/dashboard/properties"
+            >
+              <Building2 className="h-4 w-4" /> Estates
+            </Link>
+            <Link
+              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-gray-300 hover:text-white hover:bg-brand-blue/20"
+              href="/dashboard/tenants"
+            >
+              <BookUser className="h-4 w-4" />
+              Tenants
+            </Link>
+            <Link
+              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-gray-300 hover:text-white hover:bg-brand-blue/20"
+              href="/dashboard/branding"
+            >
+              <ShoppingCart className="h-4 w-4" />
+              Branding Shop
+            </Link>
+            <Link
+              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-gray-300 hover:text-white hover:bg-brand-blue/20"
+              href="/dashboard/submissions"
+            >
+              <Archive className="h-4 w-4" />
+              Submissions
             </Link>
           </nav>
         </SheetContent>
@@ -74,13 +109,19 @@ const Header = () => {
           <DropdownMenuLabel>Create New</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
-            <Link href="/dashboard/properties/new" className="flex items-center w-full">
+            <Link
+              href="/dashboard/properties/new"
+              className="flex items-center w-full"
+            >
               <Building2 className="h-4 w-4 mr-2" />
               Property
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Link href="/dashboard/orders/new" className="flex items-center w-full">
+            <Link
+              href="/dashboard/orders/new"
+              className="flex items-center w-full"
+            >
               <ShoppingCart className="h-4 w-4 mr-2" />
               Order
             </Link>

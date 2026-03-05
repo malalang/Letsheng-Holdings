@@ -1,17 +1,22 @@
 import {
-  ArrowUpRight,
-  Building2,
-  ClipboardList,
-  Users,
-  Palette,
-  DollarSign,
-  Percent,
-  Package,
   AlertCircle,
+  ArrowUpRight,
+  DollarSign,
+  Edit,
+  MoreHorizontal,
+  Package,
+  Percent,
+  Trash2,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import {
   Table,
   TableBody,
@@ -20,8 +25,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { MoreHorizontal, Edit, Trash2 } from "lucide-react";
 
 const kpiData = [
   {
@@ -136,7 +139,11 @@ export default function DashboardPage() {
                   </TableCell>
                   <TableCell>
                     <Badge
-                      className={lease.status === 'Late Payment' ? 'bg-red-500 text-white' : 'bg-green-500 text-white'}
+                      className={
+                        lease.status === "Late Payment"
+                          ? "bg-red-500 text-white"
+                          : "bg-green-500 text-white"
+                      }
                     >
                       {lease.status}
                     </Badge>
@@ -145,7 +152,11 @@ export default function DashboardPage() {
                   <TableCell className="text-right">
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
-                        <Button aria-haspopup="true" size="icon" variant="ghost">
+                        <Button
+                          aria-haspopup="true"
+                          size="icon"
+                          variant="ghost"
+                        >
                           <MoreHorizontal className="h-4 w-4" />
                           <span className="sr-only">Toggle menu</span>
                         </Button>

@@ -1,14 +1,18 @@
-'use client';
+"use client";
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { Button } from '@/components/ui/button';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ArrowLeft, PlusCircle, Trash2 } from "lucide-react";
+import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
+  CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
+} from "@/components/ui/card";
 import {
   Form,
   FormControl,
@@ -16,54 +20,90 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { type Tenant, tenantSchema } from '@/lib/validations/schemas';
-import { useSearchParams } from 'next/navigation';
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import type { Payment, Tenant } from "./data";
+
+const tenantSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  propertyId: z.string().min(1, "Property is required"),
+  status: z.enum(["Active", "Inactive", "Pending"]),
+  leaseEndDate: z.string().min(1, "Lease end date is required"),
+});
 
 interface TenantFormProps {
-    tenant?: Tenant;
+  tenant?: Tenant;
+  payments?: Payment[];
 }
 
-export default function TenantForm({ tenant }: TenantFormProps) {
-  const searchParams = useSearchParams();
-  const name = searchParams.get('name');
-  const email = searchParams.get('email');
-
-  const form = useForm<Tenant>({
+export default function TenantForm({ tenant, payments }: TenantFormProps) {
+  const form = useForm<Omit<Tenant, "id" | "avatarUrl" | "property">>({
     resolver: zodResolver(tenantSchema),
-    defaultValues: tenant || {
-      name: name || '',
-      email: email || '',
-      phone: '',
-    },
+    defaultValues: tenant
+      ? {
+          name: tenant.name,
+          propertyId: tenant.propertyId,
+          status: tenant.status,
+          leaseEndDate: tenant.leaseEndDate,
+        }
+      : {
+          name: "",
+          propertyId: "",
+          status: "Pending",
+          leaseEndDate: "",
+        },
   });
 
-  function onSubmit(data: Tenant) {
-    console.log('Form submitted with data:', data);
+  function onSubmit(data: Omit<Tenant, "id" | "avatarUrl" | "property">) {
+    console.log("Form submitted with data:", data);
     // Here you would typically send the data to your backend API
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4 md:grid-cols-[1fr_250px] lg:grid-cols-3 lg:gap-8">
-        <div className="grid auto-rows-max items-start gap-4 lg:col-span-2 lg:gap-8">
+    <div className="mx-auto max-w-2xl">
+      <div className="mb-4">
+        <Link href="/dashboard/tenants">
+          <Button variant="outline" size="sm">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Tenants
+          </Button>
+        </Link>
+      </div>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <Card>
-              <CardHeader>
-                  <CardTitle>Tenant Details</CardTitle>
-              </CardHeader>
+            <CardHeader>
+              <CardTitle>
+                {tenant ? "Edit Tenant" : "Create New Tenant"}
+              </CardTitle>
+              <CardDescription>
+                Fill out the details below to manage a tenant.
+              </CardDescription>
+            </CardHeader>
             <CardContent className="space-y-4">
               <FormField
                 control={form.control}
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Full Name</FormLabel>
+                    <FormLabel>Tenant Name</FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder="e.g., John Doe"
-                        {...field}
-                      />
+                      <Input placeholder="e.g., John Doe" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -71,31 +111,74 @@ export default function TenantForm({ tenant }: TenantFormProps) {
               />
               <FormField
                 control={form.control}
-                name="email"
+                name="propertyId"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email Address</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="e.g., john.doe@example.com"
-                        {...field}
-                      />
-                    </FormControl>
+                    <FormLabel>Property</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a property" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="prop-001">
+                          Executive Waterfront Residence
+                        </SelectItem>
+                        <SelectItem value="prop-002">
+                          Penthouse in the Sky
+                        </SelectItem>
+                        <SelectItem value="prop-003">
+                          The Urban Oasis
+                        </SelectItem>
+                        <SelectItem value="prop-004">
+                          Serene Suburban Sanctuary
+                        </SelectItem>
+                        <SelectItem value="prop-005">
+                          Modern Downtown Loft
+                        </SelectItem>
+                      </SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}
               />
               <FormField
                 control={form.control}
-                name="phone"
+                name="status"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Phone Number</FormLabel>
+                    <FormLabel>Status</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a status" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="Active">Active</SelectItem>
+                        <SelectItem value="Inactive">Inactive</SelectItem>
+                        <SelectItem value="Pending">Pending</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="leaseEndDate"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Lease End Date</FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder="e.g., 082 123 4567"
-                        {...field}
-                      />
+                      <Input type="date" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -103,15 +186,59 @@ export default function TenantForm({ tenant }: TenantFormProps) {
               />
             </CardContent>
           </Card>
-        </div>
-        <div className="grid auto-rows-max items-start gap-4 lg:gap-8">
-            <div className="flex flex-col gap-2">
-                 <Button type="submit" variant="default" className='bg-brand-blue'>
-                    {tenant ? 'Save Changes' : 'Create Tenant'}
-                </Button>
-            </div>
-        </div>
-      </form>
-    </Form>
+
+          {tenant && payments && (
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between">
+                <div>
+                  <CardTitle>Payment History</CardTitle>
+                  <CardDescription>
+                    A record of all payments made by the tenant.
+                  </CardDescription>
+                </div>
+                <Link href={`/dashboard/tenants/${tenant.id}/payments/new`}>
+                  <Button size="sm" variant="outline">
+                    <PlusCircle className="mr-2 h-4 w-4" />
+                    Add Payment
+                  </Button>
+                </Link>
+              </CardHeader>
+              <CardContent>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Date</TableHead>
+                      <TableHead>Amount</TableHead>
+                      <TableHead>Status</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {payments.map((payment) => (
+                      <TableRow key={payment.id}>
+                        <TableCell>{payment.date}</TableCell>
+                        <TableCell>${payment.amount.toFixed(2)}</TableCell>
+                        <TableCell>{payment.status}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </CardContent>
+            </Card>
+          )}
+
+          <div className="flex justify-end gap-2">
+            {tenant && (
+              <Button variant="destructive" type="button">
+                <Trash2 className="mr-2 h-4 w-4" />
+                Delete Tenant
+              </Button>
+            )}
+            <Button type="submit" variant="default" className="bg-brand-blue">
+              {tenant ? "Save Changes" : "Create Tenant"}
+            </Button>
+          </div>
+        </form>
+      </Form>
+    </div>
   );
 }

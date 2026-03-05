@@ -1,20 +1,22 @@
+import { LogIn } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { LogIn } from "lucide-react";
 
 export default function AdminHomePage() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-brand-navy text-white">
       <div className="text-center p-8 max-w-2xl">
-        <h1 className="text-5xl font-extrabold mb-4">
-          Admin Command Center
-        </h1>
+        <h1 className="text-5xl font-extrabold mb-4">Admin Command Center</h1>
         <p className="text-lg text-gray-300 mb-8">
-          Manage Letsheng Holdings' estates and print studio operations with precision and efficiency.
+          Manage Letsheng Holdings' estates and print studio operations with
+          precision and efficiency.
         </p>
         <div className="flex justify-center gap-4">
           <Link href="/dashboard">
-            <Button size="lg" className="bg-brand-blue hover:bg-brand-blue/90 text-white">
+            <Button
+              size="lg"
+              className="bg-brand-blue hover:bg-brand-blue/90 text-white"
+            >
               Access Dashboard
               <LogIn className="ml-2 h-5 w-5" />
             </Button>

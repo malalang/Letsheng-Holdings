@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowRight, Package, Upload, User } from "lucide-react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
-
+import { type Product, products } from "@/app/branding/data";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -24,7 +24,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { type Product, products } from "@/app/branding/data";
 
 // --- Zod Schema --- //
 const projectInquirySchema = z.object({

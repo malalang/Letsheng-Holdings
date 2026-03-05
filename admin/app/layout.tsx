@@ -36,7 +36,7 @@ export default function RootLayout({
       <body
         className={cn(
           "h-full bg-brand-white font-sans antialiased",
-          inter.className
+          inter.className,
         )}
       >
         {children}

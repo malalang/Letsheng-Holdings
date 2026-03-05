@@ -8,35 +8,40 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { sampleProperties } from "../../../data";
-import PropertyForm from "../../../property-form";
+import BrandingForm from "../../../branding-form";
+import { products } from "../../../data";
 
-export default async function EditPropertyPage({
+export default async function EditBrandingPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const property = sampleProperties.find((p) => p.id === id);
+  const product = products.find((p) => p.id === id);
 
-  if (!property) {
+  if (!product) {
     return (
       <div className="mx-auto max-w-5xl">
-        <h1 className="text-2xl font-bold mb-4">Property not found</h1>
-        <Link href="/dashboard/properties">
+        <h1 className="text-2xl font-bold mb-4">Product not found</h1>
+        <Link href="/dashboard/branding">
           <Button variant="outline">
             <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Properties
+            Back to Branding
           </Button>
         </Link>
       </div>
     );
   }
 
+  // The 'product' object from 'data.ts' contains an 'icon' property which is a React Component.
+  // React Components (functions) are not serializable and cannot be passed from a Server Component to a Client Component.
+  // To fix this, we create a new object that omits the 'icon' property and any other properties not defined in the 'Branding' schema.
+  const { id: _, icon: __, reviews: ___, ...productForForm } = product;
+
   return (
     <div className="mx-auto max-w-5xl">
       <div className="mb-4 flex items-center gap-4">
-        <Link href={`/dashboard/properties/property/${property.id}`}>
+        <Link href={`/dashboard/branding/brand/${product.id}`}>
           <Button variant="outline" size="sm">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Cancel Edit
@@ -45,16 +50,16 @@ export default async function EditPropertyPage({
       </div>
       <Card>
         <CardHeader>
-          <CardTitle>Edit Property</CardTitle>
+          <CardTitle>Edit Product</CardTitle>
           <CardDescription>
             You are currently editing the details for:{" "}
             <span className="font-semibold text-foreground">
-              {property.title}
+              {product.title}
             </span>
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <PropertyForm property={property} />
+          <BrandingForm product={productForForm} />
         </CardContent>
       </Card>
     </div>
