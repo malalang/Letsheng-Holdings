@@ -1,3 +1,5 @@
+
+
 import { ArrowRight, Paintbrush } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -5,19 +7,14 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-
-import {
-  type ComingSoonProduct,
-  comingSoonProducts,
-  type Product,
-  products,
-} from "./data";
+import { getBrandingProducts } from "./actions";
+import { type Branding } from "@/lib/validations/schemas";
 
 const ProductCard = ({
   product,
   isFeatured,
 }: {
-  product: Product;
+  product: Branding;
   isFeatured?: boolean;
 }) => (
   <Card
@@ -27,7 +24,7 @@ const ProductCard = ({
       className={`relative ${isFeatured ? "h-80 lg:h-auto lg:w-1/2" : "h-56"}`}
     >
       <Image
-        src={product.image}
+        src={product.image ?? ''}
         alt={product.title}
         fill
         className="object-cover"
@@ -54,26 +51,10 @@ const ProductCard = ({
   </Card>
 );
 
-const ComingSoonCard = ({ product }: { product: ComingSoonProduct }) => (
-  <Card className="overflow-hidden shadow-lg bg-gray-50 flex flex-col p-6">
-    <div className="flex items-center mb-4">
-      <div className="w-12 h-12 bg-brand-Blue/10 text-brand-Blue rounded-full flex items-center justify-center mr-4">
-        <product.icon className="w-6 h-6" />
-      </div>
-      <div>
-        <Badge variant="secondary" className="font-semibold">
-          {product.category}
-        </Badge>
-        <h3 className="text-xl font-bold text-brand-navy">{product.title}</h3>
-      </div>
-    </div>
-    <p className="text-gray-600 mt-2 flex-grow">{product.description}</p>
-  </Card>
-);
-
-export default function BrandingPage() {
-  const featuredProducts = products.filter((p) => p.isFeatured);
-  const otherProducts = products.filter((p) => !p.isFeatured);
+export default async function BrandingPage() {
+  const products = await getBrandingProducts();
+  const featuredProducts = products.filter((p) => p.is_featured);
+  const otherProducts = products.filter((p) => !p.is_featured);
 
   return (
     <div className="animate-fade-in space-y-16">
@@ -129,9 +110,6 @@ export default function BrandingPage() {
         <div className="grid md:grid-cols-2 gap-8">
           {otherProducts.map((p) => (
             <ProductCard key={p.id} product={p} />
-          ))}
-          {comingSoonProducts.map((p) => (
-            <ComingSoonCard key={p.title} product={p} />
           ))}
         </div>
       </section>

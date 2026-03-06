@@ -1,11 +1,17 @@
-"use client";
+'use client';
 
 import { Menu } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 const NavLink = ({
   href,
@@ -80,6 +86,9 @@ export default function Header() {
                 side="right"
                 className="bg-brand-navy/80 backdrop-blur-lg text-white border-l-brand-Blue/30"
               >
+                <SheetHeader>
+                  <SheetTitle className="sr-only">Menu</SheetTitle>
+                </SheetHeader>
                 <div className="flex flex-col space-y-4 pt-10">
                   <NavLink href="/" onLinkClick={onLinkClick}>
                     Home

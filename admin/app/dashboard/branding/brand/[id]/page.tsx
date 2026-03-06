@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { products } from "../../data";
+import { getBrandingProduct } from "../../actions";
 
 export default async function BrandingDetailPage({
   params,
@@ -13,7 +13,7 @@ export default async function BrandingDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const product = products.find((p) => p.id === id);
+  const product = await getBrandingProduct(id);
 
   if (!product) {
     return (
@@ -55,7 +55,7 @@ export default async function BrandingDetailPage({
             <CardHeader className="p-0">
               <div className="relative h-96">
                 <Image
-                  src={product.image}
+                  src={product.image ?? ''}
                   alt={product.title}
                   fill
                   className="object-cover rounded-t-lg"
@@ -76,14 +76,14 @@ export default async function BrandingDetailPage({
             </CardContent>
           </Card>
 
-          {product.specs && product.specs.length > 0 && (
+          {product.specs && (product.specs as any[]).length > 0 && (
             <Card>
               <CardHeader>
                 <CardTitle>Specifications</CardTitle>
               </CardHeader>
               <CardContent>
                 <ul className="grid grid-cols-2 gap-x-6 gap-y-2">
-                  {product.specs.map((spec) => (
+                  {(product.specs as any[]).map((spec) => (
                     <li key={spec.label} className="flex items-center gap-2">
                       <CheckCircle className="h-5 w-5 text-green-500" />
                       <span>
@@ -96,13 +96,13 @@ export default async function BrandingDetailPage({
             </Card>
           )}
 
-          {product.gallery && product.gallery.length > 0 && (
+          {product.gallery && (product.gallery as any[]).length > 0 && (
             <Card>
               <CardHeader>
                 <CardTitle>Product Gallery</CardTitle>
               </CardHeader>
               <CardContent className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {product.gallery.map((image) => (
+                {(product.gallery as any[]).map((image) => (
                   <div key={image.imageUrl} className="relative h-48">
                     <Image
                       src={image.imageUrl}
@@ -125,20 +125,20 @@ export default async function BrandingDetailPage({
             <CardContent>
               <div className="flex items-center justify-between">
                 <span className="text-muted-foreground">Featured</span>
-                <Badge variant={product.isFeatured ? "default" : "secondary"}>
-                  {product.isFeatured ? "Yes" : "No"}
+                <Badge variant={product.is_featured ? "default" : "secondary"}>
+                  {product.is_featured ? "Yes" : "No"}
                 </Badge>
               </div>
             </CardContent>
           </Card>
 
-          {product.reviews && product.reviews.length > 0 && (
+          {product.reviews && (product.reviews as any[]).length > 0 && (
             <Card>
               <CardHeader>
                 <CardTitle>Client Reviews</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                {product.reviews.map((review) => (
+                {(product.reviews as any[]).map((review) => (
                   <div key={review.id} className="p-4 rounded-lg border">
                     <div className="flex items-center mb-2">
                       <div className="flex items-center">

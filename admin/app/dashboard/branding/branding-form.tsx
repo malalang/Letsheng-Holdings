@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { PlusCircle, Trash2, Upload } from "lucide-react";
-import Image from "next/image";
-import { useFieldArray, useForm } from "react-hook-form";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { PlusCircle, Trash2, Upload } from 'lucide-react';
+import Image from 'next/image';
+import { useFieldArray, useForm } from 'react-hook-form';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from '@/components/ui/card';
 import {
   Form,
   FormControl,
@@ -20,19 +20,24 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Separator } from "@/components/ui/separator";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Textarea } from "@/components/ui/textarea";
-import { type Branding, brandingSchema } from "@/lib/validations/schemas";
+} from '@/components/ui/select';
+import { Separator } from '@/components/ui/separator';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Textarea } from '@/components/ui/textarea';
+import { type Branding, brandingSchema } from '@/lib/validations/schemas';
+import {
+  createBrandingProduct,
+  deleteBrandingProduct,
+  updateBrandingProduct,
+} from './actions';
 
 interface BrandingFormProps {
   product?: Branding;
@@ -42,12 +47,12 @@ export default function BrandingForm({ product }: BrandingFormProps) {
   const form = useForm<Branding>({
     resolver: zodResolver(brandingSchema),
     defaultValues: product || {
-      title: "",
-      category: "",
-      description: "",
-      image: "",
+      title: '',
+      category: '',
+      description: '',
+      image: '',
       specs: [],
-      isFeatured: false,
+      is_featured: false,
       gallery: [],
     },
   });
@@ -58,7 +63,7 @@ export default function BrandingForm({ product }: BrandingFormProps) {
     remove: removeGallery,
   } = useFieldArray({
     control: form.control,
-    name: "gallery",
+    name: 'gallery',
   });
 
   const {
@@ -67,12 +72,15 @@ export default function BrandingForm({ product }: BrandingFormProps) {
     remove: removeSpec,
   } = useFieldArray({
     control: form.control,
-    name: "specs",
+    name: 'specs',
   });
 
-  function onSubmit(data: Branding) {
-    console.log("Form submitted with data:", data);
-    // Here you would typically send the data to your backend API
+  async function onSubmit(data: Branding) {
+    if (product?.id) {
+      await updateBrandingProduct(product.id, data);
+    } else {
+      await createBrandingProduct(data);
+    }
   }
 
   return (
@@ -137,7 +145,7 @@ export default function BrandingForm({ product }: BrandingFormProps) {
                             placeholder="Provide a compelling description of the product..."
                             rows={5}
                             {...field}
-                            value={field.value ?? ""}
+                            value={field.value ?? ''}
                           />
                         </FormControl>
                         <FormMessage />
@@ -164,10 +172,10 @@ export default function BrandingForm({ product }: BrandingFormProps) {
                         <FormLabel>Main Product Image</FormLabel>
                         <FormControl>
                           <div className="w-full">
-                            {form.watch("image") ? (
+                            {form.watch('image') ? (
                               <div className="relative aspect-video w-full max-w-lg overflow-hidden rounded-lg border">
                                 <Image
-                                  src={form.watch("image") || ""}
+                                  src={form.watch('image') || ''}
                                   alt="Main product preview"
                                   fill
                                   className="object-cover"
@@ -178,7 +186,7 @@ export default function BrandingForm({ product }: BrandingFormProps) {
                                   size="icon"
                                   className="absolute top-2 right-2"
                                   onClick={() =>
-                                    form.setValue("image", "", {
+                                    form.setValue('image', '', {
                                       shouldValidate: true,
                                       shouldDirty: true,
                                     })
@@ -204,6 +212,7 @@ export default function BrandingForm({ product }: BrandingFormProps) {
                               placeholder="https://example.com/image.png"
                               {...field}
                               className="mt-4"
+                              value={field.value ?? ''}
                             />
                           </div>
                         </FormControl>
@@ -248,7 +257,7 @@ export default function BrandingForm({ product }: BrandingFormProps) {
                                             src={
                                               form.watch(
                                                 `gallery.${index}.imageUrl`,
-                                              ) || ""
+                                              ) || ''
                                             }
                                             alt={`Gallery item ${index + 1}`}
                                             fill
@@ -299,7 +308,11 @@ export default function BrandingForm({ product }: BrandingFormProps) {
                                 <FormItem>
                                   <FormLabel>Description</FormLabel>
                                   <FormControl>
-                                    <Textarea rows={2} {...field} />
+                                    <Textarea
+                                      rows={2}
+                                      {...field}
+                                      value={field.value ?? ''}
+                                    />
                                   </FormControl>
                                   <FormMessage />
                                 </FormItem>
@@ -316,9 +329,9 @@ export default function BrandingForm({ product }: BrandingFormProps) {
                       className="mt-6"
                       onClick={() =>
                         appendGallery({
-                          imageUrl: "",
-                          title: "",
-                          description: "",
+                          imageUrl: '',
+                          title: '',
+                          description: '',
                         })
                       }
                     >
@@ -391,7 +404,7 @@ export default function BrandingForm({ product }: BrandingFormProps) {
                     variant="outline"
                     size="sm"
                     className="mt-4"
-                    onClick={() => appendSpec({ label: "", value: "" })}
+                    onClick={() => appendSpec({ label: '', value: '' })}
                   >
                     <PlusCircle className="mr-2 h-4 w-4" />
                     Add Specification
@@ -409,13 +422,13 @@ export default function BrandingForm({ product }: BrandingFormProps) {
             <CardContent>
               <FormField
                 control={form.control}
-                name="isFeatured"
+                name="is_featured"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Featured Status</FormLabel>
                     <Select
                       onValueChange={(value) =>
-                        field.onChange(value === "true")
+                        field.onChange(value === 'true')
                       }
                       defaultValue={String(field.value)}
                     >
@@ -437,10 +450,23 @@ export default function BrandingForm({ product }: BrandingFormProps) {
           </Card>
           <div className="flex flex-col gap-2">
             <Button type="submit" variant="default">
-              {product ? "Save Changes" : "Create Product"}
+              {product ? 'Save Changes' : 'Create Product'}
             </Button>
             {product && (
-              <Button variant="destructive" type="button">
+              <Button
+                variant="destructive"
+                type="button"
+                onClick={async () => {
+                  if (
+                    window.confirm(
+                      'Are you sure you want to delete this product?'
+                    ) &&
+                    product.id
+                  ) {
+                    await deleteBrandingProduct(product.id);
+                  }
+                }}
+              >
                 <Trash2 className="mr-2 h-4 w-4" />
                 Delete Product
               </Button>

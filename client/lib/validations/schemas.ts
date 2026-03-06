@@ -36,7 +36,7 @@ export const brandingSchema = z.object({
   description: z.string().nullable().optional(),
   category: z.string(),
   image: z.string().url().optional(),
-  isFeatured: z.boolean(),
+  is_featured: z.boolean(),
   specs: z
     .array(
       z.object({

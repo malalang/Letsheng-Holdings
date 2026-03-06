@@ -16,9 +16,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { products } from "./data";
+import { getBrandingProducts } from "./actions";
 
-export default function AdminBrandingPage() {
+export default async function AdminBrandingPage() {
+  const products = await getBrandingProducts();
   return (
     <div>
       <div className="flex items-center gap-4 mb-4">
@@ -44,7 +45,7 @@ export default function AdminBrandingPage() {
             <div className="relative h-48">
               <Link href={`/dashboard/branding/brand/${p.id}`}>
                 <Image
-                  src={p.image}
+                  src={p.image ?? ''}
                   alt={p.title}
                   fill
                   className="object-cover"
@@ -91,10 +92,10 @@ export default function AdminBrandingPage() {
                   {p.title}
                 </CardTitle>
                 <Badge
-                  variant={p.isFeatured ? "default" : "secondary"}
+                  variant={p.is_featured ? "default" : "secondary"}
                   className="shrink-0"
                 >
-                  {p.isFeatured ? "Featured" : "Standard"}
+                  {p.is_featured ? "Featured" : "Standard"}
                 </Badge>
               </div>
               <CardDescription>{p.category}</CardDescription>

@@ -46,13 +46,15 @@ export const specItemSchema = z.object({
 
 // Schema for a branding product. Note: `image` is used for the main image URL.
 export const brandingSchema = z.object({
+  id: z.string().optional(),
   title: z.string().min(3, "Title must be at least 3 characters"),
   category: z.string().min(3, "Category is required"),
   description: z.string().optional(),
-  image: z.string().url("Must be a valid URL"),
-  specs: z.array(specItemSchema).optional(),
-  isFeatured: z.boolean(),
-  gallery: z.array(galleryItemSchema).optional(),
+  image: z.string().url("Must be a valid URL").optional().nullable(),
+  specs: z.array(specItemSchema).optional().nullable(),
+  is_featured: z.boolean(),
+  gallery: z.array(galleryItemSchema).optional().nullable(),
+  reviews: z.array(reviewSchema).optional().nullable(),
 });
 
 export type Branding = z.infer<typeof brandingSchema>;

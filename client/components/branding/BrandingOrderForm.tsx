@@ -1,10 +1,12 @@
-"use client";
+'use client';
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowRight, Package, Upload, User } from "lucide-react";
+import React from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
-import { type Product, products } from "@/app/branding/data";
+
+import { getBrandingProducts } from "@/app/branding/actions";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -24,27 +26,38 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { type Branding } from "@/lib/validations/schemas";
 
 // --- Zod Schema --- //
 const projectInquirySchema = z.object({
   customer_name: z.string().min(2, "A name is required."),
   company_name: z.string().optional(),
   email: z.string().email("Invalid email address."),
-  product_type: z.enum(products.map((p) => p.id) as [string, ...string[]]),
+  product_type: z.string(),
   quantity: z.number().int().positive("Quantity must be at least 1."),
   project_details: z.string().min(10, "Please provide more details."),
 });
 type InquiryFormData = z.infer<typeof projectInquirySchema>;
 
 // --- Client Component: The Form --- //
-export default function BrandingOrderForm({ product }: { product: Product }) {
+export default function BrandingOrderForm({ product }: { product: Branding }) {
+  const [products, setProducts] = React.useState<Branding[]>([]);
+
+  React.useEffect(() => {
+    async function fetchProducts() {
+      const allProducts = await getBrandingProducts();
+      setProducts(allProducts);
+    }
+    fetchProducts();
+  }, []);
+
   const form = useForm<InquiryFormData>({
     resolver: zodResolver(projectInquirySchema),
     defaultValues: {
       customer_name: "",
       company_name: "",
       email: "",
-      product_type: product.id,
+      product_type: product.id ?? "",
       quantity: 1,
       project_details: "",
     },
@@ -139,7 +152,7 @@ export default function BrandingOrderForm({ product }: { product: Product }) {
                     </FormControl>
                     <SelectContent>
                       {products.map((p) => (
-                        <SelectItem key={p.id} value={p.id}>
+                        <SelectItem key={p.id} value={p.id ?? ""}>
                           {p.title}
                         </SelectItem>
                       ))}

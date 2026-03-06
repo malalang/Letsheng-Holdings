@@ -1,6 +1,6 @@
 import BrandingOrderForm from "@/components/branding/BrandingOrderForm";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { products } from "../../data";
+import { getBrandingProduct } from "../../actions";
 
 // --- Sidebar Component --- //
 const NextStepsInfo = () => (
@@ -49,14 +49,11 @@ export default async function BrandingOrderPage({
   params: Promise<{ productID: string }>;
 }) {
   const { productID } = await params;
-  const product = products.find((p) => p.id === productID);
+  const product = await getBrandingProduct(productID);
 
   if (!product) {
     return <div>Product not found</div>;
   }
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { icon: _, ...productForClient } = product;
 
   return (
     <div className="animate-fade-in">
@@ -72,7 +69,7 @@ export default async function BrandingOrderPage({
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
         <div className="lg:col-span-2">
-          <BrandingOrderForm product={productForClient} />
+          <BrandingOrderForm product={product} />
         </div>
         <div className="lg:sticky lg:top-24 h-fit">
           <NextStepsInfo />
