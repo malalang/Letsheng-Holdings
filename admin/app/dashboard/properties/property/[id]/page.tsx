@@ -67,7 +67,7 @@ export default async function PropertyDetailsPage({
             <CardHeader className="p-0">
               <div className="relative h-96">
                 <Image
-                  src={property.image_url}
+                  src={property.image_url || ""}
                   alt={property.title}
                   fill
                   className="object-cover rounded-t-lg"
@@ -209,13 +209,13 @@ export default async function PropertyDetailsPage({
           )}
 
           {/* Virtual Tour */}
-          {property.virtualTourUrl && (
+          {property.virtual_tour_url && (
             <Card>
               <CardHeader>
                 <CardTitle>Virtual Tour</CardTitle>
               </CardHeader>
               <CardContent>
-                <Link href={property.virtualTourUrl} target="_blank">
+                <Link href={property.virtual_tour_url} target="_blank">
                   <Button variant="outline" className="w-full">
                     <Camera className="mr-2 h-4 w-4" />
                     Open Virtual Tour

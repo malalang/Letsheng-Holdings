@@ -153,7 +153,7 @@ export default async function PropertyDetailPage({
             </div>
           )}
 
-          {property.virtualTourUrl && (
+          {property.virtual_tour_url && (
             <div className="mt-8">
               <h3 className="text-2xl font-bold text-brand-navy mb-4">
                 More Details
@@ -161,7 +161,7 @@ export default async function PropertyDetailPage({
               <div className="flex items-center">
                 <Camera className="h-5 w-5 mr-2" />
                 <a
-                  href={property.virtualTourUrl}
+                  href={property.virtual_tour_url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-brand-Blue hover:underline"

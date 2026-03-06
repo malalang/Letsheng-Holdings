@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2, PlusCircle, Trash2, Upload } from "lucide-react";
@@ -36,7 +36,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/components/ui/use-toast";
+import { toast } from "@/components/ui/use-toast";
 import { type Property, propertySchema } from "@/lib/validations/schemas";
 
 interface PropertyFormProps {
@@ -47,7 +47,6 @@ export default function PropertyForm({ property }: PropertyFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const router = useRouter();
-  const { toast } = useToast();
 
   const form = useForm<Property>({
     resolver: zodResolver(propertySchema),
@@ -57,7 +56,7 @@ export default function PropertyForm({ property }: PropertyFormProps) {
           features: property.features || [],
           gallery: property.gallery || [],
           reviews: property.reviews || [],
-          virtualTourUrl: property.virtualTourUrl || "",
+          virtual_tour_url: property.virtual_tour_url || "",
         }
       : {
           title: "",
@@ -73,7 +72,7 @@ export default function PropertyForm({ property }: PropertyFormProps) {
           is_featured: false,
           gallery: [],
           reviews: [],
-          virtualTourUrl: "",
+          virtual_tour_url: "",
         },
   });
 
@@ -86,9 +85,15 @@ export default function PropertyForm({ property }: PropertyFormProps) {
     setIsLoading(true);
     try {
       if (property && property.id) {
-        await updateProperty(property.id, data);
-        toast.success("Property has been updated successfully.");
-        router.push(`/dashboard/properties/property/${property.id}`);
+        const result = await updateProperty(property.id, data);
+        if (result.success) {
+          toast.success("Property has been updated successfully.");
+          router.push(`/dashboard/properties/property/${property.id}`);
+        } else {
+          toast.error(
+            result.error || "An unexpected error occurred. Please try again.",
+          );
+        }
       } else {
         await createProperty(data);
         toast.success("New property has been created.");
@@ -97,7 +102,11 @@ export default function PropertyForm({ property }: PropertyFormProps) {
       router.refresh();
     } catch (error) {
       console.error("Failed to save property:", error);
-      toast.error("An unexpected error occurred. Please try again.");
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : "An unexpected error occurred. Please try again.",
+      );
     } finally {
       setIsLoading(false);
     }
@@ -115,7 +124,9 @@ export default function PropertyForm({ property }: PropertyFormProps) {
     } catch (error) {
       console.error("Failed to delete property:", error);
       toast.error(
-        "An unexpected error occurred while deleting. Please try again.",
+        error instanceof Error
+          ? error.message
+          : "An unexpected error occurred while deleting. Please try again.",
       );
     } finally {
       setIsDeleting(false);
@@ -418,7 +429,7 @@ export default function PropertyForm({ property }: PropertyFormProps) {
                   {/* Virtual Tour Section */}
                   <FormField
                     control={form.control}
-                    name="virtualTourUrl"
+                    name="virtual_tour_url"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Virtual Tour URL</FormLabel>

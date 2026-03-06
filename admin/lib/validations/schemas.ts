@@ -1,4 +1,4 @@
- import { z } from "zod";
+import { z } from "zod";
 
 // Schema for a single gallery item
 export const galleryItemSchema = z.object({
@@ -26,7 +26,7 @@ export const propertySchema = z.object({
   price: z.number().positive("Price must be a positive number"),
   location: z.string().min(3, "Location is required"),
   availability: z.boolean(),
-  image_url: z.string().url("Must be a valid URL"),
+  image_url: z.string().url("Must be a valid URL").or(z.literal("")).optional(),
   bedrooms: z.number().int().min(1, "Must have at least one bedroom"),
   bathrooms: z.number().int().min(1, "Must have at least one bathroom"),
   type: z.string().min(1, "Type is required"),
@@ -34,7 +34,7 @@ export const propertySchema = z.object({
   is_featured: z.boolean(),
   gallery: z.array(galleryItemSchema).optional(),
   reviews: z.array(reviewSchema).optional(),
-  virtualTourUrl: z.string().url().optional().nullable(),
+  virtual_tour_url: z.string().url().optional().nullable(),
 });
 
 export type Property = z.infer<typeof propertySchema>;

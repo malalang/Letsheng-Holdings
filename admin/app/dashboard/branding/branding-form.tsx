@@ -1,9 +1,12 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { PlusCircle, Trash2, Upload } from 'lucide-react';
+import { Loader2, PlusCircle, Trash2, Upload } from 'lucide-react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
+import { toast } from "@/components/ui/use-toast";
 
 import { Button } from '@/components/ui/button';
 import {
@@ -44,44 +47,114 @@ interface BrandingFormProps {
 }
 
 export default function BrandingForm({ product }: BrandingFormProps) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const router = useRouter();
+
   const form = useForm<Branding>({
     resolver: zodResolver(brandingSchema),
-    defaultValues: product || {
-      title: '',
-      category: '',
-      description: '',
-      image: '',
-      specs: [],
-      is_featured: false,
-      gallery: [],
-    },
+    defaultValues: product
+      ? {
+          ...product,
+          specs: product.specs ?? [],
+          gallery: product.gallery ?? [],
+        }
+      : {
+          title: '',
+          category: '',
+          description: '',
+          image: '',
+          specs: [],
+          is_featured: false,
+          gallery: [],
+        },
   });
 
-  const {
-    fields: galleryFields,
-    append: appendGallery,
-    remove: removeGallery,
-  } = useFieldArray({
-    control: form.control,
-    name: 'gallery',
-  });
-
-  const {
-    fields: specFields,
-    append: appendSpec,
-    remove: removeSpec,
-  } = useFieldArray({
-    control: form.control,
-    name: 'specs',
-  });
-
-  async function onSubmit(data: Branding) {
-    if (product?.id) {
-      await updateBrandingProduct(product.id, data);
-    } else {
-      await createBrandingProduct(data);
+  useEffect(() => {
+    if (product) {
+      form.reset({
+        ...product,
+        specs: product.specs ?? [],
+        gallery: product.gallery ?? [],
+      });
     }
-  }
+  }, [product, form.reset]);
+
+  const { fields: galleryFields, append: appendGallery, remove: removeGallery } =
+    useFieldArray({
+      control: form.control,
+      name: 'gallery',
+    });
+
+  const { fields: specFields, append: appendSpec, remove: removeSpec } =
+    useFieldArray({
+      control: form.control,
+      name: 'specs',
+    });
+
+    async function onSubmit(data: Branding) {
+      setIsLoading(true);
+      try {
+        if (product && product.id) {
+          const result = await updateBrandingProduct(product.id, data);
+          if (result.success) {
+            toast.success('Branding product has been updated successfully.');
+            router.push(`/dashboard/branding`);
+          } else {
+            toast.error(
+              result.error || 'An unexpected error occurred. Please try again.',
+            );
+          }
+        } else {
+          const result = await createBrandingProduct(data);
+          if (result.success) {
+            toast.success('New branding product has been created.');
+            router.push('/dashboard/branding');
+          } else {
+            toast.error(
+              result.error || 'An unexpected error occurred. Please try again.',
+            );
+          }
+        }
+        router.refresh();
+      } catch (error) {
+        console.error('Failed to save product:', error);
+        toast.error(
+          error instanceof Error
+            ? error.message
+            : 'An unexpected error occurred. Please try again.',
+        );
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    async function onDelete() {
+      if (!product || !product.id) return;
+  
+      setIsDeleting(true);
+      try {
+        const result = await deleteBrandingProduct(product.id);
+        if (result.success) {
+          toast.success('Branding product has been deleted.');
+          router.push('/dashboard/branding');
+        } else {
+          toast.error(
+            result.error || 'An unexpected error occurred while deleting. Please try again.',
+          );
+        }
+        router.refresh();
+      } catch (error) {
+        console.error('Failed to delete product:', error);
+        toast.error(
+          error instanceof Error
+            ? error.message
+            : 'An unexpected error occurred while deleting. Please try again.',
+        );
+      } finally {
+        setIsDeleting(false);
+      }
+    }
 
   return (
     <Form {...form}>
@@ -449,25 +522,22 @@ export default function BrandingForm({ product }: BrandingFormProps) {
             </CardContent>
           </Card>
           <div className="flex flex-col gap-2">
-            <Button type="submit" variant="default">
+            <Button type="submit" onClick={()=>onSubmit(form.getValues())} variant="default" disabled={isLoading}>
+              {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               {product ? 'Save Changes' : 'Create Product'}
             </Button>
             {product && (
               <Button
                 variant="destructive"
                 type="button"
-                onClick={async () => {
-                  if (
-                    window.confirm(
-                      'Are you sure you want to delete this product?'
-                    ) &&
-                    product.id
-                  ) {
-                    await deleteBrandingProduct(product.id);
-                  }
-                }}
+                onClick={onDelete}
+                disabled={isDeleting}
               >
-                <Trash2 className="mr-2 h-4 w-4" />
+                {isDeleting ? (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                ) : (
+                  <Trash2 className="mr-2 h-4 w-4" />
+                )}
                 Delete Product
               </Button>
             )}

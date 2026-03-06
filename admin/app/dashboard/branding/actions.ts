@@ -4,6 +4,7 @@ import { createClient } from '@/lib/supabase/server';
 import { type Branding } from '@/lib/validations/schemas';
 import { revalidatePath } from 'next/cache';
 
+// Action to fetch all branding products
 export async function getBrandingProducts(): Promise<Branding[]> {
   const supabase = await createClient();
   const { data, error } = await supabase.from('branding').select('*');
@@ -16,6 +17,7 @@ export async function getBrandingProducts(): Promise<Branding[]> {
   return data as any;
 }
 
+// Action to fetch a single branding product by its ID
 export async function getBrandingProduct(id: string): Promise<Branding | null> {
   const supabase = await createClient();
   const { data, error } = await supabase
@@ -32,58 +34,52 @@ export async function getBrandingProduct(id: string): Promise<Branding | null> {
   return data as any;
 }
 
-export async function createBrandingProduct(product: Branding) {
+// Action to create a new branding product
+export async function createBrandingProduct(
+  product: Branding,
+): Promise<{ success: boolean; error?: string }> {
   const supabase = await createClient();
-  const { is_featured, ...rest } = product;
-  const productForDb = { ...rest, isFeatured: is_featured };
-
-  const { data, error } = await supabase.from('branding').insert([productForDb]);
+  const { error } = await supabase.from('branding').insert([product]);
 
   if (error) {
     console.error('Error creating branding product:', error);
-    return { error };
+    return { success: false, error: error.message };
   }
 
   revalidatePath('/dashboard/branding');
-  return { data };
+  return { success: true };
 }
 
+// Action to update an existing branding product
 export async function updateBrandingProduct(
   id: string,
   product: Partial<Branding>,
-) {
+): Promise<{ success: boolean; error?: string }> {
   const supabase = await createClient();
-  const { is_featured, ...rest } = product;
-
-  const updateData: { [key: string]: any } = { ...rest };
-  if (is_featured !== undefined) {
-    updateData.isFeatured = is_featured;
-  }
-
-  const { data, error } = await supabase
-    .from('branding')
-    .update(updateData)
-    .eq('id', id);
+  const { error } = await supabase.from('branding').update(product).eq('id', id);
 
   if (error) {
     console.error('Error updating branding product:', error);
-    return { error };
+    return { success: false, error: error.message };
   }
 
   revalidatePath('/dashboard/branding');
   revalidatePath(`/dashboard/branding/brand/${id}`);
-  return { data };
+  return { success: true };
 }
 
-export async function deleteBrandingProduct(id: string) {
+// Action to delete a branding product
+export async function deleteBrandingProduct(
+  id: string,
+): Promise<{ success: boolean; error?: string }> {
   const supabase = await createClient();
-  const { data, error } = await supabase.from('branding').delete().eq('id', id);
+  const { error } = await supabase.from('branding').delete().eq('id', id);
 
   if (error) {
     console.error('Error deleting branding product:', error);
-    return { error };
+    return { success: false, error: error.message };
   }
 
   revalidatePath('/dashboard/branding');
-  return { data };
+  return { success: true };
 }

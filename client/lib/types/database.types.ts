@@ -110,7 +110,7 @@ export interface Database {
           description: string | null;
           category: string;
           image: string | null;
-          isFeatured: boolean;
+          is_featured : boolean;
           specs: Json | null;
           gallery: Json | null;
           reviews: Json | null;
@@ -122,7 +122,7 @@ export interface Database {
           description?: string | null;
           category: string;
           image?: string | null;
-          isFeatured: boolean;
+          is_featured : boolean;
           specs?: Json | null;
           gallery?: Json | null;
           reviews?: Json | null;
@@ -134,7 +134,7 @@ export interface Database {
           description?: string | null;
           category?: string;
           image?: string | null;
-          isFeatured?: boolean;
+          is_featured ?: boolean;
           specs?: Json | null;
           gallery?: Json | null;
           reviews?: Json | null;

@@ -12,16 +12,16 @@ import { type Branding } from "@/lib/validations/schemas";
 
 const ProductCard = ({
   product,
-  isFeatured,
+  is_featured ,
 }: {
   product: Branding;
-  isFeatured?: boolean;
+  is_featured ?: boolean;
 }) => (
   <Card
-    className={`overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col ${isFeatured ? "lg:flex-row" : ""}`}
+    className={`overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col ${is_featured  ? "lg:flex-row" : ""}`}
   >
     <div
-      className={`relative ${isFeatured ? "h-80 lg:h-auto lg:w-1/2" : "h-56"}`}
+      className={`relative ${is_featured  ? "h-80 lg:h-auto lg:w-1/2" : "h-56"}`}
     >
       <Image
         src={product.image ?? ''}
@@ -31,7 +31,7 @@ const ProductCard = ({
       />
     </div>
     <div
-      className={`p-6 flex flex-col justify-between ${isFeatured ? "lg:w-1/2" : ""}`}
+      className={`p-6 flex flex-col justify-between ${is_featured  ? "lg:w-1/2" : ""}`}
     >
       <div>
         <Badge variant="default" className="font-semibold mb-2">
@@ -97,7 +97,7 @@ export default async function BrandingPage() {
         </h2>
         <div className="space-y-8">
           {featuredProducts.map((p) => (
-            <ProductCard key={p.id} product={p} isFeatured />
+            <ProductCard key={p.id} product={p} is_featured  />
           ))}
         </div>
       </section>

@@ -35,7 +35,7 @@ export async function getBrandingProduct(id: string): Promise<Branding | null> {
 export async function createBrandingProduct(product: Branding) {
   const supabase = await createClient();
   const { is_featured, ...rest } = product;
-  const productForDb = { ...rest, isFeatured: is_featured };
+  const productForDb = { ...rest, is_featured : is_featured };
 
   const { data, error } = await supabase.from('branding').insert([productForDb]);
 
@@ -57,7 +57,7 @@ export async function updateBrandingProduct(
 
   const updateData: { [key: string]: any } = { ...rest };
   if (is_featured !== undefined) {
-    updateData.isFeatured = is_featured;
+    updateData.is_featured  = is_featured;
   }
 
   const { data, error } = await supabase

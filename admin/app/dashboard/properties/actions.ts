@@ -36,18 +36,31 @@ export async function createProperty(data: Property) {
 export async function updateProperty(
   id: string,
   data: Property,
-) {
+): Promise<{ success: boolean; error: string | null }> {
   const supabase = await createClient();
-  const validatedData = propertySchema.parse(data);
+  try {
+    const validatedData = propertySchema.parse(data);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { id: _, ...updateData } = validatedData;
 
-  const { error } = await supabase
-    .from("properties")
-    .update(validatedData)
-    .eq("id", id);
-  if (error) throw new Error(error.message);
+    const { error } = await supabase
+      .from("properties")
+      .update(updateData)
+      .eq("id", id);
 
-  revalidatePath("/dashboard/properties");
-  revalidatePath(`/dashboard/properties/property/${id}`);
+    if (error) {
+      console.error("Supabase update error:", error);
+      return { success: false, error: error.message };
+    }
+
+    revalidatePath("/dashboard/properties");
+    revalidatePath(`/dashboard/properties/property/${id}`);
+    return { success: true, error: null };
+  } catch (e) {
+    const error = e as Error;
+    console.error("Validation or unexpected error:", error);
+    return { success: false, error: error.message };
+  }
 }
 
 export async function deleteProperty(id: string) {
