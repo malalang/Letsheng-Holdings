@@ -19,9 +19,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { sampleProperties } from "./data";
+import { getProperties } from "./actions";
 
-export default function AdminPropertiesPage() {
+export default async function AdminPropertiesPage() {
+  const properties = await getProperties();
+
   return (
     <div>
       <div className="flex items-center gap-4 mb-4">
@@ -33,7 +35,7 @@ export default function AdminPropertiesPage() {
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-        {sampleProperties.map((p) => (
+        {properties.map((p) => (
           <Card
             key={p.id}
             className="rounded-xl shadow-lg border-gray-200/50 overflow-hidden flex flex-col"

@@ -13,9 +13,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import { sampleProperties } from "./data";
+import { getProperties } from "./actions";
 
-export default function PropertiesPage() {
+export default async function PropertiesPage() {
+  const properties = await getProperties();
+
   return (
     <div className="animate-fade-in">
       <div className="text-center mb-12">
@@ -30,7 +32,7 @@ export default function PropertiesPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-        {sampleProperties.map((p) => (
+        {properties.map((p) => (
           <Card
             key={p.id}
             className="rounded-xl shadow-lg border-gray-200/50 overflow-hidden flex flex-col"
@@ -38,7 +40,7 @@ export default function PropertiesPage() {
             <div className="relative h-48">
               <Link href={`/properties/${p.id}`}>
                 <Image
-                  src={p.image_url}
+                  src={p.image_url ?? ""}
                   alt={p.title}
                   fill
                   className="object-cover"

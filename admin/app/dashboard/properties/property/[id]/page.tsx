@@ -21,7 +21,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { sampleProperties } from "../../data";
+import { getPropertyById } from "../../actions";
 
 export default async function PropertyDetailsPage({
   params,
@@ -29,7 +29,7 @@ export default async function PropertyDetailsPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const property = sampleProperties.find((p) => p.id === id);
+  const property = await getPropertyById(id);
 
   if (!property) {
     return (
@@ -105,21 +105,23 @@ export default async function PropertyDetailsPage({
           </Card>
 
           {/* Features Card */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Features</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ul className="grid grid-cols-2 gap-x-6 gap-y-2">
-                {property.features.map((feature) => (
-                  <li key={feature} className="flex items-center gap-2">
-                    <CheckCircle className="h-5 w-5 text-green-500" />
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </CardContent>
-          </Card>
+          {property.features && property.features.length > 0 && (
+            <Card>
+              <CardHeader>
+                <CardTitle>Features</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="grid grid-cols-2 gap-x-6 gap-y-2">
+                  {property.features.map((feature) => (
+                    <li key={feature} className="flex items-center gap-2">
+                      <CheckCircle className="h-5 w-5 text-green-500" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+          )}
 
           {/* Gallery Card */}
           {property.gallery && property.gallery.length > 0 && (
@@ -160,8 +162,8 @@ export default async function PropertyDetailsPage({
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-muted-foreground">Featured</span>
-                <Badge variant={property.isFeatured ? "default" : "secondary"}>
-                  {property.isFeatured ? "Yes" : "No"}
+                <Badge variant={property.is_featured ? "default" : "secondary"}>
+                  {property.is_featured ? "Yes" : "No"}
                 </Badge>
               </div>
               <Separator />

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
-import { sampleProperties } from "../../data";
+import { getPropertyById } from "../../actions";
 
 export default async function PropertyGalleryPage({
   params,
@@ -12,7 +12,7 @@ export default async function PropertyGalleryPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const property = sampleProperties.find((p) => p.id === id);
+  const property = await getPropertyById(id);
 
   if (!property) {
     return <div>Property not found</div>;
@@ -29,7 +29,7 @@ export default async function PropertyGalleryPage({
         </Link>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {property.gallery.map((image) => (
+        {(property.gallery as any[]).map((image) => (
           <Card
             key={image.imageUrl}
             className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"

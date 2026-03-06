@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { sampleProperties } from "../../data";
+import { getPropertyById } from "../../actions";
 
 export default async function ApplyToLeasePage({
   params,
@@ -18,7 +18,7 @@ export default async function ApplyToLeasePage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const property = sampleProperties.find((p) => p.id === id);
+  const property = await getPropertyById(id);
 
   if (!property) {
     return <div>Property not found</div>;

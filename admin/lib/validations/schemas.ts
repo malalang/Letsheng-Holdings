@@ -1,4 +1,4 @@
-import { z } from "zod";
+ import { z } from "zod";
 
 // Schema for a single gallery item
 export const galleryItemSchema = z.object({
@@ -20,6 +20,7 @@ export const reviewSchema = z.object({
 
 // Schema for a property
 export const propertySchema = z.object({
+  id: z.string().optional(),
   title: z.string().min(3, "Title must be at least 3 characters"),
   description: z.string().optional(),
   price: z.number().positive("Price must be a positive number"),
@@ -30,7 +31,7 @@ export const propertySchema = z.object({
   bathrooms: z.number().int().min(1, "Must have at least one bathroom"),
   type: z.string().min(1, "Type is required"),
   features: z.array(z.string()).optional(),
-  isFeatured: z.boolean(),
+  is_featured: z.boolean(),
   gallery: z.array(galleryItemSchema).optional(),
   reviews: z.array(reviewSchema).optional(),
   virtualTourUrl: z.string().url().optional().nullable(),

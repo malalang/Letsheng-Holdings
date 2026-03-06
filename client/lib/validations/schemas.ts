@@ -1,71 +1,80 @@
 import { z } from "zod";
 
+// Schema for a single gallery item
+export const galleryItemSchema = z.object({
+  imageUrl: z
+    .string()
+    .url({ message: "Please enter a valid URL." })
+    .min(1, "Image URL is required."),
+  title: z.string().min(1, "Title is required"),
+  description: z.string().optional(),
+});
+
+// Schema for a single review
+export const reviewSchema = z.object({
+  id: z.string(),
+  author: z.string().min(1, "Author is required"),
+  rating: z.number().min(1).max(5),
+  comment: z.string().min(1, "Comment is required"),
+});
+
+// Schema for a property
 export const propertySchema = z.object({
-  id: z.string().optional(),
-  title: z.string().min(3),
-  description: z.string().nullable().optional(),
-  price: z.number().positive(),
-  location: z.string().nullable().optional(),
-  availability: z.boolean().optional(),
-  image_urls: z.array(z.string().url()).nullable().optional(),
-  created_at: z.string().optional(),
-});
-
-export const tenantSchema = z.object({
-  id: z.string().optional(),
-  name: z.string().min(1, "Name is required"),
-  email: z.string().email("Invalid email address"),
-  phone: z.string().min(1, "Phone number is required"),
-});
-
-export const printingOrderSchema = z.object({
-  id: z.string().optional(),
-  customer_name: z.string().min(1),
-  email: z.string().email(),
-  product_type: z.enum(["t-shirt", "mug", "banner", "poster"]),
-  quantity: z.number().int().positive(),
-  design_url: z.string().url().nullable().optional(),
-  status: z.enum(["pending", "processing", "completed"]).default("pending"),
-  total_price: z.number().nonnegative(),
-  created_at: z.string().optional(),
-});
-
-export const brandingSchema = z.object({
-  id: z.string().optional(),
-  title: z.string().min(3),
-  description: z.string().nullable().optional(),
-  category: z.string(),
-  image: z.string().url().optional(),
+  id: z.string(),
+  title: z.string().min(3, "Title must be at least 3 characters"),
+  description: z.string().optional(),
+  price: z.number().positive("Price must be a positive number"),
+  location: z.string().min(3, "Location is required"),
+  availability: z.boolean(),
+  image_url: z.string().url("Must be a valid URL"),
+  bedrooms: z.number().int().min(1, "Must have at least one bedroom"),
+  bathrooms: z.number().int().min(1, "Must have at least one bathroom"),
+  type: z.string().min(1, "Type is required"),
+  features: z.array(z.string()).optional(),
   is_featured: z.boolean(),
-  specs: z
-    .array(
-      z.object({
-        label: z.string(),
-        value: z.string(),
-      }),
-    )
-    .optional(),
-  gallery: z
-    .array(
-      z.object({
-        title: z.string(),
-        description: z.string(),
-        imageUrl: z.string().url(),
-      }),
-    )
-    .optional(),
-  reviews: z
-    .array(
-      z.object({
-        author: z.string(),
-        rating: z.number(),
-        comment: z.string(),
-      }),
-    )
-    .optional(),
+  gallery: z.array(galleryItemSchema).optional(),
+  reviews: z.array(reviewSchema).optional(),
+  virtualTourUrl: z.string().url().optional().nullable(),
 });
 
 export type Property = z.infer<typeof propertySchema>;
-export type Tenant = z.infer<typeof tenantSchema>;
-export type PrintingOrder = z.infer<typeof printingOrderSchema>;
+
+// Schema for a branding product specification
+export const specItemSchema = z.object({
+  label: z.string().min(1, "Label is required"),
+  value: z.string().min(1, "Value is required"),
+});
+
+// Schema for a branding product. Note: `image` is used for the main image URL.
+export const brandingSchema = z.object({
+  id: z.string(),
+  title: z.string().min(3, "Title must be at least 3 characters"),
+  category: z.string().min(3, "Category is required"),
+  description: z.string(),
+  image: z.string().url("Must be a valid URL"),
+  specs: z.array(specItemSchema).optional().nullable(),
+  is_featured: z.boolean(),
+  gallery: z.array(galleryItemSchema).optional().nullable(),
+  reviews: z.array(reviewSchema).optional().nullable(),
+});
+
 export type Branding = z.infer<typeof brandingSchema>;
+
+// Schema for a tenant
+export const tenantSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  propertyId: z.string().min(1, "Property is required"),
+  status: z.enum(["Active", "Inactive", "Pending"]),
+  leaseEndDate: z.string().min(1, "Lease end date is required"),
+});
+
+export type Tenant = z.infer<typeof tenantSchema>;
+
+// Schema for a payment
+export const paymentSchema = z.object({
+  amount: z.coerce.number().positive("Amount must be a positive number"),
+  date: z.date(),
+  status: z.enum(["Paid", "Pending", "Late"]),
+});
+
+export type Payment = z.infer<typeof paymentSchema>;

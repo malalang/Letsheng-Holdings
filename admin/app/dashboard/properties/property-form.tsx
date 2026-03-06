@@ -1,9 +1,13 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { PlusCircle, Trash2, Upload } from "lucide-react";
+import { Loader2, PlusCircle, Trash2, Upload } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
+
+import { createProperty, deleteProperty, updateProperty } from "./actions";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -32,6 +36,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/components/ui/use-toast";
 import { type Property, propertySchema } from "@/lib/validations/schemas";
 
 interface PropertyFormProps {
@@ -39,24 +44,37 @@ interface PropertyFormProps {
 }
 
 export default function PropertyForm({ property }: PropertyFormProps) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const router = useRouter();
+  const { toast } = useToast();
+
   const form = useForm<Property>({
     resolver: zodResolver(propertySchema),
-    defaultValues: property || {
-      title: "",
-      description: "",
-      price: 0,
-      location: "",
-      availability: true,
-      image_url: "",
-      bedrooms: 1,
-      bathrooms: 1,
-      type: "Apartment",
-      features: [],
-      isFeatured: false,
-      gallery: [],
-      reviews: [],
-      virtualTourUrl: "",
-    },
+    defaultValues: property
+      ? {
+          ...property,
+          features: property.features || [],
+          gallery: property.gallery || [],
+          reviews: property.reviews || [],
+          virtualTourUrl: property.virtualTourUrl || "",
+        }
+      : {
+          title: "",
+          description: "",
+          price: 0,
+          location: "",
+          availability: true,
+          image_url: "",
+          bedrooms: 1,
+          bathrooms: 1,
+          type: "Apartment",
+          features: [],
+          is_featured: false,
+          gallery: [],
+          reviews: [],
+          virtualTourUrl: "",
+        },
   });
 
   const { fields, append, remove } = useFieldArray({
@@ -64,9 +82,44 @@ export default function PropertyForm({ property }: PropertyFormProps) {
     name: "gallery",
   });
 
-  function onSubmit(data: Property) {
-    console.log("Form submitted with data:", data);
-    // Here you would typically send the data to your backend API
+  async function onSubmit(data: Property) {
+    setIsLoading(true);
+    try {
+      if (property && property.id) {
+        await updateProperty(property.id, data);
+        toast.success("Property has been updated successfully.");
+        router.push(`/dashboard/properties/property/${property.id}`);
+      } else {
+        await createProperty(data);
+        toast.success("New property has been created.");
+        router.push("/dashboard/properties");
+      }
+      router.refresh();
+    } catch (error) {
+      console.error("Failed to save property:", error);
+      toast.error("An unexpected error occurred. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  async function onDelete() {
+    if (!property || !property.id) return;
+
+    setIsDeleting(true);
+    try {
+      await deleteProperty(property.id);
+      toast.success("Property has been deleted.");
+      router.push("/dashboard/properties");
+      router.refresh();
+    } catch (error) {
+      console.error("Failed to delete property:", error);
+      toast.error(
+        "An unexpected error occurred while deleting. Please try again.",
+      );
+    } finally {
+      setIsDeleting(false);
+    }
   }
 
   return (
@@ -469,13 +522,17 @@ export default function PropertyForm({ property }: PropertyFormProps) {
                       <FormItem>
                         <FormControl>
                           <Textarea
-                            placeholder="e.g., 24/7 Security\nConcierge\nPool"
+                            placeholder={"e.g., 24/7 Security\nConcierge\nPool"}
                             rows={5}
                             {...field}
                             onChange={(e) =>
                               field.onChange(e.target.value.split("\n"))
                             }
-                            value={field.value?.join("\n") ?? ""}
+                            value={
+                              Array.isArray(field.value)
+                                ? field.value.join("\n")
+                                : ""
+                            }
                           />
                         </FormControl>
                         <FormMessage />
@@ -523,7 +580,7 @@ export default function PropertyForm({ property }: PropertyFormProps) {
               />
               <FormField
                 control={form.control}
-                name="isFeatured"
+                name="is_featured"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Featured Status</FormLabel>
@@ -550,12 +607,22 @@ export default function PropertyForm({ property }: PropertyFormProps) {
             </CardContent>
           </Card>
           <div className="flex flex-col gap-2">
-            <Button type="submit" variant="default">
+            <Button type="submit" variant="default" disabled={isLoading}>
+              {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               {property ? "Save Changes" : "Create Property"}
             </Button>
             {property && (
-              <Button variant="destructive" type="button">
-                <Trash2 className="mr-2 h-4 w-4" />
+              <Button
+                variant="destructive"
+                type="button"
+                onClick={onDelete}
+                disabled={isDeleting}
+              >
+                {isDeleting ? (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                ) : (
+                  <Trash2 className="mr-2 h-4 w-4" />
+                )}
                 Delete Property
               </Button>
             )}

@@ -15,7 +15,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-import { sampleProperties } from "../data";
+import { getPropertyById } from "../actions";
 
 export default async function PropertyDetailPage({
   params,
@@ -23,7 +23,7 @@ export default async function PropertyDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const property = sampleProperties.find((p) => p.id === id);
+  const property = await getPropertyById(id);
 
   if (!property) {
     return <div>Property not found</div>;
@@ -35,7 +35,7 @@ export default async function PropertyDetailPage({
         <CardHeader>
           <div className="relative h-96">
             <Image
-              src={property.image_url}
+              src={property.image_url ?? ""}
               alt={property.title}
               fill
               className="object-cover rounded-t-xl"
@@ -78,7 +78,7 @@ export default async function PropertyDetailPage({
 
           <h3 className="text-2xl font-bold text-brand-navy mb-4">Features</h3>
           <ul className="grid grid-cols-2 gap-2 text-gray-700 mb-8">
-            {property.features.map((feature) => (
+            {(property.features as string[]).map((feature) => (
               <li key={feature} className="flex items-center">
                 <CheckCircle className="h-5 w-5 mr-2 text-green-500" />
                 {feature}
@@ -86,13 +86,13 @@ export default async function PropertyDetailPage({
             ))}
           </ul>
 
-          {property.gallery && property.gallery.length > 0 && (
+          {property.gallery && (property.gallery as any[]).length > 0 && (
             <div className="mt-8">
               <h3 className="text-2xl font-bold text-brand-navy mb-4">
                 Property Gallery
               </h3>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {property.gallery.slice(0, 3).map((image) => (
+                {(property.gallery as any[]).slice(0, 3).map((image) => (
                   <div key={image.imageUrl} className="relative h-48">
                     <Image
                       src={image.imageUrl}
@@ -108,7 +108,7 @@ export default async function PropertyDetailPage({
                     </div>
                   </div>
                 ))}
-                {property.gallery.length > 5 && (
+                {(property.gallery as any[]).length > 5 && (
                   <Link
                     href={`/properties/${property.id}/gallery`}
                     className="relative h-48 flex items-center justify-center bg-gray-200 rounded-lg"
@@ -120,13 +120,13 @@ export default async function PropertyDetailPage({
             </div>
           )}
 
-          {property.reviews && property.reviews.length > 0 && (
+          {property.reviews && (property.reviews as any[]).length > 0 && (
             <div className="mt-8">
               <h3 className="text-2xl font-bold text-brand-navy mb-4">
                 Reviews
               </h3>
               <div className="space-y-4">
-                {property.reviews.map((review, index) => (
+                {(property.reviews as any[]).map((review, index) => (
                   <Card
                     key={`${review.author}-${index}`}
                     className="bg-gray-50/50"

@@ -14,9 +14,8 @@ import type React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
-import { products } from "./branding/data";
-import { sampleProperties } from "./properties/data";
+import { getBrandingProducts } from "./branding/actions";
+import { getProperties } from "./properties/actions";
 
 const FeaturedPropertyCard = ({
   id,
@@ -156,9 +155,11 @@ const NextStep = ({
   </div>
 );
 
-export default function HomePage() {
-  const featuredProperties = sampleProperties.filter((p) => p.isFeatured);
-  const featuredProducts = products.filter((p) => p.isFeatured);
+export default async function HomePage() {
+  const properties = await getProperties();
+  const featuredProperties = properties.filter((p) => p.is_featured);
+  const products = await getBrandingProducts();
+  const featuredProducts = products.filter((p) => p.is_featured);
 
   return (
     <div className="animate-fade-in space-y-24">
@@ -210,17 +211,17 @@ export default function HomePage() {
             modern living.
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-col-s-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {featuredProperties.map((p) => (
             <FeaturedPropertyCard
               key={p.id}
               id={p.id}
-              imageUrl={p.image_url}
+              imageUrl={p.image_url ?? ""}
               title={p.title}
               price={`R ${p.price.toLocaleString()}`}
               bedrooms={p.bedrooms}
               bathrooms={p.bathrooms}
-              description={p.description}
+              description={p.description ?? ""}
             />
           ))}
         </div>
@@ -249,10 +250,10 @@ export default function HomePage() {
             <FeaturedProductCard
               key={p.id}
               id={p.id}
-              image={p.image}
+              image={p.image ?? ""}
               title={p.title}
-              category={p.category}
-              description={p.description}
+              category={p.category ?? ""}
+              description={p.description ?? ""}
             />
           ))}
         </div>

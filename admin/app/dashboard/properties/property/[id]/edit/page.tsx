@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { sampleProperties } from "../../../data";
+import { getPropertyById } from "../../../actions";
 import PropertyForm from "../../../property-form";
 
 export default async function EditPropertyPage({
@@ -17,7 +17,7 @@ export default async function EditPropertyPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const property = sampleProperties.find((p) => p.id === id);
+  const property = await getPropertyById(id);
 
   if (!property) {
     return (
