@@ -62,11 +62,14 @@ export type Branding = z.infer<typeof brandingSchema>;
 
 // Schema for a tenant
 export const tenantSchema = z.object({
-  name: z.string().min(1, "Name is required"),
-  propertyId: z.string().min(1, "Property is required"),
-  status: z.enum(["Active", "Inactive", "Pending"]),
-  leaseEndDate: z.string().min(1, "Lease end date is required"),
-});
+    id: z.string(),
+    name: z.string().min(1, "Name is required"),
+    email: z.string().email("Invalid email address").optional().nullable(),
+    property_id: z.string().min(1, "Property is required"),
+    status: z.enum(["Active", "Inactive", "Pending"]),
+    lease_end_date: z.string().optional().nullable(),
+    avatar_url: z.string().url("Must be a valid URL.").optional().nullable(),
+  });
 
 export type Tenant = z.infer<typeof tenantSchema>;
 

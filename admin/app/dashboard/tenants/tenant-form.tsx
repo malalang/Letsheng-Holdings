@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowLeft, PlusCircle, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -37,41 +36,78 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import type { Payment, Tenant } from "./data";
+import { tenantSchema, type Tenant, type Payment } from "@/lib/validations/schemas";
+import { createTenant, deleteTenant, updateTenant } from "./actions";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { createClient } from "@/lib/supabase/client";
+import { z } from "zod";
 
-const tenantSchema = z.object({
-  name: z.string().min(1, "Name is required"),
-  propertyId: z.string().min(1, "Property is required"),
-  status: z.enum(["Active", "Inactive", "Pending"]),
-  leaseEndDate: z.string().min(1, "Lease end date is required"),
-});
+const formSchema = tenantSchema.omit({ id: true, avatar_url: true });
+type FormValues = z.infer<typeof formSchema>;
 
 interface TenantFormProps {
   tenant?: Tenant;
-  payments?: Payment[];
+  payments?: (Payment & {id: string})[];
 }
 
 export default function TenantForm({ tenant, payments }: TenantFormProps) {
-  const form = useForm<Omit<Tenant, "id" | "avatarUrl" | "property">>({
-    resolver: zodResolver(tenantSchema),
+    const router = useRouter();
+    const [properties, setProperties] = useState<{ id: string; title: string }[]>([]);
+    const form = useForm<FormValues>({
+    resolver: zodResolver(formSchema),
     defaultValues: tenant
       ? {
           name: tenant.name,
-          propertyId: tenant.propertyId,
+          property_id: tenant.property_id,
           status: tenant.status,
-          leaseEndDate: tenant.leaseEndDate,
+          lease_end_date: tenant.lease_end_date,
         }
       : {
           name: "",
-          propertyId: "",
+          property_id: "",
           status: "Pending",
-          leaseEndDate: "",
+          lease_end_date: "",
         },
   });
 
-  function onSubmit(data: Omit<Tenant, "id" | "avatarUrl" | "property">) {
-    console.log("Form submitted with data:", data);
-    // Here you would typically send the data to your backend API
+  useEffect(() => {
+    const fetchProperties = async () => {
+      const supabase = createClient();
+      const { data, error } = await supabase.from('properties').select('id, title');
+      if (error) {
+        console.error('Error fetching properties:', error);
+      } else if (data) {
+        setProperties(data);
+      }
+    };
+
+    fetchProperties();
+  }, []);
+
+  async function onSubmit(data: FormValues) {
+    const action = tenant
+    ? await updateTenant(tenant.id, data)
+    : await createTenant(data);
+
+  if (action.success) {
+    router.push("/dashboard/tenants");
+  } else {
+    // Handle error
+    console.error(action.error);
+  }
+  }
+
+  async function handleDelete() {
+    if (tenant) {
+      const action = await deleteTenant(tenant.id);
+      if (action.success) {
+        router.push("/dashboard/tenants");
+      } else {
+        // Handle error
+        console.error(action.error);
+      }
+    }
   }
 
   return (
@@ -111,7 +147,7 @@ export default function TenantForm({ tenant, payments }: TenantFormProps) {
               />
               <FormField
                 control={form.control}
-                name="propertyId"
+                name="property_id"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Property</FormLabel>
@@ -125,21 +161,11 @@ export default function TenantForm({ tenant, payments }: TenantFormProps) {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="prop-001">
-                          Executive Waterfront Residence
-                        </SelectItem>
-                        <SelectItem value="prop-002">
-                          Penthouse in the Sky
-                        </SelectItem>
-                        <SelectItem value="prop-003">
-                          The Urban Oasis
-                        </SelectItem>
-                        <SelectItem value="prop-004">
-                          Serene Suburban Sanctuary
-                        </SelectItem>
-                        <SelectItem value="prop-005">
-                          Modern Downtown Loft
-                        </SelectItem>
+                        {properties.map((property) => (
+                            <SelectItem key={property.id} value={property.id}>
+                                {property.title}
+                            </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -173,12 +199,12 @@ export default function TenantForm({ tenant, payments }: TenantFormProps) {
               />
               <FormField
                 control={form.control}
-                name="leaseEndDate"
+                name="lease_end_date"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Lease End Date</FormLabel>
                     <FormControl>
-                      <Input type="date" {...field} />
+                      <Input type="date" {...field} value={field.value ?? ''} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -215,7 +241,7 @@ export default function TenantForm({ tenant, payments }: TenantFormProps) {
                   <TableBody>
                     {payments.map((payment) => (
                       <TableRow key={payment.id}>
-                        <TableCell>{payment.date}</TableCell>
+                        <TableCell>{payment.date.toLocaleDateString()}</TableCell>
                         <TableCell>${payment.amount.toFixed(2)}</TableCell>
                         <TableCell>{payment.status}</TableCell>
                       </TableRow>
@@ -228,7 +254,7 @@ export default function TenantForm({ tenant, payments }: TenantFormProps) {
 
           <div className="flex justify-end gap-2">
             {tenant && (
-              <Button variant="destructive" type="button">
+              <Button variant="destructive" type="button" onClick={handleDelete}>
                 <Trash2 className="mr-2 h-4 w-4" />
                 Delete Tenant
               </Button>

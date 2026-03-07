@@ -1,15 +1,17 @@
-import { samplePayments, sampleTenants } from "../../../data";
+import { getTenantById } from "../../../actions";
 import TenantForm from "../../../tenant-form";
 
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ id: string }>;
+export default async function EditTenantPage({ params }: {
+    params: Promise<{ id: string }>;
 }) {
-  const { id } = await params;
-  const tenant = sampleTenants.find((t) => t.id === id);
+    const { id } = await params;
+    const tenant = await getTenantById(id);
 
-  const payments = samplePayments.filter((p) => p.tenantId === id);
+    if (!tenant) {
+        return <div>Tenant not found</div>;
+    }
 
-  return <TenantForm tenant={tenant} payments={payments} />;
+    return (
+        <TenantForm tenant={tenant} />
+    );
 }

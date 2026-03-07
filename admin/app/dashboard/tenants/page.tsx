@@ -19,7 +19,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { sampleTenants, type Tenant } from "./data";
+import { getTenants } from "./actions";
+import { type Tenant } from "@/lib/validations/schemas";
 
 const getStatusBadgeClass = (status: Tenant["status"]) => {
   switch (status) {
@@ -32,7 +33,8 @@ const getStatusBadgeClass = (status: Tenant["status"]) => {
   }
 };
 
-export default function AdminTenantsPage() {
+export default async function AdminTenantsPage() {
+  const tenants = await getTenants();
   return (
     <div>
       <div className="flex items-center gap-4 mb-4">
@@ -62,12 +64,12 @@ export default function AdminTenantsPage() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {sampleTenants.map((tenant) => (
+              {tenants.map((tenant) => (
                 <TableRow key={tenant.id}>
                   <TableCell className="font-medium">
                     <div className="flex items-center gap-3">
                       <Avatar className="h-9 w-9">
-                        <AvatarImage src={tenant.avatarUrl} alt={tenant.name} />
+                        <AvatarImage src={tenant.avatar_url ?? undefined} alt={tenant.name} />
                         <AvatarFallback>{tenant.name.charAt(0)}</AvatarFallback>
                       </Avatar>
                       <div className="grid gap-0.5">
@@ -80,19 +82,19 @@ export default function AdminTenantsPage() {
                   </TableCell>
                   <TableCell className="text-muted-foreground">
                     <Link
-                      href={`/dashboard/properties/${tenant.propertyId}`}
+                      href={`/dashboard/properties/${tenant.property_id}`}
                       className="hover:underline"
                     >
-                      {tenant.property}
+                      {tenant.property?.title ?? 'N/A'}
                     </Link>
                   </TableCell>
                   <TableCell className="text-center">
-                    <Badge className={getStatusBadgeClass(tenant.status)}>
+                    <Badge className={getStatusBadgeClass(tenant.status as any)}>
                       {tenant.status}
                     </Badge>
                   </TableCell>
                   <TableCell className="text-right font-semibold">
-                    {tenant.leaseEndDate}
+                    {tenant.lease_end_date}
                   </TableCell>
                   <TableCell className="text-center">
                     <DropdownMenu>
