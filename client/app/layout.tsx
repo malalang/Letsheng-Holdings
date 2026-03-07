@@ -7,6 +7,7 @@ import { FaWhatsapp } from "react-icons/fa";
 
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -58,6 +59,7 @@ export default function RootLayout({
           <Footer />
         </div>
         <WhatsAppButton />
+        <Toaster />
       </body>
     </html>
   );

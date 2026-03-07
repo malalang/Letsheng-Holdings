@@ -1,10 +1,10 @@
 'use server';
 
 import { createClient } from '@/lib/supabase/server';
-import { type Branding } from '@/lib/validations/schemas';
+import { type Branding, brandingInquirySchema, type BrandingInquiry } from '@/lib/validations/schemas';
 import { revalidatePath } from 'next/cache';
 
-export async function getBrandingProducts(): Promise<Branding[]> {
+export async function getBrandingProducts(){
   const supabase = await createClient();
   const { data, error } = await supabase.from('branding').select('*');
 
@@ -13,10 +13,10 @@ export async function getBrandingProducts(): Promise<Branding[]> {
     return [];
   }
 
-  return data as any;
+  return data ;
 }
 
-export async function getBrandingProduct(id: string): Promise<Branding | null> {
+export async function getBrandingProduct(id: string) {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from('branding')
@@ -29,7 +29,7 @@ export async function getBrandingProduct(id: string): Promise<Branding | null> {
     return null;
   }
 
-  return data as any;
+  return data ;
 }
 
 export async function createBrandingProduct(product: Branding) {
@@ -86,4 +86,41 @@ export async function deleteBrandingProduct(id: string) {
 
   revalidatePath('/dashboard/branding');
   return { data };
+}
+
+export async function submitBrandingInquiry(data: BrandingInquiry): Promise<{ success: boolean; error?: string }> {
+  const supabase = await createClient();
+
+  const validatedFields = brandingInquirySchema.safeParse(data);
+
+  if (!validatedFields.success) {
+    return {
+      success: false,
+      error: 'Invalid data provided.',
+    };
+  }
+
+  const { error } = await supabase.from('branding_inquiries').insert({
+    customer_name: validatedFields.data.name,
+    email: validatedFields.data.email,
+    company: validatedFields.data.company,
+    quantity: validatedFields.data.quantity,
+    message: validatedFields.data.message,
+    product_id: validatedFields.data.productId,
+    status: 'New', // Default status for new inquiries
+  });
+
+  if (error) {
+    console.error('Supabase error:', error);
+    return {
+      success: false,
+      error: 'An unexpected error occurred. Please try again.',
+    };
+  }
+
+  revalidatePath('/branding'); // Or a more specific path if you prefer
+
+  return {
+    success: true,
+  };
 }

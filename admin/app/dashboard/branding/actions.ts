@@ -5,7 +5,7 @@ import { type Branding } from '@/lib/validations/schemas';
 import { revalidatePath } from 'next/cache';
 
 // Action to fetch all branding products
-export async function getBrandingProducts(): Promise<Branding[]> {
+export async function getBrandingProducts() {
   const supabase = await createClient();
   const { data, error } = await supabase.from('branding').select('*');
 
@@ -14,11 +14,11 @@ export async function getBrandingProducts(): Promise<Branding[]> {
     return [];
   }
 
-  return data as any;
+  return data;
 }
 
 // Action to fetch a single branding product by its ID
-export async function getBrandingProduct(id: string): Promise<Branding | null> {
+export async function getBrandingProduct(id: string) {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from('branding')
@@ -31,7 +31,7 @@ export async function getBrandingProduct(id: string): Promise<Branding | null> {
     return null;
   }
 
-  return data as any;
+  return data;
 }
 
 // Action to create a new branding product

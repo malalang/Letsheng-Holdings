@@ -299,6 +299,7 @@ export default function PropertyForm({ property }: PropertyFormProps) {
                               placeholder="https://example.com/image.png"
                               {...field}
                               className="mt-4"
+                              value={field.value ?? ""}
                             />
                           </div>
                         </FormControl>
@@ -463,6 +464,7 @@ export default function PropertyForm({ property }: PropertyFormProps) {
                           <Input
                             type="number"
                             {...field}
+                            value={field.value ?? 0}
                             onChange={(e) =>
                               field.onChange(parseInt(e.target.value, 10))
                             }
@@ -482,6 +484,7 @@ export default function PropertyForm({ property }: PropertyFormProps) {
                           <Input
                             type="number"
                             {...field}
+                            value={field.value ?? 0}
                             onChange={(e) =>
                               field.onChange(parseInt(e.target.value, 10))
                             }
@@ -499,7 +502,8 @@ export default function PropertyForm({ property }: PropertyFormProps) {
                         <FormLabel>Type</FormLabel>
                         <Select
                           onValueChange={field.onChange}
-                          defaultValue={field.value}
+                          value={field.value ?? "Apartment"}
+                          defaultValue={field.value ?? "Apartment"}
                         >
                           <FormControl>
                             <SelectTrigger>

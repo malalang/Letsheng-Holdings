@@ -1,14 +1,15 @@
 'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowRight, Package, Upload, User } from "lucide-react";
-import React from "react";
-import { type SubmitHandler, useForm } from "react-hook-form";
-import { z } from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Loader2, ArrowRight, Package, Upload, User } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useState, useTransition } from 'react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 
-import { getBrandingProducts } from "@/app/branding/actions";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { submitBrandingInquiry } from '@/app/branding/actions';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Form,
   FormControl,
@@ -16,63 +17,59 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { type Branding } from "@/lib/validations/schemas";
+} from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
+import { type Branding, brandingInquirySchema } from '@/lib/validations/schemas';
 
-// --- Zod Schema --- //
-const projectInquirySchema = z.object({
-  customer_name: z.string().min(2, "A name is required."),
-  company_name: z.string().optional(),
-  email: z.string().email("Invalid email address."),
-  product_type: z.string(),
-  quantity: z.number().int().positive("Quantity must be at least 1."),
-  project_details: z.string().min(10, "Please provide more details."),
-});
-type InquiryFormData = z.infer<typeof projectInquirySchema>;
+interface BrandingOrderFormProps {
+  product: Branding;
+}
 
-// --- Client Component: The Form --- //
-export default function BrandingOrderForm({ product }: { product: Branding }) {
-  const [products, setProducts] = React.useState<Branding[]>([]);
+export default function BrandingOrderForm({ product }: BrandingOrderFormProps) {
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
-  React.useEffect(() => {
-    async function fetchProducts() {
-      const allProducts = await getBrandingProducts();
-      setProducts(allProducts);
-    }
-    fetchProducts();
-  }, []);
-
-  const form = useForm<InquiryFormData>({
-    resolver: zodResolver(projectInquirySchema),
+  const form = useForm<any>({
+    resolver: zodResolver(brandingInquirySchema),
     defaultValues: {
-      customer_name: "",
-      company_name: "",
-      email: "",
-      product_type: product.id ?? "",
+      name: '',
+      email: '',
+      company: '',
       quantity: 1,
-      project_details: "",
+      message: '',
+      productId: product.id,
     },
   });
 
-  const onSubmit: SubmitHandler<InquiryFormData> = (data) => {
-    console.log("Project Inquiry Submitted:", data);
-    alert(
-      "Thank you. Your project inquiry has been successfully submitted. Our team will be in touch shortly.",
-    );
-  };
+  async function onSubmit(data: any) {
+    setIsLoading(true);
+    try {
+      const result = await submitBrandingInquiry(data);
+      if (result.success) {
+        toast.success('Your inquiry has been submitted successfully.');
+        router.push('/branding');
+      } else {
+        toast.error(result.error || 'An unexpected error occurred.');
+      }
+    } catch (error) {
+      toast.error('An unexpected error occurred.');
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <input type="hidden" {...form.register('productId')} />
         <Card>
           <CardHeader>
             <CardTitle className="text-2xl flex items-center text-brand-navy">
@@ -83,7 +80,7 @@ export default function BrandingOrderForm({ product }: { product: Branding }) {
           <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <FormField
               control={form.control}
-              name="customer_name"
+              name="name"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Full Name</FormLabel>
@@ -113,7 +110,7 @@ export default function BrandingOrderForm({ product }: { product: Branding }) {
             />
             <FormField
               control={form.control}
-              name="company_name"
+              name="company"
               render={({ field }) => (
                 <FormItem className="md:col-span-2">
                   <FormLabel>Company Name (Optional)</FormLabel>
@@ -137,33 +134,6 @@ export default function BrandingOrderForm({ product }: { product: Branding }) {
           <CardContent className="space-y-6">
             <FormField
               control={form.control}
-              name="product_type"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Product Type</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select a product..." />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {products.map((p) => (
-                        <SelectItem key={p.id} value={p.id ?? ""}>
-                          {p.title}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
               name="quantity"
               render={({ field }) => (
                 <FormItem>
@@ -183,7 +153,7 @@ export default function BrandingOrderForm({ product }: { product: Branding }) {
             />
             <FormField
               control={form.control}
-              name="project_details"
+              name="message"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Project Brief & Design Notes</FormLabel>
@@ -220,7 +190,8 @@ export default function BrandingOrderForm({ product }: { product: Branding }) {
         </Card>
 
         <div className="flex justify-end">
-          <Button type="submit" size="lg">
+          <Button type="submit" size="lg" disabled={isLoading}>
+            {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             Submit Project Inquiry
             <ArrowRight className="h-5 w-5 ml-3" />
           </Button>

@@ -1,8 +1,12 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { BrandingInquiriesTable } from "./BrandingInquiriesTable";
 import { LeaseApplicationsTable } from "./LeaseApplicationsTable";
+import { getLeaseApplications, getBrandingInquiries } from "./actions";
 
-export default function SubmissionsPage() {
+export default async function SubmissionsPage() {
+  const applications = await getLeaseApplications();
+  const inquiries = await getBrandingInquiries();
+
   return (
     <div>
       <div className="flex items-center gap-4 mb-4">
@@ -19,10 +23,10 @@ export default function SubmissionsPage() {
           <TabsTrigger value="branding">Branding Inquiries</TabsTrigger>
         </TabsList>
         <TabsContent value="leases">
-          <LeaseApplicationsTable />
+          <LeaseApplicationsTable applications={applications} />
         </TabsContent>
         <TabsContent value="branding">
-          <BrandingInquiriesTable />
+          <BrandingInquiriesTable inquiries={inquiries} />
         </TabsContent>
       </Tabs>
     </div>

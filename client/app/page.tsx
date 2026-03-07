@@ -30,8 +30,8 @@ const FeaturedPropertyCard = ({
   imageUrl: string;
   title: string;
   price: string;
-  bedrooms: number;
-  bathrooms: number;
+  bedrooms: number | null;
+  bathrooms: number | null;
   description: string;
 }) => (
   <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
@@ -46,11 +46,11 @@ const FeaturedPropertyCard = ({
       <div className="flex items-center text-gray-600 space-x-4 mb-4">
         <div className="flex items-center">
           <Bed className="h-5 w-5 mr-2" />
-          <span>{bedrooms} Beds</span>
+          <span>{bedrooms ?? 0} Beds</span>
         </div>
         <div className="flex items-center">
           <Bath className="h-5 w-5 mr-2" />
-          <span>{bathrooms} Baths</span>
+          <span>{bathrooms ?? 0} Baths</span>
         </div>
       </div>
       <p className="font-bold text-lg text-brand-Blue mb-4">{price}</p>

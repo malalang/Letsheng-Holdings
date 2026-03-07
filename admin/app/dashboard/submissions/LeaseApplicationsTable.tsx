@@ -1,23 +1,34 @@
-"use client";
+'use client';
 
-import { MoreHorizontal } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { MoreHorizontal } from 'lucide-react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { toast } from 'sonner';
+
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from '@/components/ui/card';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from '@/components/ui/dropdown-menu';
 import {
   Table,
   TableBody,
@@ -25,92 +36,193 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { leaseApplications } from "./data";
+} from '@/components/ui/table';
+import type { LeaseApplication } from '@/lib/validations/schemas';
+
+import {
+  deleteLeaseApplication,
+  updateLeaseApplicationStatus,
+} from './actions';
 
 const statusVariantMap: {
-  [key: string]: "default" | "secondary" | "destructive";
+  [key: string]: 'default' | 'secondary' | 'destructive';
 } = {
-  Pending: "secondary",
-  Reviewed: "default",
+  Pending: 'secondary',
+  Reviewed: 'default',
 };
 
-export function LeaseApplicationsTable() {
+// Extends the base LeaseApplication to include database-specific fields
+interface LeaseApplicationWithDetails extends LeaseApplication {
+  id: string;
+  created_at: string;
+  status: string;
+  property_title: string;
+  property_id: string;
+}
+
+interface LeaseApplicationsTableProps {
+  applications: LeaseApplicationWithDetails[];
+}
+
+export function LeaseApplicationsTable({
+  applications,
+}: LeaseApplicationsTableProps) {
   const router = useRouter();
+  const [selectedApplication, setSelectedApplication] =
+    useState<LeaseApplicationWithDetails | null>(null);
 
   const handleAddTenant = (applicantName: string, email: string) => {
     router.push(
-      `/dashboard/tenants/new?name=${encodeURIComponent(applicantName)}&email=${encodeURIComponent(email)}`,
+      `/dashboard/tenants/new?name=${encodeURIComponent(
+        applicantName,
+      )}&email=${encodeURIComponent(email)}`,
     );
   };
 
+  const handleStatusUpdate = async (id: string, status: string) => {
+    const result = await updateLeaseApplicationStatus(id, status);
+    if (result.success) {
+      toast.success(`Application marked as ${status}.`);
+    } else {
+      toast.error(result.error || 'Failed to update status.');
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    if (confirm('Are you sure you want to delete this application?')) {
+      const result = await deleteLeaseApplication(id);
+      if (result.success) {
+        toast.success('Application has been deleted.');
+      } else {
+        toast.error(result.error || 'Failed to delete application.');
+      }
+    }
+  };
+
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Lease Applications</CardTitle>
-        <CardDescription>
-          Review and manage all property lease applications.
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Property Title</TableHead>
-              <TableHead>Applicant</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Submitted On</TableHead>
-              <TableHead>
-                <span className="sr-only">Actions</span>
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {leaseApplications.map((app) => (
-              <TableRow key={app.id}>
-                <TableCell className="font-medium">
-                  {app.propertyTitle}
-                </TableCell>
-                <TableCell>
-                  <div className="font-medium">{app.applicantName}</div>
-                  <div className="text-sm text-muted-foreground">
-                    {app.email}
-                  </div>
-                </TableCell>
-                <TableCell>
-                  <Badge variant={statusVariantMap[app.status]}>
-                    {app.status}
-                  </Badge>
-                </TableCell>
-                <TableCell>{app.submittedAt.toLocaleDateString()}</TableCell>
-                <TableCell>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button aria-haspopup="true" size="icon" variant="ghost">
-                        <MoreHorizontal className="h-4 w-4" />
-                        <span className="sr-only">Toggle menu</span>
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                      <DropdownMenuItem>View Application</DropdownMenuItem>
-                      <DropdownMenuItem>Mark as Reviewed</DropdownMenuItem>
-                      <DropdownMenuItem
-                        onClick={() =>
-                          handleAddTenant(app.applicantName, app.email)
-                        }
-                      >
-                        Add as Tenant
-                      </DropdownMenuItem>
-                      <DropdownMenuItem>Decline</DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </TableCell>
+    <>
+      <Card>
+        <CardHeader>
+          <CardTitle>Lease Applications</CardTitle>
+          <CardDescription>
+            Review and manage all property lease applications.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Property</TableHead>
+                <TableHead>Applicant</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead>Submitted On</TableHead>
+                <TableHead>
+                  <span className="sr-only">Actions</span>
+                </TableHead>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </CardContent>
-    </Card>
+            </TableHeader>
+            <TableBody>
+              {applications.map((app) => (
+                <TableRow key={app.id}>
+                  <TableCell className="font-medium">
+                    <Link
+                      href={`/dashboard/properties/property/${app.property_id}`}
+                      className="hover:underline"
+                    >
+                      {app.property_title}
+                    </Link>
+                  </TableCell>
+                  <TableCell>
+                    <div className="font-medium">{app.applicant_name}</div>
+                    <div className="text-sm text-muted-foreground">
+                      {app.email}
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <Badge variant={statusVariantMap[app.status]}>
+                      {app.status}
+                    </Badge>
+                  </TableCell>
+                  <TableCell>
+                    {new Date(app.created_at).toLocaleDateString()}
+                  </TableCell>
+                  <TableCell>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button
+                          aria-haspopup="true"
+                          size="icon"
+                          variant="ghost"
+                        >
+                          <MoreHorizontal className="h-4 w-4" />
+                          <span className="sr-only">Toggle menu</span>
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end">
+                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                        <DropdownMenuItem
+                          onSelect={() => setSelectedApplication(app)}
+                        >
+                          View Details
+                        </DropdownMenuItem>
+                        <DropdownMenuItem
+                          onClick={() => handleStatusUpdate(app.id, 'Reviewed')}
+                        >
+                          Mark as Reviewed
+                        </DropdownMenuItem>
+                        <DropdownMenuItem
+                          onClick={() => handleAddTenant(app.applicant_name, app.email)}
+                        >
+                          Add as Tenant
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => handleDelete(app.id)}>
+                          Decline
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
+      {selectedApplication && (
+        <Dialog
+          open={!!selectedApplication}
+          onOpenChange={(isOpen: boolean) => !isOpen && setSelectedApplication(null)}
+        >
+          <DialogContent className="sm:max-w-lg">
+            <DialogHeader>
+              <DialogTitle>
+                Lease Application for {selectedApplication.property_title}
+              </DialogTitle>
+              <DialogDescription>
+                Submitted by {selectedApplication.applicant_name} on{' '}
+                {new Date(selectedApplication.created_at).toLocaleString()}
+              </DialogDescription>
+            </DialogHeader>
+            <div className="space-y-4 py-4">
+              <div className="space-y-1">
+                <h4 className="font-semibold">Applicant Details</h4>
+                <p>Name: {selectedApplication.applicant_name}</p>
+                <p>Email: {selectedApplication.email}</p>
+                <p>Phone: {selectedApplication.phone || 'Not provided'}</p>
+                <p>
+                  Employment:{' '}
+                  {selectedApplication.employment || 'Not specified'}
+                </p>
+              </div>
+              <div className="space-y-1">
+                <h4 className="font-semibold">Additional Information</h4>
+                <p className="text-sm text-gray-700">
+                  {selectedApplication.message || 'No message provided.'}
+                </p>
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
+      )}
+    </>
   );
 }

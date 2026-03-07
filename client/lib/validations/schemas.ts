@@ -22,18 +22,18 @@ export const reviewSchema = z.object({
 export const propertySchema = z.object({
   id: z.string(),
   title: z.string().min(3, "Title must be at least 3 characters"),
-  description: z.string().optional(),
+  description: z.string().optional().nullable(),
   price: z.number().positive("Price must be a positive number"),
-  location: z.string().min(3, "Location is required"),
+  location: z.string().min(3, "Location is required").nullable(),
   availability: z.boolean(),
-  image_url: z.string().url("Must be a valid URL"),
-  bedrooms: z.number().int().min(1, "Must have at least one bedroom"),
-  bathrooms: z.number().int().min(1, "Must have at least one bathroom"),
-  type: z.string().min(1, "Type is required"),
-  features: z.array(z.string()).optional(),
+  image_url: z.string().url("Must be a valid URL").nullable(),
+  bedrooms: z.number().int().min(1, "Must have at least one bedroom").nullable(),
+  bathrooms: z.number().int().min(1, "Must have at least one bathroom").nullable(),
+  type: z.string().min(1, "Type is required").nullable(),
+  features: z.any(),
   is_featured: z.boolean(),
-  gallery: z.array(galleryItemSchema).optional(),
-  reviews: z.array(reviewSchema).optional(),
+  gallery: z.any(),
+  reviews: z.any(),
   virtual_tour_url: z.string().url().optional().nullable(),
 });
 
@@ -50,12 +50,12 @@ export const brandingSchema = z.object({
   id: z.string(),
   title: z.string().min(3, "Title must be at least 3 characters"),
   category: z.string().min(3, "Category is required"),
-  description: z.string(),
-  image: z.string().url("Must be a valid URL"),
-  specs: z.array(specItemSchema).optional().nullable(),
+  description: z.string().nullable(),
+  image: z.string().url("Must be a valid URL").nullable(),
+  specs: z.any(),
   is_featured: z.boolean(),
-  gallery: z.array(galleryItemSchema).optional().nullable(),
-  reviews: z.array(reviewSchema).optional().nullable(),
+  gallery: z.any(),
+  reviews: z.any(),
 });
 
 export type Branding = z.infer<typeof brandingSchema>;
@@ -78,3 +78,27 @@ export const paymentSchema = z.object({
 });
 
 export type Payment = z.infer<typeof paymentSchema>;
+
+// Schema for a branding inquiry
+export const brandingInquirySchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Invalid email address"),
+  company: z.string().optional(),
+  quantity: z.coerce.number().positive("Quantity must be a positive number"),
+  message: z.string().optional(),
+  productId: z.string(),
+});
+
+export type BrandingInquiry = z.infer<typeof brandingInquirySchema>;
+
+// Schema for a lease application
+export const leaseApplicationSchema = z.object({
+  applicant_name: z.string().min(1, "Name is required"),
+  email: z.string().email("Invalid email address"),
+  phone: z.string().optional(),
+  employment: z.enum(["employed", "self-employed", "unemployed", "student"]),
+  message: z.string().optional(),
+  property_id: z.string(),
+});
+
+export type LeaseApplication = z.infer<typeof leaseApplicationSchema>;

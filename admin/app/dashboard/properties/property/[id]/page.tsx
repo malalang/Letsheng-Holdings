@@ -112,7 +112,7 @@ export default async function PropertyDetailsPage({
               </CardHeader>
               <CardContent>
                 <ul className="grid grid-cols-2 gap-x-6 gap-y-2">
-                  {property.features.map((feature) => (
+                  {property.features.map((feature: string) => (
                     <li key={feature} className="flex items-center gap-2">
                       <CheckCircle className="h-5 w-5 text-green-500" />
                       <span>{feature}</span>
@@ -130,7 +130,7 @@ export default async function PropertyDetailsPage({
                 <CardTitle>Property Gallery</CardTitle>
               </CardHeader>
               <CardContent className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {property.gallery.map((image) => (
+                {property.gallery.map((image: { imageUrl: string; title: string }) => (
                   <div key={image.imageUrl} className="relative h-48">
                     <Image
                       src={image.imageUrl}
@@ -186,7 +186,7 @@ export default async function PropertyDetailsPage({
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                {property.reviews.map((review) => (
+                {property.reviews.map((review: { id: string; rating: number; author: string; comment: string }) => (
                   <div key={review.id} className="p-4 rounded-lg border">
                     <div className="flex items-center mb-2">
                       <div className="flex items-center">
