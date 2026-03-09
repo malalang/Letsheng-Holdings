@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
+import { ClientDate } from '@/components/ClientDate';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -144,7 +145,7 @@ export function LeaseApplicationsTable({
                     </Badge>
                   </TableCell>
                   <TableCell>
-                    {new Date(app.created_at).toLocaleDateString()}
+                    <ClientDate dateString={app.created_at} />
                   </TableCell>
                   <TableCell>
                     <DropdownMenu>
@@ -199,7 +200,7 @@ export function LeaseApplicationsTable({
               </DialogTitle>
               <DialogDescription>
                 Submitted by {selectedApplication.applicant_name} on{' '}
-                {new Date(selectedApplication.created_at).toLocaleString()}
+                <ClientDate dateString={selectedApplication.created_at} format="datetime" />
               </DialogDescription>
             </DialogHeader>
             <div className="space-y-4 py-4">

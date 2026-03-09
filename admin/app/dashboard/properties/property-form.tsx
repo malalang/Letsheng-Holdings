@@ -1,12 +1,12 @@
 'use client';
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2, PlusCircle, Trash2, Upload } from "lucide-react";
-import Image from "next/image";
+import { Loader2, PlusCircle, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 
+import { UploadImage } from "@/components/upload-image";
 import { createProperty, deleteProperty, updateProperty } from "./actions";
 
 import { Button } from "@/components/ui/button";
@@ -257,51 +257,16 @@ export default function PropertyForm({ property }: PropertyFormProps) {
                       <FormItem>
                         <FormLabel>Main Property Image</FormLabel>
                         <FormControl>
-                          <div className="w-full">
-                            {form.watch("image_url") ? (
-                              <div className="relative aspect-video w-full max-w-lg overflow-hidden rounded-lg border">
-                                <Image
-                                  src={form.watch("image_url") || ""}
-                                  alt="Main property preview"
-                                  fill
-                                  className="object-cover"
-                                />
-                                <Button
-                                  type="button"
-                                  variant="destructive"
-                                  size="icon"
-                                  className="absolute top-2 right-2"
-                                  onClick={() =>
-                                    form.setValue("image_url", "", {
-                                      shouldValidate: true,
-                                      shouldDirty: true,
-                                    })
-                                  }
-                                >
-                                  <Trash2 className="h-4 w-4" />
-                                </Button>
-                              </div>
-                            ) : (
-                              <div className="flex w-full max-w-lg justify-center rounded-lg border border-dashed border-gray-300 px-6 py-10">
-                                <div className="text-center">
-                                  <Upload className="mx-auto h-12 w-12 text-gray-400" />
-                                  <p className="mt-4 text-sm text-gray-600">
-                                    No main image provided.
-                                  </p>
-                                  <p className="text-xs text-gray-500">
-                                    Paste an image URL below to set the main
-                                    image.
-                                  </p>
-                                </div>
-                              </div>
-                            )}
-                            <Input
-                              placeholder="https://example.com/image.png"
-                              {...field}
-                              className="mt-4"
-                              value={field.value ?? ""}
-                            />
-                          </div>
+                          <UploadImage
+                            folder="properties"
+                            onUploadSuccess={(url) => {
+                              form.setValue("image_url", url, {
+                                shouldValidate: true,
+                                shouldDirty: true,
+                              });
+                            }}
+                            initialUrl={field.value}
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -339,43 +304,22 @@ export default function PropertyForm({ property }: PropertyFormProps) {
                               name={`gallery.${index}.imageUrl`}
                               render={({ field }) => (
                                 <FormItem>
-                                  <FormLabel>Image URL</FormLabel>
+                                  <FormLabel>Image</FormLabel>
                                   <FormControl>
-                                    <div className="w-full">
-                                      {form.watch(
-                                        `gallery.${index}.imageUrl`,
-                                      ) ? (
-                                        <div className="relative aspect-video w-full max-w-md mx-auto overflow-hidden rounded-lg border">
-                                          <Image
-                                            src={
-                                              form.watch(
-                                                `gallery.${index}.imageUrl`,
-                                              ) || ""
-                                            }
-                                            alt={`Gallery item ${index + 1}`}
-                                            fill
-                                            className="object-cover"
-                                          />
-                                        </div>
-                                      ) : (
-                                        <div className="flex w-full max-w-md mx-auto justify-center rounded-lg border border-dashed border-gray-300 px-6 py-10">
-                                          <div className="text-center">
-                                            <Upload className="mx-auto h-12 w-12 text-gray-400" />
-                                            <p className="mt-4 text-sm text-gray-600">
-                                              No image for this item.
-                                            </p>
-                                            <p className="text-xs text-gray-500">
-                                              Paste an image URL below.
-                                            </p>
-                                          </div>
-                                        </div>
-                                      )}
-                                      <Input
-                                        placeholder="https://example.com/gallery-image.png"
-                                        {...field}
-                                        className="mt-4"
-                                      />
-                                    </div>
+                                    <UploadImage
+                                      folder="properties/gallery"
+                                      onUploadSuccess={(url) => {
+                                        form.setValue(
+                                          `gallery.${index}.imageUrl`,
+                                          url,
+                                          {
+                                            shouldValidate: true,
+                                            shouldDirty: true,
+                                          },
+                                        );
+                                      }}
+                                      initialUrl={field.value}
+                                    />
                                   </FormControl>
                                   <FormMessage />
                                 </FormItem>
@@ -401,7 +345,7 @@ export default function PropertyForm({ property }: PropertyFormProps) {
                                 <FormItem>
                                   <FormLabel>Description</FormLabel>
                                   <FormControl>
-                                    <Textarea rows={2} {...field} />
+                                    <Textarea rows={2} {...field} value={field.value ?? ''} />
                                   </FormControl>
                                   <FormMessage />
                                 </FormItem>

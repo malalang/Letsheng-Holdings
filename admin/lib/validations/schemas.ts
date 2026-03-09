@@ -9,7 +9,7 @@ export const galleryItemSchema = z.object({
   title: z.string().min(1, "Title is required"),
   description: z.string().optional(),
 });
-
+export type galleryItem = z.infer<typeof galleryItemSchema>;
 // Schema for a single review
 export const reviewSchema = z.object({
   id: z.string(),
