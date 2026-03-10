@@ -180,13 +180,19 @@ export default async function PropertyDetailPage({
             </span>
           </div>
           <div className="mt-8 grid grid-cols-2 gap-4">
-            <Link href={`/properties/${property.id}/apply-to-lease`}>
-              <Button size="lg" className="w-full">
-                Apply to Lease
-              </Button>
-            </Link>
+            {property.availability && (
+              <Link href={`/properties/${property.id}/apply-to-lease`}>
+                <Button size="lg" className="w-full">
+                  Apply to Lease
+                </Button>
+              </Link>
+            )}
             <Link href="/contact">
-              <Button size="lg" variant="outline" className="w-full">
+              <Button
+                size="lg"
+                variant="outline"
+                className="w-full"
+              >
                 Request a Viewing
               </Button>
             </Link>

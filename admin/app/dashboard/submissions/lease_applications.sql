@@ -6,7 +6,7 @@ CREATE TABLE public.lease_applications (
   applicant_name text NOT NULL,
   email text NOT NULL,
   phone text NULL,
-  employment_status text NULL,
+  employment text NULL,
   message text NULL,
   status text NOT NULL DEFAULT 'Pending'::text,
   CONSTRAINT lease_applications_pkey PRIMARY KEY (id),
@@ -17,6 +17,5 @@ CREATE TABLE public.lease_applications (
 ALTER TABLE public.lease_applications ENABLE ROW LEVEL SECURITY;
 
 -- Create policies
-CREATE POLICY "Allow public read access" ON public.lease_applications FOR SELECT USING (true);
 CREATE POLICY "Allow public insert access" ON public.lease_applications FOR INSERT WITH CHECK (true);
 CREATE POLICY "Allow admin full access" ON public.lease_applications FOR ALL USING (auth.role() = 'service_role');

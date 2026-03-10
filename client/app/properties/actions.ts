@@ -33,7 +33,7 @@ export async function submitLeaseApplication(data: z.infer<typeof leaseApplicati
     const { applicant_name, email, phone, employment, message, property_id } = validatedData.data;
 
     const { error } = await supabase.from('lease_applications').insert([
-        { applicant_name, email, phone, employment, message, property_id, status: 'pending' },
+        { applicant_name, email, phone, employment, message, property_id, status: 'Pending' },
     ]);
 
     if (error) {

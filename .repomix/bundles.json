@@ -1,13 +1,57 @@
 {
   "bundles": {
-    "letsheng-766": {
-      "name": "letsheng",
-      "created": "2026-02-24T14:52:24.949Z",
-      "lastUsed": "2026-02-24T14:52:24.949Z",
+    "Admin-109": {
+      "name": "Admin",
+      "created": "2026-03-10T13:53:53.437Z",
+      "lastUsed": "2026-03-10T13:53:53.437Z",
       "tags": [],
       "files": [
-        "admin",
-        "client"
+        "admin/app",
+        "admin/components",
+        "admin/lib",
+        "admin/public",
+        "admin/biome.json",
+        "admin/next-env.d.ts",
+        "admin/next.config.mjs",
+        "admin/next.config.ts",
+        "admin/package.json",
+        "admin/postcss.config.mjs",
+        "admin/proxy.ts",
+        "admin/tsconfig.json"
+      ]
+    },
+    "letsheng-816": {
+      "name": "letsheng",
+      "created": "2026-03-10T14:05:51.625Z",
+      "lastUsed": "2026-03-10T14:05:51.625Z",
+      "tags": [],
+      "files": [
+        "admin/components",
+        "admin/app",
+        "admin/lib",
+        "admin/public",
+        "admin/biome.json",
+        "admin/next-env.d.ts",
+        "admin/next.config.mjs",
+        "admin/next.config.ts",
+        "admin/package.json",
+        "admin/proxy.ts",
+        "admin/postcss.config.mjs",
+        "admin/tsconfig.json",
+        "client/components",
+        "client/lib",
+        "client/app",
+        "client/public",
+        "client/supabase",
+        "client/biome.json",
+        "client/next.config.mjs",
+        "client/next.config.ts",
+        "client/package.json",
+        "client/postcss.config.mjs",
+        "client/tsconfig.json",
+        "client/tailwind.config.ts",
+        "docs/blueprint.md",
+        "docs/projects1.xml"
       ]
     }
   }

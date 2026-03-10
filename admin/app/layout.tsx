@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
+import { createClient } from "@/lib/supabase/server";
+import { redirect } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,9 +13,15 @@ export const metadata: Metadata = {
   description: "Manage your properties and tenants with ease.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const supabase = await createClient()
+  const { data, error } = await supabase.auth.getUser()
+console.log('layout',data)
+  // if (error || !data.user) {
+  //   redirect('/login')
+  // }
   return (
     <html lang="en">
       <body className={inter.className}>

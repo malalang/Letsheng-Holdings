@@ -85,12 +85,12 @@ export default function Footer() {
               </li>
               <li>
                 <FooterLink
-                  href="/printing"
+                  href="/branding"
                   icon={
                     <Printer className="h-5 w-5 mr-3 text-primary/60 group-hover:text-primary transition-colors" />
                   }
                 >
-                  Printing
+                  Branding
                 </FooterLink>
               </li>
               <li>

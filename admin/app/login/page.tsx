@@ -1,31 +1,85 @@
-"use client";
-import { LogIn, Shield } from "lucide-react";
-import type React from "react";
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
+'use client';
+
+import { createClient } from '@/lib/supabase/client';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { LogIn, Shield } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import { z } from 'zod';
+
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+} from '@/components/ui/card';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+
+const loginSchema = z.object({
+  email: z.string().email('Invalid email address.'),
+  password: z.string().min(6, 'Password must be at least 6 characters.'),
+});
+
+type LoginFormValues = z.infer<typeof loginSchema>;
 
 export default function LoginPage() {
-  const [password, setPassword] = useState("");
+  const router = useRouter();
+  const supabase = createClient();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // IMPORTANT: This is a mock authentication for front-end demo purposes only.
-    // In a real application, this logic would be handled securely on the server.
-    if (password === "letcheng-admin-2024") {
-      localStorage.setItem("admin-token", "__mock_secure_token__");
-      window.location.href = "/dashboard";
-    } else {
-      alert("Incorrect password. Please try again.");
+  useEffect(() => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event) => {
+      console.log(subscription.id)
+      if (event === 'SIGNED_IN') {
+        router.push('/dashboard');
+        router.refresh();
+      }
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [router, supabase]);
+
+  const form = useForm<LoginFormValues>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
+
+  async function onSubmit(values: LoginFormValues) {
+    const {data, error } = await supabase.auth.signInWithPassword({
+      email: values.email,
+      password: values.password,
+    });
+
+    if (error) {
+      toast.error('Login Failed', {
+        description: error.message,
+      });
+    } else if (data.user)   {
+      console.log(data.user)
+      toast.success('Login Successful', {
+        description: 'Redirecting to dashboard...',
+      });
+      router.push('/dashboard');
     }
-  };
+  }
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-secondary p-4">
@@ -39,28 +93,65 @@ export default function LoginPage() {
         </div>
         <Card className="border-gray-700 bg-gray-900/50 text-white">
           <CardHeader>
-            <CardTitle>Enter Access Code</CardTitle>
+            <CardTitle>Enter Credentials</CardTitle>
             <CardDescription className="text-gray-400">
-              Provide the administrative password to proceed.
+              Provide your administrative credentials to proceed.
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <Input
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                type="password"
-                placeholder="••••••••••••••"
-                className="border-gray-600 bg-gray-800 text-white placeholder:text-gray-500"
-              />
-              <Button
-                type="submit"
-                className="w-full bg-primary text-white hover:bg-primary/90"
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-4"
               >
-                Authenticate
-                <LogIn className="ml-2 h-4 w-4" />
-              </Button>
-            </form>
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="email"
+                          placeholder="admin@letsheng.co.za"
+                          {...field}
+                          className="border-gray-600 bg-gray-800 text-white placeholder:text-gray-500"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Password</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="password"
+                          placeholder="••••••••••••••"
+                          {...field}
+                          className="border-gray-600 bg-gray-800 text-white placeholder:text-gray-500"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button
+                  type="submit"
+                  className="w-full bg-primary text-secondary hover:bg-primary/90"
+                  disabled={form.formState.isSubmitting}
+                >
+                  {form.formState.isSubmitting
+                    ? 'Authenticating...'
+                    : 'Authenticate'}
+                  <LogIn className="ml-2 h-4 w-4" />
+                </Button>
+              </form>
+            </Form>
           </CardContent>
         </Card>
       </div>
