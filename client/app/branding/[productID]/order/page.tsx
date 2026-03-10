@@ -12,7 +12,7 @@ const NextStepsInfo = () => (
     <CardContent>
       <ol className="space-y-4 text-sm">
         <li className="flex items-start">
-          <strong className="bg-brand-Blue text-brand-navy rounded-full h-8 w-8 text-center shrink-0 leading-8 font-bold mr-4">
+          <strong className="bg-primary text-secondary rounded-full h-8 w-8 text-center shrink-0 leading-8 font-bold mr-4">
             1
           </strong>
           <div>
@@ -21,7 +21,7 @@ const NextStepsInfo = () => (
           </div>
         </li>
         <li className="flex items-start">
-          <strong className="bg-brand-Blue text-brand-navy rounded-full h-8 w-8 text-center shrink-0 leading-8 font-bold mr-4">
+          <strong className="bg-primary text-secondary rounded-full h-8 w-8 text-center shrink-0 leading-8 font-bold mr-4">
             2
           </strong>
           <div>
@@ -30,7 +30,7 @@ const NextStepsInfo = () => (
           </div>
         </li>
         <li className="flex items-start">
-          <strong className="bg-brand-Blue text-brand-navy rounded-full h-8 w-8 text-center shrink-0 leading-8 font-bold mr-4">
+          <strong className="bg-primary text-secondary rounded-full h-8 w-8 text-center shrink-0 leading-8 font-bold mr-4">
             3
           </strong>
           <div>
@@ -59,7 +59,7 @@ export default async function BrandingOrderPage({
   return (
     <div className="animate-fade-in">
       <div className="text-center mb-12">
-        <h1 className="text-5xl font-extrabold text-brand-navy tracking-tight">
+        <h1 className="text-5xl font-extrabold text-secondary tracking-tight">
           Inquiry: {product.title}
         </h1>
         <p className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">

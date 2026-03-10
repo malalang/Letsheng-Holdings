@@ -52,7 +52,7 @@ export default async function AdminPropertiesPage() {
               <div className="absolute top-2 right-2">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="secondary" size="icon">
+                    <Button variant="default" size="icon">
                       <MoreVertical className="h-4 w-4" />
                     </Button>
                   </DropdownMenuTrigger>
@@ -81,7 +81,7 @@ export default async function AdminPropertiesPage() {
 
             <CardHeader>
               <div className="flex justify-between items-start">
-                <CardTitle className="text-2xl font-bold text-brand-navy leading-tight">
+                <CardTitle className="text-2xl font-bold text-secondary leading-tight">
                   {p.title}
                 </CardTitle>
                 <Badge
@@ -112,8 +112,8 @@ export default async function AdminPropertiesPage() {
               <p className="text-gray-700 leading-relaxed truncate">
                 {p.description}
               </p>
-              <div className="mt-6 flex items-center text-2xl font-bold text-brand-navy">
-                <CircleDollarSign className="h-6 w-6 mr-2 text-brand-Blue" />R
+              <div className="mt-6 flex items-center text-2xl font-bold text-secondary">
+                <CircleDollarSign className="h-6 w-6 mr-2 text-primary" />R
                 {p.price.toLocaleString()}
                 <span className="text-sm font-normal text-gray-500 ml-2">
                   / month

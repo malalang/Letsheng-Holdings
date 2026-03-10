@@ -21,7 +21,7 @@ export default async function PropertyGalleryPage({
   return (
     <div className="animate-fade-in">
       <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-brand-navy">
+        <h1 className="text-4xl md:text-5xl font-extrabold text-secondary">
           {property.title} - Gallery
         </h1>
         <Link href={`/properties/${id}`} className="mt-4 inline-block">
@@ -43,7 +43,7 @@ export default async function PropertyGalleryPage({
               />
             </div>
             <CardContent className="p-4">
-              <h3 className="text-lg font-bold text-brand-navy">
+              <h3 className="text-lg font-bold text-secondary">
                 {image.title}
               </h3>
               <p className="text-gray-600">{image.description}</p>

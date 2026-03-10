@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Archive,
   BookUser,
@@ -9,10 +11,11 @@ import {
   PlusCircle,
   Search,
   ShoppingCart,
-} from "lucide-react";
-import Link from "next/link";
+} from 'lucide-react';
+import Link from 'next/link';
+import { useState } from 'react';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,14 +23,16 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+} from '@/components/ui/dropdown-menu';
+import { Input } from '@/components/ui/input';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
 const Header = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <header className="flex h-14 items-center gap-4 border-b bg-brand-navy px-4 lg:h-[60px] lg:px-6">
-      <Sheet>
+    <header className="flex h-14 items-center gap-4 border-b bg-secondary px-4 lg:h-[60px] lg:px-6">
+      <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger asChild>
           <Button variant="outline" size="icon" className="shrink-0 md:hidden">
             <Menu className="h-5 w-5" />
@@ -36,47 +41,53 @@ const Header = () => {
         </SheetTrigger>
         <SheetContent
           side="left"
-          className="flex flex-col bg-brand-navy text-white"
+          className="flex flex-col bg-secondary text-white"
         >
           <nav className="grid gap-2 text-lg font-medium">
             <Link
               href="#"
               className="flex items-center gap-2 text-lg font-semibold text-white"
+              onClick={() => setIsOpen(false)}
             >
-              <Package2 className="h-6 w-6 text-brand-blue" />
+              <Package2 className="h-6 w-6 text-primary" />
               <span className="sr-only">Letsheng Inc</span>
             </Link>
             <Link
               href="/dashboard"
-              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-gray-300 hover:text-white hover:bg-brand-blue/20"
+              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-gray-300 hover:text-white hover:bg-primary/20"
+              onClick={() => setIsOpen(false)}
             >
               <Home className="h-4 w-4" />
               Dashboard
             </Link>
 
             <Link
-              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-gray-300 hover:text-white hover:bg-brand-blue/20"
+              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-gray-300 hover:text-white hover:bg-primary/20"
               href="/dashboard/properties"
+              onClick={() => setIsOpen(false)}
             >
               <Building2 className="h-4 w-4" /> Estates
             </Link>
             <Link
-              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-gray-300 hover:text-white hover:bg-brand-blue/20"
+              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-gray-300 hover:text-white hover:bg-primary/20"
               href="/dashboard/tenants"
+              onClick={() => setIsOpen(false)}
             >
               <BookUser className="h-4 w-4" />
               Tenants
             </Link>
             <Link
-              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-gray-300 hover:text-white hover:bg-brand-blue/20"
+              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-gray-300 hover:text-white hover:bg-primary/20"
               href="/dashboard/branding"
+              onClick={() => setIsOpen(false)}
             >
               <ShoppingCart className="h-4 w-4" />
               Branding Shop
             </Link>
             <Link
-              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-gray-300 hover:text-white hover:bg-brand-blue/20"
+              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-gray-300 hover:text-white hover:bg-primary/20"
               href="/dashboard/submissions"
+              onClick={() => setIsOpen(false)}
             >
               <Archive className="h-4 w-4" />
               Submissions
@@ -85,16 +96,7 @@ const Header = () => {
         </SheetContent>
       </Sheet>
       <div className="w-full flex-1">
-        <form>
-          <div className="relative">
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input
-              type="search"
-              placeholder="Search... (CMD+K)"
-              className="w-full appearance-none bg-brand-background pl-8 shadow-none md:w-2/3 lg:w-1/3"
-            />
-          </div>
-        </form>
+       
       </div>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>

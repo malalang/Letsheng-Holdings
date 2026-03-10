@@ -25,7 +25,7 @@ const NavLink = ({
   <Link
     href={href}
     onClick={onLinkClick}
-    className="block md:inline-block text-white px-3 py-2 rounded-md text-brand-navy text-base font-medium hover:bg-brand-Blue/10 hover:text-brand-Blue transition-colors"
+    className="block md:inline-block text-white px-3 py-2 rounded-md text-secondary text-base font-medium hover:bg-primary/10 hover:text-primary transition-colors"
   >
     {children}
   </Link>
@@ -36,7 +36,7 @@ export default function Header() {
   const onLinkClick = () => setIsOpen(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-brand-navy/80 backdrop-blur-lg border-b border-brand-Blue/20 shadow-lg">
+    <header className="sticky top-0 z-50 bg-secondary/80 backdrop-blur-lg border-b border-primary/20 shadow-lg">
       <div className="container mx-auto px-4 md:px-8">
         <div className="flex items-center justify-between h-20">
           <Link href="/" className="flex items-center gap-3">
@@ -67,7 +67,7 @@ export default function Header() {
           </nav>
           <div className="flex items-center gap-4">
             <Link href="/contact" className="hidden md:block">
-              <Button className="bg-brand-Blue text-brand-navy font-bold hover:bg-brand-Blue/90">
+              <Button className="bg-primary text-secondary font-bold hover:bg-primary/90">
                 Contact Us
               </Button>
             </Link>
@@ -84,7 +84,7 @@ export default function Header() {
               </SheetTrigger>
               <SheetContent
                 side="right"
-                className="bg-brand-navy/80 backdrop-blur-lg text-white border-l-brand-Blue/30"
+                className="bg-secondary/80 backdrop-blur-lg text-white border-l-primary/30"
               >
                 <SheetHeader>
                   <SheetTitle className="sr-only">Menu</SheetTitle>
@@ -103,7 +103,7 @@ export default function Header() {
                     About Us
                   </NavLink>
                   <Link href="/contact" className="mt-4">
-                    <Button className="w-full bg-brand-Blue text-brand-navy font-bold hover:bg-brand-Blue/90">
+                    <Button className="w-full bg-primary text-secondary font-bold hover:bg-primary/90">
                       Contact Us
                     </Button>
                   </Link>

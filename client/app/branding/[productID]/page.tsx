@@ -36,7 +36,7 @@ export default async function ProductPage({
               <Badge variant="default" className="font-semibold mb-2">
                 {product.category}
               </Badge>
-              <h1 className="text-5xl font-extrabold text-brand-navy tracking-tight">
+              <h1 className="text-5xl font-extrabold text-secondary tracking-tight">
                 {product.title}
               </h1>
               <p className="mt-4 text-xl text-gray-600">
@@ -91,7 +91,7 @@ export default async function ProductPage({
         <CardContent className="mt-6">
           {product.gallery && (product.gallery as any[]).length > 0 && (
             <div className="mt-8">
-              <h3 className="text-2xl font-bold text-brand-navy mb-4">
+              <h3 className="text-2xl font-bold text-secondary mb-4">
                 Product Gallery
               </h3>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -103,8 +103,8 @@ export default async function ProductPage({
                       fill
                       className="object-cover rounded-lg"
                     />
-                    <div className="absolute bottom-0 left-0 bg-brand-navy/70 text-white p-2 w-full rounded-b-lg">
-                      <h4 className="font-bold text-brand-Blue">
+                    <div className="absolute bottom-0 left-0 bg-secondary/70 text-white p-2 w-full rounded-b-lg">
+                      <h4 className="font-bold text-primary">
                         {image.title}
                       </h4>
                       <p className="text-sm">{image.description}</p>
@@ -125,7 +125,7 @@ export default async function ProductPage({
 
           {product.reviews && (product.reviews as any[]).length > 0 && (
             <div className="mt-8">
-              <h3 className="text-2xl font-bold text-brand-navy mb-4">
+              <h3 className="text-2xl font-bold text-secondary mb-4">
                 Reviews
               </h3>
               <div className="space-y-4">
@@ -144,7 +144,7 @@ export default async function ProductPage({
                             />
                           ))}
                         </div>
-                        <p className="ml-2 font-bold text-brand-navy">
+                        <p className="ml-2 font-bold text-secondary">
                           {review.author}
                         </p>
                       </div>

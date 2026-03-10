@@ -41,7 +41,7 @@ export default async function PropertyDetailPage({
               className="object-cover rounded-t-xl"
             />
           </div>
-          <CardTitle className="mt-6 text-4xl font-extrabold text-brand-navy">
+          <CardTitle className="mt-6 text-4xl font-extrabold text-secondary">
             {property.title}
           </CardTitle>
           <div className="flex justify-between items-center mt-2">
@@ -76,7 +76,7 @@ export default async function PropertyDetailPage({
             {property.description}
           </p>
 
-          <h3 className="text-2xl font-bold text-brand-navy mb-4">Features</h3>
+          <h3 className="text-2xl font-bold text-secondary mb-4">Features</h3>
           <ul className="grid grid-cols-2 gap-2 text-gray-700 mb-8">
             {(property.features as string[]).map((feature) => (
               <li key={feature} className="flex items-center">
@@ -88,7 +88,7 @@ export default async function PropertyDetailPage({
 
           {property.gallery && (property.gallery as any[]).length > 0 && (
             <div className="mt-8">
-              <h3 className="text-2xl font-bold text-brand-navy mb-4">
+              <h3 className="text-2xl font-bold text-secondary mb-4">
                 Property Gallery
               </h3>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -100,8 +100,8 @@ export default async function PropertyDetailPage({
                       fill
                       className="object-cover rounded-lg"
                     />
-                    <div className="absolute bottom-0 left-0 bg-brand-navy/70 text-white p-2 w-full rounded-b-lg">
-                      <h4 className="font-bold text-brand-Blue">
+                    <div className="absolute bottom-0 left-0 bg-secondary/70 text-white p-2 w-full rounded-b-lg">
+                      <h4 className="font-bold text-primary">
                         {image.title}
                       </h4>
                       <p className="text-sm">{image.description}</p>
@@ -122,7 +122,7 @@ export default async function PropertyDetailPage({
 
           {property.reviews && (property.reviews as any[]).length > 0 && (
             <div className="mt-8">
-              <h3 className="text-2xl font-bold text-brand-navy mb-4">
+              <h3 className="text-2xl font-bold text-secondary mb-4">
                 Reviews
               </h3>
               <div className="space-y-4">
@@ -141,7 +141,7 @@ export default async function PropertyDetailPage({
                             />
                           ))}
                         </div>
-                        <p className="ml-2 font-bold text-brand-navy">
+                        <p className="ml-2 font-bold text-secondary">
                           {review.author}
                         </p>
                       </div>
@@ -155,7 +155,7 @@ export default async function PropertyDetailPage({
 
           {property.virtual_tour_url && (
             <div className="mt-8">
-              <h3 className="text-2xl font-bold text-brand-navy mb-4">
+              <h3 className="text-2xl font-bold text-secondary mb-4">
                 More Details
               </h3>
               <div className="flex items-center">
@@ -164,7 +164,7 @@ export default async function PropertyDetailPage({
                   href={property.virtual_tour_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-brand-Blue hover:underline"
+                  className="text-primary hover:underline"
                 >
                   Virtual Tour
                 </a>
@@ -172,8 +172,8 @@ export default async function PropertyDetailPage({
             </div>
           )}
 
-          <div className="mt-8 flex items-center text-4xl font-bold text-brand-navy">
-            <CircleDollarSign className="h-8 w-8 mr-2 text-brand-Blue" />R
+          <div className="mt-8 flex items-center text-4xl font-bold text-secondary">
+            <CircleDollarSign className="h-8 w-8 mr-2 text-primary" />R
             {property.price.toLocaleString()}
             <span className="text-lg font-normal text-gray-500 ml-2">
               / month

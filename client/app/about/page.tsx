@@ -20,10 +20,10 @@ const Pillar = ({
   children: React.ReactNode;
 }) => (
   <div className="text-center">
-    <div className="w-16 h-16 bg-brand-Blue/10 text-brand-navy rounded-full mx-auto flex items-center justify-center mb-4">
+    <div className="w-16 h-16 bg-primary/10 text-secondary rounded-full mx-auto flex items-center justify-center mb-4">
       {icon}
     </div>
-    <h4 className="font-bold text-lg text-brand-navy">{title}</h4>
+    <h4 className="font-bold text-lg text-secondary">{title}</h4>
     <p className="text-sm text-gray-600 mt-1">{children}</p>
   </div>
 );
@@ -44,8 +44,8 @@ const LeadershipCard = ({
       <Image src={imageUrl} alt={name} fill className="object-cover" />
     </div>
     <CardHeader>
-      <CardTitle className="text-brand-navy">{name}</CardTitle>
-      <p className="text-brand-Blue font-semibold">{title}</p>
+      <CardTitle className="text-secondary">{name}</CardTitle>
+      <p className="text-primary font-semibold">{title}</p>
     </CardHeader>
     <CardContent>
       <p className="text-gray-600 text-sm">{bio}</p>
@@ -66,12 +66,12 @@ const TimelineEvent = ({
 }) => (
   <div className="flex">
     <div className="flex flex-col items-center mr-6">
-      <div className="w-4 h-4 bg-brand-Blue rounded-full" />
-      {!last && <div className="w-px h-full bg-brand-Blue/30" />}
+      <div className="w-4 h-4 bg-primary rounded-full" />
+      {!last && <div className="w-px h-full bg-primary/30" />}
     </div>
     <div className="pb-12">
-      <p className="font-bold text-brand-Blue">{year}</p>
-      <h4 className="font-semibold text-lg text-brand-navy">{title}</h4>
+      <p className="font-bold text-primary">{year}</p>
+      <h4 className="font-semibold text-lg text-secondary">{title}</h4>
       <p className="text-gray-600 text-sm">{description}</p>
     </div>
   </div>
@@ -85,7 +85,7 @@ const FaqItem = ({
   answer: string;
 }) => (
   <div className="border-b border-gray-200 py-4">
-    <h5 className="font-semibold text-lg text-brand-navy">{question}</h5>
+    <h5 className="font-semibold text-lg text-secondary">{question}</h5>
     <p className="text-gray-600 mt-2">{answer}</p>
   </div>
 );
@@ -98,7 +98,7 @@ export default function AboutPage() {
   return (
     <div className="animate-fade-in space-y-24">
       <header className="text-center">
-        <h1 className="text-5xl font-extrabold text-brand-navy tracking-tight">
+        <h1 className="text-5xl font-extrabold text-secondary tracking-tight">
           Our Philosophy: The Letsheng Standard
         </h1>
         <p className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
@@ -109,7 +109,7 @@ export default function AboutPage() {
 
       <main className="space-y-24">
         <section>
-          <h2 className="text-4xl font-extrabold text-brand-navy text-center mb-12">
+          <h2 className="text-4xl font-extrabold text-secondary text-center mb-12">
             Meet Our Leadership
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -135,7 +135,7 @@ export default function AboutPage() {
         </section>
 
         <section>
-          <h2 className="text-4xl font-extrabold text-brand-navy text-center mb-12">
+          <h2 className="text-4xl font-extrabold text-secondary text-center mb-12">
             Timeline of Excellence
           </h2>
           <div className="max-w-2xl mx-auto">
@@ -164,14 +164,14 @@ export default function AboutPage() {
         </section>
 
         <section>
-          <h2 className="text-4xl font-extrabold text-brand-navy text-center mb-12">
+          <h2 className="text-4xl font-extrabold text-secondary text-center mb-12">
             Two Divisions, One Vision
           </h2>
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             <Card className="shadow-lg">
               <CardHeader className="flex-row items-center">
-                <Building className="h-8 w-8 text-brand-navy" />
-                <CardTitle className="ml-4 text-2xl font-semibold text-brand-navy">
+                <Building className="h-8 w-8 text-secondary" />
+                <CardTitle className="ml-4 text-2xl font-semibold text-secondary">
                   Letsheng Estates
                 </CardTitle>
               </CardHeader>
@@ -185,8 +185,8 @@ export default function AboutPage() {
             </Card>
             <Card className="shadow-lg">
               <CardHeader className="flex-row items-center">
-                <Printer className="h-8 w-8 text-brand-navy" />
-                <CardTitle className="ml-4 text-2xl font-semibold text-brand-navy">
+                <Printer className="h-8 w-8 text-secondary" />
+                <CardTitle className="ml-4 text-2xl font-semibold text-secondary">
                   Letsheng Print
                 </CardTitle>
               </CardHeader>
@@ -202,7 +202,7 @@ export default function AboutPage() {
 
         <section className="bg-gray-50/80 rounded-2xl py-16">
           <div className="max-w-4xl mx-auto text-center">
-            <h3 className="text-3xl font-extrabold text-brand-navy mb-6">
+            <h3 className="text-3xl font-extrabold text-secondary mb-6">
               Synergy in Action: A Case Study
             </h3>
             <p className="text-lg text-gray-600 mb-8">
@@ -219,7 +219,7 @@ export default function AboutPage() {
         </section>
 
         <section>
-          <h3 className="text-4xl font-extrabold text-brand-navy text-center mb-12">
+          <h3 className="text-4xl font-extrabold text-secondary text-center mb-12">
             Sustainability and Community Impact
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto text-center">
@@ -248,14 +248,14 @@ export default function AboutPage() {
         </section>
 
         <section>
-          <h2 className="text-4xl font-extrabold text-brand-navy text-center mb-12">
+          <h2 className="text-4xl font-extrabold text-secondary text-center mb-12">
             Client Success Stories
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             <Card className="bg-white/60 p-6">
               <div className="flex items-center mb-4">
                 <Star className="h-5 w-5 text-yellow-400 fill-current mr-1" />
-                <p className="font-bold text-brand-navy">
+                <p className="font-bold text-secondary">
                   Exceptional Management
                 </p>
               </div>
@@ -270,7 +270,7 @@ export default function AboutPage() {
             <Card className="bg-white/60 p-6">
               <div className="flex items-center mb-4">
                 <Star className="h-5 w-5 text-yellow-400 fill-current mr-1" />
-                <p className="font-bold text-brand-navy">
+                <p className="font-bold text-secondary">
                   Uncompromising Color Accuracy
                 </p>
               </div>
@@ -287,7 +287,7 @@ export default function AboutPage() {
         </section>
 
         <section className="bg-gray-50/80 rounded-2xl py-16">
-          <h2 className="text-4xl font-extrabold text-brand-navy text-center mb-12">
+          <h2 className="text-4xl font-extrabold text-secondary text-center mb-12">
             The Letsheng Standard Explained (FAQ)
           </h2>
           <div className="max-w-4xl mx-auto">
@@ -307,7 +307,7 @@ export default function AboutPage() {
         </section>
 
         <section>
-          <Card className="bg-brand-navy text-white rounded-2xl p-6 md:p-12 shadow-2xl text-center">
+          <Card className="bg-secondary text-white rounded-2xl p-6 md:p-12 shadow-2xl text-center">
             <CardTitle className="text-4xl font-bold">
               Partner with Excellence
             </CardTitle>
@@ -321,7 +321,7 @@ export default function AboutPage() {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="mt-8 font-bold text-white border-white hover:bg-white hover:text-brand-navy transition-transform transform hover:scale-105"
+                  className="mt-8 font-bold text-white border-white hover:bg-white hover:text-secondary transition-transform transform hover:scale-105"
                 >
                   Contact Business Services
                 </Button>

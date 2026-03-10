@@ -37,7 +37,7 @@ const ProductCard = ({
         <Badge variant="default" className="font-semibold mb-2">
           {product.category}
         </Badge>
-        <h3 className="text-2xl font-bold text-brand-navy">{product.title}</h3>
+        <h3 className="text-2xl font-bold text-secondary">{product.title}</h3>
         <p className="text-gray-600 mt-2 line-clamp-3">{product.description}</p>
       </div>
       <div className="mt-6">
@@ -60,7 +60,7 @@ export default async function BrandingPage() {
     <div className="animate-fade-in space-y-16">
       {/* Header */}
       <header
-        className="relative bg-brand-navy rounded-2xl shadow-2xl overflow-hidden -mt-4"
+        className="relative bg-secondary rounded-2xl shadow-2xl overflow-hidden -mt-4"
         style={{
           backgroundImage: `radial-gradient(circle at top right, #FFD70020, transparent), radial-gradient(circle at bottom left, #002147, #001a38)`,
         }}
@@ -72,7 +72,7 @@ export default async function BrandingPage() {
           className="object-cover opacity-30"
         />
         <div className="relative text-center p-12">
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-brand-Blue/80">
+          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-primary/80">
             Letsheng Branding
           </h1>
           <p className="mt-6 text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto">
@@ -92,7 +92,7 @@ export default async function BrandingPage() {
 
       {/* Featured Products */}
       <section>
-        <h2 className="text-4xl font-extrabold text-brand-navy mb-8 text-center">
+        <h2 className="text-4xl font-extrabold text-secondary mb-8 text-center">
           Featured Products
         </h2>
         <div className="space-y-8">
@@ -104,7 +104,7 @@ export default async function BrandingPage() {
 
       {/* Other Products */}
       <section>
-        <h2 className="text-4xl font-extrabold text-brand-navy mb-8 text-center">
+        <h2 className="text-4xl font-extrabold text-secondary mb-8 text-center">
           Our Full Catalog
         </h2>
         <div className="grid md:grid-cols-2 gap-8">

@@ -21,7 +21,7 @@ export default async function PropertiesPage() {
   return (
     <div className="animate-fade-in">
       <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-brand-navy">
+        <h1 className="text-4xl md:text-5xl font-extrabold text-secondary">
           Letsheng Estates
         </h1>
         <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
@@ -50,7 +50,7 @@ export default async function PropertiesPage() {
 
             <CardHeader>
               <div className="flex justify-between items-start">
-                <CardTitle className="text-2xl font-bold text-brand-navy leading-tight">
+                <CardTitle className="text-2xl font-bold text-secondary leading-tight">
                   {p.title}
                 </CardTitle>
                 <Badge
@@ -79,8 +79,8 @@ export default async function PropertiesPage() {
                 </div>
               </div>
               <p className="text-gray-700 leading-relaxed">{p.description}</p>
-              <div className="mt-6 flex items-center text-2xl font-bold text-brand-navy">
-                <CircleDollarSign className="h-6 w-6 mr-2 text-brand-Blue" />R
+              <div className="mt-6 flex items-center text-2xl font-bold text-secondary">
+                <CircleDollarSign className="h-6 w-6 mr-2 text-primary" />R
                 {p.price.toLocaleString()}
                 <span className="text-sm font-normal text-gray-500 ml-2">
                   / month

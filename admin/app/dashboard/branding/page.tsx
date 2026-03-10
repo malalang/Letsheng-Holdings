@@ -88,7 +88,7 @@ export default async function AdminBrandingPage() {
 
             <CardHeader>
               <div className="flex justify-between items-start">
-                <CardTitle className="text-2xl font-bold text-brand-navy leading-tight">
+                <CardTitle className="text-2xl font-bold text-secondary leading-tight">
                   {p.title}
                 </CardTitle>
                 <Badge

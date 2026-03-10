@@ -9,7 +9,7 @@ export default function ContactPage() {
   return (
     <div className="animate-fade-in space-y-12">
       <header className="text-center">
-        <h1 className="text-5xl font-extrabold text-brand-navy tracking-tight">
+        <h1 className="text-5xl font-extrabold text-secondary tracking-tight">
           Get in Touch
         </h1>
         <p className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
@@ -21,7 +21,7 @@ export default function ContactPage() {
       <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
         <Card className="shadow-lg">
           <CardHeader>
-            <CardTitle className="text-brand-navy">Send us a Message</CardTitle>
+            <CardTitle className="text-secondary">Send us a Message</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
@@ -59,20 +59,20 @@ export default function ContactPage() {
 
         <Card className="shadow-lg">
           <CardHeader>
-            <CardTitle className="text-brand-navy">
+            <CardTitle className="text-secondary">
               Contact Information
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-6 text-gray-700">
             <div className="flex items-start gap-4">
-              <MapPin className="h-6 w-6 text-brand-Blue flex-shrink-0 mt-1" />
+              <MapPin className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
               <div>
                 <h4 className="font-semibold">Our Office</h4>
                 <p>39 Mvubu Street, Soshanguve South, Pretoria, 0152</p>
               </div>
             </div>
             <div className="flex items-start gap-4">
-              <Phone className="h-6 w-6 text-brand-Blue flex-shrink-0 mt-1" />
+              <Phone className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
               <div>
                 <h4 className="font-semibold">Phone</h4>
                 <p>+27 76 348 9454</p>
@@ -80,7 +80,7 @@ export default function ContactPage() {
               </div>
             </div>
             <div className="flex items-start gap-4">
-              <Mail className="h-6 w-6 text-brand-Blue flex-shrink-0 mt-1" />
+              <Mail className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
               <div>
                 <h4 className="font-semibold">Email</h4>
                 <p>letshengholdings@gmail.com</p>

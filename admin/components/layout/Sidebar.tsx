@@ -12,14 +12,14 @@ import Link from "next/link";
 
 const Sidebar = () => {
   return (
-    <div className="hidden border-r bg-brand-navy text-white md:block">
+    <div className="hidden border-r bg-secondary text-white md:block">
       <div className="flex h-full max-h-screen flex-col gap-2">
-        <div className="flex h-14 items-center border-b border-brand-blue/30 px-4 lg:h-[60px] lg:px-6">
+        <div className="flex h-14 items-center border-b border-primary/30 px-4 lg:h-[60px] lg:px-6">
           <Link
             href="/"
             className="flex items-center gap-2 font-semibold text-white"
           >
-            <Package2 className="h-6 w-6 text-brand-blue" />
+            <Package2 className="h-6 w-6 text-primary" />
             <span>Letsheng Inc.</span>
           </Link>
         </div>
@@ -77,7 +77,7 @@ const Sidebar = () => {
 };
 
 const SidebarSection = ({ title }: { title: string }) => (
-  <h3 className="px-3 py-2 text-xs font-semibold uppercase text-brand-blue/50 tracking-wider">
+  <h3 className="px-3 py-2 text-xs font-semibold uppercase text-primary/50 tracking-wider">
     {title}
   </h3>
 );
@@ -93,7 +93,7 @@ const SidebarLink = ({
 }) => (
   <Link
     href={href}
-    className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-300 transition-all hover:text-white hover:bg-brand-blue/20"
+    className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-300 transition-all hover:text-white hover:bg-primary/20"
   >
     {icon}
     {children}

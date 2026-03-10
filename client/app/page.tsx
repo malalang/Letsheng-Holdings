@@ -39,7 +39,7 @@ const FeaturedPropertyCard = ({
       <Image src={imageUrl} alt={title} fill className="object-cover" />
     </div>
     <CardHeader>
-      <CardTitle className="text-brand-navy">{title}</CardTitle>
+      <CardTitle className="text-secondary">{title}</CardTitle>
     </CardHeader>
     <CardContent className="flex flex-col flex-grow">
       <p className="text-gray-600 mb-4 line-clamp-3 flex-grow">{description}</p>
@@ -53,7 +53,7 @@ const FeaturedPropertyCard = ({
           <span>{bathrooms ?? 0} Baths</span>
         </div>
       </div>
-      <p className="font-bold text-lg text-brand-Blue mb-4">{price}</p>
+      <p className="font-bold text-lg text-primary mb-4">{price}</p>
       <Link href={`/properties/${id}`} className="mt-auto block">
         <Button variant="outline" className="w-full">
           View Details
@@ -84,7 +84,7 @@ const FeaturedProductCard = ({
       <Badge variant="default" className="font-semibold mb-2 w-fit">
         {category}
       </Badge>
-      <CardTitle className="text-brand-navy">{title}</CardTitle>
+      <CardTitle className="text-secondary">{title}</CardTitle>
     </CardHeader>
     <CardContent className="flex flex-col flex-grow">
       <p className="text-gray-600 line-clamp-3 flex-grow">{description}</p>
@@ -130,7 +130,7 @@ const TestimonialCard = ({
       />
     </div>
     <p className="text-gray-600 italic mb-4">\"{quote}\"</p>
-    <p className="font-bold text-brand-navy">{author}</p>
+    <p className="font-bold text-secondary">{author}</p>
     <p className="text-sm text-gray-500">{authorRole}</p>
   </Card>
 );
@@ -145,11 +145,11 @@ const NextStep = ({
   description: string;
 }) => (
   <div className="flex items-start">
-    <div className="w-12 h-12 bg-brand-Blue/10 text-brand-Blue rounded-full flex items-center justify-center mr-6 flex-shrink-0">
+    <div className="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center mr-6 flex-shrink-0">
       {icon}
     </div>
     <div>
-      <h4 className="font-bold text-lg text-brand-navy">{title}</h4>
+      <h4 className="font-bold text-lg text-secondary">{title}</h4>
       <p className="text-gray-600">{description}</p>
     </div>
   </div>
@@ -165,7 +165,7 @@ export default async function HomePage() {
     <div className="animate-fade-in space-y-24">
       {/* Header */}
       <header
-        className="relative bg-brand-navy rounded-2xl shadow-2xl overflow-hidden -mt-4"
+        className="relative bg-secondary rounded-2xl shadow-2xl overflow-hidden -mt-4"
         style={{
           backgroundImage: `radial-gradient(circle at top right,rgba(6, 61, 68, 0.6), transparent), radial-gradient(circle at bottom left, #002147, #001a38)`,
         }}
@@ -177,7 +177,7 @@ export default async function HomePage() {
           className="object-cover opacity-40"
         />
         <div className="relative text-center p-12">
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-brand-Blue/80">
+          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-primary/80">
             Elevating Ambitions
           </h1>
           <p className="mt-6 text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto">
@@ -191,7 +191,7 @@ export default async function HomePage() {
             <Button
               size="lg"
               variant="outline"
-              className="border-brand-Blue text-white hover:bg-brand-Blue hover:text-brand-navy"
+              className="border-primary text-white hover:bg-primary hover:text-secondary"
               asChild
             >
               <Link href="/branding">Discover Branding Solutions</Link>
@@ -203,7 +203,7 @@ export default async function HomePage() {
       {/* Featured Estates */}
       <section>
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-extrabold text-brand-navy">
+          <h2 className="text-4xl font-extrabold text-secondary">
             Featured Estates
           </h2>
           <p className="mt-3 text-lg text-gray-600 max-w-2xl mx-auto">
@@ -237,7 +237,7 @@ export default async function HomePage() {
       {/* Featured Products */}
       <section>
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-extrabold text-brand-navy">
+          <h2 className="text-4xl font-extrabold text-secondary">
             Featured Products
           </h2>
           <p className="mt-3 text-lg text-gray-600 max-w-2xl mx-auto">
@@ -269,7 +269,7 @@ export default async function HomePage() {
       {/* Testimonials */}
       <section>
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-extrabold text-brand-navy">
+          <h2 className="text-4xl font-extrabold text-secondary">
             Partnerships Rooted in Quality
           </h2>
           <p className="mt-3 text-lg text-gray-600 max-w-2xl mx-auto">
@@ -298,7 +298,7 @@ export default async function HomePage() {
       {/* Next Steps Guide */}
       <section className="bg-gray-50/80 rounded-2xl py-16 -mx-4 md:-mx-8 px-4">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-extrabold text-brand-navy">
+          <h2 className="text-4xl font-extrabold text-secondary">
             Your Path to Partnership
           </h2>
           <p className="mt-3 text-lg text-gray-600 max-w-2xl mx-auto">

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 export default function AdminHomePage() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-brand-navy text-white">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-secondary text-white">
       <div className="text-center p-8 max-w-2xl">
         <h1 className="text-5xl font-extrabold mb-4">Admin Command Center</h1>
         <p className="text-lg text-gray-300 mb-8">
@@ -15,7 +15,7 @@ export default function AdminHomePage() {
           <Link href="/dashboard">
             <Button
               size="lg"
-              className="bg-brand-blue hover:bg-brand-blue/90 text-white"
+              className="bg-primary hover:bg-primary/90 text-white"
             >
               Access Dashboard
               <LogIn className="ml-2 h-5 w-5" />

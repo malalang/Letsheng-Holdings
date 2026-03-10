@@ -41,13 +41,13 @@ function ApplyToLeaseForm({ propertyId, propertyTitle, propertyPrice }: { proper
   return (
     <div className="animate-fade-in">
       <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-brand-navy">
+        <h1 className="text-4xl md:text-5xl font-extrabold text-secondary">
           Apply to Lease
         </h1>
         <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
           You are applying for the following property:
         </p>
-        <h2 className="mt-4 text-2xl font-bold text-brand-navy">
+        <h2 className="mt-4 text-2xl font-bold text-secondary">
           {propertyTitle}
         </h2>
         <p className="text-lg text-gray-600">

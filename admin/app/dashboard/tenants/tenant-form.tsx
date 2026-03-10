@@ -259,7 +259,7 @@ export default function TenantForm({ tenant, payments }: TenantFormProps) {
                 Delete Tenant
               </Button>
             )}
-            <Button type="submit" variant="default" className="bg-brand-blue">
+            <Button type="submit" variant="default" className="bg-primary">
               {tenant ? "Save Changes" : "Create Tenant"}
             </Button>
           </div>

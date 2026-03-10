@@ -72,7 +72,7 @@ export default function BrandingOrderForm({ product }: BrandingOrderFormProps) {
         <input type="hidden" {...form.register('productId')} />
         <Card>
           <CardHeader>
-            <CardTitle className="text-2xl flex items-center text-brand-navy">
+            <CardTitle className="text-2xl flex items-center text-secondary">
               <User className="mr-3" />
               Contact Information
             </CardTitle>
@@ -126,7 +126,7 @@ export default function BrandingOrderForm({ product }: BrandingOrderFormProps) {
 
         <Card>
           <CardHeader>
-            <CardTitle className="text-2xl flex items-center text-brand-navy">
+            <CardTitle className="text-2xl flex items-center text-secondary">
               <Package className="mr-3" />
               Project Specifications
             </CardTitle>
@@ -171,7 +171,7 @@ export default function BrandingOrderForm({ product }: BrandingOrderFormProps) {
             <FormItem>
               <FormLabel>Artwork & Logo Files</FormLabel>
               <FormControl>
-                <Card className="border-2 border-dashed border-gray-300 rounded-xl p-8 flex flex-col items-center justify-center text-center hover:border-brand-Blue transition-colors duration-300">
+                <Card className="border-2 border-dashed border-gray-300 rounded-xl p-8 flex flex-col items-center justify-center text-center hover:border-primary transition-colors duration-300">
                   <Upload className="h-12 w-12 text-gray-400 mb-4" />
                   <p className="text-gray-700 font-semibold mb-2">
                     Drag & drop your vector artwork, or

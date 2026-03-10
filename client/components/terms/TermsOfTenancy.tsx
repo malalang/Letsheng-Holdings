@@ -1,7 +1,7 @@
 export default function TermsOfTenancy() {
   return (
-    <section className="glass-overlay border-brand-Blue/30 rounded-lg p-6">
-      <h3 className="text-2xl font-bold text-brand-navy">Terms of Tenancy</h3>
+    <section className="glass-overlay border-primary/30 rounded-lg p-6">
+      <h3 className="text-2xl font-bold text-secondary">Terms of Tenancy</h3>
       <p className="mt-3 text-gray-700">
         Letsheng Holdings operates a strict and transparent tenancy policy to
         protect both residents and the integrity of our portfolio. The following

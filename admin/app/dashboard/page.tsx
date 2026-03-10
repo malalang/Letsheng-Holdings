@@ -110,7 +110,7 @@ export default function DashboardPage() {
           <div className="grid gap-2">
             <CardTitle>Recent Lease Agreements</CardTitle>
           </div>
-          <Button asChild size="sm" className="ml-auto gap-1 bg-brand-blue">
+          <Button asChild size="sm" className="ml-auto gap-1 bg-primary">
             <a href="/dashboard/properties">
               View All
               <ArrowUpRight className="h-4 w-4" />

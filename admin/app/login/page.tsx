@@ -28,10 +28,10 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-brand-navy p-4">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-secondary p-4">
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
-          <Shield className="mx-auto h-12 w-12 text-brand-blue" />
+          <Shield className="mx-auto h-12 w-12 text-primary" />
           <h1 className="mt-4 text-4xl font-bold text-white">
             Admin Secure Login
           </h1>
@@ -55,7 +55,7 @@ export default function LoginPage() {
               />
               <Button
                 type="submit"
-                className="w-full bg-brand-blue text-white hover:bg-brand-blue/90"
+                className="w-full bg-primary text-white hover:bg-primary/90"
               >
                 Authenticate
                 <LogIn className="ml-2 h-4 w-4" />
