@@ -1,10 +1,8 @@
 'use client';
 
-import { createClient } from '@/lib/supabase/server';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { LogIn, Shield } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
@@ -26,6 +24,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { login } from './actions';
 
 const loginSchema = z.object({
   email: z.string().email('Invalid email address.'),
@@ -36,23 +35,6 @@ type LoginFormValues = z.infer<typeof loginSchema>;
 
 export default function LoginPage() {
   const router = useRouter();
-  const supabase = createClient();
-
-  // useEffect(() => {
-  //   const {
-  //     data: { subscription },
-  //   } = supabase.auth.onAuthStateChange((event) => {
-  //     console.log(subscription.id)
-  //     if (event === 'SIGNED_IN') {
-  //       router.push('/dashboard');
-  //       router.refresh();
-  //     }
-  //   });
-
-  //   return () => {
-  //     subscription.unsubscribe();
-  //   };
-  // }, [router, supabase]);
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -63,18 +45,13 @@ export default function LoginPage() {
   });
 
   async function onSubmit(values: LoginFormValues) {
-    const supabase = await createClient();
-    const {data, error } = await supabase.auth.signInWithPassword({
-      email: values.email,
-      password: values.password,
-    });
+    const result = await login(values);
 
-    if (error) {
+    if (result.error) {
       toast.error('Login Failed', {
-        description: error.message,
+        description: result.error,
       });
-    } else if (data.user)   {
-      console.log(data.user)
+    } else if (result.success) {
       toast.success('Login Successful', {
         description: 'Redirecting to dashboard...',
       });
