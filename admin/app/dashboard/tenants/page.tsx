@@ -91,7 +91,7 @@ export default async function AdminTenantsPage() {
                     </Link>
                   </TableCell>
                   <TableCell className="text-center">
-                    <Badge className={getStatusBadgeClass(tenant.status)}>
+                    <Badge className={getStatusBadgeClass(tenant.status as Tenant["status"])}>
                       {tenant.status}
                     </Badge>
                   </TableCell>

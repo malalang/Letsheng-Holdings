@@ -1,3 +1,4 @@
+import {type Tenant } from "@/lib/validations/schemas";
 import { getTenantById } from "../../../actions";
 import TenantForm from "../../../tenant-form";
 
@@ -12,6 +13,6 @@ export default async function EditTenantPage({ params }: {
     }
 
     return (
-        <TenantForm tenant={tenant} />
+        <TenantForm tenant={tenant as Tenant } />
     );
 }
