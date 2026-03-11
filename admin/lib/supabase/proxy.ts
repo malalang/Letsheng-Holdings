@@ -37,7 +37,7 @@ export async function updateSession(request: NextRequest) {
 
 
 
-  if (user && !isAuthRoute ) {
+  if (!user && pathname !== "/login" ) {
     const redirectUrl = request.nextUrl.clone();
     redirectUrl.pathname = "/login";
     // redirectUrl.searchParams.set("redirectTo", pathname);
@@ -45,7 +45,7 @@ export async function updateSession(request: NextRequest) {
   
   }
 
-  if (user && isAuthRoute) {
+  if (user && pathname == "/login") {
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
