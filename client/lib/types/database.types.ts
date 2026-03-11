@@ -32,7 +32,7 @@ export type Database = {
           created_at?: string
           description?: string | null
           gallery?: Json | null
-          id: string
+          id?: string
           image?: string | null
           is_featured?: boolean
           reviews?: Json | null
@@ -61,7 +61,7 @@ export type Database = {
           email: string
           id: string
           message: string | null
-          product_id: string
+          product_id: string | null
           quantity: number
           status: string
         }
@@ -72,7 +72,7 @@ export type Database = {
           email: string
           id?: string
           message?: string | null
-          product_id: string
+          product_id?: string | null
           quantity: number
           status?: string
         }
@@ -83,11 +83,19 @@ export type Database = {
           email?: string
           id?: string
           message?: string | null
-          product_id?: string
+          product_id?: string | null
           quantity?: number
           status?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "branding_inquiries_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "branding"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       lease_applications: {
         Row: {
@@ -98,7 +106,7 @@ export type Database = {
           id: string
           message: string | null
           phone: string | null
-          property_id: string
+          property_id: string | null
           status: string
         }
         Insert: {
@@ -109,7 +117,7 @@ export type Database = {
           id?: string
           message?: string | null
           phone?: string | null
-          property_id: string
+          property_id?: string | null
           status?: string
         }
         Update: {
@@ -120,10 +128,53 @@ export type Database = {
           id?: string
           message?: string | null
           phone?: string | null
-          property_id?: string
+          property_id?: string | null
           status?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "lease_applications_product_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      payments: {
+        Row: {
+          amount: number
+          created_at: string
+          date: string
+          id: string
+          status: string
+          tenant_id: string | null
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          date: string
+          id?: string
+          status?: string
+          tenant_id?: string | null
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          date?: string
+          id?: string
+          status?: string
+          tenant_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payments_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       properties: {
         Row: {
@@ -152,7 +203,7 @@ export type Database = {
           description?: string | null
           features?: Json | null
           gallery?: Json | null
-          id: string
+          id?: string
           image_url?: string | null
           is_featured?: boolean
           location?: string | null
@@ -181,6 +232,47 @@ export type Database = {
           virtual_tour_url?: string | null
         }
         Relationships: []
+      }
+      tenants: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          email: string | null
+          id: string
+          lease_end_date: string | null
+          name: string
+          property_id: string | null
+          status: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          lease_end_date?: string | null
+          name: string
+          property_id?: string | null
+          status?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          lease_end_date?: string | null
+          name?: string
+          property_id?: string | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tenants_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
