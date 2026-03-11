@@ -10,6 +10,12 @@ import {
 } from "@/components/ui/card";
 import BrandingForm from "../../../branding-form";
 import { getBrandingProduct } from "../../../actions";
+import {
+  galleryItemSchema,
+  specItemSchema,
+  reviewSchema,
+} from "@/lib/validations/schemas";
+import { z } from "zod";
 
 export default async function EditBrandingPage({
   params,
@@ -17,9 +23,9 @@ export default async function EditBrandingPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const product = await getBrandingProduct(id);
+  const productData = await getBrandingProduct(id);
 
-  if (!product) {
+  if (!productData) {
     return (
       <div className="mx-auto max-w-5xl">
         <h1 className="text-2xl font-bold mb-4">Product not found</h1>
@@ -32,6 +38,17 @@ export default async function EditBrandingPage({
       </div>
     );
   }
+
+  const specs = z.array(specItemSchema).safeParse(productData.specs);
+  const gallery = z.array(galleryItemSchema).safeParse(productData.gallery);
+  const reviews = z.array(reviewSchema).safeParse(productData.reviews);
+
+  const product = {
+    ...productData,
+    specs: specs.success ? specs.data : null,
+    gallery: gallery.success ? gallery.data : null,
+    reviews: reviews.success ? reviews.data : null,
+  };
 
   return (
     <div className="mx-auto max-w-5xl">

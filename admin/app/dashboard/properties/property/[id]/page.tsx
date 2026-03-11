@@ -105,14 +105,14 @@ export default async function PropertyDetailsPage({
           </Card>
 
           {/* Features Card */}
-          {property.features && property.features.length > 0 && (
+          {Array.isArray(property.features) && property.features.length > 0 && (
             <Card>
               <CardHeader>
                 <CardTitle>Features</CardTitle>
               </CardHeader>
               <CardContent>
                 <ul className="grid grid-cols-2 gap-x-6 gap-y-2">
-                  {property.features.map((feature: string) => (
+                  {property.features.map((feature: as any as string) => (
                     <li key={feature} className="flex items-center gap-2">
                       <CheckCircle className="h-5 w-5 text-green-500" />
                       <span>{feature}</span>
@@ -124,7 +124,7 @@ export default async function PropertyDetailsPage({
           )}
 
           {/* Gallery Card */}
-          {property.gallery && property.gallery.length > 0 && (
+          {Array.isArray(property.gallery) && property.gallery.length > 0 && (
             <Card>
               <CardHeader>
                 <CardTitle>Property Gallery</CardTitle>
@@ -177,7 +177,7 @@ export default async function PropertyDetailsPage({
           </Card>
 
           {/* Reviews Card */}
-          {property.reviews && property.reviews.length > 0 && (
+          {Array.isArray(property.reviews) && property.reviews.length > 0 && (
             <Card>
               <CardHeader>
                 <CardTitle>Client Reviews</CardTitle>

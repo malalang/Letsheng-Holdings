@@ -19,6 +19,9 @@ export const reviewSchema = z.object({
   comment: z.string().min(1, "Comment is required"),
 });
 
+// Schema for a single feature, which is just a string
+export const featureSchema = z.string();
+
 // Schema for a property
 export const propertySchema = z.object({
   id: z.string(),
@@ -31,7 +34,7 @@ export const propertySchema = z.object({
   bedrooms: z.number().int().min(1, "Must have at least one bedroom").nullable(),
   bathrooms: z.number().int().min(1, "Must have at least one bathroom").nullable(),
   type: z.string().min(1, "Type is required").nullable(),
-  features: z.any(),
+  features: z.array(featureSchema).nullable(),
   is_featured: z.boolean(),
   gallery: z.array(galleryItemSchema).nullable(),
   reviews: z.array(reviewSchema).nullable(),
