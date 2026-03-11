@@ -77,7 +77,7 @@ const FeaturedProductCard = ({
   description: string;
 }) => (
   <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
-    <div className="relative h-80 lg:h-auto lg:w-1/2">
+    <div className="relative h-80 ">
       <Image src={image} alt={title} fill className="object-cover" />
     </div>
     <CardHeader>
