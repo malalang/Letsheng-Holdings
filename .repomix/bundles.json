@@ -49,9 +49,7 @@
         "client/package.json",
         "client/postcss.config.mjs",
         "client/tsconfig.json",
-        "client/tailwind.config.ts",
-        "docs/blueprint.md",
-        "docs/projects1.xml"
+        "client/tailwind.config.ts"
       ]
     }
   }

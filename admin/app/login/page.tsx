@@ -1,6 +1,6 @@
 'use client';
 
-import { createClient } from '@/lib/supabase/client';
+import { createClient } from '@/lib/supabase/server';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { LogIn, Shield } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -38,21 +38,21 @@ export default function LoginPage() {
   const router = useRouter();
   const supabase = createClient();
 
-  useEffect(() => {
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((event) => {
-      console.log(subscription.id)
-      if (event === 'SIGNED_IN') {
-        router.push('/dashboard');
-        router.refresh();
-      }
-    });
+  // useEffect(() => {
+  //   const {
+  //     data: { subscription },
+  //   } = supabase.auth.onAuthStateChange((event) => {
+  //     console.log(subscription.id)
+  //     if (event === 'SIGNED_IN') {
+  //       router.push('/dashboard');
+  //       router.refresh();
+  //     }
+  //   });
 
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, [router, supabase]);
+  //   return () => {
+  //     subscription.unsubscribe();
+  //   };
+  // }, [router, supabase]);
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -63,6 +63,7 @@ export default function LoginPage() {
   });
 
   async function onSubmit(values: LoginFormValues) {
+    const supabase = await createClient();
     const {data, error } = await supabase.auth.signInWithPassword({
       email: values.email,
       password: values.password,
