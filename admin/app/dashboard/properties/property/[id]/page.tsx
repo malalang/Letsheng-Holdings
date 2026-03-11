@@ -112,7 +112,7 @@ export default async function PropertyDetailsPage({
               </CardHeader>
               <CardContent>
                 <ul className="grid grid-cols-2 gap-x-6 gap-y-2">
-                  {property.features.map((feature: as any as string) => (
+                  {property.features.map((feature: string) => (
                     <li key={feature} className="flex items-center gap-2">
                       <CheckCircle className="h-5 w-5 text-green-500" />
                       <span>{feature}</span>
