@@ -38,7 +38,6 @@ export const propertySchema = z.object({
   is_featured: z.boolean(),
   gallery: z.array(galleryItemSchema).nullable(),
   reviews: z.array(reviewSchema).nullable(),
-  virtual_tour_url: z.string().url().optional().nullable(),
 });
 
 export type Property = z.infer<typeof propertySchema>;

@@ -56,7 +56,6 @@ export default function PropertyForm({ property }: PropertyFormProps) {
           features: property.features || [],
           gallery: property.gallery || [],
           reviews: property.reviews || [],
-          virtual_tour_url: property.virtual_tour_url || "",
         }
       : {
           title: "",
@@ -72,7 +71,6 @@ export default function PropertyForm({ property }: PropertyFormProps) {
           is_featured: false,
           gallery: [],
           reviews: [],
-          virtual_tour_url: "",
         },
   });
 
@@ -80,6 +78,12 @@ export default function PropertyForm({ property }: PropertyFormProps) {
     control: form.control,
     name: "gallery",
   });
+
+  const { fields: reviewFields, append: appendReview, remove: removeReview, } = useFieldArray({
+    control: form.control,
+    name: "reviews",
+  });
+
 
   async function onSubmit(data: Property) {
     setIsLoading(true);
@@ -99,7 +103,6 @@ export default function PropertyForm({ property }: PropertyFormProps) {
         toast.success("New property has been created.");
         router.push("/dashboard/properties");
       }
-      router.refresh();
     } catch (error) {
       console.error("Failed to save property:", error);
       toast.error(
@@ -145,6 +148,7 @@ export default function PropertyForm({ property }: PropertyFormProps) {
               <TabsTrigger value="general">General Info</TabsTrigger>
               <TabsTrigger value="media">Media</TabsTrigger>
               <TabsTrigger value="details">Details & Features</TabsTrigger>
+              <TabsTrigger value="reviews">Reviews</TabsTrigger>
             </TabsList>
             <TabsContent value="general">
               <Card className="mb-4">
@@ -245,7 +249,7 @@ export default function PropertyForm({ property }: PropertyFormProps) {
                 <CardHeader>
                   <CardTitle>Property Media</CardTitle>
                   <CardDescription>
-                    Manage main image, gallery, and virtual tour.
+                    Manage main image and gallery.
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
@@ -368,27 +372,6 @@ export default function PropertyForm({ property }: PropertyFormProps) {
                       Add Gallery Item
                     </Button>
                   </div>
-
-                  <Separator />
-
-                  {/* Virtual Tour Section */}
-                  <FormField
-                    control={form.control}
-                    name="virtual_tour_url"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Virtual Tour URL</FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="https://my.matterport.com/show/?m=JgWn9mJ4Z4N"
-                            {...field}
-                            value={field.value ?? ""}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
                 </CardContent>
               </Card>
             </TabsContent>
@@ -498,6 +481,93 @@ export default function PropertyForm({ property }: PropertyFormProps) {
                       </FormItem>
                     )}
                   />
+                </CardContent>
+              </Card>
+            </TabsContent>
+            <TabsContent value="reviews">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Property Reviews</CardTitle>
+                  <CardDescription>
+                    Manage customer reviews for this property.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div>
+                    <div className="space-y-6 mt-4">
+                      {reviewFields.map((field, index) => (
+                        <Card key={field.id}>
+                          <CardHeader className="flex flex-row items-center justify-between py-4">
+                            <CardTitle className="text-lg">
+                              Review {index + 1}
+                            </CardTitle>
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              size="icon"
+                              className="text-red-500 hover:text-red-600"
+                              onClick={() => removeReview(index)}
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
+                          </CardHeader>
+                          <CardContent className="space-y-4">
+                            <FormField
+                              control={form.control}
+                              name={`reviews.${index}.author`}
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel>Author</FormLabel>
+                                  <FormControl>
+                                    <Input {...field} />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                            <FormField
+                              control={form.control}
+                              name={`reviews.${index}.rating`}
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel>Rating</FormLabel>
+                                  <FormControl>
+                                    <Input type="number" {...field} onChange={(e) => field.onChange(parseInt(e.target.value, 10) || 0)} />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                            <FormField
+                              control={form.control}
+                              name={`reviews.${index}.comment`}
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel>Comment</FormLabel>
+                                  <FormControl>
+                                    <Textarea rows={2} {...field} value={field.value ?? '.'} />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </div>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      className="mt-6"
+                      onClick={() =>
+                        appendReview({ author: "", rating: 5, comment: "" } as any)
+                      }
+                    >
+                      <PlusCircle className="mr-2 h-4 w-4" />
+                      Add Review
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
             </TabsContent>

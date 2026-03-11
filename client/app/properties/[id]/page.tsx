@@ -153,25 +153,6 @@ export default async function PropertyDetailPage({
             </div>
           )}
 
-          {property.virtual_tour_url && (
-            <div className="mt-8">
-              <h3 className="text-2xl font-bold text-secondary mb-4">
-                More Details
-              </h3>
-              <div className="flex items-center">
-                <Camera className="h-5 w-5 mr-2" />
-                <a
-                  href={property.virtual_tour_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline"
-                >
-                  Virtual Tour
-                </a>
-              </div>
-            </div>
-          )}
-
           <div className="mt-8 flex items-center text-4xl font-bold text-secondary">
             <CircleDollarSign className="h-8 w-8 mr-2 text-primary" />R
             {property.price.toLocaleString()}

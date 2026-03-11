@@ -10,12 +10,6 @@ import {
 } from "@/components/ui/card";
 import { getPropertyById } from "../../../actions";
 import PropertyForm from "../../../property-form";
-import {
-  galleryItemSchema,
-  reviewSchema,
-  featureSchema,
-} from "@/lib/validations/schemas";
-import { z } from "zod";
 
 export default async function EditPropertyPage({
   params,
@@ -23,9 +17,9 @@ export default async function EditPropertyPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const propertyData = await getPropertyById(id);
+  const property = await getPropertyById(id);
 
-  if (!propertyData) {
+  if (!property) {
     return (
       <div className="mx-auto max-w-5xl">
         <h1 className="text-2xl font-bold mb-4">Property not found</h1>
@@ -38,17 +32,6 @@ export default async function EditPropertyPage({
       </div>
     );
   }
-
-  const gallery = z.array(galleryItemSchema).safeParse(propertyData.gallery);
-  const reviews = z.array(reviewSchema).safeParse(propertyData.reviews);
-  const features = z.array(featureSchema).safeParse(propertyData.features);
-
-  const property = {
-    ...propertyData,
-    gallery: gallery.success ? gallery.data : null,
-    reviews: reviews.success ? reviews.data : null,
-    features: features.success ? features.data : null,
-  };
 
   return (
     <div className="mx-auto max-w-5xl">

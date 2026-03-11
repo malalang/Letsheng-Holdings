@@ -193,7 +193,6 @@ export type Database = {
           reviews: Json | null
           title: string
           type: string | null
-          virtual_tour_url: string | null
         }
         Insert: {
           availability?: boolean
@@ -211,7 +210,6 @@ export type Database = {
           reviews?: Json | null
           title: string
           type?: string | null
-          virtual_tour_url?: string | null
         }
         Update: {
           availability?: boolean
@@ -229,7 +227,6 @@ export type Database = {
           reviews?: Json | null
           title?: string
           type?: string | null
-          virtual_tour_url?: string | null
         }
         Relationships: []
       }
