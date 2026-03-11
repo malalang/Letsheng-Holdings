@@ -6,10 +6,10 @@ import {
   Building2,
   CircleUser,
   Home,
+  LogOut,
   Menu,
   Package2,
   PlusCircle,
-  Search,
   ShoppingCart,
 } from 'lucide-react';
 import Link from 'next/link';
@@ -24,14 +24,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Input } from '@/components/ui/input';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { logout } from '@/app/login/actions';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="flex h-14 items-center gap-4 border-b bg-secondary px-4 lg:h-[60px] lg:px-6">
+    <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-secondary px-4 lg:h-[60px] lg:px-6">
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger asChild>
           <Button variant="outline" size="icon" className="shrink-0 md:hidden">
@@ -95,9 +95,7 @@ const Header = () => {
           </nav>
         </SheetContent>
       </Sheet>
-      <div className="w-full flex-1">
-       
-      </div>
+      <div className="w-full flex-1"></div>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline" size="sm" className="h-8 gap-1">
@@ -143,7 +141,14 @@ const Header = () => {
           <DropdownMenuItem>Settings</DropdownMenuItem>
           <DropdownMenuItem>Support</DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Logout</DropdownMenuItem>
+          <DropdownMenuItem>
+            <form action={logout}>
+              <Button type="submit" variant="ghost" className="w-full">
+                <LogOut className="mr-2 h-4 w-4" />
+                Logout
+              </Button>
+            </form>
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </header>
