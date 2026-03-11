@@ -14,7 +14,7 @@ export async function getBrandingProducts() {
     return [];
   }
 
-  return brandingSchema.array().parse(data);
+  return data;
 }
 
 // Action to fetch a single branding product by its ID
@@ -31,7 +31,7 @@ export async function getBrandingProduct(id: string) {
     return null;
   }
 
-  return brandingSchema.parse(data);
+  return data;
 }
 
 // Action to create a new branding product

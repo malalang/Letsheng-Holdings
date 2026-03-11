@@ -9,10 +9,10 @@ export async function getProperties() {
   const supabase = await createClient();
   const { data, error } = await supabase.from("properties").select("*");
   if (error) throw new Error(error.message);
-  return propertySchema.array().parse(data);
+  return data;
 }
 
-export async function getPropertyById(id: string): Promise<Property | null> {
+export async function getPropertyById(id: string) {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("properties")
@@ -20,7 +20,7 @@ export async function getPropertyById(id: string): Promise<Property | null> {
     .eq("id", id)
     .single();
   if (error) throw new Error(error.message);
-  return propertySchema.parse(data);
+  return data;
 }
 
 export async function createProperty(data: Property) {

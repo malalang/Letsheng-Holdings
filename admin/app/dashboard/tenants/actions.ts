@@ -12,28 +12,28 @@ export async function getTenants() {
   const { data, error } = await supabase
     .from("tenants")
     .select("*, property:properties(title)");
+    if (error) {
+      console.error("Error fetching tenants:", error);
+      return [];
+    }
+    return data
+  // if (!data) {
+  //   return [];
+  // }
 
-  if (error) {
-    console.error("Error fetching tenants:", error);
-    return [];
-  }
-  if (!data) {
-    return [];
-  }
+  // const tenantWithPropertySchema = tenantSchema.extend({
+  //   property: z.object({
+  //     title: z.string(),
+  //   }).nullable(),
+  // });
 
-  const tenantWithPropertySchema = tenantSchema.extend({
-    property: z.object({
-      title: z.string(),
-    }).nullable(),
-  });
+  // const result = tenantWithPropertySchema.array().safeParse(data);
+  // if (!result.success) {
+  //   console.error("Validation error in getTenants:", result.error);
+  //   return [];
+  // }
 
-  const result = tenantWithPropertySchema.array().safeParse(data);
-  if (!result.success) {
-    console.error("Validation error in getTenants:", result.error);
-    return [];
-  }
-
-  return result.data;
+  // return result.data;
 }
 
 export async function createTenant(formData: Omit<Tenant, "id" | "avatar_url">) {
@@ -111,5 +111,5 @@ export async function getTenantById(id: string) {
     return null;
   }
 
-  return tenantSchema.parse(data);
+  return data;
 }

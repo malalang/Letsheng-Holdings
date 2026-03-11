@@ -21,7 +21,7 @@ export const reviewSchema = z.object({
 
 // Schema for a property
 export const propertySchema = z.object({
-  id: z.string().uuid(),
+  id: z.string(),
   title: z.string().min(3, "Title must be at least 3 characters"),
   description: z.string().optional().nullable(),
   price: z.number().positive("Price must be a positive number"),
@@ -48,7 +48,7 @@ export const specItemSchema = z.object({
 
 // Schema for a branding product. Note: `image` is used for the main image URL.
 export const brandingSchema = z.object({
-  id: z.string().uuid(),
+  id: z.string(),
   title: z.string().min(3, "Title must be at least 3 characters"),
   category: z.string().min(3, "Category is required"),
   description: z.string().nullable(),
@@ -63,10 +63,10 @@ export type Branding = z.infer<typeof brandingSchema>;
 
 // Schema for a tenant
 export const tenantSchema = z.object({
-    id: z.string().uuid(),
+    id: z.string(),
     name: z.string().min(1, "Name is required"),
     email: z.string().email("Invalid email address").optional().nullable(),
-    property_id: z.string().uuid(),
+    property_id: z.string().nullable(),
     status: z.enum(["Active", "Inactive", "Pending"]),
     lease_end_date: z.coerce.date().nullable(),
     avatar_url: z.string().url("Must be a valid URL.").optional().nullable(),
@@ -76,7 +76,7 @@ export type Tenant = z.infer<typeof tenantSchema>;
 
 // Schema for a payment
 export const paymentSchema = z.object({
-  id: z.string().uuid(),
+  id: z.string(),
   amount: z.coerce.number().positive("Amount must be a positive number"),
   date: z.date(),
   status: z.enum(["Paid", "Pending", "Late"]),
@@ -91,7 +91,7 @@ export const brandingInquirySchema = z.object({
   company: z.string().optional(),
   quantity: z.coerce.number().positive("Quantity must be a positive number"),
   message: z.string().optional(),
-  productId: z.string().uuid(),
+  productId: z.string(),
 });
 
 export type BrandingInquiry = z.infer<typeof brandingInquirySchema>;
@@ -103,7 +103,7 @@ export const leaseApplicationSchema = z.object({
   phone: z.string().optional(),
   employment: z.enum(["employed", "self-employed", "unemployed", "student"]),
   message: z.string().optional(),
-  property_id: z.string().uuid(),
+  property_id: z.string(),
 });
 
 export type LeaseApplication = z.infer<typeof leaseApplicationSchema>;
