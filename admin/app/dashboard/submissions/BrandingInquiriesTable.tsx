@@ -120,7 +120,7 @@ export function BrandingInquiriesTable({ inquiries }: BrandingInquiriesTableProp
                     </Link>
                   </TableCell>
                   <TableCell>
-                    <div className="font-medium">{inquiry.name}</div>
+                    <div className="font-medium">{inquiry.customer_name}</div>
                     <div className="text-sm text-muted-foreground">
                       {inquiry.email}
                     </div>
@@ -188,7 +188,7 @@ export function BrandingInquiriesTable({ inquiries }: BrandingInquiriesTableProp
             <div className="space-y-4 py-4">
               <div className="space-y-1">
                 <h4 className="font-semibold">Contact Information</h4>
-                <p>Name: {selectedInquiry.name}</p>
+                <p>Name: {selectedInquiry.customer_name}</p>
                 <p>Email: {selectedInquiry.email}</p>
                 <p>Company: {selectedInquiry.company || 'Not provided'}</p>
               </div>

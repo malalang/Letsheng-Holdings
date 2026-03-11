@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowLeft, PlusCircle, Trash2 } from "lucide-react";
@@ -38,37 +38,53 @@ import {
 } from "@/components/ui/table";
 import { tenantSchema, type Tenant, type Payment } from "@/lib/validations/schemas";
 import { createTenant, deleteTenant, updateTenant } from "./actions";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { z } from "zod";
 
-const formSchema = tenantSchema.omit({ id: true, avatar_url: true });
+// Create a form-specific schema that overrides the date to be a string
+const formSchema = tenantSchema.omit({ id: true, avatar_url: true }).extend({
+    lease_end_date: z.string().optional().nullable(),
+});
 type FormValues = z.infer<typeof formSchema>;
 
 interface TenantFormProps {
   tenant?: Tenant;
-  payments?: (Payment & {id: string})[];
+  payments?: (Payment & { id: string })[];
 }
+
+// Helper to format date for input
+const formatDateForInput = (date: Date | string | null | undefined): string => {
+    if (!date) return '';
+    try {
+      const dateObj = new Date(date);
+      if (isNaN(dateObj.getTime())) return '';
+      return dateObj.toISOString().split('T')[0];
+    } catch (e) {
+      return '';
+    }
+  };
 
 export default function TenantForm({ tenant, payments }: TenantFormProps) {
     const router = useRouter();
+    const searchParams = useSearchParams();
     const [properties, setProperties] = useState<{ id: string; title: string }[]>([]);
+    
     const form = useForm<FormValues>({
-    resolver: zodResolver(formSchema),
-    defaultValues: tenant
-      ? {
-          name: tenant.name,
-          property_id: tenant.property_id,
-          status: tenant.status,
-          lease_end_date: tenant.lease_end_date,
-        }
-      : {
-          name: "",
-          property_id: "",
-          status: "Pending",
-          lease_end_date: "",
-        },
+      resolver: zodResolver(formSchema),
+      defaultValues: tenant
+        ? {
+            ...tenant,
+            lease_end_date: formatDateForInput(tenant.lease_end_date),
+          }
+        : {
+            name: searchParams.get('name') || "",
+            email: searchParams.get('email') || "",
+            property_id: searchParams.get('property_id') || "",
+            status: "Pending",
+            lease_end_date: "",
+          },
   });
 
   useEffect(() => {
@@ -86,14 +102,19 @@ export default function TenantForm({ tenant, payments }: TenantFormProps) {
   }, []);
 
   async function onSubmit(data: FormValues) {
+    const dataForAction = {
+        ...data,
+        lease_end_date: data.lease_end_date ? new Date(data.lease_end_date) : null,
+    };
+
     const action = tenant
-    ? await updateTenant(tenant.id, data)
-    : await createTenant(data);
+    ? await updateTenant(tenant.id, dataForAction)
+    : await createTenant(dataForAction as Omit<Tenant, 'id' | 'avatar_url'>);
 
   if (action.success) {
     router.push("/dashboard/tenants");
+    router.refresh();
   } else {
-    // Handle error
     console.error(action.error);
   }
   }
@@ -103,8 +124,8 @@ export default function TenantForm({ tenant, payments }: TenantFormProps) {
       const action = await deleteTenant(tenant.id);
       if (action.success) {
         router.push("/dashboard/tenants");
+        router.refresh();
       } else {
-        // Handle error
         console.error(action.error);
       }
     }
@@ -147,13 +168,26 @@ export default function TenantForm({ tenant, payments }: TenantFormProps) {
               />
               <FormField
                 control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input placeholder="e.g., john.doe@example.com" {...field} value={field.value ?? ''}/>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
                 name="property_id"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Property</FormLabel>
                     <Select
                       onValueChange={field.onChange}
-                      defaultValue={field.value}
+                      value={field.value || ''}
                     >
                       <FormControl>
                         <SelectTrigger>
@@ -241,7 +275,7 @@ export default function TenantForm({ tenant, payments }: TenantFormProps) {
                   <TableBody>
                     {payments.map((payment) => (
                       <TableRow key={payment.id}>
-                        <TableCell>{payment.date.toLocaleDateString()}</TableCell>
+                        <TableCell>{new Date(payment.date).toLocaleDateString()}</TableCell>
                         <TableCell>${payment.amount.toFixed(2)}</TableCell>
                         <TableCell>{payment.status}</TableCell>
                       </TableRow>

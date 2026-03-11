@@ -1,7 +1,7 @@
 'use server';
 
 import { createClient } from '@/lib/supabase/server';
-import { type Branding } from '@/lib/validations/schemas';
+import { brandingSchema, type Branding } from '@/lib/validations/schemas';
 import { revalidatePath } from 'next/cache';
 
 // Action to fetch all branding products
@@ -14,7 +14,7 @@ export async function getBrandingProducts() {
     return [];
   }
 
-  return data;
+  return brandingSchema.array().parse(data);
 }
 
 // Action to fetch a single branding product by its ID
@@ -31,7 +31,7 @@ export async function getBrandingProduct(id: string) {
     return null;
   }
 
-  return data;
+  return brandingSchema.parse(data);
 }
 
 // Action to create a new branding product

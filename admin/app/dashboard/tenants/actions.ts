@@ -1,12 +1,13 @@
-"use server";
+'use server';
 
 import { createClient } from "@/lib/supabase/server";
 import { tenantSchema, type Tenant } from "@/lib/validations/schemas";
 import { revalidatePath } from "next/cache";
+import { z } from "zod";
 
 export type TenantWithProperty = Tenant & { property: { title: string } | null };
 
-export async function getTenants(): Promise<TenantWithProperty[]> {
+export async function getTenants() {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("tenants")
@@ -16,8 +17,23 @@ export async function getTenants(): Promise<TenantWithProperty[]> {
     console.error("Error fetching tenants:", error);
     return [];
   }
+  if (!data) {
+    return [];
+  }
 
-  return data as TenantWithProperty[];
+  const tenantWithPropertySchema = tenantSchema.extend({
+    property: z.object({
+      title: z.string(),
+    }).nullable(),
+  });
+
+  const result = tenantWithPropertySchema.array().safeParse(data);
+  if (!result.success) {
+    console.error("Validation error in getTenants:", result.error);
+    return [];
+  }
+
+  return result.data;
 }
 
 export async function createTenant(formData: Omit<Tenant, "id" | "avatar_url">) {
@@ -27,9 +43,7 @@ export async function createTenant(formData: Omit<Tenant, "id" | "avatar_url">) 
 
   const { data, error } = await supabase
     .from("tenants")
-    // The 'as any' is a workaround for a faulty auto-generated Supabase type
-    // that incorrectly requires the 'id' field on insert.
-    .insert([validatedData as any])
+    .insert({ ...validatedData, lease_end_date: validatedData.lease_end_date?.toISOString() })
     .select()
     .single();
 
@@ -43,7 +57,10 @@ export async function createTenant(formData: Omit<Tenant, "id" | "avatar_url">) 
   return { success: true, data };
 }
 
-export async function updateTenant(id: string, formData: Partial<Omit<Tenant, "id" | "avatar_url">>) {
+export async function updateTenant(
+  id: string,
+  formData: Partial<Omit<Tenant, "id" | "avatar_url">>
+) {
   const supabase = await createClient();
 
   const partialTenantSchema = tenantSchema.partial().omit({ id: true, avatar_url: true });
@@ -51,7 +68,7 @@ export async function updateTenant(id: string, formData: Partial<Omit<Tenant, "i
 
   const { data, error } = await supabase
     .from("tenants")
-    .update(validatedData)
+    .update({ ...validatedData, lease_end_date: validatedData.lease_end_date?.toISOString() })
     .eq("id", id)
     .select()
     .single();
@@ -81,7 +98,7 @@ export async function deleteTenant(id: string) {
   return { success: true, data };
 }
 
-export async function getTenantById(id: string): Promise<Tenant | null> {
+export async function getTenantById(id: string) {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("tenants")
@@ -94,5 +111,5 @@ export async function getTenantById(id: string): Promise<Tenant | null> {
     return null;
   }
 
-  return data as Tenant;
+  return tenantSchema.parse(data);
 }

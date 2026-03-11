@@ -72,12 +72,13 @@ export function LeaseApplicationsTable({
   const [selectedApplication, setSelectedApplication] =
     useState<LeaseApplicationWithDetails | null>(null);
 
-  const handleAddTenant = (applicantName: string, email: string) => {
-    router.push(
-      `/dashboard/tenants/new?name=${encodeURIComponent(
-        applicantName,
-      )}&email=${encodeURIComponent(email)}`,
-    );
+  const handleAddTenant = (applicantName: string, email: string, propertyId: string) => {
+    const params = new URLSearchParams({
+      name: applicantName,
+      email,
+      property_id: propertyId,
+    });
+    router.push(`/dashboard/tenants/new?${params.toString()}`);
   };
 
   const handleStatusUpdate = async (id: string, status: string) => {
@@ -172,7 +173,7 @@ export function LeaseApplicationsTable({
                           Mark as Reviewed
                         </DropdownMenuItem>
                         <DropdownMenuItem
-                          onClick={() => handleAddTenant(app.applicant_name, app.email)}
+                          onClick={() => handleAddTenant(app.applicant_name, app.email, app.property_id)}
                         >
                           Add as Tenant
                         </DropdownMenuItem>

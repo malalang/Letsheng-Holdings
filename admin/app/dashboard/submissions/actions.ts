@@ -98,7 +98,15 @@ export async function getBrandingInquiries() {
     .from('branding_inquiries')
     .select(
       `
-      *,
+      id,
+      created_at,
+      customer_name,
+      email,
+      company,
+      quantity,
+      status,
+      message,
+      product_id,
       branding ( id, title )
       `
     );

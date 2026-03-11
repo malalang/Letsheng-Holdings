@@ -10,9 +10,10 @@ export const galleryItemSchema = z.object({
   description: z.string().optional(),
 });
 export type galleryItem = z.infer<typeof galleryItemSchema>;
+
 // Schema for a single review
 export const reviewSchema = z.object({
-  id: z.string(),
+  id: z.string().uuid(),
   author: z.string().min(1, "Author is required"),
   rating: z.number().min(1).max(5),
   comment: z.string().min(1, "Comment is required"),
@@ -20,7 +21,7 @@ export const reviewSchema = z.object({
 
 // Schema for a property
 export const propertySchema = z.object({
-  id: z.string(),
+  id: z.string().uuid(),
   title: z.string().min(3, "Title must be at least 3 characters"),
   description: z.string().optional().nullable(),
   price: z.number().positive("Price must be a positive number"),
@@ -32,8 +33,8 @@ export const propertySchema = z.object({
   type: z.string().min(1, "Type is required").nullable(),
   features: z.any(),
   is_featured: z.boolean(),
-  gallery: z.any(),
-  reviews: z.any(),
+  gallery: z.array(galleryItemSchema).nullable(),
+  reviews: z.array(reviewSchema).nullable(),
   virtual_tour_url: z.string().url().optional().nullable(),
 });
 
@@ -47,27 +48,27 @@ export const specItemSchema = z.object({
 
 // Schema for a branding product. Note: `image` is used for the main image URL.
 export const brandingSchema = z.object({
-  id: z.string(),
+  id: z.string().uuid(),
   title: z.string().min(3, "Title must be at least 3 characters"),
   category: z.string().min(3, "Category is required"),
   description: z.string().nullable(),
   image: z.string().url("Must be a valid URL").nullable(),
-  specs: z.any(),
+  specs: z.array(specItemSchema).nullable(),
   is_featured: z.boolean(),
-  gallery: z.any(),
-  reviews: z.any(),
+  gallery: z.array(galleryItemSchema).nullable(),
+  reviews: z.array(reviewSchema).nullable(),
 });
 
 export type Branding = z.infer<typeof brandingSchema>;
 
 // Schema for a tenant
 export const tenantSchema = z.object({
-    id: z.string(),
+    id: z.string().uuid(),
     name: z.string().min(1, "Name is required"),
     email: z.string().email("Invalid email address").optional().nullable(),
-    property_id: z.string().min(1, "Property is required"),
+    property_id: z.string().uuid(),
     status: z.enum(["Active", "Inactive", "Pending"]),
-    lease_end_date: z.string().optional().nullable(),
+    lease_end_date: z.coerce.date().nullable(),
     avatar_url: z.string().url("Must be a valid URL.").optional().nullable(),
   });
 
@@ -75,6 +76,7 @@ export type Tenant = z.infer<typeof tenantSchema>;
 
 // Schema for a payment
 export const paymentSchema = z.object({
+  id: z.string().uuid(),
   amount: z.coerce.number().positive("Amount must be a positive number"),
   date: z.date(),
   status: z.enum(["Paid", "Pending", "Late"]),
@@ -84,12 +86,12 @@ export type Payment = z.infer<typeof paymentSchema>;
 
 // Schema for a branding inquiry
 export const brandingInquirySchema = z.object({
-  name: z.string().min(1, "Name is required"),
+  customer_name: z.string().min(1, "Name is required"),
   email: z.string().email("Invalid email address"),
   company: z.string().optional(),
   quantity: z.coerce.number().positive("Quantity must be a positive number"),
   message: z.string().optional(),
-  productId: z.string(),
+  productId: z.string().uuid(),
 });
 
 export type BrandingInquiry = z.infer<typeof brandingInquirySchema>;
@@ -101,7 +103,7 @@ export const leaseApplicationSchema = z.object({
   phone: z.string().optional(),
   employment: z.enum(["employed", "self-employed", "unemployed", "student"]),
   message: z.string().optional(),
-  property_id: z.string(),
+  property_id: z.string().uuid(),
 });
 
 export type LeaseApplication = z.infer<typeof leaseApplicationSchema>;

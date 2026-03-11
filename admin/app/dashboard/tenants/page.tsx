@@ -30,6 +30,8 @@ const getStatusBadgeClass = (status: Tenant["status"]) => {
       return "bg-red-500 text-white";
     case "Pending":
       return "bg-yellow-500 text-white";
+    default:
+      return "bg-gray-500 text-white";
   }
 };
 
@@ -89,12 +91,12 @@ export default async function AdminTenantsPage() {
                     </Link>
                   </TableCell>
                   <TableCell className="text-center">
-                    <Badge className={getStatusBadgeClass(tenant.status as any)}>
+                    <Badge className={getStatusBadgeClass(tenant.status)}>
                       {tenant.status}
                     </Badge>
                   </TableCell>
                   <TableCell className="text-right font-semibold">
-                    {tenant.lease_end_date}
+                    {tenant.lease_end_date ? new Date(tenant.lease_end_date).toLocaleDateString() : 'N/A'}
                   </TableCell>
                   <TableCell className="text-center">
                     <DropdownMenu>
@@ -110,7 +112,7 @@ export default async function AdminTenantsPage() {
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem>
+                        <DropdownMenuItem asChild>
                           <Link
                             href={`/dashboard/tenants/tenant/${tenant.id}`}
                             className="flex items-center w-full"
@@ -119,7 +121,7 @@ export default async function AdminTenantsPage() {
                             View
                           </Link>
                         </DropdownMenuItem>
-                        <DropdownMenuItem>
+                        <DropdownMenuItem asChild>
                           <Link
                             href={`/dashboard/tenants/tenant/${tenant.id}/edit`}
                             className="flex items-center w-full"
