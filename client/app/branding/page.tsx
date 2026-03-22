@@ -21,7 +21,7 @@ const ProductCard = ({
     className={`overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col ${is_featured  ? "lg:flex-row" : ""}`}
   >
     <div
-      className={`relative ${is_featured  ? "h-80 lg:h-auto lg:w-1/2" : "h-56"}`}
+      className={`relative ${is_featured  ? "h-56  lg:w-1/2" : "h-56"}`}
     >
       <Image
         src={product.image ?? ''}
