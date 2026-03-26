@@ -53,7 +53,7 @@ export default function RootLayout({
       <body className={`${inter.className} bg-gray-50/80 text-gray-800`}>
         <div className="flex flex-col min-h-screen">
           <Header />
-          <main className="flex-grow container mx-auto px-4 md:px-8 py-12">
+          <main className="flex-grow container mx-auto px-2 md:px-8 py-12">
             {children}
           </main>
           <Footer />
