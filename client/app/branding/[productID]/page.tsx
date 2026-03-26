@@ -68,21 +68,14 @@ export default async function ProductPage({
                 <Link href={`/branding/${product.id}/order`} className="flex-1">
                   <Button size="lg" className="w-full font-bold text-lg">
                     <ShoppingCart className="h-5 w-5 mr-3" />
-                    Initiate Inquiry
+                    Order
                   </Button>
                 </Link>
                 <Link
                   href={`/branding/${product.id}/gallery`}
                   className="flex-1"
                 >
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="w-full font-bold text-lg"
-                  >
-                    <Eye className="h-5 w-5 mr-3" />
-                    View Gallery
-                  </Button>
+                  
                 </Link>
               </div>
             </div>

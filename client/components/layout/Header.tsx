@@ -25,7 +25,7 @@ const NavLink = ({
   <Link
     href={href}
     onClick={onLinkClick}
-    className="block md:inline-block px-3 py-2 rounded-md text-base font-medium hover:bg-primary/10 hover:text-primary transition-colors"
+    className="block md:inline-block px-3 py-2 rounded-md text-base font-medium md:text-primary hover:bg-primary/10 hover:text-primary transition-colors"
   >
     {children}
   </Link>
@@ -61,9 +61,13 @@ export default function Header() {
             <NavLink href="/branding" onLinkClick={onLinkClick}>
               Branding
             </NavLink>
+            <NavLink href="/waterDetergents" onLinkClick={onLinkClick}>
+              Water and Detergents
+            </NavLink>
             <NavLink href="/about" onLinkClick={onLinkClick}>
               About
             </NavLink>
+
           </nav>
           <div className="flex items-center gap-4">
             <Link href="/contact" className="hidden md:block">
@@ -98,6 +102,9 @@ export default function Header() {
                   </NavLink>
                   <NavLink href="/branding" onLinkClick={onLinkClick}>
                     Branding
+                  </NavLink>
+                  <NavLink href="/waterDetergents" onLinkClick={onLinkClick}>
+                    Water and Detergents
                   </NavLink>
                   <NavLink href="/about" onLinkClick={onLinkClick}>
                     About Us

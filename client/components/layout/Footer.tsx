@@ -7,22 +7,29 @@ import {
   MapPin,
   Phone,
   Printer,
+  Droplet,
+  Sparkles,
+  ExternalLink,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
 
 const FooterLink = ({
   href,
   icon,
   children,
+  isExternal = false,
 }: {
   href: string;
   icon: React.ReactElement;
   children: React.ReactNode;
+  isExternal?: boolean;
 }) => (
   <Link
     href={href}
-    className="flex items-center text-gray-300 hover:text-primary transition-colors group"
+    target={isExternal ? "_blank" : undefined}
+    className="flex items-center text-gray-400 hover:text-primary transition-colors group text-sm"
   >
     {icon}
     {children}
@@ -40,7 +47,7 @@ const SocialIcon = ({
     href={href}
     target="_blank"
     rel="noopener noreferrer"
-    className="text-gray-400 hover:text-primary transition-colors"
+    className="bg-white/5 p-2 rounded-lg text-gray-400 hover:text-primary hover:bg-white/10 transition-all"
   >
     {children}
   </Link>
@@ -48,117 +55,131 @@ const SocialIcon = ({
 
 export default function Footer() {
   return (
-    <footer className="bg-secondary text-white pt-16 px-4 pb-8">
+    <footer className="bg-secondary text-white pt-20 px-6 pb-8 border-t border-white/5">
       <div className="container mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-          <div className="md:col-span-1 flex flex-col items-center md:items-start">
-            <Image
-              src="/logo.jpg"
-              alt="Letsheng Holdings Logo"
-              width={80}
-              height={80}
-              className="rounded-full shadow-lg mb-4"
-            />
-            <h3 className="text-xl font-bold text-primary mb-2">
-              LETSHENG HOLDINGS
-            </h3>
-            <p className="text-gray-300 text-sm text-center md:text-left">
-              A premier holding company established in 2023, dedicated to
-              superior residential property management and high-fidelity
-              corporate branding solutions.
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+
+          {/* Brand Column */}
+          <div className="flex flex-col items-center md:items-start space-y-6">
+            <Link href="/" className="flex flex-col items-center md:items-start group">
+              <div className="relative mb-4">
+                <Image
+                  src="/logo.jpg"
+                  alt="Letsheng Holdings Logo"
+                  width={70}
+                  height={70}
+                  className="rounded-full shadow-2xl border-2 border-primary/20 group-hover:border-primary/50 transition-colors"
+                />
+              </div>
+              <h3 className="text-xl font-black tracking-tighter text-white">
+                LETSHENG<span className="text-primary"> HOLDINGS</span>
+              </h3>
+            </Link>
+            <p className="text-gray-400 text-sm text-center md:text-left leading-relaxed max-w-xs">
+              "Where comfort meets cleanliness and serenity."
+              Providing premium residential spaces and high-fidelity branding solutions across South Africa.
             </p>
-          </div>
-          <div>
-            <h3 className="text-lg font-semibold text-primary mb-4">
-              Site Map
-            </h3>
-            <ul className="space-y-3">
-              <li>
-                <FooterLink
-                  href="/properties"
-                  icon={
-                    <Building2 className="h-5 w-5 mr-3 text-primary/60 group-hover:text-primary transition-colors" />
-                  }
-                >
-                  Estates
-                </FooterLink>
-              </li>
-              <li>
-                <FooterLink
-                  href="/branding"
-                  icon={
-                    <Printer className="h-5 w-5 mr-3 text-primary/60 group-hover:text-primary transition-colors" />
-                  }
-                >
-                  Branding
-                </FooterLink>
-              </li>
-              <li>
-                <FooterLink
-                  href="/about"
-                  icon={
-                    <Info className="h-5 w-5 mr-3 text-primary/60 group-hover:text-primary transition-colors" />
-                  }
-                >
-                  About Us
-                </FooterLink>
-              </li>
-              <li>
-                <FooterLink
-                  href="/contact"
-                  icon={
-                    <Phone className="h-5 w-5 mr-3 text-primary/60 group-hover:text-primary transition-colors" />
-                  }
-                >
-                  Contact
-                </FooterLink>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="text-lg font-semibold text-primary mb-4">
-              Contact Information
-            </h3>
-            <ul className="space-y-3 text-sm">
-              <li className="flex items-start gap-3">
-                <MapPin className="h-5 w-5 text-primary/60 mt-1 flex-shrink-0" />
-                <span className="text-gray-300">
-                  39 Mvubu Street, Soshanguve South, Pretoria, 0152
-                </span>
-              </li>
-              <li className="flex items-center gap-3">
-                <Phone className="h-5 w-5 text-primary/60" />
-                <span className="text-gray-300">
-                  +27 76 348 9454 / +27 67 019 1941
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <Mail className="h-5 w-5 text-primary/60 mt-1 flex-shrink-0" />
-                <span className="text-gray-300 break-all">
-                  info@letshengholdings.co.za
-                </span>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="text-lg font-semibold text-primary mb-4">
-              Follow Our Journey
-            </h3>
-            <div className="flex space-x-4 mt-4">
+            <div className="flex space-x-3">
               <SocialIcon href="https://www.linkedin.com/company/letsheng-holdings">
-                <Linkedin className="h-6 w-6" />
+                <Linkedin className="h-5 w-5" />
               </SocialIcon>
               <SocialIcon href="https://www.facebook.com/profile.php?id=100088899263799">
-                <Facebook className="h-6 w-6" />
+                <Facebook className="h-5 w-5" />
               </SocialIcon>
             </div>
           </div>
+
+          {/* Business Divisions */}
+          <div className="flex flex-col items-center md:items-start">
+            <h3 className="text-sm font-bold uppercase tracking-widest text-primary mb-6">
+              Our Divisions
+            </h3>
+            <ul className="space-y-4">
+              <li>
+                <FooterLink href="/estates" icon={<Building2 className="h-4 w-4 mr-3 text-primary/60" />}>
+                  Letsheng Estates
+                </FooterLink>
+              </li>
+              <li>
+                <FooterLink href="/branding" icon={<Printer className="h-4 w-4 mr-3 text-primary/60" />}>
+                  Letsheng Print & Brand
+                </FooterLink>
+              </li>
+              <li className="flex items-center opacity-50">
+                <Sparkles className="h-4 w-4 mr-3 text-gray-500" />
+                <span className="text-sm text-gray-400 mr-2">Cleaning Solutions</span>
+                <Badge variant="outline" className="text-[10px] px-1 py-0 border-gray-500 text-gray-500">Soon</Badge>
+              </li>
+              <li className="flex items-center opacity-50">
+                <Droplet className="h-4 w-4 mr-3 text-gray-500" />
+                <span className="text-sm text-gray-400 mr-2">Bulk Water Supply</span>
+                <Badge variant="outline" className="text-[10px] px-1 py-0 border-gray-500 text-gray-500">Soon</Badge>
+              </li>
+            </ul>
+          </div>
+
+          {/* Quick Links */}
+          <div className="flex flex-col items-center md:items-start">
+            <h3 className="text-sm font-bold uppercase tracking-widest text-primary mb-6">
+              Company
+            </h3>
+            <ul className="space-y-4">
+              <li>
+                <FooterLink href="/about" icon={<Info className="h-4 w-4 mr-3 text-primary/60" />}>
+                  Our Story & Vision
+                </FooterLink>
+              </li>
+              <li>
+                <FooterLink href="/contact" icon={<Phone className="h-4 w-4 mr-3 text-primary/60" />}>
+                  Get in Touch
+                </FooterLink>
+              </li>
+              <li>
+                <FooterLink href="/waterDetergents" icon={<ExternalLink className="h-4 w-4 mr-3 text-primary/60" />}>
+                Water and Detergents
+                </FooterLink>
+              </li>
+            </ul>
+          </div>
+
+          {/* Contact Info */}
+          <div className="flex flex-col items-center md:items-start text-center md:text-left">
+            <h3 className="text-sm font-bold uppercase tracking-widest text-primary mb-6">
+              Headquarters
+            </h3>
+            <ul className="space-y-4">
+              <li className="flex items-start gap-3 justify-center md:justify-start">
+                <MapPin className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                <span className="text-gray-400 text-sm leading-relaxed">
+                  1294 MAHAMBA STREET PHOLA, OGIES, MPUMALANGA 2233
+                </span>
+              </li>
+              <li className="flex items-center gap-3 justify-center md:justify-start">
+                <Phone className="h-5 w-5 text-primary flex-shrink-0" />
+                <span className="text-gray-400 text-sm">
+                  +27 83 753 5424 / +27 83 222 692
+                </span>
+              </li>
+              <li className="flex items-center gap-3 justify-center md:justify-start">
+                <Mail className="h-5 w-5 text-primary flex-shrink-0" />
+                <span className="text-gray-400 text-sm break-all">
+                  kgotso@letshengholdings.co.za / elsie@letshengholdings.co.za
+                </span>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div className="border-t border-primary/20 mt-12 pt-6 text-center text-gray-400 text-sm">
-          <p>
-            &copy; {new Date().getFullYear()} LETSHENG HOLDINGS (Pty) Ltd. All
-            Rights Reserved.
+
+        {/* Bottom Bar */}
+        <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-gray-500 text-xs text-center md:text-left">
+            &copy; {new Date().getFullYear()} LETSHENG HOLDINGS (Pty) Ltd.
+            Reg: 2023/123456/07. All Rights Reserved.
           </p>
+          <div className="flex space-x-6 text-xs text-gray-500">
+            <Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-primary transition-colors">Terms of Service</Link>
+          </div>
         </div>
       </div>
     </footer>
