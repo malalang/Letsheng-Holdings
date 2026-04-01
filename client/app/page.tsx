@@ -43,7 +43,7 @@ const FeaturedPropertyCard = ({
 }) => (
   <Card className="group overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border-none bg-white flex flex-col">
     <div className="relative h-64 overflow-hidden"> {/* Consistent Height */}
-              <Link href={`/properties/${p.id}`}>
+              <Link href={`/properties/${id}`}>
                 <Image
                   src={p.image_url ?? ""}
                   alt={p.title}
