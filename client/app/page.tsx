@@ -97,7 +97,7 @@ const FeaturedProductCard = ({
 }) => (
   <Card className="group overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border-none flex flex-col">
     <div className="relative aspect-square bg-gray-100 overflow-hidden">
-  <Link href={`/branding/${p.id}`}>
+  <Link href={`/branding/${id}`}>
     <Image
       src={image ?? "/placeholder-branding.jpg"}
       alt={title}
