@@ -71,12 +71,7 @@ export default async function ProductPage({
                     Order
                   </Button>
                 </Link>
-                <Link
-                  href={`/branding/${product.id}/gallery`}
-                  className="flex-1"
-                >
-                  
-                </Link>
+
               </div>
             </div>
           </div>
@@ -148,6 +143,14 @@ export default async function ProductPage({
               </div>
             </div>
           )}
+          <div className="mt-8 flex gap-4">
+            <Link href={`/branding/${product.id}/order`} className="flex-1">
+              <Button size="lg" className="w-full font-bold text-lg">
+                <ShoppingCart className="h-5 w-5 mr-3" />
+                Order Now
+              </Button>
+            </Link>
+          </div>
         </CardContent>
       </Card>
     </div>

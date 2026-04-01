@@ -1,116 +1,189 @@
-
-
-import { ArrowRight, Paintbrush } from "lucide-react";
+import {
+  Paintbrush,
+  Tag,
+  Clock,
+  CheckCircle2,
+  CircleDollarSign,
+  ArrowRight, Zap, Layers
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { getBrandingProducts } from "./actions";
-import { type Branding } from "@/lib/validations/schemas";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
-const ProductCard = ({
-  product,
-  is_featured ,
-}: {
-  product: Branding;
-  is_featured ?: boolean;
-}) => (
-  <Card
-    className={`overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col ${is_featured  ? "lg:flex-row" : ""}`}
-  >
-    <div
-      className={`relative ${is_featured  ? "h-56  lg:w-1/2" : "h-56"}`}
-    >
-      <Image
-        src={product.image ?? ''}
-        alt={product.title}
-        fill
-        className="object-cover"
-      />
-    </div>
-    <div
-      className={`p-6 flex flex-col justify-between ${is_featured  ? "lg:w-1/2" : ""}`}
-    >
-      <div>
-        <Badge variant="default" className="font-semibold mb-2">
-          {product.category}
-        </Badge>
-        <h3 className="text-2xl font-bold text-secondary">{product.title}</h3>
-        <p className="text-gray-600 mt-2 line-clamp-3">{product.description}</p>
+import { getBrandingProducts } from "./actions";
+
+
+function BrandingHero() {
+  return (
+    <section className="relative overflow-hidden bg-white pt-16 pb-12 md:pt-24 md:pb-20">
+      {/* Background Decorative Element */}
+      <div className="absolute top-0 left-0 -translate-y-12 -translate-x-12 blur-3xl opacity-10 pointer-events-none">
+        <div className="aspect-square h-[500px] rounded-full bg-primary" />
       </div>
-      <div className="mt-6">
-        <Link href={`/branding/${product.id}`}>
-          <Button variant="outline" className="w-full font-semibold">
-            View Product <ArrowRight className="h-4 w-4 ml-2" />
-          </Button>
-        </Link>
+
+      <div className="container relative z-10 mx-auto px-6 text-center">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/5 border border-secondary/10 mb-6">
+          <Layers className="h-4 w-4 text-primary" />
+          <span className="text-[10px] font-bold uppercase tracking-widest text-secondary">
+            Custom Corporate Identity
+          </span>
+        </div>
+
+        <h1 className="text-5xl md:text-7xl font-extrabold text-secondary tracking-tight mb-6">
+          Letsheng <span className="text-primary">Branding</span>
+        </h1>
+
+        <p className="max-w-2xl mx-auto text-lg md:text-xl text-gray-600 leading-relaxed mb-10">
+          We translate your vision into tangible professional assets. From high-quality
+          apparel to full-scale corporate identity kits, we build the visual
+          tools for your business growth.
+        </p>
+
+        <div className="flex flex-wrap items-center justify-center gap-6 mb-12 text-sm font-medium text-gray-500">
+          <div className="flex items-center gap-2">
+            <Paintbrush className="h-5 w-5 text-primary" />
+            <span>Custom Design</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Zap className="h-5 w-5 text-primary" />
+            <span>Rapid Production</span>
+          </div>
+        </div>
       </div>
-    </div>
-  </Card>
-);
+    </section>
+  );
+}
 
 export default async function BrandingPage() {
   const products = await getBrandingProducts();
-  const featuredProducts = products.filter((p) => p.is_featured);
-  const otherProducts = products.filter((p) => !p.is_featured);
 
   return (
-    <div className="animate-fade-in space-y-16">
-      {/* Header */}
-      <header
-        className="relative bg-secondary rounded-2xl shadow-2xl overflow-hidden -mt-4"
-        style={{
-          backgroundImage: `radial-gradient(circle at top right, #FFD70020, transparent), radial-gradient(circle at bottom left, #002147, #001a38)`,
-        }}
-      >
-        <Image
-          src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?q=80&w=2070&auto=format&fit=crop"
-          alt="Professional working on a branding project"
-          fill
-          className="object-cover opacity-30"
-        />
-        <div className="relative text-center p-12">
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-primary/80">
-            Letsheng Branding
-          </h1>
-          <p className="mt-6 text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto">
-            We translate your brand identity into tangible, professional-grade
-            assets that make an impact.
-          </p>
-          <div className="mt-10">
-            <Link href="/branding/t-shirt/order">
-              <Button size="lg" className="font-bold text-lg">
-                <Paintbrush className="h-5 w-5 mr-3" />
-                Start a Project
-              </Button>
-            </Link>
+    <div className="animate-fade-in">
+      <BrandingHero />
+
+
+      {/* Product Grid - 1 col mobile, 2 col md */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+        {products.map((p) => (
+          <Card
+            key={p.id}
+            className="rounded-xl shadow-lg border-gray-200/50 overflow-hidden flex flex-col transition-hover duration-300 hover:shadow-xl"
+          >
+            {/* Image Section */}
+            <div className="relative h-80 bg-gray-100 overflow-hidden">
+              <Link href={`/branding/${p.id}`}>
+                <Image
+                  src={p.image ?? "/placeholder-branding.jpg"}
+                  alt={p.title}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                {p.is_featured && (
+                  <div className="absolute top-4 left-4">
+                    <Badge className="bg-primary text-secondary font-bold">
+                      Featured
+                    </Badge>
+                  </div>)}
+              </Link>
+            </div>
+
+
+            <CardHeader>
+              <div className="flex justify-between items-start">
+                <CardTitle className="text-lg md:text-2xl font-bold text-secondary leading-tight">
+                  {p.title}
+                </CardTitle>
+                <Badge variant="outline" className="shrink-0 border-primary text-primary bg-primary/5">
+                  {p.category}
+                </Badge>
+              </div>
+              <p className="text-sm text-gray-500 pt-1">Professional Solutions</p>
+            </CardHeader>
+
+            <CardContent className="flex-grow">
+              {/* Branding Info Row - Matching the Bed/Bath/Home style */}
+              <div className="flex items-center text-gray-600 space-x-4 mb-4">
+                <div className="flex items-center text-sm">
+                  <Tag className="h-4 w-4 mr-2 text-primary" />
+                  <span>Premium</span>
+                </div>
+                <div className="flex items-center text-sm">
+                  <Clock className="h-4 w-4 mr-2 text-primary" />
+                  <span>Quick</span>
+                </div>
+                <div className="flex items-center text-sm">
+                  <CheckCircle2 className="h-4 w-4 mr-2 text-primary" />
+                  <span>Bulk Ready</span>
+                </div>
+              </div>
+
+              <p className="text-gray-700 leading-relaxed line-clamp-3">
+                {p.description}
+              </p>
+              <Card className="mt-6">
+                <CardHeader>
+                  <CardTitle>Specifications</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-2">
+                  {(p.specs as any[]).map((spec) => (
+                    <div
+                      key={spec.label}
+                      className="flex border-b mb-2 border-primary justify-between text-sm"
+                    >
+                      <span className="font-semibold flex gap text-gray-600">
+                        <Tag className="h-4 w-4 mr-2 text-primary" />
+                        {spec.label}:
+                      </span>
+                      <span className="text-gray-800">{spec.value}</span>
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+            </CardContent>
+
+            <CardFooter className="bg-gray-50/50 px-6 py-4 flex items-center justify-between mt-auto border-t border-gray-100">
+              <Link href={`/branding/${p.id}`}>
+                <Button variant="outline" className="font-semibold">
+                  View Catalog
+                </Button>
+              </Link>
+              <Link href={`/branding/${p.id}/order`}>
+                <Button variant="default" className="font-semibold">
+                  Get a Quote <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+            </CardFooter>
+          </Card>
+        ))}
+      </div>
+
+      {/* High-Fidelity Trust Banner - Replaces Terms of Tenancy */}
+      <section className="mt-20 p-8 rounded-2xl bg-secondary text-white">
+        <div className="max-w-4xl mx-auto text-center space-y-6">
+          <h2 className="text-3xl text-primary font-bold">Custom Branding Workflow</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="space-y-2">
+              <div className="text-primary font-black text-xl">01. Quote</div>
+              <p className="text-sm text-gray-300">Submit your brief and receive a tailored estimate within 24 hours.</p>
+            </div>
+            <div className="space-y-2">
+              <div className="text-primary font-black text-xl">02. Proof</div>
+              <p className="text-sm text-gray-300">Review digital mockups and approve your design before production.</p>
+            </div>
+            <div className="space-y-2">
+              <div className="text-primary font-black text-xl">03. Deliver</div>
+              <p className="text-sm text-gray-300">Fast production and nationwide delivery to your doorstep.</p>
+            </div>
           </div>
-        </div>
-      </header>
-
-      {/* Featured Products */}
-      <section>
-        <h2 className="text-4xl font-extrabold text-secondary mb-8 text-center">
-          Featured Products
-        </h2>
-        <div className="space-y-8">
-          {featuredProducts.map((p) => (
-            <ProductCard key={p.id} product={p} is_featured  />
-          ))}
-        </div>
-      </section>
-
-      {/* Other Products */}
-      <section>
-        <h2 className="text-4xl font-extrabold text-secondary mb-8 text-center">
-          Our Full Catalog
-        </h2>
-        <div className="grid md:grid-cols-2 gap-8">
-          {otherProducts.map((p) => (
-            <ProductCard key={p.id} product={p} />
-          ))}
         </div>
       </section>
     </div>

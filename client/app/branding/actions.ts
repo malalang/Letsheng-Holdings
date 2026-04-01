@@ -4,16 +4,16 @@ import { createClient } from '@/lib/supabase/server';
 import { type Branding, brandingInquirySchema, type BrandingInquiry } from '@/lib/validations/schemas';
 import { revalidatePath } from 'next/cache';
 
-export async function getBrandingProducts(){
+export async function getBrandingProducts() {
   const supabase = await createClient();
-  const { data, error } = await supabase.from('branding').select('*');
+  const { data, error } = await supabase.from('branding').select('*').order("is_featured", { ascending: false });
 
   if (error) {
     console.error('Error fetching branding products:', error);
     return [];
   }
 
-  return data ;
+  return data;
 }
 
 export async function getBrandingProduct(id: string) {
@@ -29,13 +29,13 @@ export async function getBrandingProduct(id: string) {
     return null;
   }
 
-  return data ;
+  return data;
 }
 
 export async function createBrandingProduct(product: Branding) {
   const supabase = await createClient();
   const { is_featured, ...rest } = product;
-  const productForDb = { ...rest, is_featured : is_featured };
+  const productForDb = { ...rest, is_featured: is_featured };
 
   const { data, error } = await supabase.from('branding').insert([productForDb]);
 
@@ -57,7 +57,7 @@ export async function updateBrandingProduct(
 
   const updateData: { [key: string]: any } = { ...rest };
   if (is_featured !== undefined) {
-    updateData.is_featured  = is_featured;
+    updateData.is_featured = is_featured;
   }
 
   const { data, error } = await supabase

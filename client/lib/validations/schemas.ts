@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { Database } from "../types/database.types";
 
 // Schema for a single gallery item
 export const galleryItemSchema = z.object({

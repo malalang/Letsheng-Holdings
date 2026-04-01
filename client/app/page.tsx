@@ -175,78 +175,78 @@ export default async function HomePage() {
   return (
     <div className="animate-fade-in space-y-32 pb-20">
       <header className="relative min-h-[85vh] lg:min-h-[80vh] flex items-center bg-secondary rounded-[2rem] md:rounded-[3rem] shadow-2xl overflow-hidden mx-2 md:mx-4 mt-2 border border-white/5">
-  {/* Background Layer: Image + Gradient Mesh */}
-  <div className="absolute inset-0 z-0">
-    <Image
-      src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop"
-      alt="Premium Property Background"
-      fill
-      className="object-cover grayscale-[50%] select-none opacity-40 lg:opacity-30"
-      priority
-    />
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(6,61,68,0.4),transparent_50%)]" />
-    <div className="absolute inset-0 bg-gradient-to-b from-secondary/90 via-secondary/50 to-secondary" />
-  </div>
-
-  <div className="relative z-10 container mx-auto px-4 sm:px-8 py-12 md:py-24 grid lg:grid-cols-2 items-center gap-12 lg:gap-16">
-    {/* Left Column: Copy & Actions */}
-    <div className="space-y-6 md:space-y-10 text-center lg:text-left">
-      {/* Badge - Responsive padding and text size */}
-      <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 px-3 py-1.5 md:px-4 md:py-2 rounded-full backdrop-blur-md">
-        <span className="relative flex h-2 w-2">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-        </span>
-        <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.15em] md:tracking-[0.2em] text-gray-300">
-          Est. 2023 • Leading South African Enterprise
-        </span>
-      </div>
-
-      {/* Heading - Responsive font sizes */}
-      <div className="space-y-4">
-        <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white leading-[1.1] lg:leading-[0.9]">
-          Elevating <br />
-          <span className="text-primary italic drop-shadow-[0_0_15px_rgba(var(--primary),0.3)]">Ambitions</span>
-        </h1>
-        <p className="text-lg md:text-xl lg:text-2xl text-gray-400 max-w-xl mx-auto lg:mx-0 leading-relaxed font-light">
-          Your strategic partner for <span className="text-white font-medium">premium residential estates</span> and
-          <span className="text-white font-medium"> high-fidelity corporate branding</span>.
-        </p>
-      </div>
-
-      {/* Buttons - Stack on mobile, side-by-side on sm+ */}
-      <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
-        <Button size="lg" className="h-14 md:h-16 px-8 md:px-10 text-base md:text-lg font-bold shadow-[0_10px_20px_-10px_rgba(var(--primary),0.5)] transition-transform hover:scale-105 active:scale-95" asChild>
-          <Link href="/properties">Explore Estates</Link>
-        </Button>
-        <Button size="lg" variant="outline" className="h-14 md:h-16 px-8 md:px-10 text-base md:text-lg font-bold border-white/10 bg-primary/10 text-white hover:bg-white hover:text-secondary transition-all backdrop-blur-sm" asChild>
-          <Link href="/branding">Branding Solutions</Link>
-        </Button>
-      </div>
-
-      {/* Stats - Responsive borders and alignment */}
-      <div className="pt-8 flex items-center justify-center lg:justify-start gap-6 md:gap-8 text-gray-500 border-t border-white/5 w-full lg:w-fit">
-        <div className="text-center lg:text-left">
-          <p className="text-white font-bold text-lg md:text-xl">100%</p>
-          <p className="text-[9px] md:text-[10px] uppercase tracking-widest">Reliability</p>
+        {/* Background Layer: Image + Gradient Mesh */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop"
+            alt="Premium Property Background"
+            fill
+            className="object-cover grayscale-[50%] select-none opacity-40 lg:opacity-30"
+            priority
+          />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(6,61,68,0.4),transparent_50%)]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-secondary/90 via-secondary/50 to-secondary" />
         </div>
-        <div className="text-center lg:text-left">
-          <p className="text-white font-bold text-lg md:text-xl">24/7</p>
-          <p className="text-[9px] md:text-[10px] uppercase tracking-widest">Support</p>
-        </div>
-        <div className="text-center lg:text-left">
-          <p className="text-white font-bold text-lg md:text-xl">ZA</p>
-          <p className="text-[9px] md:text-[10px] uppercase tracking-widest">National</p>
-        </div>
-      </div>
-    </div>
 
-    {/* Right Column: Visual Elements (Hidden on mobile for better focus) */}
-    <div className="hidden lg:grid grid-cols-2 gap-4 relative">
-        {/* Your visual grid of cards go here as previously designed */}
-    </div>
-  </div>
-</header>
+        <div className="relative z-10 container mx-auto px-4 sm:px-8 py-12 md:py-24 grid lg:grid-cols-2 items-center gap-12 lg:gap-16">
+          {/* Left Column: Copy & Actions */}
+          <div className="space-y-6 md:space-y-10 text-center lg:text-left">
+            {/* Badge - Responsive padding and text size */}
+            <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 px-3 py-1.5 md:px-4 md:py-2 rounded-full backdrop-blur-md">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+              </span>
+              <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.15em] md:tracking-[0.2em] text-gray-300">
+                Est. 2023 • Leading South African Enterprise
+              </span>
+            </div>
+
+            {/* Heading - Responsive font sizes */}
+            <div className="space-y-4">
+              <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white leading-[1.1] lg:leading-[0.9]">
+                Elevating <br />
+                <span className="text-primary italic drop-shadow-[0_0_15px_rgba(var(--primary),0.3)]">Ambitions</span>
+              </h1>
+              <p className="text-lg md:text-xl lg:text-2xl text-gray-400 max-w-xl mx-auto lg:mx-0 leading-relaxed font-light">
+                Your strategic partner for <span className="text-white font-medium">premium residential estates</span> and
+                <span className="text-white font-medium"> high-fidelity corporate branding</span>.
+              </p>
+            </div>
+
+            {/* Buttons - Stack on mobile, side-by-side on sm+ */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
+              <Button size="lg" className="h-14 md:h-16 px-8 md:px-10 text-base md:text-lg font-bold shadow-[0_10px_20px_-10px_rgba(var(--primary),0.5)] transition-transform hover:scale-105 active:scale-95 hover:bg-white hover:text-secondary transition-all bg-primary text-secondary" asChild>
+                <Link href="/properties">Explore Estates</Link>
+              </Button>
+              <Button size="lg" variant="outline" className="h-14 md:h-16 px-8 md:px-10 text-base md:text-lg font-bold border-white/10 bg-primary/10 text-white hover:bg-white hover:text-secondary transition-all backdrop-blur-sm" asChild>
+                <Link href="/branding">Branding Solutions</Link>
+              </Button>
+            </div>
+
+            {/* Stats - Responsive borders and alignment */}
+            <div className="pt-8 flex items-center justify-center lg:justify-start gap-6 md:gap-8 text-gray-500 border-t border-white/5 w-full lg:w-fit">
+              <div className="text-center lg:text-left">
+                <p className="text-white font-bold text-lg md:text-xl">100%</p>
+                <p className="text-[9px] md:text-[10px] uppercase tracking-widest">Reliability</p>
+              </div>
+              <div className="text-center lg:text-left">
+                <p className="text-white font-bold text-lg md:text-xl">24/7</p>
+                <p className="text-[9px] md:text-[10px] uppercase tracking-widest">Support</p>
+              </div>
+              <div className="text-center lg:text-left">
+                <p className="text-white font-bold text-lg md:text-xl">ZA</p>
+                <p className="text-[9px] md:text-[10px] uppercase tracking-widest">National</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: Visual Elements (Hidden on mobile for better focus) */}
+          <div className="hidden lg:grid grid-cols-2 gap-4 relative">
+            {/* Your visual grid of cards go here as previously designed */}
+          </div>
+        </div>
+      </header>
 
       {/* Featured Estates - FIRST Section */}
       <section className="container mx-auto px-6">
