@@ -45,8 +45,8 @@ const FeaturedPropertyCard = ({
     <div className="relative h-64 overflow-hidden"> {/* Consistent Height */}
               <Link href={`/properties/${id}`}>
                 <Image
-                  src={p.image_url ?? ""}
-                  alt={p.title}
+                  src={imageUrl ?? ""}
+                  alt={title}
                   fill
                   className="object-cover"
                 />
@@ -99,8 +99,8 @@ const FeaturedProductCard = ({
     <div className="relative aspect-square bg-gray-100 overflow-hidden">
   <Link href={`/branding/${p.id}`}>
     <Image
-      src={p.image ?? "/placeholder-branding.jpg"}
-      alt={p.title}
+      src={image ?? "/placeholder-branding.jpg"}
+      alt={title}
       fill
       className="object-cover transition-transform duration-500 hover:scale-105"
     />
