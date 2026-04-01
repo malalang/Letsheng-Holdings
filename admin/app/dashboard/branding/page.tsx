@@ -42,7 +42,7 @@ export default async function AdminBrandingPage() {
             key={p.id}
             className="rounded-xl shadow-lg border-gray-200/50 overflow-hidden flex flex-col"
           >
-            <div className="relative h-48">
+            <div className="relative aspect-square overflow-hidden">
               <Link href={`/dashboard/branding/brand/${p.id}`}>
                 <Image
                   src={p.image ?? ''}
@@ -54,7 +54,7 @@ export default async function AdminBrandingPage() {
               <div className="absolute top-2 right-2">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="secondary" size="icon">
+                    <Button size="icon">
                       <MoreVertical className="h-4 w-4" />
                     </Button>
                   </DropdownMenuTrigger>

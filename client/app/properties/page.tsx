@@ -68,7 +68,7 @@ export default async function PropertiesPage() {
             key={p.id}
             className="rounded-xl shadow-lg border-gray-200/50 overflow-hidden flex flex-col transition-all hover:shadow-xl"
           >
-            <div className="relative aspect-square overflow-hidden">
+           <div className="relative h-64"> {/* Consistent Height */}
               <Link href={`/properties/${p.id}`}>
                 <Image
                   src={p.image_url ?? ""}

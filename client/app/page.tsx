@@ -42,14 +42,17 @@ const FeaturedPropertyCard = ({
   description: string;
 }) => (
   <Card className="group overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border-none bg-white flex flex-col">
-    <div className="relative h-64 overflow-hidden">
-      <Image
-        src={imageUrl}
-        alt={title}
-        fill
-        className="object-cover group-hover:scale-110 transition-transform duration-500"
-      />
-      <div className="absolute top-4 left-4">
+    <div className="relative h-64 overflow-hidden"> {/* Consistent Height */}
+              <Link href={`/properties/${p.id}`}>
+                <Image
+                  src={p.image_url ?? ""}
+                  alt={p.title}
+                  fill
+                  className="object-cover"
+                />
+              </Link>
+          
+      <div className="absolute top-4 right-4">
         <Badge className="bg-primary text-secondary font-bold px-3 py-1">Featured Estate</Badge>
       </div>
     </div>
@@ -93,17 +96,20 @@ const FeaturedProductCard = ({
   description: string;
 }) => (
   <Card className="group overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border-none flex flex-col">
-    <div className="relative h-80 bg-gray-100 overflow-hidden">
-      <Image
-        src={image}
-        alt={title}
-        fill
-        className="object-cover group-hover:scale-105 transition-transform duration-500"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+    <div className="relative aspect-square bg-gray-100 overflow-hidden">
+  <Link href={`/branding/${p.id}`}>
+    <Image
+      src={p.image ?? "/placeholder-branding.jpg"}
+      alt={p.title}
+      fill
+      className="object-cover transition-transform duration-500 hover:scale-105"
+    />
+     <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
         <p className="text-white text-sm font-medium">High-Fidelity Branding Solutions</p>
       </div>
-    </div>
+  </Link>
+</div>
+    
     <CardHeader>
       <Badge variant="outline" className="border-primary text-primary font-bold mb-2 w-fit uppercase text-[10px] tracking-widest">
         {category}
