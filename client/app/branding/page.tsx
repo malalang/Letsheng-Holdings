@@ -112,15 +112,15 @@ export default async function BrandingPage() {
             <CardContent className="flex-grow">
               {/* Branding Info Row - Matching the Bed/Bath/Home style */}
               <div className="flex items-center text-gray-600 space-x-4 mb-4">
-                <div className="flex items-center text-sm">
+                <div className="flex items-center text-xs md:text-sm">
                   <Tag className="h-4 w-4 mr-2 text-primary" />
                   <span>Premium</span>
                 </div>
-                <div className="flex items-center text-sm">
+                <div className="flex items-center text-xs md:text-sm">
                   <Clock className="h-4 w-4 mr-2 text-primary" />
                   <span>Quick</span>
                 </div>
-                <div className="flex items-center text-sm">
+                <div className="flex items-center text-xs md:text-sm">
                   <CheckCircle2 className="h-4 w-4 mr-2 text-primary" />
                   <span>Bulk Ready</span>
                 </div>
@@ -137,13 +137,13 @@ export default async function BrandingPage() {
                   {(p.specs as any[]).map((spec) => (
                     <div
                       key={spec.label}
-                      className="flex border-b mb-2 border-primary justify-between text-sm"
+                      className="flex border-b mb-2 border-primary justify-between text-xs md:text-sm"
                     >
                       <span className="font-semibold flex gap text-gray-600">
                         <Tag className="h-4 w-4 mr-2 text-primary" />
                         {spec.label}:
                       </span>
-                      <span className="text-gray-800">{spec.value}</span>
+                      <span className="text-gray-800 ">{spec.value}</span>
                     </div>
                   ))}
                 </CardContent>
