@@ -77,7 +77,7 @@ export default async function BrandingPage() {
             className="rounded-xl shadow-lg border-gray-200/50 overflow-hidden flex flex-col transition-all hover:shadow-xl"
           >
             <div className="relative aspect-square overflow-hidden">
-              <Link href={`/properties/${p.id}`}>
+              <Link href={`/branding/${p.id}`}>
                 <Image
                   src={p.image ?? ""}
                   alt={p.title}
