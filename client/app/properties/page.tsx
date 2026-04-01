@@ -18,7 +18,6 @@ import { getProperties } from "./actions";
 function EstatesHero() {
   return (
     <section className="relative overflow-hidden bg-white pt-16 pb-12 md:pt-24 md:pb-20">
-      {/* Background Decorative Element */}
       <div className="absolute top-0 right-0 -translate-y-12 translate-x-12 blur-3xl opacity-10 pointer-events-none">
         <div className="aspect-square h-[500px] rounded-full bg-primary" />
       </div>
@@ -55,6 +54,7 @@ function EstatesHero() {
     </section>
   );
 }
+
 export default async function PropertiesPage() {
   const properties = await getProperties();
 
@@ -62,14 +62,13 @@ export default async function PropertiesPage() {
     <div className="animate-fade-in">
       <EstatesHero />
 
-
-      <div className="grid grid-cols-1 md:grid-cols-2  gap-8 mt-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
         {properties.map((p) => (
           <Card
             key={p.id}
-            className="rounded-xl shadow-lg border-gray-200/50 overflow-hidden flex flex-col"
+            className="rounded-xl shadow-lg border-gray-200/50 overflow-hidden flex flex-col transition-all hover:shadow-xl"
           >
-            <div className="relative h-48">
+            <div className="relative h-64"> {/* Consistent Height */}
               <Link href={`/properties/${p.id}`}>
                 <Image
                   src={p.image_url ?? ""}
@@ -92,40 +91,41 @@ export default async function PropertiesPage() {
                   {p.availability ? "Available" : "Occupied"}
                 </Badge>
               </div>
-              <p className="text-sm text-gray-500 pt-1">{p.location}</p>
+              <p className="text-sm text-gray-500 pt-1 flex items-center">
+                <MapPin className="h-3 w-3 mr-1" /> {p.location}
+              </p>
             </CardHeader>
 
             <CardContent className="flex-grow">
               <div className="flex items-center text-gray-600 space-x-4 mb-4">
-                <div className="flex items-center">
-                  <Bed className="h-5 w-5 mr-2" />
+                <div className="flex items-center text-sm">
+                  <Bed className="h-4 w-4 mr-2 text-primary" />
                   <span>{p.bedrooms}</span>
                 </div>
-                <div className="flex items-center">
-                  <Bath className="h-5 w-5 mr-2" />
+                <div className="flex items-center text-sm">
+                  <Bath className="h-4 w-4 mr-2 text-primary" />
                   <span>{p.bathrooms}</span>
                 </div>
-                <div className="flex items-center">
-                  <Home className="h-5 w-5 mr-2" />
+                <div className="flex items-center text-sm">
+                  <Home className="h-4 w-4 mr-2 text-primary" />
                   <span>{p.type}</span>
                 </div>
               </div>
-              <p className="text-gray-700 leading-relaxed">{p.description}</p>
+              <p className="text-gray-700 leading-relaxed line-clamp-2">{p.description}</p>
+
               <div className="mt-6 flex items-center text-2xl font-bold text-secondary">
                 <CircleDollarSign className="h-6 w-6 mr-2 text-primary" />R
                 {p.price.toLocaleString()}
-                <span className="text-sm font-normal text-gray-500 ml-2">
-                  / month
-                </span>
+                <span className="text-sm font-normal text-gray-500 ml-2">/ month</span>
               </div>
             </CardContent>
 
-            <CardFooter className="bg-gray-50/50 px-6 py-4 flex items-center justify-between mt-auto">
+            <CardFooter className="bg-gray-50/50 px-6 py-4 flex items-center justify-between mt-auto border-t">
               <Link href={`/properties/${p.id}`}>
-                <Button variant="outline">View Details</Button>
+                <Button size="sm" variant="outline">View Details</Button>
               </Link>
               <Link href={`/properties/${p.id}/apply-to-lease`}>
-                <Button variant="default">Apply to Lease</Button>
+                <Button size="sm" variant="default">Apply to Lease</Button>
               </Link>
             </CardFooter>
           </Card>
