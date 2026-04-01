@@ -152,12 +152,12 @@ export default async function BrandingPage() {
 
             <CardFooter className="bg-gray-50/50 px-6 py-4 flex items-center justify-between mt-auto border-t border-gray-100">
               <Link href={`/branding/${p.id}`}>
-                <Button variant="outline" className="font-semibold">
+                <Button size="sm" variant="outline" className="font-semibold">
                   View Catalog
                 </Button>
               </Link>
               <Link href={`/branding/${p.id}/order`}>
-                <Button variant="default" className="font-semibold">
+                <Button size="sm" variant="default" className="font-semibold">
                   Get a Quote <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
