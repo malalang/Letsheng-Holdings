@@ -76,13 +76,13 @@ export default async function BrandingPage() {
             key={p.id}
             className="rounded-xl shadow-lg border-gray-200/50 overflow-hidden flex flex-col transition-all hover:shadow-xl"
           >
-            <div className="relative h-64 bg-gray-100 overflow-hidden">
-              <Link href={`/branding/${p.id}`}>
+            <div className="relative aspect-square overflow-hidden">
+              <Link href={`/properties/${p.id}`}>
                 <Image
-                  src={p.image ?? "/placeholder-branding.jpg"}
+                  src={p.image ?? ""}
                   alt={p.title}
                   fill
-                  className="object-cover transition-transform duration-500 hover:scale-105"
+                  className="object-cover"
                 />
                 {p.is_featured && (
                   <div className="absolute top-4 left-4">
@@ -127,7 +127,7 @@ export default async function BrandingPage() {
               </p>
 
               {/* Simplified Specifications List */}
-              <div className="space-y-2 border-t pt-4">
+              <div className="space-y-2 pt-4">
                 <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Specifications</p>
                 {(p.specs as any[]).slice(0, 3).map((spec) => (
                   <div key={spec.label} className="flex justify-between text-sm border-b border-gray-50 pb-1">
@@ -137,15 +137,10 @@ export default async function BrandingPage() {
                 ))}
               </div>
 
-              {/* PRICE ALIGNMENT - Matching Properties style */}
-              <div className="mt-8 flex items-center text-2xl font-bold text-secondary">
-                <CircleDollarSign className="h-6 w-6 mr-2 text-primary" />
-                <span className="text-sm font-normal text-gray-500 mr-2">Starts at</span>
-                R ---
-              </div>
+
             </CardContent>
 
-            <CardFooter className="bg-gray-50/50 px-6 py-4 flex items-center justify-between mt-auto border-t">
+            <CardFooter className="bg-gray-50/50 px-6 py-4 flex items-center justify-between mt-auto ">
               <Link href={`/branding/${p.id}`}>
                 <Button size="sm" variant="outline">View Catalog</Button>
               </Link>

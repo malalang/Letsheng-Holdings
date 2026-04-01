@@ -68,7 +68,7 @@ export default async function PropertiesPage() {
             key={p.id}
             className="rounded-xl shadow-lg border-gray-200/50 overflow-hidden flex flex-col transition-all hover:shadow-xl"
           >
-            <div className="relative h-64"> {/* Consistent Height */}
+            <div className="relative aspect-square overflow-hidden">
               <Link href={`/properties/${p.id}`}>
                 <Image
                   src={p.image_url ?? ""}
@@ -120,7 +120,7 @@ export default async function PropertiesPage() {
               </div>
             </CardContent>
 
-            <CardFooter className="bg-gray-50/50 px-6 py-4 flex items-center justify-between mt-auto border-t">
+            <CardFooter className="bg-gray-50/50 px-6 py-4 flex items-center justify-between mt-auto ">
               <Link href={`/properties/${p.id}`}>
                 <Button size="sm" variant="outline">View Details</Button>
               </Link>
