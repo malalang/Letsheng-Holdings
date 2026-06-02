@@ -1,245 +1,455 @@
-This file is a merged representation of a subset of the codebase, containing specifically included files, combined into a single document by Repomix.
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
 
-<file_summary>
-This section contains a summary of this file.
+# File Summary
 
-<purpose>
-This file contains a packed representation of a subset of the repository's contents that is considered the most important context.
+## Purpose
+This file contains a packed representation of the entire repository's contents.
 It is designed to be easily consumable by AI systems for analysis, code review,
 or other automated processes.
-</purpose>
 
-<file_format>
+## File Format
 The content is organized as follows:
 1. This summary section
 2. Repository information
 3. Directory structure
 4. Repository files (if enabled)
 5. Multiple file entries, each consisting of:
-  - File path as an attribute
-  - Full contents of the file
-</file_format>
+  a. A header with the file path (## File: path/to/file)
+  b. The full contents of the file in a code block
 
-<usage_guidelines>
+## Usage Guidelines
 - This file should be treated as read-only. Any changes should be made to the
   original repository files, not this packed version.
 - When processing this file, use the file path to distinguish
   between different files in the repository.
 - Be aware that this file may contain sensitive information. Handle it with
   the same level of security as you would the original repository.
-</usage_guidelines>
 
-<notes>
+## Notes
 - Some files may have been excluded based on .gitignore rules and Repomix's configuration
 - Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
-- Only files matching these patterns are included: admin/components, admin/app, admin/lib, admin/public, admin/biome.json, admin/next-env.d.ts, admin/next.config.mjs, admin/next.config.ts, admin/package.json, admin/proxy.ts, admin/postcss.config.mjs, admin/tsconfig.json, client/components, client/lib, client/app, client/public, client/supabase, client/biome.json, client/next.config.mjs, client/next.config.ts, client/package.json, client/postcss.config.mjs, client/tsconfig.json, client/tailwind.config.ts
 - Files matching patterns in .gitignore are excluded
 - Files matching default ignore patterns are excluded
 - Files are sorted by Git change count (files with more changes are at the bottom)
-</notes>
 
-</file_summary>
+# Directory Structure
+```
+.gitattributes
+.gitignore
+.repomixignore
+admin/.gitignore
+admin/app/dashboard/actions.ts
+admin/app/dashboard/branding/actions.ts
+admin/app/dashboard/branding/brand/[id]/edit/page.tsx
+admin/app/dashboard/branding/brand/[id]/page.tsx
+admin/app/dashboard/branding/branding-form.tsx
+admin/app/dashboard/branding/data.sql
+admin/app/dashboard/branding/data.ts
+admin/app/dashboard/branding/new/page.tsx
+admin/app/dashboard/branding/page.tsx
+admin/app/dashboard/branding/table.sql
+admin/app/dashboard/layout.tsx
+admin/app/dashboard/page.tsx
+admin/app/dashboard/properties/actions.ts
+admin/app/dashboard/properties/data.sql
+admin/app/dashboard/properties/data.ts
+admin/app/dashboard/properties/new/page.tsx
+admin/app/dashboard/properties/page.tsx
+admin/app/dashboard/properties/property-form.tsx
+admin/app/dashboard/properties/property/[id]/edit/page.tsx
+admin/app/dashboard/properties/property/[id]/page.tsx
+admin/app/dashboard/properties/table.sql
+admin/app/dashboard/submissions/actions.ts
+admin/app/dashboard/submissions/branding_inquiries.sql
+admin/app/dashboard/submissions/BrandingInquiriesTable.tsx
+admin/app/dashboard/submissions/data.sql
+admin/app/dashboard/submissions/data.ts
+admin/app/dashboard/submissions/lease_applications.sql
+admin/app/dashboard/submissions/LeaseApplicationsTable.tsx
+admin/app/dashboard/submissions/page.tsx
+admin/app/dashboard/tenants/actions.ts
+admin/app/dashboard/tenants/data.ts
+admin/app/dashboard/tenants/new/page.tsx
+admin/app/dashboard/tenants/page.tsx
+admin/app/dashboard/tenants/payments.sql
+admin/app/dashboard/tenants/table.sql
+admin/app/dashboard/tenants/tenant-form.tsx
+admin/app/dashboard/tenants/tenant/[id]/edit/page.tsx
+admin/app/dashboard/tenants/tenant/[id]/page.tsx
+admin/app/dashboard/tenants/tenants.sql
+admin/app/globals.css
+admin/app/layout.tsx
+admin/app/login/actions.ts
+admin/app/login/page.tsx
+admin/app/page.tsx
+admin/biome.json
+admin/components/ClientDate.tsx
+admin/components/layout/Header.tsx
+admin/components/layout/Sidebar.tsx
+admin/components/terms/TermsOfTenancy.tsx
+admin/components/ui/avatar.tsx
+admin/components/ui/badge.tsx
+admin/components/ui/button.tsx
+admin/components/ui/card.tsx
+admin/components/ui/dialog.tsx
+admin/components/ui/dropdown-menu.tsx
+admin/components/ui/form.tsx
+admin/components/ui/input.tsx
+admin/components/ui/label.tsx
+admin/components/ui/select.tsx
+admin/components/ui/separator.tsx
+admin/components/ui/sheet.tsx
+admin/components/ui/switch.tsx
+admin/components/ui/table.tsx
+admin/components/ui/tabs.tsx
+admin/components/ui/textarea.tsx
+admin/components/ui/toaster.tsx
+admin/components/ui/use-toast.ts
+admin/components/upload-image.tsx
+admin/lib/env.ts
+admin/lib/supabase/client.ts
+admin/lib/supabase/config.ts
+admin/lib/supabase/proxy.ts
+admin/lib/supabase/server.ts
+admin/lib/types/database.types.ts
+admin/lib/utils.ts
+admin/lib/validations/schemas.ts
+admin/next.config.mts
+admin/package.json
+admin/postcss.config.mjs
+admin/proxy.ts
+admin/public/logo.jpg
+admin/public/Mug.png
+admin/public/T-shirt.png
+admin/README.md
+admin/supabase/.temp/cli-latest
+admin/supabase/.temp/gotrue-version
+admin/supabase/.temp/pooler-url
+admin/supabase/.temp/postgres-version
+admin/supabase/.temp/project-ref
+admin/supabase/.temp/rest-version
+admin/supabase/.temp/storage-migration
+admin/supabase/.temp/storage-version
+admin/supabase/migrations/20260311114326_remote_schema.sql
+admin/tsconfig.json
+client/.gitignore
+client/app/about/page.tsx
+client/app/branding/[productID]/gallery/page.tsx
+client/app/branding/[productID]/order/page.tsx
+client/app/branding/[productID]/page.tsx
+client/app/branding/actions.ts
+client/app/branding/data.ts
+client/app/branding/page.tsx
+client/app/contact/page.tsx
+client/app/globals.css
+client/app/layout.tsx
+client/app/not-found.tsx
+client/app/page.tsx
+client/app/properties/[id]/apply-to-lease/page.tsx
+client/app/properties/[id]/gallery/page.tsx
+client/app/properties/[id]/page.tsx
+client/app/properties/actions.ts
+client/app/properties/data.ts
+client/app/properties/page.tsx
+client/app/waterDetergents/page.tsx
+client/biome.json
+client/components/branding/BrandingOrderForm.tsx
+client/components/branding/waterDetergents.tsx
+client/components/layout/Footer.tsx
+client/components/layout/Header.tsx
+client/components/terms/TermsOfTenancy.tsx
+client/components/ui/avatar.tsx
+client/components/ui/badge.tsx
+client/components/ui/button.tsx
+client/components/ui/card.tsx
+client/components/ui/dropdown-menu.tsx
+client/components/ui/form.tsx
+client/components/ui/input.tsx
+client/components/ui/label.tsx
+client/components/ui/select.tsx
+client/components/ui/sheet.tsx
+client/components/ui/switch.tsx
+client/components/ui/table.tsx
+client/components/ui/tabs.tsx
+client/components/ui/textarea.tsx
+client/components/ui/toaster.tsx
+client/lib/env.ts
+client/lib/supabase/client.ts
+client/lib/supabase/middleware.ts
+client/lib/supabase/server.ts
+client/lib/types/database.types.ts
+client/lib/utils.ts
+client/lib/validations/schemas.ts
+client/next.config.ts
+client/package.json
+client/postcss.config.mjs
+client/public/Detergents.jpg
+client/public/Letsheng.mp4
+client/public/Letsheng.zip
+client/public/logo.jpg
+client/public/Mug.png
+client/public/Printing-Services.png
+client/public/T-shirt.png
+client/public/water.jpg
+client/README.md
+client/supabase/.gitignore
+client/supabase/config.toml
+client/tailwind.config.ts
+client/tsconfig.json
+db/LETSHENG  Business Plan.pdf.pdf
+db/LETSHENG HOLDINGS COMPANY PROFILE (2).pdf
+media/1.png
+media/2.png
+media/3.png
+media/4.png
+media/5.png
+media/IMG-20260223-WA0020.jpg
+media/IMG-20260223-WA0037.jpg
+repomix.config.json
+tables/branding_rows.sql
+tables/properties_rows.sql
+```
 
-<directory_structure>
-admin/
-  app/
-    dashboard/
-      branding/
-        brand/
-          [id]/
-            edit/
-              page.tsx
-            page.tsx
-        new/
-          page.tsx
-        actions.ts
-        branding-form.tsx
-        data.sql
-        data.ts
-        page.tsx
-        table.sql
-      properties/
-        new/
-          page.tsx
-        property/
-          [id]/
-            edit/
-              page.tsx
-            page.tsx
-        actions.ts
-        data.sql
-        data.ts
-        page.tsx
-        property-form.tsx
-        table.sql
-      submissions/
-        actions.ts
-        branding_inquiries.sql
-        BrandingInquiriesTable.tsx
-        data.sql
-        data.ts
-        lease_applications.sql
-        LeaseApplicationsTable.tsx
-        page.tsx
-      tenants/
-        new/
-          page.tsx
-        tenant/
-          [id]/
-            edit/
-              page.tsx
-            page.tsx
-        actions.ts
-        data.ts
-        page.tsx
-        payments.sql
-        table.sql
-        tenant-form.tsx
-        tenants.sql
-      actions.ts
-      layout.tsx
-      page.tsx
-    login/
-      actions.ts
-      page.tsx
-    globals.css
-    layout.tsx
-    page.tsx
-  components/
-    layout/
-      Header.tsx
-      Sidebar.tsx
-    terms/
-      TermsOfTenancy.tsx
-    ui/
-      avatar.tsx
-      badge.tsx
-      button.tsx
-      card.tsx
-      dialog.tsx
-      dropdown-menu.tsx
-      form.tsx
-      input.tsx
-      label.tsx
-      select.tsx
-      separator.tsx
-      sheet.tsx
-      switch.tsx
-      table.tsx
-      tabs.tsx
-      textarea.tsx
-      toaster.tsx
-      use-toast.ts
-    ClientDate.tsx
-    upload-image.tsx
-  lib/
-    supabase/
-      client.ts
-      config.ts
-      proxy.ts
-      server.ts
-    types/
-      database.types.ts
-    validations/
-      schemas.ts
-    env.ts
-    utils.ts
-  public/
-    logo.jpg
-    Mug.png
-    T-shirt.png
-  biome.json
-  next.config.mjs
-  next.config.ts
-  package.json
-  postcss.config.mjs
-  proxy.ts
-  tsconfig.json
-client/
-  app/
-    about/
-      page.tsx
-    branding/
-      [productID]/
-        gallery/
-          page.tsx
-        order/
-          page.tsx
-        page.tsx
-      actions.ts
-      data.ts
-      page.tsx
-    contact/
-      page.tsx
-    properties/
-      [id]/
-        apply-to-lease/
-          page.tsx
-        gallery/
-          page.tsx
-        page.tsx
-      actions.ts
-      data.ts
-      page.tsx
-    globals.css
-    layout.tsx
-    not-found.tsx
-    page.tsx
-  components/
-    branding/
-      BrandingOrderForm.tsx
-    layout/
-      Footer.tsx
-      Header.tsx
-    terms/
-      TermsOfTenancy.tsx
-    ui/
-      avatar.tsx
-      badge.tsx
-      button.tsx
-      card.tsx
-      dropdown-menu.tsx
-      form.tsx
-      input.tsx
-      label.tsx
-      select.tsx
-      sheet.tsx
-      switch.tsx
-      table.tsx
-      tabs.tsx
-      textarea.tsx
-      toaster.tsx
-  lib/
-    supabase/
-      client.ts
-      middleware.ts
-      server.ts
-    types/
-      database.types.ts
-    validations/
-      schemas.ts
-    env.ts
-    utils.ts
-  public/
-    logo.jpg
-    Mug.png
-    T-shirt.png
-  supabase/
-    .gitignore
-    config.toml
-  biome.json
-  next.config.mjs
-  next.config.ts
-  package.json
-  postcss.config.mjs
-  tailwind.config.ts
-  tsconfig.json
-</directory_structure>
+# Files
 
-<files>
-This section contains the contents of the repository's files.
+## File: .repomixignore
+````
+# Add patterns to ignore here, one per line
+# Example:
+# *.log
+# tmp/
 
-<file path="admin/app/dashboard/branding/data.sql">
+letsheng.xml
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+.env*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+````
+
+## File: repomix.config.json
+````json
+{
+  "$schema": "https://repomix.com/schemas/latest/schema.json",
+  "input": {
+    "maxFileSize": 52428800
+  },
+  "output": {
+    "filePath": "context.md",
+    "style": "markdown",
+    "parsableStyle": false,
+    "fileSummary": true,
+    "directoryStructure": true,
+    "files": true,
+    "removeComments": false,
+    "removeEmptyLines": false,
+    "compress": false,
+    "topFilesLength": 5,
+    "showLineNumbers": false,
+    "truncateBase64": false,
+    "copyToClipboard": false,
+    "includeFullDirectoryStructure": false,
+    "tokenCountTree": false,
+    "git": {
+      "sortByChanges": true,
+      "sortByChangesMaxCommits": 100,
+      "includeDiffs": false,
+      "includeLogs": false,
+      "includeLogsCount": 50
+    }
+  },
+  "include": [],
+  "ignore": {
+    "useGitignore": true,
+    "useDotIgnore": true,
+    "useDefaultPatterns": true,
+    "customPatterns": []
+  },
+  "security": {
+    "enableSecurityCheck": true
+  },
+  "tokenCount": {
+    "encoding": "o200k_base"
+  }
+}
+````
+
+## File: .gitattributes
+````
+# Auto detect text files and perform LF normalization
+* text=auto
+````
+
+## File: admin/.gitignore
+````
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+.env*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+````
+
+## File: admin/app/dashboard/actions.ts
+````typescript
+'use server';
+
+import { createClient } from "@/lib/supabase/server";
+
+export async function getDashboardKpis() {
+    const supabase = await createClient();
+
+    const { data: properties, error: propertiesError } = await supabase
+        .from('properties')
+        .select('price, availability');
+
+    if (propertiesError) {
+        console.error('Error fetching properties:', propertiesError);
+        return null;
+    }
+
+    const { data: brandingInquiries, error: inquiriesError } = await supabase
+        .from('branding_inquiries')
+        .select('id, status');
+
+    if (inquiriesError) {
+        console.error('Error fetching branding inquiries:', inquiriesError);
+        return null;
+    }
+
+    const { data: payments, error: paymentsError } = await supabase
+        .from('payments')
+        .select('amount, status');
+
+    if (paymentsError) {
+        console.error('Error fetching payments:', paymentsError);
+        return null;
+    }
+
+    // Calculate KPIs
+    const totalRevenue = properties
+        .filter(p => !p.availability) // Assumes occupied properties generate revenue
+        .reduce((sum, p) => sum + p.price, 0);
+
+    const occupiedCount = properties.filter(p => !p.availability).length;
+    const occupancyRate = (occupiedCount / properties.length) * 100;
+
+    const pendingOrders = brandingInquiries.filter(i => i.status === 'New').length;
+
+    const overduePayments = payments.filter(p => p.status === 'Late');
+    const overdueAmount = overduePayments.reduce((sum, p) => sum + p.amount, 0);
+
+    return {
+        totalRevenue,
+        occupancyRate,
+        pendingOrders,
+        overdueAmount,
+        overdueCount: overduePayments.length,
+    };
+}
+
+export async function getRecentLeases() {
+    const supabase = await createClient();
+
+    const { data, error } = await supabase
+        .from('tenants')
+        .select(`
+            id,
+            name,
+            status,
+            property:properties(title, price)
+        `)
+        .order('created_at', { ascending: false })
+        .limit(5);
+
+    if (error) {
+        console.error('Error fetching recent leases:', error);
+        return [];
+    }
+
+    return data.map(lease => ({
+        id: lease.id,
+        tenant: lease.name,
+        property: lease.property?.title || 'N/A',
+        amount: lease.property?.price ? `R${lease.property.price.toLocaleString()}/mo` : 'N/A',
+        status: lease.status,
+    }));
+}
+````
+
+## File: admin/app/dashboard/branding/data.sql
+````sql
 -- Insert mock data for branding products
 INSERT INTO
   "public"."branding" (
@@ -298,9 +508,10 @@ VALUES
     '[]',
     '[]'
   );
-</file>
+````
 
-<file path="admin/app/dashboard/branding/table.sql">
+## File: admin/app/dashboard/branding/table.sql
+````sql
 -- Create the branding table to store product information
 CREATE TABLE branding (
     id TEXT PRIMARY KEY,
@@ -319,9 +530,10 @@ COMMENT ON TABLE "public"."branding" IS 'Stores branding product information, mi
 COMMENT ON COLUMN "public"."branding"."specs" IS 'Stores product specifications as a JSON array of objects, e.g., [{"label": "Material", "value": "Cotton"}].';
 COMMENT ON COLUMN "public"."branding"."gallery" IS 'Stores product gallery images as a JSON array of objects, e.g., [{"title": "Front View", "imageUrl": "...", "description": "..."}].';
 COMMENT ON COLUMN "public"."branding"."reviews" IS 'Stores client reviews as a JSON array of objects, e.g., [{"id": "...", "author": "...", "rating": 5, "comment": "..."}].';
-</file>
+````
 
-<file path="admin/app/dashboard/properties/data.sql">
+## File: admin/app/dashboard/properties/data.sql
+````sql
 insert into public.properties (id, title, description, price, location, availability, image_url, bedrooms, bathrooms, type, features, is_featured, gallery, reviews, virtual_tour_url) values
 ('1', 'Executive Waterfront Residence, Harbour View', 'Experience unparalleled luxury in our executive waterfront suite. Offering breathtaking panoramic views of the marina, this residence features state-of-the-art amenities and bespoke furnishings. Ideal for the discerning professional.', 35000, 'V&A Waterfront, Cape Town', true, 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop', 2, 2, 'Apartment', '["24/7 Security", "Concierge", "Pool", "Gym", "Secure Parking"]', true, '[{"imageUrl": "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2070&auto=format&fit=crop", "title": "Living Area", "description": "Spacious and modern living area with ocean views."}, {"imageUrl": "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?q=80&w=2070&auto=format&fit=crop", "title": "Bedroom", "description": "Elegant bedroom with a king-size bed and en-suite bathroom."}, {"imageUrl": "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?q=80&w=2070&auto=format&fit=crop", "title": "Kitchen", "description": "Fully-equipped gourmet kitchen with high-end appliances."}, {"imageUrl": "https://images.unsplash.com/photo-1596701062953-b45a1a1d3b2c?q=80&w=2070&auto=format&fit=crop", "title": "Bathroom", "description": "Modern bathroom with a walk-in shower and premium toiletries."}, {"imageUrl": "https://images.unsplash.com/photo-1616047006789-b7af5afb8c20?q=80&w=2070&auto=format&fit=crop", "title": "Dining Area", "description": "Elegant dining area with seating for six."}, {"imageUrl": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop", "title": "Exterior", "description": "Stunning exterior view of the property."}]', '[{"id": "review-1", "author": "John Doe", "rating": 5, "comment": "Absolutely stunning property with breathtaking views. The amenities are top-notch and the service is exceptional."}, {"id": "review-2", "author": "Jane Smith", "rating": 4, "comment": "A luxurious and comfortable stay. The location is perfect for exploring the city. I would highly recommend it."}]', 'https://my.matterport.com/show/?m=JgWn9mJ4Z4N'),
 ('2', 'Metropolitan Loft, Financial District', 'A chic, fully-serviced loft situated in the heart of the financial district. With soaring ceilings and industrial-luxe design, this space is crafted for productivity and style. Includes access to our resident''s lounge.', 22000, 'Sandton, Johannesburg', false, 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070&auto=format&fit=crop', 1, 1, 'Loft', '["High-speed Internet", "Resident''s Lounge", "Housekeeping", "City Views"]', false, '[{"imageUrl": "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14aa?q=80&w=2070&auto=format&fit=crop", "title": "Living Area", "description": "Stylish living area with a comfortable sofa and a flat-screen TV."}, {"imageUrl": "https://images.unsplash.com/photo-1595526114035-0d45ab29c649?q=80&w=2070&auto=format&fit=crop", "title": "Bedroom", "description": "Cozy bedroom with a queen-size bed and a dedicated workspace."}, {"imageUrl": "https://images.unsplash.com/photo-1600122313623-167e42938a16?q=80&w=2070&auto=format&fit=crop", "title": "Bathroom", "description": "Modern bathroom with a walk-in shower and premium toiletries."}]', '[{"id": "review-3", "author": "Peter Jones", "rating": 4, "comment": "A great place to stay for business travelers. The location is very convenient and the apartment is well-equipped."}]', null),
@@ -329,9 +541,10 @@ insert into public.properties (id, title, description, price, location, availabi
 ('soshanguve-south-modern-home', 'Soshanguve South Modern Home', 'A beautiful and modern family home located in a vibrant community. Spacious and perfect for a growing family.', 1200000, 'Soshanguve, Pretoria', true, 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=1974&auto=format&fit=crop', 3, 2, 'House', '["Garden", "Garage", "Modern Kitchen", "Security System"]', true, '[]', '[]', null),
 ('pretoria-east-family-house', 'Pretoria East Family House', 'A large and welcoming family house in the suburbs of Pretoria East. Features a large garden and swimming pool.', 2500000, 'Pretoria East, Pretoria', true, 'https://images.unsplash.com/photo-1560185007-c5ca9d2c014d?q=80&w=2070&auto=format&fit=crop', 4, 3, 'House', '["Swimming Pool", "Large Garden", "Braai Area", "Double Garage"]', false, '[]', '[]', null),
 ('centurion-luxury-villa', 'Centurion Luxury Villa', 'An exquisite luxury villa in the heart of Centurion. Offers premium finishes and a sophisticated lifestyle.', 3800000, 'Centurion, Pretoria', false, 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop', 5, 4, 'Villa', '["Home Theatre", "Infinity Pool", "Gourmet Kitchen", "Landscaped Gardens"]', false, '[]', '[]', null);
-</file>
+````
 
-<file path="admin/app/dashboard/properties/table.sql">
+## File: admin/app/dashboard/properties/table.sql
+````sql
 create table public.properties (
   id text not null,
   created_at timestamp with time zone not null default now(),
@@ -351,9 +564,10 @@ create table public.properties (
   virtual_tour_url text null,
   constraint properties_pkey primary key (id)
 ) tablespace pg_default;
-</file>
+````
 
-<file path="admin/app/dashboard/submissions/branding_inquiries.sql">
+## File: admin/app/dashboard/submissions/branding_inquiries.sql
+````sql
 -- Create the branding_inquiries table
 CREATE TABLE public.branding_inquiries (
     id uuid NOT NULL DEFAULT gen_random_uuid(),
@@ -374,9 +588,10 @@ ALTER TABLE public.branding_inquiries ENABLE ROW LEVEL SECURITY;
 
 -- Create policies
 -- (Policies will be here)
-</file>
+````
 
-<file path="admin/app/dashboard/submissions/data.sql">
+## File: admin/app/dashboard/submissions/data.sql
+````sql
 INSERT INTO tenants (id, name, property_id, status, lease_end_date, avatar_url) VALUES
 ('tenant-001', 'John Doe', 'prop-001', 'Active', '2024-12-31', '/avatars/01.png'),
 ('tenant-002', 'Jane Smith', 'prop-002', 'Active', '2025-06-30', '/avatars/02.png'),
@@ -390,9 +605,10 @@ INSERT INTO payments (id, tenant_id, amount, date, status) VALUES
 ('payment-003', 'tenant-001', 1200, '2024-01-01', 'Late'),
 ('payment-004', 'tenant-002', 1500, '2024-03-05', 'Paid'),
 ('payment-005', 'tenant-003', 950, '2024-03-10', 'Pending');
-</file>
+````
 
-<file path="admin/app/dashboard/submissions/data.ts">
+## File: admin/app/dashboard/submissions/data.ts
+````typescript
 export const leaseApplications = [
   {
     id: "lease-1",
@@ -436,9 +652,42 @@ export const brandingInquiries = [
     submittedAt: new Date("2024-07-18T12:00:00Z"),
   },
 ];
-</file>
+````
 
-<file path="admin/app/dashboard/tenants/tenant/[id]/page.tsx">
+## File: admin/app/dashboard/tenants/payments.sql
+````sql
+-- Create the payments table to store tenant payment information
+CREATE TABLE payments (
+    id TEXT PRIMARY KEY,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    tenant_id TEXT REFERENCES tenants(id) ON DELETE CASCADE,
+    amount NUMERIC NOT NULL,
+    date TIMESTAMPTZ NOT NULL,
+    status TEXT NOT NULL DEFAULT 'Pending'
+);
+
+COMMENT ON TABLE "public"."payments" IS 'Stores payment history for each tenant.';
+````
+
+## File: admin/app/dashboard/tenants/table.sql
+````sql
+-- Create the tenants table to store tenant information
+CREATE TABLE tenants (
+    id TEXT PRIMARY KEY,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    name TEXT NOT NULL,
+    email TEXT,
+    property_id TEXT REFERENCES properties(id) ON DELETE SET NULL,
+    status TEXT NOT NULL DEFAULT 'Pending',
+    lease_end_date TIMESTAMPTZ,
+    avatar_url TEXT
+);
+
+COMMENT ON TABLE "public"."tenants" IS 'Stores tenant information, including their assigned property and lease details.';
+````
+
+## File: admin/app/dashboard/tenants/tenant/[id]/page.tsx
+````typescript
 import { ArrowLeft, Edit } from "lucide-react";
 import Link from "next/link";
 
@@ -598,23 +847,10 @@ export default async function Page({
     </div>
   );
 }
-</file>
+````
 
-<file path="admin/app/dashboard/tenants/payments.sql">
--- Create the payments table to store tenant payment information
-CREATE TABLE payments (
-    id TEXT PRIMARY KEY,
-    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    tenant_id TEXT REFERENCES tenants(id) ON DELETE CASCADE,
-    amount NUMERIC NOT NULL,
-    date TIMESTAMPTZ NOT NULL,
-    status TEXT NOT NULL DEFAULT 'Pending'
-);
-
-COMMENT ON TABLE "public"."payments" IS 'Stores payment history for each tenant.';
-</file>
-
-<file path="admin/app/dashboard/tenants/table.sql">
+## File: admin/app/dashboard/tenants/tenants.sql
+````sql
 -- Create the tenants table to store tenant information
 CREATE TABLE tenants (
     id TEXT PRIMARY KEY,
@@ -628,111 +864,98 @@ CREATE TABLE tenants (
 );
 
 COMMENT ON TABLE "public"."tenants" IS 'Stores tenant information, including their assigned property and lease details.';
-</file>
+````
 
-<file path="admin/app/dashboard/tenants/tenants.sql">
--- Create the tenants table to store tenant information
-CREATE TABLE tenants (
-    id TEXT PRIMARY KEY,
-    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    name TEXT NOT NULL,
-    email TEXT,
-    property_id TEXT REFERENCES properties(id) ON DELETE SET NULL,
-    status TEXT NOT NULL DEFAULT 'Pending',
-    lease_end_date TIMESTAMPTZ,
-    avatar_url TEXT
-);
-
-COMMENT ON TABLE "public"."tenants" IS 'Stores tenant information, including their assigned property and lease details.';
-</file>
-
-<file path="admin/app/dashboard/actions.ts">
-'use server';
-
-import { createClient } from "@/lib/supabase/server";
-
-export async function getDashboardKpis() {
-    const supabase = await createClient();
-
-    const { data: properties, error: propertiesError } = await supabase
-        .from('properties')
-        .select('price, availability');
-
-    if (propertiesError) {
-        console.error('Error fetching properties:', propertiesError);
-        return null;
+## File: admin/biome.json
+````json
+{
+  "$schema": "https://biomejs.dev/schemas/2.2.0/schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "ignoreUnknown": true,
+    "includes": ["**", "!node_modules", "!.next", "!dist", "!build"]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "suspicious": {
+        "noUnknownAtRules": "off"
+      }
+    },
+    "domains": {
+      "next": "recommended",
+      "react": "recommended"
     }
-
-    const { data: brandingInquiries, error: inquiriesError } = await supabase
-        .from('branding_inquiries')
-        .select('id, status');
-
-    if (inquiriesError) {
-        console.error('Error fetching branding inquiries:', inquiriesError);
-        return null;
+  },
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
     }
+  }
+}
+````
 
-    const { data: payments, error: paymentsError } = await supabase
-        .from('payments')
-        .select('amount, status');
+## File: admin/components/ClientDate.tsx
+````typescript
+'use client';
 
-    if (paymentsError) {
-        console.error('Error fetching payments:', paymentsError);
-        return null;
-    }
+import { useEffect, useState } from 'react';
 
-    // Calculate KPIs
-    const totalRevenue = properties
-        .filter(p => !p.availability) // Assumes occupied properties generate revenue
-        .reduce((sum, p) => sum + p.price, 0);
-
-    const occupiedCount = properties.filter(p => !p.availability).length;
-    const occupancyRate = (occupiedCount / properties.length) * 100;
-
-    const pendingOrders = brandingInquiries.filter(i => i.status === 'New').length;
-
-    const overduePayments = payments.filter(p => p.status === 'Late');
-    const overdueAmount = overduePayments.reduce((sum, p) => sum + p.amount, 0);
-
-    return {
-        totalRevenue,
-        occupancyRate,
-        pendingOrders,
-        overdueAmount,
-        overdueCount: overduePayments.length,
-    };
+interface ClientDateProps {
+  dateString: string | null | undefined;
+  format?: 'date' | 'datetime';
 }
 
-export async function getRecentLeases() {
-    const supabase = await createClient();
+export function ClientDate({ dateString, format = 'date' }: ClientDateProps) {
+  const [formatted, setFormatted] = useState('');
 
-    const { data, error } = await supabase
-        .from('tenants')
-        .select(`
-            id,
-            name,
-            status,
-            property:properties(title, price)
-        `)
-        .order('created_at', { ascending: false })
-        .limit(5);
-
-    if (error) {
-        console.error('Error fetching recent leases:', error);
-        return [];
+  useEffect(() => {
+    // This effect runs only on the client, after the initial render,
+    // which prevents a hydration mismatch.
+    if (dateString) {
+      const date = new Date(dateString);
+      if (isNaN(date.getTime())) {
+        setFormatted('Invalid Date');
+        return;
+      }
+      
+      if (format === 'datetime') {
+        // Using a consistent, non-locale-specific format
+        const year = date.getFullYear();
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const day = date.getDate().toString().padStart(2, '0');
+        const hours = date.getHours().toString().padStart(2, '0');
+        const minutes = date.getMinutes().toString().padStart(2, '0');
+        setFormatted(`${year}-${month}-${day} ${hours}:${minutes}`);
+      } else {
+        // Just the date part, in a consistent YYYY-MM-DD format
+        setFormatted(date.toISOString().split('T')[0]);
+      }
+    } else {
+      setFormatted('N/A');
     }
+  }, [dateString, format]);
 
-    return data.map(lease => ({
-        id: lease.id,
-        tenant: lease.name,
-        property: lease.property?.title || 'N/A',
-        amount: lease.property?.price ? `R${lease.property.price.toLocaleString()}/mo` : 'N/A',
-        status: lease.status,
-    }));
+  // Return empty string on server and initial client render
+  // to prevent mismatch. The actual value is populated via useEffect.
+  return <>{formatted}</>;
 }
-</file>
+````
 
-<file path="admin/components/ui/dialog.tsx">
+## File: admin/components/ui/dialog.tsx
+````typescript
 'use client';
 
 import * as React from 'react';
@@ -849,9 +1072,10 @@ export {
   DialogTitle,
   DialogDescription,
 };
-</file>
+````
 
-<file path="admin/components/ui/toaster.tsx">
+## File: admin/components/ui/toaster.tsx
+````typescript
 'use client';
 
 import { Toaster as Sonner } from "sonner";
@@ -880,55 +1104,10 @@ const Toaster = ({ ...props }: ToasterProps) => {
 };
 
 export { Toaster };
-</file>
+````
 
-<file path="admin/components/ClientDate.tsx">
-'use client';
-
-import { useEffect, useState } from 'react';
-
-interface ClientDateProps {
-  dateString: string | null | undefined;
-  format?: 'date' | 'datetime';
-}
-
-export function ClientDate({ dateString, format = 'date' }: ClientDateProps) {
-  const [formatted, setFormatted] = useState('');
-
-  useEffect(() => {
-    // This effect runs only on the client, after the initial render,
-    // which prevents a hydration mismatch.
-    if (dateString) {
-      const date = new Date(dateString);
-      if (isNaN(date.getTime())) {
-        setFormatted('Invalid Date');
-        return;
-      }
-      
-      if (format === 'datetime') {
-        // Using a consistent, non-locale-specific format
-        const year = date.getFullYear();
-        const month = (date.getMonth() + 1).toString().padStart(2, '0');
-        const day = date.getDate().toString().padStart(2, '0');
-        const hours = date.getHours().toString().padStart(2, '0');
-        const minutes = date.getMinutes().toString().padStart(2, '0');
-        setFormatted(`${year}-${month}-${day} ${hours}:${minutes}`);
-      } else {
-        // Just the date part, in a consistent YYYY-MM-DD format
-        setFormatted(date.toISOString().split('T')[0]);
-      }
-    } else {
-      setFormatted('N/A');
-    }
-  }, [dateString, format]);
-
-  // Return empty string on server and initial client render
-  // to prevent mismatch. The actual value is populated via useEffect.
-  return <>{formatted}</>;
-}
-</file>
-
-<file path="admin/components/upload-image.tsx">
+## File: admin/components/upload-image.tsx
+````typescript
 'use client';
 
 import { createClient } from '@/lib/supabase/client';
@@ -1075,9 +1254,10 @@ export function UploadImage({
     </div>
   );
 }
-</file>
+````
 
-<file path="admin/lib/supabase/config.ts">
+## File: admin/lib/supabase/config.ts
+````typescript
 export const getSupabaseConfig = () => {
     const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
     const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -1096,9 +1276,406 @@ export const getSupabaseConfig = () => {
   
     return { url, anonKey };
   };
-</file>
+````
 
-<file path="admin/biome.json">
+## File: admin/next.config.mts
+````typescript
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  /* config options here */
+  reactCompiler: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      }, {
+        protocol: 'https',
+        hostname: 'unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'qjrvfgxyjflcwnfupxcy.supabase.co',
+      }, {
+        protocol: "https",
+        hostname: "picsum.photos",
+      },
+    ],
+  },
+};
+
+export default nextConfig;
+````
+
+## File: admin/postcss.config.mjs
+````javascript
+const config = {
+  plugins: {
+    "@tailwindcss/postcss": {},
+  },
+};
+
+export default config;
+````
+
+## File: admin/README.md
+````markdown
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+## Getting Started
+
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+````
+
+## File: admin/supabase/.temp/cli-latest
+````
+v2.75.0
+````
+
+## File: admin/supabase/.temp/gotrue-version
+````
+v2.187.0
+````
+
+## File: admin/supabase/.temp/pooler-url
+````
+postgresql://postgres.qjrvfgxyjflcwnfupxcy@aws-1-eu-west-1.pooler.supabase.com:5432/postgres
+````
+
+## File: admin/supabase/.temp/postgres-version
+````
+17.6.1.063
+````
+
+## File: admin/supabase/.temp/project-ref
+````
+qjrvfgxyjflcwnfupxcy
+````
+
+## File: admin/supabase/.temp/rest-version
+````
+v14.1
+````
+
+## File: admin/supabase/.temp/storage-migration
+````
+fix-optimized-search-function
+````
+
+## File: admin/supabase/.temp/storage-version
+````
+v1.37.7
+````
+
+## File: admin/supabase/migrations/20260311114326_remote_schema.sql
+````sql
+
+````
+
+## File: client/.gitignore
+````
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+.env*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+````
+
+## File: client/app/waterDetergents/page.tsx
+````typescript
+import { 
+    Droplet, 
+    Sparkles, 
+    ShieldCheck, 
+    Truck, 
+    Factory, 
+    FlaskConical, 
+    Waves, 
+    CheckCircle2,
+    ArrowRight,
+    PhoneCall
+  } from "lucide-react";
+  import Image from "next/image";
+  import Link from "next/link";
+  import { Button } from "@/components/ui/button";
+  import { Badge } from "@/components/ui/badge";
+  import { Card, CardContent } from "@/components/ui/card";
+  
+  const FeaturePoint = ({ children }: { children: React.ReactNode }) => (
+    <li className="flex items-center gap-3 text-gray-300">
+      <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0" />
+      <span className="text-sm text-primary md:text-base">{children}</span>
+    </li>
+  );
+  
+  export default function WaterDetergentsPage() {
+    return (
+      <div className="animate-fade-in space-y-24 pb-20">
+        {/* --- Hero Section --- */}
+        <header className="relative min-h-[85vh] flex items-center bg-secondary rounded-[3rem] shadow-2xl overflow-hidden mx-4 mt-2 border border-white/5">
+          <Image
+            src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=2070&auto=format&fit=crop"
+            alt="Clean water and detergents"
+            fill
+            className="object-cover opacity-20 grayscale"
+            priority
+          />
+          <div className="relative z-10 container mx-auto px-8">
+            <div className="max-w-3xl space-y-6">
+              <Badge className="bg-primary/20 text-primary border-primary/30 px-4 py-1 uppercase tracking-widest font-bold">
+                Essential Services Division
+              </Badge>
+              <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-white leading-[0.9]">
+                Pure Water. <br />
+                <span className="text-primary italic">Absolute Clean.</span>
+              </h1>
+              <p className="text-xl text-gray-400 max-w-xl leading-relaxed">
+                Providing high-standard cleaning solutions and reliable bulk water supply 
+                to households, businesses, and industrial sites across South Africa.
+              </p>
+            </div>
+          </div>
+        </header>
+  
+        {/* --- Division 1: Bulk Water Supply --- */}
+        <section className="container mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className="relative h-[500px] rounded-[2.5rem] overflow-hidden shadow-2xl order-2 lg:order-1">
+              <Image
+                src="/water.jpg"
+                alt="Water delivery truck"
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 to-transparent" />
+              <div className="absolute bottom-8 left-8 right-8">
+                <div className="bg-white/10 backdrop-blur-md border border-white/10 p-6 rounded-2xl">
+                  <p className="text-white font-bold flex items-center gap-2">
+                    <Waves className="text-primary h-5 w-5" /> 
+                    SABS Standard Compliant
+                  </p>
+                </div>
+              </div>
+            </div>
+  
+            <div className="space-y-8 order-1 lg:order-2">
+              <div className="space-y-4">
+                <h2 className="text-4xl font-black text-secondary tracking-tight">
+                  Bulk Water <span className="text-primary">&</span> Distribution
+                </h2>
+                <p className="text-gray-600 leading-relaxed text-lg">
+                  Addressing South Africa's water security challenges with reliable, 
+                  purified, and bulk water delivery solutions for various applications.
+                </p>
+              </div>
+  
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <FeaturePoint>Potable Drinking Water</FeaturePoint>
+                <FeaturePoint>Industrial Site Supply</FeaturePoint>
+                <FeaturePoint>Agricultural Irrigation</FeaturePoint>
+                <FeaturePoint>Emergency Jojo Tank Refills</FeaturePoint>
+                <FeaturePoint>Purified Bottled Solutions</FeaturePoint>
+                <FeaturePoint>Event Water Logistics</FeaturePoint>
+              </ul>
+  
+              <div className="pt-6">
+                <Button size="lg" className="rounded-full px-8 gap-2" asChild>
+                  <Link href="/contact?service=water">
+                    Request Bulk Quote <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+  
+        {/* --- Division 2: Cleaning Detergents --- */}
+        <section className="bg-secondary py-24 mx-4 rounded-[3rem]">
+          <div className="container mx-auto px-6">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <div className="space-y-8">
+                <div className="space-y-4">
+                  <Badge variant="outline" className="border-primary text-primary font-bold">
+                    Manufacturing Division
+                  </Badge>
+                  <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight">
+                    High-Fidelity <br />
+                    <span className="text-primary">Cleaning Detergents</span>
+                  </h2>
+                  <p className="text-gray-400 leading-relaxed text-lg">
+                    Formulated for maximum efficiency and environmental safety. 
+                    Our detergent line serves hospitals, schools, and professional cleaning firms.
+                  </p>
+                </div>
+  
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  {[
+                    { icon: <FlaskConical />, title: "Concentrated", desc: "Industrial strength formulas" },
+                    { icon: <ShieldCheck />, title: "Safe & Green", desc: "Biodegradable ingredients" },
+                    { icon: <Truck />, title: "Wholesale", desc: "Bulk 25L & 50L options" },
+                    { icon: <Factory />, title: "Direct Supply", desc: "Factory-to-door pricing" },
+                  ].map((item, i) => (
+                    <div key={i} className="flex gap-4 p-4 rounded-2xl bg-white/5 border border-white/5">
+                      <div className="text-primary h-6 w-6 shrink-0">{item.icon}</div>
+                      <div>
+                        <h4 className="text-white font-bold text-sm">{item.title}</h4>
+                        <p className="text-gray-500 text-xs">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+  
+                <Button size="lg" variant="outline" className="text-white border-white/20 hover:bg-white hover:text-secondary rounded-full px-8" asChild>
+                  <Link href="/contact?service=detergents">Get Product Catalog</Link>
+                </Button>
+              </div>
+  
+              <div className="relative h-[500px] rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/10">
+                <Image
+                  src="/Detergents.jpg"
+                  alt="Detergent manufacturing"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-secondary/20" />
+              </div>
+            </div>
+          </div>
+        </section>
+  
+        {/* --- Featured Product Categories --- */}
+        <section className="container mx-auto px-6">
+          <div className="text-center mb-16 space-y-4">
+            <h2 className="text-4xl font-black text-secondary tracking-tight">Product Categories</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Available for both retail and wholesale distribution.
+            </p>
+          </div>
+  
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Dishwashing Liquids",
+                desc: "Grease-cutting formulas for commercial kitchens and homes.",
+                icon: <Sparkles className="h-8 w-8 text-primary" />,
+              },
+              {
+                title: "All-Purpose Cleaners",
+                desc: "Versatile solutions for floors, surfaces, and industrial areas.",
+                icon: <ShieldCheck className="h-8 w-8 text-primary" />,
+              },
+              {
+                title: "Bulk Water Supply",
+                desc: "From 500L to 10,000L deliveries for various needs.",
+                icon: <Droplet className="h-8 w-8 text-primary" />,
+              },
+            ].map((cat, i) => (
+              <Card key={i} className="group border-none shadow-lg hover:shadow-2xl transition-all duration-300 rounded-[2rem]">
+                <CardContent className="pt-10 pb-10 text-center space-y-4">
+                  <div className="mx-auto w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                    {cat.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-secondary">{cat.title}</h3>
+                  <p className="text-gray-500 text-sm leading-relaxed">{cat.desc}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+  
+        {/* --- Call to Action --- */}
+        <section className="container mx-auto px-6">
+          <div className="bg-primary rounded-[3rem] p-12 text-center space-y-8 shadow-2xl shadow-primary/20">
+            <h2 className="text-4xl md:text-5xl font-black text-secondary leading-tight">
+              Ready to scale your <br /> supply chain?
+            </h2>
+            <p className="text-secondary/80 font-medium text-lg max-w-xl mx-auto">
+              Contact our logistics team today for a custom quote on bulk detergents or water delivery.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button size="lg" className="bg-secondary text-white hover:bg-secondary/90 px-10 h-16 rounded-full font-bold text-lg">
+                <Link href="/contact" className="flex items-center gap-2">
+                  <PhoneCall className="h-5 w-5" /> Contact Sales
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
+````
+
+## File: client/biome.json
+````json
 {
   "$schema": "https://biomejs.dev/schemas/2.2.0/schema.json",
   "vcs": {
@@ -1136,68 +1713,10 @@ export const getSupabaseConfig = () => {
     }
   }
 }
-</file>
+````
 
-<file path="admin/next.config.ts">
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  /* config options here */
-  reactCompiler: true,
-};
-
-export default nextConfig;
-</file>
-
-<file path="admin/postcss.config.mjs">
-const config = {
-  plugins: {
-    "@tailwindcss/postcss": {},
-  },
-};
-
-export default config;
-</file>
-
-<file path="admin/tsconfig.json">
-{
-  "compilerOptions": {
-    "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "incremental": true,
-    "module": "NodeNext",
-    "esModuleInterop": true,
-    "moduleResolution": "nodenext",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "react-jsx",
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./*"]
-    }
-  },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "next-env.d.ts",
-    ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts"
-  ],
-  "exclude": ["node_modules"]
-}
-</file>
-
-<file path="client/components/ui/toaster.tsx">
+## File: client/components/ui/toaster.tsx
+````typescript
 'use client';
 
 import { Toaster as Sonner } from "sonner";
@@ -1226,9 +1745,61 @@ const Toaster = ({ ...props }: ToasterProps) => {
 };
 
 export { Toaster };
-</file>
+````
 
-<file path="client/supabase/.gitignore">
+## File: client/postcss.config.mjs
+````javascript
+const config = {
+  plugins: {
+    "@tailwindcss/postcss": {},
+  },
+};
+
+export default config;
+````
+
+## File: client/README.md
+````markdown
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+## Getting Started
+
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+````
+
+## File: client/supabase/.gitignore
+````
 # Supabase
 .branches
 .temp
@@ -1237,9 +1808,10 @@ export { Toaster };
 .env.keys
 .env.local
 .env.*.local
-</file>
+````
 
-<file path="client/supabase/config.toml">
+## File: client/supabase/config.toml
+````toml
 # For detailed configuration reference documentation, visit:
 # https://supabase.com/docs/guides/local-development/cli/config
 # A string used to distinguish different Supabase projects on the same host. Defaults to the
@@ -1628,70 +2200,10 @@ s3_region = "env(S3_REGION)"
 s3_access_key = "env(S3_ACCESS_KEY)"
 # Configures AWS_SECRET_ACCESS_KEY for S3 bucket
 s3_secret_key = "env(S3_SECRET_KEY)"
-</file>
+````
 
-<file path="client/biome.json">
-{
-  "$schema": "https://biomejs.dev/schemas/2.2.0/schema.json",
-  "vcs": {
-    "enabled": true,
-    "clientKind": "git",
-    "useIgnoreFile": true
-  },
-  "files": {
-    "ignoreUnknown": true,
-    "includes": ["**", "!node_modules", "!.next", "!dist", "!build"]
-  },
-  "formatter": {
-    "enabled": true,
-    "indentStyle": "space",
-    "indentWidth": 2
-  },
-  "linter": {
-    "enabled": true,
-    "rules": {
-      "recommended": true,
-      "suspicious": {
-        "noUnknownAtRules": "off"
-      }
-    },
-    "domains": {
-      "next": "recommended",
-      "react": "recommended"
-    }
-  },
-  "assist": {
-    "actions": {
-      "source": {
-        "organizeImports": "on"
-      }
-    }
-  }
-}
-</file>
-
-<file path="client/next.config.ts">
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  /* config options here */
-  reactCompiler: true,
-};
-
-export default nextConfig;
-</file>
-
-<file path="client/postcss.config.mjs">
-const config = {
-  plugins: {
-    "@tailwindcss/postcss": {},
-  },
-};
-
-export default config;
-</file>
-
-<file path="client/tsconfig.json">
+## File: client/tsconfig.json
+````json
 {
   "compilerOptions": {
     "target": "ES2017",
@@ -1727,9 +2239,66 @@ export default config;
   ],
   "exclude": ["node_modules"]
 }
-</file>
+````
 
-<file path="admin/app/dashboard/branding/brand/[id]/page.tsx">
+## File: tables/branding_rows.sql
+````sql
+INSERT INTO "public"."branding" ("created_at", "title", "description", "category", "image", "is_featured", "specs", "gallery", "reviews", "id") VALUES ('2026-03-05 16:08:57.546744+00', 'Large-Format Banners', 'Command attention with durable, large-format banners. Ideal for outdoor advertising, trade shows, and events. Weather-resistant and built to last.', 'printing service', 'https://qjrvfgxyjflcwnfupxcy.supabase.co/storage/v1/object/public/letshengHoldings/branding/1775068989657-5.png', false, '[{"label":"Material","value":"Heavy-Duty PVC"},{"label":"Sizes","value":"Custom"},{"label":"Features","value":"Weather-Resistant, Eyelets"}]', '[]', '[]', '2bab539f-7cc6-4efa-949d-b3af28aa852d'), ('2026-03-05 16:08:57.546744+00', 'T-Shirt Printing service', 'The cornerstone of a professional wardrobe. Woven from ultra-soft, 180gsm combed cotton for superior comfort and a premium feel. Features a classic fit with a reinforced collar and shoulder-to-shoulder taping for lasting durability. Ideal for team uniforms and corporate events.', 'printing service', 'https://qjrvfgxyjflcwnfupxcy.supabase.co/storage/v1/object/public/letshengHoldings/branding/1775069030100-3.png', true, '[{"label":"Material","value":"100% Combed Cotton"},{"label":"Weight","value":"180gsm"},{"label":"Fit","value":"Unisex Classic"}]', '[{"title":"T-Shirt ","imageUrl":"https://qjrvfgxyjflcwnfupxcy.supabase.co/storage/v1/object/public/letshengHoldings/branding/gallery/1775076414040-T-shirt.png","description":"our brand t-shirt"},{"title":"embrod","imageUrl":"https://qjrvfgxyjflcwnfupxcy.supabase.co/storage/v1/object/public/letshengHoldings/branding/gallery/1775077695129-IMG-20260223-WA0037.jpg","description":"our embrod jackets "}]', '[{"id":"review-tshirt-1","author":"Marketing Manager, ABC Corp","rating":5,"comment":"Excellent quality and our logo looks fantastic. The team loves them."},{"id":"review-tshirt-2","author":"Event Coordinator","rating":4,"comment":"Great shirts for our annual conference. Very comfortable."}]', '666c7e71-b556-4414-8b08-586d9eed2eb5'), ('2026-03-05 16:08:57.546744+00', 'Ceramic Branding Mug', 'A powerful statement piece for any desk. This 11oz ceramic mug is finished with a high-gloss, scratch-resistant coating, ensuring your branding remains vibrant and pristine. Dishwasher and microwave safe. Perfect for client gifts and internal brand reinforcement.', 'Promotional Merchandise', 'https://qjrvfgxyjflcwnfupxcy.supabase.co/storage/v1/object/public/letshengHoldings/branding/1775069070042-2.png', true, '[{"label":"Capacity","value":"11oz (325ml)"},{"label":"Material","value":"AAA Grade Ceramic"},{"label":"Printing","value":"Full-Color Dye-Sublimation"}]', '[{"title":"mug","imageUrl":"https://qjrvfgxyjflcwnfupxcy.supabase.co/storage/v1/object/public/letshengHoldings/branding/gallery/1775077300546-Mug.png","description":"our brand mug"},{"title":"Letsheng mug","imageUrl":"https://qjrvfgxyjflcwnfupxcy.supabase.co/storage/v1/object/public/letshengHoldings/branding/gallery/1775077902143-IMG-20260223-WA0020.jpg","description":"our mug"}]', '[{"id":"review-mug-1","author":"Office Manager","rating":5,"comment":"The print quality is outstanding. Our new favorite office mugs."},{"id":"review-mug-2","author":"Client Relations","rating":5,"comment":"We sent these as client gifts and got great feedback. Very professional."}]', 'a9183838-0fdd-4805-b3e2-194b622896fb'), ('2026-03-05 16:08:57.546744+00', 'High-Resolution Posters', 'Make a statement with vibrant, high-resolution posters. Perfect for events, promotions, and interior branding. Available in a variety of sizes and finishes.', 'Printing Service', 'https://qjrvfgxyjflcwnfupxcy.supabase.co/storage/v1/object/public/letshengHoldings/branding/1775068898752-4.png', false, '[{"label":"Paper","value":"200gsm Satin Finish"},{"label":"Sizes","value":"A3, A2, A1"},{"label":"Printing","value":"Full-Color"}]', '[]', '[]', 'd03348a2-a9b4-4fc8-b171-0e550cf42308');
+````
+
+## File: tables/properties_rows.sql
+````sql
+INSERT INTO "public"."properties" ("created_at", "title", "description", "price", "location", "availability", "image_url", "bedrooms", "bathrooms", "type", "features", "is_featured", "gallery", "reviews", "id") VALUES ('2026-03-06 03:09:02.283401+00', 'Metropolitan Loft, Financial District ', 'A chic, fully-serviced loft situated in the heart of the financial district. With soaring ceilings and industrial-luxe design, this space is crafted for productivity and style. Includes access to our resident''s lounge.', '22000', 'Sandton, Johannesburg', false, 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070&auto=format&fit=crop', 1, 1, 'Loft', '["High-speed Internet","Resident''s Lounge","Housekeeping","City Views"]', false, '[{"title":"Living Area","imageUrl":"https://images.unsplash.com/photo-1522771739844-6a9f6d5f14aa?q=80&w=2070&auto=format&fit=crop","description":"Stylish living area with a comfortable sofa and a flat-screen TV."},{"title":"Bedroom","imageUrl":"https://images.unsplash.com/photo-1595526114035-0d45ab29c649?q=80&w=2070&auto=format&fit=crop","description":"Cozy bedroom with a queen-size bed and a dedicated workspace."},{"title":"Bathroom","imageUrl":"https://images.unsplash.com/photo-1600122313623-167e42938a16?q=80&w=2070&auto=format&fit=crop","description":"Modern bathroom with a walk-in shower and premium toiletries."}]', '[{"id":"review-3","author":"Peter Jones","rating":4,"comment":"A great place to stay for business travelers. The location is very convenient and the apartment is well-equipped."}]', '03da9070-eee8-43fe-914e-92b23e88b4f6'), ('2026-03-06 05:37:42.309418+00', 'Executive Waterfront Residence, Harbour View', 'Experience unparalleled luxury in our executive waterfront suite. Offering breathtaking panoramic views of the marina, this residence features state-of-the-art amenities and bespoke furnishings. Ideal for the discerning professional.', '35000', 'V&A Waterfront, Cape Town', true, 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop', 2, 2, 'Apartment', '["24/7 Security","Concierge","Pool","Gym","Secure Parking"]', true, '[{"title":"Living Area","imageUrl":"https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2070&auto=format&fit=crop","description":"Spacious and modern living area with ocean views."},{"title":"Bedroom","imageUrl":"https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?q=80&w=2070&auto=format&fit=crop","description":"Elegant bedroom with a king-size bed and en-suite bathroom."},{"title":"Kitchen","imageUrl":"https://images.unsplash.com/photo-1578683010236-d716f9a3f461?q=80&w=2070&auto=format&fit=crop","description":"Fully-equipped gourmet kitchen with high-end appliances."},{"title":"Bathroom","imageUrl":"https://images.unsplash.com/photo-1596701062953-b45a1a1d3b2c?q=80&w=2070&auto=format&fit=crop","description":"Modern bathroom with a walk-in shower and premium toiletries."},{"title":"Dining Area","imageUrl":"https://images.unsplash.com/photo-1616047006789-b7af5afb8c20?q=80&w=2070&auto=format&fit=crop","description":"Elegant dining area with seating for six."},{"title":"Exterior","imageUrl":"https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop","description":"Stunning exterior view of the property."}]', '[{"id":"review-1","author":"John Doe","rating":5,"comment":"Absolutely stunning property with breathtaking views. The amenities are top-notch and the service is exceptional."},{"id":"review-2","author":"Jane Smith","rating":4,"comment":"A luxurious and comfortable stay. The location is perfect for exploring the city. I would highly recommend it."}]', '125947a4-5c16-486c-b29c-f7f1f4e19503'), ('2026-03-06 03:09:02.283401+00', 'Soshanguve South Modern Home 4', 'A beautiful and modern family home located in a vibrant community. Spacious and perfect for a growing family.', '1200000', 'Soshanguve, Pretoria', true, 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=1974&auto=format&fit=crop', 6, 2, 'House', '["Garden","Garage","Modern Kitchen","Security System"]', true, '[]', '[]', '714ed494-461b-41b0-a2e5-fdea01a0b60a'), ('2026-03-06 03:09:02.283401+00', 'Tranquil Garden Cottage', 'A serene and private garden cottage nestled in a quiet suburban neighbourhood. Perfect for those seeking peace and quiet with easy access to city amenities. Features a private garden and modern finishes.', '12500', 'Constantia, Cape Town', true, 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=1974&auto=format&fit=crop', 1, 1, 'Cottage', '["Private Garden","Pet-friendly","Fibre Internet","Secure Parking"]', true, '[]', '[]', '8a18baf7-f4f1-48d5-99fd-4a34aad2efc0'), ('2026-03-06 03:09:02.283401+00', 'Pretoria East Family House', 'A large and welcoming family house in the suburbs of Pretoria East. Features a large garden and swimming pool', '2500000', 'Pretoria East, Pretoria', true, 'https://qjrvfgxyjflcwnfupxcy.supabase.co/storage/v1/object/public/letshengHoldings/properties/1773043722892-Mug.png', 4, 3, 'House', '["Swimming Pool","Large Garden","Braai Area","Double Garage"]', false, '[]', '[]', 'ec40e85f-d2d7-4add-bf74-6de3b2bee3d4'), ('2026-03-06 03:09:02.283401+00', 'Centurion Luxury Villa 2', 'An exquisite luxury villa in the heart of Centurion. Offers premium finishes and a sophisticated lifestyle.', '3800000', 'Centurion, Pretoria', false, 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop', 5, 4, 'Villa', '["Home Theatre","Infinity Pool","Gourmet Kitchen","Landscaped Gardens"]', false, '[]', '[]', 'f6f2525d-9ae5-47fa-aa39-9bb1e3756235');
+````
+
+## File: .gitignore
+````
+letsheng.xml
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+.env*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+````
+
+## File: admin/app/dashboard/branding/brand/[id]/page.tsx
+````typescript
 import { ArrowLeft, CheckCircle, Edit, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -1896,9 +2465,10 @@ export default async function BrandingDetailPage({
     </div>
   );
 }
-</file>
+````
 
-<file path="admin/app/dashboard/branding/new/page.tsx">
+## File: admin/app/dashboard/branding/new/page.tsx
+````typescript
 import BrandingForm from "../branding-form";
 
 export default function NewBrandingPage() {
@@ -1909,9 +2479,10 @@ export default function NewBrandingPage() {
     </div>
   );
 }
-</file>
+````
 
-<file path="admin/app/dashboard/submissions/actions.ts">
+## File: admin/app/dashboard/submissions/actions.ts
+````typescript
 'use server';
 
 import { createClient } from '@/lib/supabase/server';
@@ -2039,9 +2610,10 @@ export async function getBrandingInquiries() {
     product_id: inquiry.branding?.id ?? '',
   }));
 }
-</file>
+````
 
-<file path="admin/app/dashboard/submissions/lease_applications.sql">
+## File: admin/app/dashboard/submissions/lease_applications.sql
+````sql
 -- Create the lease_applications table
 CREATE TABLE public.lease_applications (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
@@ -2063,17 +2635,10 @@ ALTER TABLE public.lease_applications ENABLE ROW LEVEL SECURITY;
 -- Create policies
 CREATE POLICY "Allow public insert access" ON public.lease_applications FOR INSERT WITH CHECK (true);
 CREATE POLICY "Allow admin full access" ON public.lease_applications FOR ALL USING (auth.role() = 'service_role');
-</file>
+````
 
-<file path="admin/app/dashboard/tenants/new/page.tsx">
-import TenantForm from "../tenant-form";
-
-export default function NewTenantPage() {
-  return <TenantForm />;
-}
-</file>
-
-<file path="admin/app/dashboard/tenants/data.ts">
+## File: admin/app/dashboard/tenants/data.ts
+````typescript
 export type TenantStatus = "Active" | "Inactive" | "Pending";
 export type PaymentStatus = "Paid" | "Pending" | "Late";
 
@@ -2180,9 +2745,19 @@ export const samplePayments: Payment[] = [
     status: "Pending",
   },
 ];
-</file>
+````
 
-<file path="admin/app/login/actions.ts">
+## File: admin/app/dashboard/tenants/new/page.tsx
+````typescript
+import TenantForm from "../tenant-form";
+
+export default function NewTenantPage() {
+  return <TenantForm />;
+}
+````
+
+## File: admin/app/login/actions.ts
+````typescript
 'use server';
 
 import { createClient } from '@/lib/supabase/server';
@@ -2222,9 +2797,10 @@ export async function logout() {
   await supabase.auth.signOut();
   redirect('/login');
 }
-</file>
+````
 
-<file path="admin/components/terms/TermsOfTenancy.tsx">
+## File: admin/components/terms/TermsOfTenancy.tsx
+````typescript
 export default function TermsOfTenancy() {
   return (
     <section className="glass-card rounded-lg p-5">
@@ -2248,9 +2824,10 @@ export default function TermsOfTenancy() {
     </section>
   );
 }
-</file>
+````
 
-<file path="admin/components/ui/avatar.tsx">
+## File: admin/components/ui/avatar.tsx
+````typescript
 "use client";
 
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
@@ -2301,9 +2878,10 @@ const AvatarFallback = React.forwardRef<
 AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName;
 
 export { Avatar, AvatarImage, AvatarFallback };
-</file>
+````
 
-<file path="admin/components/ui/form.tsx">
+## File: admin/components/ui/form.tsx
+````typescript
 import { Slot } from "@radix-ui/react-slot";
 import React from "react";
 import type { ControllerProps, FieldPath, FieldValues } from "react-hook-form";
@@ -2473,9 +3051,10 @@ export {
   FormMessage,
   FormField,
 };
-</file>
+````
 
-<file path="admin/components/ui/label.tsx">
+## File: admin/components/ui/label.tsx
+````typescript
 "use client";
 import * as LabelPrimitive from "@radix-ui/react-label";
 import { cva, type VariantProps } from "class-variance-authority";
@@ -2500,9 +3079,10 @@ const Label = React.forwardRef<
 Label.displayName = LabelPrimitive.Root.displayName;
 
 export { Label };
-</file>
+````
 
-<file path="admin/components/ui/select.tsx">
+## File: admin/components/ui/select.tsx
+````typescript
 import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons";
 import * as SelectPrimitive from "@radix-ui/react-select";
 import * as React from "react";
@@ -2622,9 +3202,10 @@ export {
   SelectItem,
   SelectSeparator,
 };
-</file>
+````
 
-<file path="admin/components/ui/separator.tsx">
+## File: admin/components/ui/separator.tsx
+````typescript
 "use client";
 
 import * as SeparatorPrimitive from "@radix-ui/react-separator";
@@ -2656,9 +3237,10 @@ const Separator = React.forwardRef<
 Separator.displayName = SeparatorPrimitive.Root.displayName;
 
 export { Separator };
-</file>
+````
 
-<file path="admin/components/ui/switch.tsx">
+## File: admin/components/ui/switch.tsx
+````typescript
 "use client";
 
 import * as SwitchPrimitives from "@radix-ui/react-switch";
@@ -2688,9 +3270,10 @@ const Switch = React.forwardRef<
 Switch.displayName = SwitchPrimitives.Root.displayName;
 
 export { Switch };
-</file>
+````
 
-<file path="admin/components/ui/table.tsx">
+## File: admin/components/ui/table.tsx
+````typescript
 import React from "react";
 import { cn } from "@/lib/utils";
 
@@ -2804,9 +3387,10 @@ export {
   TableCell,
   TableCaption,
 };
-</file>
+````
 
-<file path="admin/components/ui/tabs.tsx">
+## File: admin/components/ui/tabs.tsx
+````typescript
 "use client";
 
 import * as TabsPrimitive from "@radix-ui/react-tabs";
@@ -2862,9 +3446,10 @@ const TabsContent = React.forwardRef<
 TabsContent.displayName = TabsPrimitive.Content.displayName;
 
 export { Tabs, TabsList, TabsTrigger, TabsContent };
-</file>
+````
 
-<file path="admin/components/ui/textarea.tsx">
+## File: admin/components/ui/textarea.tsx
+````typescript
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
@@ -2889,15 +3474,17 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
 Textarea.displayName = "Textarea";
 
 export { Textarea };
-</file>
+````
 
-<file path="admin/components/ui/use-toast.ts">
+## File: admin/components/ui/use-toast.ts
+````typescript
 import { toast } from "sonner";
 
 export { toast };
-</file>
+````
 
-<file path="admin/lib/env.ts">
+## File: admin/lib/env.ts
+````typescript
 import { z } from "zod";
 
 const envSchema = z.object({
@@ -2909,33 +3496,58 @@ export const env = envSchema.parse({
   NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
   NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
 });
-</file>
+````
 
-<file path="admin/next.config.mjs">
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-      },
-      {
-        protocol: "https",
-        hostname: "picsum.photos",
-      },
-      {
-        protocol: "https",
-        hostname: "qjrvfgxyjflcwnfupxcy.supabase.co",
-      },
+## File: admin/tsconfig.json
+````json
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
     ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "incremental": true,
+    "module": "NodeNext",
+    "esModuleInterop": true,
+    "moduleResolution": "nodenext",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    }
   },
-};
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "next-env.d.ts",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts",
+    "next.config.mts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
+````
 
-export default nextConfig;
-</file>
-
-<file path="client/app/branding/data.ts">
+## File: client/app/branding/data.ts
+````typescript
 import {
   Coffee,
   File,
@@ -3108,9 +3720,10 @@ export const comingSoonProducts: ComingSoonProduct[] = [
     icon: Megaphone,
   },
 ];
-</file>
+````
 
-<file path="client/app/properties/data.ts">
+## File: client/app/properties/data.ts
+````typescript
 export const sampleProperties = [
   {
     id: "1",
@@ -3323,9 +3936,101 @@ export const sampleProperties = [
     virtualTourUrl: null,
   },
 ];
-</file>
+````
 
-<file path="client/components/ui/avatar.tsx">
+## File: client/components/branding/waterDetergents.tsx
+````typescript
+import { Droplet, Sparkles, ArrowRight, ShieldCheck, Truck } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+
+export default function WaterDetergentsSpotlight() {
+  return (
+    <section className="container mx-auto px-4 md:px-6 py-12">
+      <div className="relative overflow-hidden bg-secondary rounded-[2rem] md:rounded-[3rem] border border-white/5 shadow-2xl">
+        {/* Decorative Background Element - Hidden on mobile for cleaner look */}
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-primary/5 skew-x-12 translate-x-1/3 z-0 hidden lg:block" />
+
+        <div className="relative z-10 grid lg:grid-cols-2 items-stretch">
+          {/* Image Side: Visual Split */}
+          <div className="relative h-[300px] sm:h-[400px] lg:h-auto group overflow-hidden">
+            <div className="absolute inset-4 z-20 flex flex-col justify-between pointer-events-none">
+              <Badge className="w-fit bg-primary text-secondary font-bold px-4 py-1 self-end shadow-lg">
+                New Division
+              </Badge>
+              <div className="bg-secondary/60 backdrop-blur-md border border-white/10 p-4 md:p-6 rounded-2xl transform group-hover:translate-y-[-5px] transition-transform duration-500 max-w-[280px] md:max-w-none">
+                <p className="text-white font-bold text-base md:text-lg mb-1 italic">"Where cleanliness meets serenity"</p>
+                <p className="text-gray-300 text-[10px] tracking-widest uppercase">The Letsheng Standard</p>
+              </div>
+            </div>
+            
+            <Image
+              src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=2070&auto=format&fit=crop"
+              alt="Industrial cleaning solutions and water supply"
+              fill
+              className="object-cover opacity-60 lg:opacity-80 group-hover:scale-105 transition-transform duration-700"
+            />
+            {/* Mobile Overlay: Darkens the bottom of the image for better text transition */}
+            <div className="absolute inset-0 bg-gradient-to-t from-secondary via-transparent to-transparent lg:hidden" />
+            {/* Desktop Overlay: Side gradient */}
+            <div className="absolute inset-0 bg-gradient-to-r from-secondary via-transparent to-transparent hidden lg:block" />
+          </div>
+
+          {/* Content Side */}
+          <div className="p-6 sm:p-10 lg:p-16 space-y-8 flex flex-col justify-center">
+            <div className="space-y-4 text-center lg:text-left">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tighter leading-tight">
+                Essential <span className="text-primary italic">Resources</span> <br />
+                <span className="lg:block">& Cleaning Solutions</span>
+              </h2>
+              <p className="text-gray-400 text-base md:text-lg leading-relaxed max-w-md mx-auto lg:mx-0">
+                Expanding our commitment to quality through reliable bulk water distribution 
+                and high-performance industrial detergents.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+              {[
+                { icon: <Droplet />, title: "Bulk Water", desc: "Potable & Industrial" },
+                { icon: <Sparkles />, title: "Detergents", desc: "High-fidelity gear" },
+                { icon: <Truck />, title: "Logistics", desc: "Nationwide reach" },
+                { icon: <ShieldCheck />, title: "SABS Quality", desc: "Safety guaranteed" }
+              ].map((item, index) => (
+                <div key={index} className="flex gap-4 items-center lg:items-start p-3 lg:p-0 rounded-xl bg-white/5 lg:bg-transparent border border-white/5 lg:border-none">
+                  <div className="p-3 bg-white/5 rounded-xl text-primary shrink-0">
+                    {cloneElement(item.icon, { className: "h-5 w-5 md:h-6 md:w-6" })}
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold text-sm md:text-base">{item.title}</h4>
+                    <p className="text-gray-500 text-xs">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="pt-4 flex justify-center lg:justify-start">
+              <Button size="lg" className="w-full sm:w-auto rounded-full px-10 font-bold group h-14" asChild>
+                <Link href="/waterDetergents">
+                  View Solutions 
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Helper to handle icon sizing in the map
+import { cloneElement } from "react";
+````
+
+## File: client/components/ui/avatar.tsx
+````typescript
 "use client";
 
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
@@ -3376,9 +4081,10 @@ const AvatarFallback = React.forwardRef<
 AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName;
 
 export { Avatar, AvatarImage, AvatarFallback };
-</file>
+````
 
-<file path="client/components/ui/dropdown-menu.tsx">
+## File: client/components/ui/dropdown-menu.tsx
+````typescript
 "use client";
 
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
@@ -3579,9 +4285,10 @@ export {
   DropdownMenuSubTrigger,
   DropdownMenuRadioGroup,
 };
-</file>
+````
 
-<file path="client/components/ui/switch.tsx">
+## File: client/components/ui/switch.tsx
+````typescript
 "use client";
 
 import * as SwitchPrimitives from "@radix-ui/react-switch";
@@ -3611,9 +4318,10 @@ const Switch = React.forwardRef<
 Switch.displayName = SwitchPrimitives.Root.displayName;
 
 export { Switch };
-</file>
+````
 
-<file path="client/components/ui/table.tsx">
+## File: client/components/ui/table.tsx
+````typescript
 import React from "react";
 import { cn } from "@/lib/utils";
 
@@ -3727,9 +4435,10 @@ export {
   TableCell,
   TableCaption,
 };
-</file>
+````
 
-<file path="client/components/ui/tabs.tsx">
+## File: client/components/ui/tabs.tsx
+````typescript
 "use client";
 
 import * as TabsPrimitive from "@radix-ui/react-tabs";
@@ -3785,9 +4494,25 @@ const TabsContent = React.forwardRef<
 TabsContent.displayName = TabsPrimitive.Content.displayName;
 
 export { Tabs, TabsList, TabsTrigger, TabsContent };
-</file>
+````
 
-<file path="client/lib/supabase/middleware.ts">
+## File: client/lib/env.ts
+````typescript
+import { z } from "zod";
+
+const envSchema = z.object({
+  NEXT_PUBLIC_SUPABASE_URL: z.string().url(),
+  NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string(),
+});
+
+export const env = envSchema.parse({
+  NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
+  NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+});
+````
+
+## File: client/lib/supabase/middleware.ts
+````typescript
 import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { type NextRequest, NextResponse } from "next/server";
 
@@ -3857,9 +4582,10 @@ export async function updateSession(request: NextRequest) {
 
   return response;
 }
-</file>
+````
 
-<file path="client/lib/supabase/server.ts">
+## File: client/lib/supabase/server.ts
+````typescript
 import { type CookieOptions, createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import type { Database } from "@/lib/types/database.types";
@@ -3888,32 +4614,50 @@ export async function createClient() {
     },
   });
 }
-</file>
+````
 
-<file path="client/lib/env.ts">
-import { z } from "zod";
-
-const envSchema = z.object({
-  NEXT_PUBLIC_SUPABASE_URL: z.string().url(),
-  NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string(),
-});
-
-export const env = envSchema.parse({
-  NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
-  NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-});
-</file>
-
-<file path="client/lib/utils.ts">
+## File: client/lib/utils.ts
+````typescript
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
-</file>
+````
 
-<file path="admin/app/dashboard/branding/brand/[id]/edit/page.tsx">
+## File: client/next.config.ts
+````typescript
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  /* config options here */
+  reactCompiler: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      }, {
+        protocol: 'https',
+        hostname: 'unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'qjrvfgxyjflcwnfupxcy.supabase.co',
+      }, {
+        protocol: "https",
+        hostname: "picsum.photos",
+      },
+    ],
+  },
+};
+
+export default nextConfig;
+````
+
+## File: admin/app/dashboard/branding/brand/[id]/edit/page.tsx
+````typescript
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -3993,9 +4737,10 @@ export default async function EditBrandingPage({
     </div>
   );
 }
-</file>
+````
 
-<file path="admin/app/dashboard/branding/data.ts">
+## File: admin/app/dashboard/branding/data.ts
+````typescript
 import {
   Coffee,
   File,
@@ -4172,9 +4917,10 @@ export const comingSoonProducts: ComingSoonProduct[] = [
     icon: Megaphone,
   },
 ];
-</file>
+````
 
-<file path="admin/app/dashboard/tenants/actions.ts">
+## File: admin/app/dashboard/tenants/actions.ts
+````typescript
 'use server';
 
 import { createClient } from "@/lib/supabase/server";
@@ -4290,9 +5036,10 @@ export async function getTenantById(id: string) {
 
   return data;
 }
-</file>
+````
 
-<file path="admin/components/layout/Sidebar.tsx">
+## File: admin/components/layout/Sidebar.tsx
+````typescript
 import {
   Archive,
   BookUser,
@@ -4396,9 +5143,10 @@ const SidebarLink = ({
 );
 
 export default Sidebar;
-</file>
+````
 
-<file path="admin/components/ui/badge.tsx">
+## File: admin/components/ui/badge.tsx
+````typescript
 import type { VariantProps } from "class-variance-authority";
 import { cva } from "class-variance-authority";
 import type * as React from "react";
@@ -4434,9 +5182,10 @@ function Badge({ className, variant, ...props }: BadgeProps) {
 }
 
 export { Badge, badgeVariants };
-</file>
+````
 
-<file path="admin/components/ui/button.tsx">
+## File: admin/components/ui/button.tsx
+````typescript
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
@@ -4491,9 +5240,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 Button.displayName = "Button";
 
 export { Button, buttonVariants };
-</file>
+````
 
-<file path="admin/components/ui/card.tsx">
+## File: admin/components/ui/card.tsx
+````typescript
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
@@ -4580,9 +5330,10 @@ export {
   CardDescription,
   CardContent,
 };
-</file>
+````
 
-<file path="admin/components/ui/dropdown-menu.tsx">
+## File: admin/components/ui/dropdown-menu.tsx
+````typescript
 "use client";
 
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
@@ -4783,9 +5534,10 @@ export {
   DropdownMenuSubTrigger,
   DropdownMenuRadioGroup,
 };
-</file>
+````
 
-<file path="admin/lib/supabase/proxy.ts">
+## File: admin/lib/supabase/proxy.ts
+````typescript
 import { createServerClient } from "@supabase/ssr";
 import { type NextRequest, NextResponse } from "next/server";
 import { getSupabaseConfig } from "@/lib/supabase/config";
@@ -4831,18 +5583,20 @@ export async function updateSession(request: NextRequest) {
 
   return supabaseResponse;
 }
-</file>
+````
 
-<file path="admin/lib/utils.ts">
+## File: admin/lib/utils.ts
+````typescript
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
-</file>
+````
 
-<file path="client/app/branding/[productID]/gallery/page.tsx">
+## File: client/app/branding/[productID]/gallery/page.tsx
+````typescript
 import Image from "next/image";
 
 import { Card } from "@/components/ui/card";
@@ -4891,174 +5645,10 @@ export default async function ProductGalleryPage({
     </div>
   );
 }
-</file>
+````
 
-<file path="client/app/branding/[productID]/page.tsx">
-import { Eye, ShoppingCart, Star } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { getBrandingProduct } from "../actions";
-
-export default async function ProductPage({
-  params,
-}: {
-  params: Promise<{ productID: string }>;
-}) {
-  const { productID } = await params;
-  const product = await getBrandingProduct(productID);
-
-  if (!product) {
-    return <div>Product not found</div>;
-  }
-
-  return (
-    <div className="animate-fade-in">
-      <Card className="max-w-4xl mx-auto">
-        <CardHeader>
-          <div className="grid md:grid-cols-2 gap-12 items-start">
-            <div className="relative h-96 rounded-2xl shadow-lg overflow-hidden">
-              <Image
-                src={product.image ?? ''}
-                alt={product.title}
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div>
-              <Badge variant="default" className="font-semibold mb-2">
-                {product.category}
-              </Badge>
-              <h1 className="text-5xl font-extrabold text-secondary tracking-tight">
-                {product.title}
-              </h1>
-              <p className="mt-4 text-xl text-gray-600">
-                {product.description}
-              </p>
-
-              {product.specs && (product.specs as any[]).length > 0 && (
-                <Card className="mt-6">
-                  <CardHeader>
-                    <CardTitle>Specifications</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-2">
-                    {(product.specs as any[]).map((spec) => (
-                      <div
-                        key={spec.label}
-                        className="flex justify-between text-sm"
-                      >
-                        <span className="font-semibold text-gray-600">
-                          {spec.label}:
-                        </span>
-                        <span className="text-gray-800">{spec.value}</span>
-                      </div>
-                    ))}
-                  </CardContent>
-                </Card>
-              )}
-
-              <div className="mt-8 flex gap-4">
-                <Link href={`/branding/${product.id}/order`} className="flex-1">
-                  <Button size="lg" className="w-full font-bold text-lg">
-                    <ShoppingCart className="h-5 w-5 mr-3" />
-                    Initiate Inquiry
-                  </Button>
-                </Link>
-                <Link
-                  href={`/branding/${product.id}/gallery`}
-                  className="flex-1"
-                >
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="w-full font-bold text-lg"
-                  >
-                    <Eye className="h-5 w-5 mr-3" />
-                    View Gallery
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </CardHeader>
-        <CardContent className="mt-6">
-          {product.gallery && (product.gallery as any[]).length > 0 && (
-            <div className="mt-8">
-              <h3 className="text-2xl font-bold text-secondary mb-4">
-                Product Gallery
-              </h3>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {(product.gallery as any[]).slice(0, 3).map((image) => (
-                  <div key={image.imageUrl} className="relative h-48">
-                    <Image
-                      src={image.imageUrl}
-                      alt={image.title}
-                      fill
-                      className="object-cover rounded-lg"
-                    />
-                    <div className="absolute bottom-0 left-0 bg-secondary/70 text-white p-2 w-full rounded-b-lg">
-                      <h4 className="font-bold text-primary">
-                        {image.title}
-                      </h4>
-                      <p className="text-sm">{image.description}</p>
-                    </div>
-                  </div>
-                ))}
-                {(product.gallery as any[]).length > 3 && (
-                  <Link
-                    href={`/branding/${product.id}/gallery`}
-                    className="relative h-48 flex items-center justify-center bg-gray-200 rounded-lg"
-                  >
-                    <Button>Show More</Button>
-                  </Link>
-                )}
-              </div>
-            </div>
-          )}
-
-          {product.reviews && (product.reviews as any[]).length > 0 && (
-            <div className="mt-8">
-              <h3 className="text-2xl font-bold text-secondary mb-4">
-                Reviews
-              </h3>
-              <div className="space-y-4">
-                {(product.reviews as any[]).map((review, index) => (
-                  <Card
-                    key={`${review.author}-${index}`}
-                    className="bg-gray-50/50"
-                  >
-                    <CardContent className="p-4">
-                      <div className="flex items-center mb-2">
-                        <div className="flex items-center">
-                          {[...Array(review.rating)].map((_, i) => (
-                            <Star
-                              key={`${review.author}-${index}-star-${i}`}
-                              className="h-5 w-5 text-yellow-400 fill-current"
-                            />
-                          ))}
-                        </div>
-                        <p className="ml-2 font-bold text-secondary">
-                          {review.author}
-                        </p>
-                      </div>
-                      <p className="text-gray-600">{review.comment}</p>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </div>
-          )}
-        </CardContent>
-      </Card>
-    </div>
-  );
-}
-</file>
-
-<file path="client/app/contact/page.tsx">
+## File: client/app/contact/page.tsx
+````typescript
 import { Mail, MapPin, Phone } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -5154,9 +5744,34 @@ export default function ContactPage() {
     </div>
   );
 }
-</file>
+````
 
-<file path="client/app/properties/[id]/gallery/page.tsx">
+## File: client/app/not-found.tsx
+````typescript
+export default function NotFound() {
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen bg-secondary text-white p-6">
+      <h1 className="text-9xl font-bold text-primary animate-pulse">404</h1>
+      <h2 className="text-2xl mt-4 font-semibold uppercase tracking-widest">
+        Room Not Found / Page Misprinted
+      </h2>
+      <p className="mt-4 text-gray-300 max-w-md text-center">
+        Even the best blueprints have errors. Let's get you back to the main
+        holding area.
+      </p>
+      <a
+        href="/"
+        className="mt-8 px-8 py-3 bg-primary text-secondary font-bold rounded-full"
+      >
+        RETURN TO HOME
+      </a>
+    </div>
+  );
+}
+````
+
+## File: client/app/properties/[id]/gallery/page.tsx
+````typescript
 import Image from "next/image";
 import Link from "next/link";
 
@@ -5213,9 +5828,10 @@ export default async function PropertyGalleryPage({
     </div>
   );
 }
-</file>
+````
 
-<file path="client/app/properties/actions.ts">
+## File: client/app/properties/actions.ts
+````typescript
 'use server';
 
 import { createClient } from "@/lib/supabase/server";
@@ -5260,32 +5876,10 @@ export async function submitLeaseApplication(data: z.infer<typeof leaseApplicati
 
     return { success: true };
 }
-</file>
+````
 
-<file path="client/app/not-found.tsx">
-export default function NotFound() {
-  return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-secondary text-white p-6">
-      <h1 className="text-9xl font-bold text-primary animate-pulse">404</h1>
-      <h2 className="text-2xl mt-4 font-semibold uppercase tracking-widest">
-        Room Not Found / Page Misprinted
-      </h2>
-      <p className="mt-4 text-gray-300 max-w-md text-center">
-        Even the best blueprints have errors. Let's get you back to the main
-        holding area.
-      </p>
-      <a
-        href="/"
-        className="mt-8 px-8 py-3 bg-primary text-secondary font-bold rounded-full"
-      >
-        RETURN TO HOME
-      </a>
-    </div>
-  );
-}
-</file>
-
-<file path="client/components/terms/TermsOfTenancy.tsx">
+## File: client/components/terms/TermsOfTenancy.tsx
+````typescript
 export default function TermsOfTenancy() {
   return (
     <section className="glass-overlay border-primary/30 rounded-lg p-6">
@@ -5328,9 +5922,10 @@ export default function TermsOfTenancy() {
     </section>
   );
 }
-</file>
+````
 
-<file path="client/components/ui/card.tsx">
+## File: client/components/ui/card.tsx
+````typescript
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
@@ -5417,9 +6012,10 @@ export {
   CardDescription,
   CardContent,
 };
-</file>
+````
 
-<file path="client/lib/supabase/client.ts">
+## File: client/lib/supabase/client.ts
+````typescript
 import { createBrowserClient } from "@supabase/ssr";
 import type { Database } from "@/lib/types/database.types";
 
@@ -5433,34 +6029,10 @@ export function createClient() {
 
   return createBrowserClient<Database>(supabaseUrl, supabaseAnonKey);
 }
-</file>
+````
 
-<file path="client/next.config.mjs">
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-    images: {
-        remotePatterns: [
-            {
-                protocol: 'https',
-                hostname: 'images.unsplash.com',
-            },
-            {
-                protocol: 'https',
-                hostname: 'qjrvfgxyjflcwnfupxcy.supabase.co',
-            },{
-                protocol: "https",
-                hostname: "picsum.photos",
-        
-            },
-        ],
-    },
-
-};
-
-export default nextConfig;
-</file>
-
-<file path="admin/app/dashboard/branding/branding-form.tsx">
+## File: admin/app/dashboard/branding/branding-form.tsx
+````typescript
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -5955,9 +6527,10 @@ export default function BrandingForm({ product }: BrandingFormProps) {
     </Form>
   );
 }
-</file>
+````
 
-<file path="admin/app/dashboard/properties/data.ts">
+## File: admin/app/dashboard/properties/data.ts
+````typescript
 export const sampleProperties = [
   {
     id: "1",
@@ -6173,9 +6746,10 @@ export const sampleProperties = [
     virtualTourUrl: null,
   },
 ];
-</file>
+````
 
-<file path="admin/app/dashboard/submissions/page.tsx">
+## File: admin/app/dashboard/submissions/page.tsx
+````typescript
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { BrandingInquiriesTable } from "./BrandingInquiriesTable";
 import { LeaseApplicationsTable } from "./LeaseApplicationsTable";
@@ -6210,9 +6784,10 @@ export default async function SubmissionsPage() {
     </div>
   );
 }
-</file>
+````
 
-<file path="admin/app/dashboard/tenants/tenant/[id]/edit/page.tsx">
+## File: admin/app/dashboard/tenants/tenant/[id]/edit/page.tsx
+````typescript
 import {type Tenant } from "@/lib/validations/schemas";
 import { getTenantById } from "../../../actions";
 import TenantForm from "../../../tenant-form";
@@ -6231,9 +6806,10 @@ export default async function EditTenantPage({ params }: {
         <TenantForm tenant={tenant as Tenant } />
     );
 }
-</file>
+````
 
-<file path="admin/components/ui/input.tsx">
+## File: admin/components/ui/input.tsx
+````typescript
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
@@ -6259,9 +6835,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 Input.displayName = "Input";
 
 export { Input };
-</file>
+````
 
-<file path="admin/lib/supabase/client.ts">
+## File: admin/lib/supabase/client.ts
+````typescript
 "use client";
 import { createBrowserClient } from "@supabase/ssr";
 import type { Database } from "@/lib/types/database.types";
@@ -6276,9 +6853,10 @@ export function createClient() {
 export type SupabaseBrowserClient = ReturnType<
   typeof createClient
 >;
-</file>
+````
 
-<file path="admin/lib/supabase/server.ts">
+## File: admin/lib/supabase/server.ts
+````typescript
 "use server"
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
@@ -6310,257 +6888,10 @@ export const createClient = async () => {
 export type SupabaseServerClient = Awaited<
   ReturnType<typeof createClient>
 >;
-</file>
+````
 
-<file path="client/app/branding/actions.ts">
-'use server';
-
-import { createClient } from '@/lib/supabase/server';
-import { type Branding, brandingInquirySchema, type BrandingInquiry } from '@/lib/validations/schemas';
-import { revalidatePath } from 'next/cache';
-
-export async function getBrandingProducts(){
-  const supabase = await createClient();
-  const { data, error } = await supabase.from('branding').select('*');
-
-  if (error) {
-    console.error('Error fetching branding products:', error);
-    return [];
-  }
-
-  return data ;
-}
-
-export async function getBrandingProduct(id: string) {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from('branding')
-    .select('*')
-    .eq('id', id)
-    .single();
-
-  if (error) {
-    console.error('Error fetching branding product:', error);
-    return null;
-  }
-
-  return data ;
-}
-
-export async function createBrandingProduct(product: Branding) {
-  const supabase = await createClient();
-  const { is_featured, ...rest } = product;
-  const productForDb = { ...rest, is_featured : is_featured };
-
-  const { data, error } = await supabase.from('branding').insert([productForDb]);
-
-  if (error) {
-    console.error('Error creating branding product:', error);
-    return { error };
-  }
-
-  revalidatePath('/dashboard/branding');
-  return { data };
-}
-
-export async function updateBrandingProduct(
-  id: string,
-  product: Partial<Branding>,
-) {
-  const supabase = await createClient();
-  const { is_featured, ...rest } = product;
-
-  const updateData: { [key: string]: any } = { ...rest };
-  if (is_featured !== undefined) {
-    updateData.is_featured  = is_featured;
-  }
-
-  const { data, error } = await supabase
-    .from('branding')
-    .update(updateData)
-    .eq('id', id);
-
-  if (error) {
-    console.error('Error updating branding product:', error);
-    return { error };
-  }
-
-  revalidatePath('/dashboard/branding');
-  revalidatePath(`/dashboard/branding/brand/${id}`);
-  return { data };
-}
-
-export async function deleteBrandingProduct(id: string) {
-  const supabase = await createClient();
-  const { data, error } = await supabase.from('branding').delete().eq('id', id);
-
-  if (error) {
-    console.error('Error deleting branding product:', error);
-    return { error };
-  }
-
-  revalidatePath('/dashboard/branding');
-  return { data };
-}
-
-export async function submitBrandingInquiry(data: BrandingInquiry): Promise<{ success: boolean; error?: string }> {
-  const supabase = await createClient();
-
-  const validatedFields = brandingInquirySchema.safeParse(data);
-
-  if (!validatedFields.success) {
-    return {
-      success: false,
-      error: 'Invalid data provided.',
-    };
-  }
-
-  const { error } = await supabase.from('branding_inquiries').insert({
-    customer_name: validatedFields.data.name,
-    email: validatedFields.data.email,
-    company: validatedFields.data.company,
-    quantity: validatedFields.data.quantity,
-    message: validatedFields.data.message,
-    product_id: validatedFields.data.productId,
-    status: 'New', // Default status for new inquiries
-  });
-
-  if (error) {
-    console.error('Supabase error:', error);
-    return {
-      success: false,
-      error: 'An unexpected error occurred. Please try again.',
-    };
-  }
-
-  revalidatePath('/branding'); // Or a more specific path if you prefer
-
-  return {
-    success: true,
-  };
-}
-</file>
-
-<file path="client/app/branding/page.tsx">
-import { ArrowRight, Paintbrush } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { getBrandingProducts } from "./actions";
-import { type Branding } from "@/lib/validations/schemas";
-
-const ProductCard = ({
-  product,
-  is_featured ,
-}: {
-  product: Branding;
-  is_featured ?: boolean;
-}) => (
-  <Card
-    className={`overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col ${is_featured  ? "lg:flex-row" : ""}`}
-  >
-    <div
-      className={`relative ${is_featured  ? "h-56  lg:w-1/2" : "h-56"}`}
-    >
-      <Image
-        src={product.image ?? ''}
-        alt={product.title}
-        fill
-        className="object-cover"
-      />
-    </div>
-    <div
-      className={`p-6 flex flex-col justify-between ${is_featured  ? "lg:w-1/2" : ""}`}
-    >
-      <div>
-        <Badge variant="default" className="font-semibold mb-2">
-          {product.category}
-        </Badge>
-        <h3 className="text-2xl font-bold text-secondary">{product.title}</h3>
-        <p className="text-gray-600 mt-2 line-clamp-3">{product.description}</p>
-      </div>
-      <div className="mt-6">
-        <Link href={`/branding/${product.id}`}>
-          <Button variant="outline" className="w-full font-semibold">
-            View Product <ArrowRight className="h-4 w-4 ml-2" />
-          </Button>
-        </Link>
-      </div>
-    </div>
-  </Card>
-);
-
-export default async function BrandingPage() {
-  const products = await getBrandingProducts();
-  const featuredProducts = products.filter((p) => p.is_featured);
-  const otherProducts = products.filter((p) => !p.is_featured);
-
-  return (
-    <div className="animate-fade-in space-y-16">
-      {/* Header */}
-      <header
-        className="relative bg-secondary rounded-2xl shadow-2xl overflow-hidden -mt-4"
-        style={{
-          backgroundImage: `radial-gradient(circle at top right, #FFD70020, transparent), radial-gradient(circle at bottom left, #002147, #001a38)`,
-        }}
-      >
-        <Image
-          src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?q=80&w=2070&auto=format&fit=crop"
-          alt="Professional working on a branding project"
-          fill
-          className="object-cover opacity-30"
-        />
-        <div className="relative text-center p-12">
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-primary/80">
-            Letsheng Branding
-          </h1>
-          <p className="mt-6 text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto">
-            We translate your brand identity into tangible, professional-grade
-            assets that make an impact.
-          </p>
-          <div className="mt-10">
-            <Link href="/branding/t-shirt/order">
-              <Button size="lg" className="font-bold text-lg">
-                <Paintbrush className="h-5 w-5 mr-3" />
-                Start a Project
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </header>
-
-      {/* Featured Products */}
-      <section>
-        <h2 className="text-4xl font-extrabold text-secondary mb-8 text-center">
-          Featured Products
-        </h2>
-        <div className="space-y-8">
-          {featuredProducts.map((p) => (
-            <ProductCard key={p.id} product={p} is_featured  />
-          ))}
-        </div>
-      </section>
-
-      {/* Other Products */}
-      <section>
-        <h2 className="text-4xl font-extrabold text-secondary mb-8 text-center">
-          Our Full Catalog
-        </h2>
-        <div className="grid md:grid-cols-2 gap-8">
-          {otherProducts.map((p) => (
-            <ProductCard key={p.id} product={p} />
-          ))}
-        </div>
-      </section>
-    </div>
-  );
-}
-</file>
-
-<file path="client/app/properties/[id]/apply-to-lease/page.tsx">
+## File: client/app/properties/[id]/apply-to-lease/page.tsx
+````typescript
 'use client';
 
 import { Button } from "@/components/ui/button";
@@ -6697,9 +7028,10 @@ export default function ApplyToLeasePage() {
 
   return <ApplyToLeaseForm propertyId={property.id} propertyTitle={property.title} propertyPrice={property.price} />;
 }
-</file>
+````
 
-<file path="client/components/ui/input.tsx">
+## File: client/components/ui/input.tsx
+````typescript
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
@@ -6725,9 +7057,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 Input.displayName = "Input";
 
 export { Input };
-</file>
+````
 
-<file path="client/components/ui/label.tsx">
+## File: client/components/ui/label.tsx
+````typescript
 "use client";
 import * as LabelPrimitive from "@radix-ui/react-label";
 import { cva, type VariantProps } from "class-variance-authority";
@@ -6752,9 +7085,10 @@ const Label = React.forwardRef<
 Label.displayName = LabelPrimitive.Root.displayName;
 
 export { Label };
-</file>
+````
 
-<file path="client/components/ui/select.tsx">
+## File: client/components/ui/select.tsx
+````typescript
 import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons";
 import * as SelectPrimitive from "@radix-ui/react-select";
 import * as React from "react";
@@ -6874,9 +7208,10 @@ export {
   SelectItem,
   SelectSeparator,
 };
-</file>
+````
 
-<file path="client/components/ui/textarea.tsx">
+## File: client/components/ui/textarea.tsx
+````typescript
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
@@ -6901,9 +7236,10 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
 Textarea.displayName = "Textarea";
 
 export { Textarea };
-</file>
+````
 
-<file path="client/tailwind.config.ts">
+## File: client/tailwind.config.ts
+````typescript
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -6928,9 +7264,10 @@ const config: Config = {
   plugins: [],
 };
 export default config;
-</file>
+````
 
-<file path="admin/app/dashboard/branding/actions.ts">
+## File: admin/app/dashboard/branding/actions.ts
+````typescript
 'use server';
 
 import { createClient } from '@/lib/supabase/server';
@@ -7016,126 +7353,10 @@ export async function deleteBrandingProduct(
   revalidatePath('/dashboard/branding');
   return { success: true };
 }
-</file>
+````
 
-<file path="admin/app/dashboard/branding/page.tsx">
-import { Edit, Eye, MoreVertical, PlusCircle, Trash2 } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { getBrandingProducts } from "./actions";
-
-export default async function AdminBrandingPage() {
-  const products = await getBrandingProducts();
-  return (
-    <div>
-      <div className="flex items-center gap-4 mb-4">
-        <div className="flex-1">
-          <h1 className="text-2xl font-bold">Branding Command</h1>
-          <p className="text-muted-foreground">
-            Manage your branding portfolio.
-          </p>
-        </div>
-        <Link href="/dashboard/branding/new">
-          <Button>
-            <PlusCircle className="mr-2 h-4 w-4" />
-            Create New
-          </Button>
-        </Link>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-        {products.map((p) => (
-          <Card
-            key={p.id}
-            className="rounded-xl shadow-lg border-gray-200/50 overflow-hidden flex flex-col"
-          >
-            <div className="relative h-48">
-              <Link href={`/dashboard/branding/brand/${p.id}`}>
-                <Image
-                  src={p.image ?? ''}
-                  alt={p.title}
-                  fill
-                  className="object-cover"
-                />
-              </Link>
-              <div className="absolute top-2 right-2">
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="secondary" size="icon">
-                      <MoreVertical className="h-4 w-4" />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuItem asChild>
-                      <Link
-                        href={`/dashboard/branding/brand/${p.id}/edit`}
-                        className="flex items-center w-full"
-                      >
-                        <Edit className="h-4 w-4 mr-2" />
-                        Edit
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
-                      <Link
-                        href={`/dashboard/branding/brand/${p.id}`}
-                        className="flex items-center w-full"
-                      >
-                        <Eye className="h-4 w-4 mr-2" />
-                        View
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem className="text-red-500">
-                      <Trash2 className="h-4 w-4 mr-2" />
-                      Delete
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </div>
-            </div>
-
-            <CardHeader>
-              <div className="flex justify-between items-start">
-                <CardTitle className="text-2xl font-bold text-secondary leading-tight">
-                  {p.title}
-                </CardTitle>
-                <Badge
-                  variant={p.is_featured ? "default" : "secondary"}
-                  className="shrink-0"
-                >
-                  {p.is_featured ? "Featured" : "Standard"}
-                </Badge>
-              </div>
-              <CardDescription>{p.category}</CardDescription>
-            </CardHeader>
-
-            <CardContent className="flex-grow">
-              <p className="text-gray-700 leading-relaxed truncate">
-                {p.description}
-              </p>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-    </div>
-  );
-}
-</file>
-
-<file path="admin/app/dashboard/properties/property/[id]/edit/page.tsx">
+## File: admin/app/dashboard/properties/property/[id]/edit/page.tsx
+````typescript
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -7198,9 +7419,10 @@ export default async function EditPropertyPage({
     </div>
   );
 }
-</file>
+````
 
-<file path="admin/app/dashboard/tenants/page.tsx">
+## File: admin/app/dashboard/tenants/page.tsx
+````typescript
 import { Edit, Eye, MoreHorizontal, PlusCircle, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -7349,9 +7571,10 @@ export default async function AdminTenantsPage() {
     </div>
   );
 }
-</file>
+````
 
-<file path="admin/app/dashboard/tenants/tenant-form.tsx">
+## File: admin/app/dashboard/tenants/tenant-form.tsx
+````typescript
 'use client';
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -7656,9 +7879,10 @@ export default function TenantForm({ tenant, payments }: TenantFormProps) {
     </div>
   );
 }
-</file>
+````
 
-<file path="admin/components/layout/Header.tsx">
+## File: admin/components/layout/Header.tsx
+````typescript
 'use client';
 
 import {
@@ -7813,9 +8037,10 @@ const Header = () => {
 };
 
 export default Header;
-</file>
+````
 
-<file path="admin/components/ui/sheet.tsx">
+## File: admin/components/ui/sheet.tsx
+````typescript
 "use client";
 
 import * as SheetPrimitive from "@radix-ui/react-dialog";
@@ -7964,9 +8189,10 @@ export {
   SheetTitle,
   SheetDescription,
 };
-</file>
+````
 
-<file path="admin/proxy.ts">
+## File: admin/proxy.ts
+````typescript
 import { type NextRequest } from "next/server"
 import { updateSession } from "@/lib/supabase/proxy"
 
@@ -7986,9 +8212,10 @@ export const config = {
     "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 }
-</file>
+````
 
-<file path="client/app/branding/[productID]/order/page.tsx">
+## File: client/app/branding/[productID]/order/page.tsx
+````typescript
 import BrandingOrderForm from "@/components/branding/BrandingOrderForm";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getBrandingProduct } from "../../actions";
@@ -8069,9 +8296,302 @@ export default async function BrandingOrderPage({
     </div>
   );
 }
-</file>
+````
 
-<file path="client/components/branding/BrandingOrderForm.tsx">
+## File: client/app/branding/[productID]/page.tsx
+````typescript
+import { Eye, ShoppingCart, Star } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { getBrandingProduct } from "../actions";
+
+export default async function ProductPage({
+  params,
+}: {
+  params: Promise<{ productID: string }>;
+}) {
+  const { productID } = await params;
+  const product = await getBrandingProduct(productID);
+
+  if (!product) {
+    return <div>Product not found</div>;
+  }
+
+  return (
+    <div className="animate-fade-in">
+      <Card className="max-w-4xl mx-auto">
+        <CardHeader>
+          <div className="grid md:grid-cols-2 gap-12 items-start">
+            <div className="relative h-96 rounded-2xl shadow-lg overflow-hidden">
+              <Image
+                src={product.image ?? ''}
+                alt={product.title}
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div>
+              <Badge variant="default" className="font-semibold mb-2">
+                {product.category}
+              </Badge>
+              <h1 className="text-5xl font-extrabold text-secondary tracking-tight">
+                {product.title}
+              </h1>
+              <p className="mt-4 text-xl text-gray-600">
+                {product.description}
+              </p>
+
+              {product.specs && (product.specs as any[]).length > 0 && (
+                <Card className="mt-6">
+                  <CardHeader>
+                    <CardTitle>Specifications</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-2">
+                    {(product.specs as any[]).map((spec) => (
+                      <div
+                        key={spec.label}
+                        className="flex justify-between text-sm"
+                      >
+                        <span className="font-semibold text-gray-600">
+                          {spec.label}:
+                        </span>
+                        <span className="text-gray-800">{spec.value}</span>
+                      </div>
+                    ))}
+                  </CardContent>
+                </Card>
+              )}
+
+              <div className="mt-8 flex gap-4">
+                <Link href={`/branding/${product.id}/order`} className="flex-1">
+                  <Button size="lg" className="w-full font-bold text-lg">
+                    <ShoppingCart className="h-5 w-5 mr-3" />
+                    Order
+                  </Button>
+                </Link>
+
+              </div>
+            </div>
+          </div>
+        </CardHeader>
+        <CardContent className="mt-6">
+          {product.gallery && (product.gallery as any[]).length > 0 && (
+            <div className="mt-8">
+              <h3 className="text-2xl font-bold text-secondary mb-4">
+                Product Gallery
+              </h3>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                {(product.gallery as any[]).slice(0, 3).map((image) => (
+                  <div key={image.imageUrl} className="relative h-48">
+                    <Image
+                      src={image.imageUrl}
+                      alt={image.title}
+                      fill
+                      className="object-cover rounded-lg"
+                    />
+                    <div className="absolute bottom-0 left-0 bg-secondary/70 text-white p-2 w-full rounded-b-lg">
+                      <h4 className="font-bold text-primary">
+                        {image.title}
+                      </h4>
+                      <p className="text-sm">{image.description}</p>
+                    </div>
+                  </div>
+                ))}
+                {(product.gallery as any[]).length > 3 && (
+                  <Link
+                    href={`/branding/${product.id}/gallery`}
+                    className="relative h-48 flex items-center justify-center bg-gray-200 rounded-lg"
+                  >
+                    <Button>Show More</Button>
+                  </Link>
+                )}
+              </div>
+            </div>
+          )}
+
+          {product.reviews && (product.reviews as any[]).length > 0 && (
+            <div className="mt-8">
+              <h3 className="text-2xl font-bold text-secondary mb-4">
+                Reviews
+              </h3>
+              <div className="space-y-4">
+                {(product.reviews as any[]).map((review, index) => (
+                  <Card
+                    key={`${review.author}-${index}`}
+                    className="bg-gray-50/50"
+                  >
+                    <CardContent className="p-4">
+                      <div className="flex items-center mb-2">
+                        <div className="flex items-center">
+                          {[...Array(review.rating)].map((_, i) => (
+                            <Star
+                              key={`${review.author}-${index}-star-${i}`}
+                              className="h-5 w-5 text-yellow-400 fill-current"
+                            />
+                          ))}
+                        </div>
+                        <p className="ml-2 font-bold text-secondary">
+                          {review.author}
+                        </p>
+                      </div>
+                      <p className="text-gray-600">{review.comment}</p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          )}
+          <div className="mt-8 flex gap-4">
+            <Link href={`/branding/${product.id}/order`} className="flex-1">
+              <Button size="lg" className="w-full font-bold text-lg">
+                <ShoppingCart className="h-5 w-5 mr-3" />
+                Order Now
+              </Button>
+            </Link>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
+````
+
+## File: client/app/branding/actions.ts
+````typescript
+'use server';
+
+import { createClient } from '@/lib/supabase/server';
+import { type Branding, brandingInquirySchema, type BrandingInquiry } from '@/lib/validations/schemas';
+import { revalidatePath } from 'next/cache';
+
+export async function getBrandingProducts() {
+  const supabase = await createClient();
+  const { data, error } = await supabase.from('branding').select('*').order("is_featured", { ascending: false });
+
+  if (error) {
+    console.error('Error fetching branding products:', error);
+    return [];
+  }
+
+  return data;
+}
+
+export async function getBrandingProduct(id: string) {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from('branding')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if (error) {
+    console.error('Error fetching branding product:', error);
+    return null;
+  }
+
+  return data;
+}
+
+export async function createBrandingProduct(product: Branding) {
+  const supabase = await createClient();
+  const { is_featured, ...rest } = product;
+  const productForDb = { ...rest, is_featured: is_featured };
+
+  const { data, error } = await supabase.from('branding').insert([productForDb]);
+
+  if (error) {
+    console.error('Error creating branding product:', error);
+    return { error };
+  }
+
+  revalidatePath('/dashboard/branding');
+  return { data };
+}
+
+export async function updateBrandingProduct(
+  id: string,
+  product: Partial<Branding>,
+) {
+  const supabase = await createClient();
+  const { is_featured, ...rest } = product;
+
+  const updateData: { [key: string]: any } = { ...rest };
+  if (is_featured !== undefined) {
+    updateData.is_featured = is_featured;
+  }
+
+  const { data, error } = await supabase
+    .from('branding')
+    .update(updateData)
+    .eq('id', id);
+
+  if (error) {
+    console.error('Error updating branding product:', error);
+    return { error };
+  }
+
+  revalidatePath('/dashboard/branding');
+  revalidatePath(`/dashboard/branding/brand/${id}`);
+  return { data };
+}
+
+export async function deleteBrandingProduct(id: string) {
+  const supabase = await createClient();
+  const { data, error } = await supabase.from('branding').delete().eq('id', id);
+
+  if (error) {
+    console.error('Error deleting branding product:', error);
+    return { error };
+  }
+
+  revalidatePath('/dashboard/branding');
+  return { data };
+}
+
+export async function submitBrandingInquiry(data: BrandingInquiry): Promise<{ success: boolean; error?: string }> {
+  const supabase = await createClient();
+
+  const validatedFields = brandingInquirySchema.safeParse(data);
+
+  if (!validatedFields.success) {
+    return {
+      success: false,
+      error: 'Invalid data provided.',
+    };
+  }
+
+  const { error } = await supabase.from('branding_inquiries').insert({
+    customer_name: validatedFields.data.name,
+    email: validatedFields.data.email,
+    company: validatedFields.data.company,
+    quantity: validatedFields.data.quantity,
+    message: validatedFields.data.message,
+    product_id: validatedFields.data.productId,
+    status: 'New', // Default status for new inquiries
+  });
+
+  if (error) {
+    console.error('Supabase error:', error);
+    return {
+      success: false,
+      error: 'An unexpected error occurred. Please try again.',
+    };
+  }
+
+  revalidatePath('/branding'); // Or a more specific path if you prefer
+
+  return {
+    success: true,
+  };
+}
+````
+
+## File: client/components/branding/BrandingOrderForm.tsx
+````typescript
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -8274,9 +8794,10 @@ export default function BrandingOrderForm({ product }: BrandingOrderFormProps) {
     </Form>
   );
 }
-</file>
+````
 
-<file path="client/components/ui/form.tsx">
+## File: client/components/ui/form.tsx
+````typescript
 "use client";
 import { Slot } from "@radix-ui/react-slot";
 import React from "react";
@@ -8447,9 +8968,10 @@ export {
   FormMessage,
   FormField,
 };
-</file>
+````
 
-<file path="client/components/ui/sheet.tsx">
+## File: client/components/ui/sheet.tsx
+````typescript
 "use client";
 
 import * as SheetPrimitive from "@radix-ui/react-dialog";
@@ -8594,9 +9116,128 @@ export {
   SheetTitle,
   SheetDescription,
 };
-</file>
+````
 
-<file path="admin/app/dashboard/properties/actions.ts">
+## File: admin/app/dashboard/branding/page.tsx
+````typescript
+import { Edit, Eye, MoreVertical, PlusCircle, Trash2 } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { getBrandingProducts } from "./actions";
+
+export default async function AdminBrandingPage() {
+  const products = await getBrandingProducts();
+  return (
+    <div>
+      <div className="flex items-center gap-4 mb-4">
+        <div className="flex-1">
+          <h1 className="text-2xl font-bold">Branding Command</h1>
+          <p className="text-muted-foreground">
+            Manage your branding portfolio.
+          </p>
+        </div>
+        <Link href="/dashboard/branding/new">
+          <Button>
+            <PlusCircle className="mr-2 h-4 w-4" />
+            Create New
+          </Button>
+        </Link>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+        {products.map((p) => (
+          <Card
+            key={p.id}
+            className="rounded-xl shadow-lg border-gray-200/50 overflow-hidden flex flex-col"
+          >
+            <div className="relative aspect-square overflow-hidden">
+              <Link href={`/dashboard/branding/brand/${p.id}`}>
+                <Image
+                  src={p.image ?? ''}
+                  alt={p.title}
+                  fill
+                  className="object-cover"
+                />
+              </Link>
+              <div className="absolute top-2 right-2">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button size="icon">
+                      <MoreVertical className="h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem asChild>
+                      <Link
+                        href={`/dashboard/branding/brand/${p.id}/edit`}
+                        className="flex items-center w-full"
+                      >
+                        <Edit className="h-4 w-4 mr-2" />
+                        Edit
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link
+                        href={`/dashboard/branding/brand/${p.id}`}
+                        className="flex items-center w-full"
+                      >
+                        <Eye className="h-4 w-4 mr-2" />
+                        View
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="text-red-500">
+                      <Trash2 className="h-4 w-4 mr-2" />
+                      Delete
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+            </div>
+
+            <CardHeader>
+              <div className="flex justify-between items-start">
+                <CardTitle className="text-2xl font-bold text-secondary leading-tight">
+                  {p.title}
+                </CardTitle>
+                <Badge
+                  variant={p.is_featured ? "default" : "secondary"}
+                  className="shrink-0"
+                >
+                  {p.is_featured ? "Featured" : "Standard"}
+                </Badge>
+              </div>
+              <CardDescription>{p.category}</CardDescription>
+            </CardHeader>
+
+            <CardContent className="flex-grow">
+              <p className="text-gray-700 leading-relaxed truncate">
+                {p.description}
+              </p>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </div>
+  );
+}
+````
+
+## File: admin/app/dashboard/properties/actions.ts
+````typescript
 'use server';
 
 import { revalidatePath } from "next/cache";
@@ -8670,9 +9311,10 @@ export async function deleteProperty(id: string) {
 
   revalidatePath("/dashboard/properties");
 }
-</file>
+````
 
-<file path="admin/app/dashboard/submissions/BrandingInquiriesTable.tsx">
+## File: admin/app/dashboard/submissions/BrandingInquiriesTable.tsx
+````typescript
 'use client';
 
 import { MoreHorizontal } from 'lucide-react';
@@ -8884,9 +9526,10 @@ export function BrandingInquiriesTable({ inquiries }: BrandingInquiriesTableProp
     </>
   );
 }
-</file>
+````
 
-<file path="admin/app/dashboard/submissions/LeaseApplicationsTable.tsx">
+## File: admin/app/dashboard/submissions/LeaseApplicationsTable.tsx
+````typescript
 'use client';
 
 import { MoreHorizontal } from 'lucide-react';
@@ -9117,9 +9760,10 @@ export function LeaseApplicationsTable({
     </>
   );
 }
-</file>
+````
 
-<file path="client/app/globals.css">
+## File: client/app/globals.css
+````css
 @import "tailwindcss";
 
 @theme {
@@ -9184,9 +9828,10 @@ export function LeaseApplicationsTable({
   border: 1px solid rgba(255, 215, 0, 0.12);
   backdrop-filter: blur(6px);
 }
-</file>
+````
 
-<file path="client/components/ui/badge.tsx">
+## File: client/components/ui/badge.tsx
+````typescript
 import type { VariantProps } from "class-variance-authority";
 import { cva } from "class-variance-authority";
 import type * as React from "react";
@@ -9222,9 +9867,10 @@ function Badge({ className, variant, ...props }: BadgeProps) {
 }
 
 export { Badge, badgeVariants };
-</file>
+````
 
-<file path="client/components/ui/button.tsx">
+## File: client/components/ui/button.tsx
+````typescript
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
@@ -9279,9 +9925,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 Button.displayName = "Button";
 
 export { Button, buttonVariants };
-</file>
+````
 
-<file path="client/package.json">
+## File: client/package.json
+````json
 {
   "name": "my-app",
   "version": "0.1.0",
@@ -9331,9 +9978,34 @@ export { Button, buttonVariants };
     "typescript": "^5"
   }
 }
-</file>
+````
 
-<file path="admin/app/dashboard/properties/property-form.tsx">
+## File: admin/app/dashboard/layout.tsx
+````typescript
+import Header from "@/components/layout/Header";
+import Sidebar from "@/components/layout/Sidebar";
+
+export default function DashboardLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
+      <Sidebar />
+      <div className="flex flex-col relative ">
+        <Header />
+        <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
+          {children}
+        </main>
+      </div>
+    </div>
+  );
+}
+````
+
+## File: admin/app/dashboard/properties/property-form.tsx
+````typescript
 'use client';
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -9997,32 +10669,10 @@ export default function PropertyForm({ property }: PropertyFormProps) {
     </Form>
   );
 }
-</file>
+````
 
-<file path="admin/app/dashboard/layout.tsx">
-import Header from "@/components/layout/Header";
-import Sidebar from "@/components/layout/Sidebar";
-
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
-      <Sidebar />
-      <div className="flex flex-col relative ">
-        <Header />
-        <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
-          {children}
-        </main>
-      </div>
-    </div>
-  );
-}
-</file>
-
-<file path="admin/app/globals.css">
+## File: admin/app/globals.css
+````css
 @import "tailwindcss";
 
 @theme {
@@ -10090,9 +10740,10 @@ export default function DashboardLayout({
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(0, 0, 0, 0.06);
 }
-</file>
+````
 
-<file path="admin/app/page.tsx">
+## File: admin/app/page.tsx
+````typescript
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 
@@ -10107,9 +10758,10 @@ export default async function AdminHomePage() {
     redirect('/login')
   }
 }
-</file>
+````
 
-<file path="admin/app/dashboard/properties/new/page.tsx">
+## File: admin/app/dashboard/properties/new/page.tsx
+````typescript
 import PropertyForm from "../property-form";
 
 export default function NewPropertyPage() {
@@ -10120,9 +10772,10 @@ export default function NewPropertyPage() {
     </div>
   );
 }
-</file>
+````
 
-<file path="admin/app/dashboard/properties/property/[id]/page.tsx">
+## File: admin/app/dashboard/properties/property/[id]/page.tsx
+````typescript
 import {
   ArrowLeft,
   Bath,
@@ -10337,9 +10990,10 @@ export default async function PropertyDetailsPage({
     </div>
   );
 }
-</file>
+````
 
-<file path="admin/lib/types/database.types.ts">
+## File: admin/lib/types/database.types.ts
+````typescript
 export type Json =
   | string
   | number
@@ -10753,9 +11407,10 @@ export const Constants = {
     },
   },
 } as const
-</file>
+````
 
-<file path="client/components/layout/Footer.tsx">
+## File: client/components/layout/Footer.tsx
+````typescript
 import {
   Building2,
   Facebook,
@@ -10765,22 +11420,29 @@ import {
   MapPin,
   Phone,
   Printer,
+  Droplet,
+  Sparkles,
+  ExternalLink,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
 
 const FooterLink = ({
   href,
   icon,
   children,
+  isExternal = false,
 }: {
   href: string;
   icon: React.ReactElement;
   children: React.ReactNode;
+  isExternal?: boolean;
 }) => (
   <Link
     href={href}
-    className="flex items-center text-gray-300 hover:text-primary transition-colors group"
+    target={isExternal ? "_blank" : undefined}
+    className="flex items-center text-gray-400 hover:text-primary transition-colors group text-sm"
   >
     {icon}
     {children}
@@ -10798,7 +11460,7 @@ const SocialIcon = ({
     href={href}
     target="_blank"
     rel="noopener noreferrer"
-    className="text-gray-400 hover:text-primary transition-colors"
+    className="bg-white/5 p-2 rounded-lg text-gray-400 hover:text-primary hover:bg-white/10 transition-all"
   >
     {children}
   </Link>
@@ -10806,125 +11468,140 @@ const SocialIcon = ({
 
 export default function Footer() {
   return (
-    <footer className="bg-secondary text-white pt-16 px-4 pb-8">
+    <footer className="bg-secondary text-white pt-20 px-6 pb-8 border-t border-white/5">
       <div className="container mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-          <div className="md:col-span-1 flex flex-col items-center md:items-start">
-            <Image
-              src="/logo.jpg"
-              alt="Letsheng Holdings Logo"
-              width={80}
-              height={80}
-              className="rounded-full shadow-lg mb-4"
-            />
-            <h3 className="text-xl font-bold text-primary mb-2">
-              LETSHENG HOLDINGS
-            </h3>
-            <p className="text-gray-300 text-sm text-center md:text-left">
-              A premier holding company established in 2023, dedicated to
-              superior residential property management and high-fidelity
-              corporate branding solutions.
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+
+          {/* Brand Column */}
+          <div className="flex flex-col items-center md:items-start space-y-6">
+            <Link href="/" className="flex flex-col items-center md:items-start group">
+              <div className="relative mb-4">
+                <Image
+                  src="/logo.jpg"
+                  alt="Letsheng Holdings Logo"
+                  width={70}
+                  height={70}
+                  className="rounded-full shadow-2xl border-2 border-primary/20 group-hover:border-primary/50 transition-colors"
+                />
+              </div>
+              <h3 className="text-xl font-black tracking-tighter text-white">
+                LETSHENG<span className="text-primary"> HOLDINGS</span>
+              </h3>
+            </Link>
+            <p className="text-gray-400 text-sm text-center md:text-left leading-relaxed max-w-xs">
+              "Where comfort meets cleanliness and serenity."
+              Providing premium residential spaces and high-fidelity branding solutions across South Africa.
             </p>
-          </div>
-          <div>
-            <h3 className="text-lg font-semibold text-primary mb-4">
-              Site Map
-            </h3>
-            <ul className="space-y-3">
-              <li>
-                <FooterLink
-                  href="/properties"
-                  icon={
-                    <Building2 className="h-5 w-5 mr-3 text-primary/60 group-hover:text-primary transition-colors" />
-                  }
-                >
-                  Estates
-                </FooterLink>
-              </li>
-              <li>
-                <FooterLink
-                  href="/branding"
-                  icon={
-                    <Printer className="h-5 w-5 mr-3 text-primary/60 group-hover:text-primary transition-colors" />
-                  }
-                >
-                  Branding
-                </FooterLink>
-              </li>
-              <li>
-                <FooterLink
-                  href="/about"
-                  icon={
-                    <Info className="h-5 w-5 mr-3 text-primary/60 group-hover:text-primary transition-colors" />
-                  }
-                >
-                  About Us
-                </FooterLink>
-              </li>
-              <li>
-                <FooterLink
-                  href="/contact"
-                  icon={
-                    <Phone className="h-5 w-5 mr-3 text-primary/60 group-hover:text-primary transition-colors" />
-                  }
-                >
-                  Contact
-                </FooterLink>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="text-lg font-semibold text-primary mb-4">
-              Contact Information
-            </h3>
-            <ul className="space-y-3 text-sm">
-              <li className="flex items-start gap-3">
-                <MapPin className="h-5 w-5 text-primary/60 mt-1 flex-shrink-0" />
-                <span className="text-gray-300">
-                  39 Mvubu Street, Soshanguve South, Pretoria, 0152
-                </span>
-              </li>
-              <li className="flex items-center gap-3">
-                <Phone className="h-5 w-5 text-primary/60" />
-                <span className="text-gray-300">
-                  +27 76 348 9454 / +27 67 019 1941
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <Mail className="h-5 w-5 text-primary/60 mt-1 flex-shrink-0" />
-                <span className="text-gray-300 break-all">
-                  info@letshengholdings.co.za
-                </span>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="text-lg font-semibold text-primary mb-4">
-              Follow Our Journey
-            </h3>
-            <div className="flex space-x-4 mt-4">
+            <div className="flex space-x-3">
               <SocialIcon href="https://www.linkedin.com/company/letsheng-holdings">
-                <Linkedin className="h-6 w-6" />
+                <Linkedin className="h-5 w-5" />
               </SocialIcon>
               <SocialIcon href="https://www.facebook.com/profile.php?id=100088899263799">
-                <Facebook className="h-6 w-6" />
+                <Facebook className="h-5 w-5" />
               </SocialIcon>
             </div>
           </div>
+
+          {/* Business Divisions */}
+          <div className="flex flex-col items-center md:items-start">
+            <h3 className="text-sm font-bold uppercase tracking-widest text-primary mb-6">
+              Our Divisions
+            </h3>
+            <ul className="space-y-4">
+              <li>
+                <FooterLink href="/estates" icon={<Building2 className="h-4 w-4 mr-3 text-primary/60" />}>
+                  Letsheng Estates
+                </FooterLink>
+              </li>
+              <li>
+                <FooterLink href="/branding" icon={<Printer className="h-4 w-4 mr-3 text-primary/60" />}>
+                  Letsheng Print & Brand
+                </FooterLink>
+              </li>
+              <li className="flex items-center opacity-50">
+                <Sparkles className="h-4 w-4 mr-3 text-gray-500" />
+                <span className="text-sm text-gray-400 mr-2">Cleaning Solutions</span>
+                <Badge variant="outline" className="text-[10px] px-1 py-0 border-gray-500 text-gray-500">Soon</Badge>
+              </li>
+              <li className="flex items-center opacity-50">
+                <Droplet className="h-4 w-4 mr-3 text-gray-500" />
+                <span className="text-sm text-gray-400 mr-2">Bulk Water Supply</span>
+                <Badge variant="outline" className="text-[10px] px-1 py-0 border-gray-500 text-gray-500">Soon</Badge>
+              </li>
+            </ul>
+          </div>
+
+          {/* Quick Links */}
+          <div className="flex flex-col items-center md:items-start">
+            <h3 className="text-sm font-bold uppercase tracking-widest text-primary mb-6">
+              Company
+            </h3>
+            <ul className="space-y-4">
+              <li>
+                <FooterLink href="/about" icon={<Info className="h-4 w-4 mr-3 text-primary/60" />}>
+                  Our Story & Vision
+                </FooterLink>
+              </li>
+              <li>
+                <FooterLink href="/contact" icon={<Phone className="h-4 w-4 mr-3 text-primary/60" />}>
+                  Get in Touch
+                </FooterLink>
+              </li>
+              <li>
+                <FooterLink href="/waterDetergents" icon={<ExternalLink className="h-4 w-4 mr-3 text-primary/60" />}>
+                Water and Detergents
+                </FooterLink>
+              </li>
+            </ul>
+          </div>
+
+          {/* Contact Info */}
+          <div className="flex flex-col items-center md:items-start text-center md:text-left">
+            <h3 className="text-sm font-bold uppercase tracking-widest text-primary mb-6">
+              Headquarters
+            </h3>
+            <ul className="space-y-4">
+              <li className="flex items-start gap-3 justify-center md:justify-start">
+                <MapPin className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                <span className="text-gray-400 text-sm leading-relaxed">
+                  1294 MAHAMBA STREET PHOLA, OGIES, MPUMALANGA 2233
+                </span>
+              </li>
+              <li className="flex items-center gap-3 justify-center md:justify-start">
+                <Phone className="h-5 w-5 text-primary flex-shrink-0" />
+                <span className="text-gray-400 text-sm">
+                  +27 83 753 5424 / +27 83 222 692
+                </span>
+              </li>
+              <li className="flex items-center gap-3 justify-center md:justify-start">
+                <Mail className="h-5 w-5 text-primary flex-shrink-0" />
+                <span className="text-gray-400 text-sm break-all">
+                  kgotso@letshengholdings.co.za / elsie@letshengholdings.co.za
+                </span>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div className="border-t border-primary/20 mt-12 pt-6 text-center text-gray-400 text-sm">
-          <p>
-            &copy; {new Date().getFullYear()} LETSHENG HOLDINGS (Pty) Ltd. All
-            Rights Reserved.
+
+        {/* Bottom Bar */}
+        <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-gray-500 text-xs text-center md:text-left">
+            &copy; {new Date().getFullYear()} LETSHENG HOLDINGS (Pty) Ltd.
+            Reg: 2023/123456/07. All Rights Reserved.
           </p>
+          <div className="flex space-x-6 text-xs text-gray-500">
+            <Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-primary transition-colors">Terms of Service</Link>
+          </div>
         </div>
       </div>
     </footer>
   );
 }
-</file>
+````
 
-<file path="client/components/layout/Header.tsx">
+## File: client/components/layout/Header.tsx
+````typescript
 'use client';
 
 import { Menu } from "lucide-react";
@@ -10952,7 +11629,7 @@ const NavLink = ({
   <Link
     href={href}
     onClick={onLinkClick}
-    className="block md:inline-block px-3 py-2 rounded-md text-base font-medium hover:bg-primary/10 hover:text-primary transition-colors"
+    className="block md:inline-block px-3 py-2 rounded-md text-base font-medium md:text-primary hover:bg-primary/10 hover:text-primary transition-colors"
   >
     {children}
   </Link>
@@ -10988,9 +11665,13 @@ export default function Header() {
             <NavLink href="/branding" onLinkClick={onLinkClick}>
               Branding
             </NavLink>
+            <NavLink href="/waterDetergents" onLinkClick={onLinkClick}>
+              Water and Detergents
+            </NavLink>
             <NavLink href="/about" onLinkClick={onLinkClick}>
               About
             </NavLink>
+
           </nav>
           <div className="flex items-center gap-4">
             <Link href="/contact" className="hidden md:block">
@@ -11026,6 +11707,9 @@ export default function Header() {
                   <NavLink href="/branding" onLinkClick={onLinkClick}>
                     Branding
                   </NavLink>
+                  <NavLink href="/waterDetergents" onLinkClick={onLinkClick}>
+                    Water and Detergents
+                  </NavLink>
                   <NavLink href="/about" onLinkClick={onLinkClick}>
                     About Us
                   </NavLink>
@@ -11043,10 +11727,429 @@ export default function Header() {
     </header>
   );
 }
-</file>
+````
 
-<file path="client/lib/validations/schemas.ts">
+## File: client/lib/types/database.types.ts
+````typescript
+export type Json =
+  | string
+  | number
+  | boolean
+  | null
+  | { [key: string]: Json | undefined }
+  | Json[]
+
+export type Database = {
+  // Allows to automatically instantiate createClient with right options
+  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
+  __InternalSupabase: {
+    PostgrestVersion: "14.1"
+  }
+  public: {
+    Tables: {
+      branding: {
+        Row: {
+          category: string
+          created_at: string
+          description: string | null
+          gallery: Json | null
+          id: string
+          image: string | null
+          is_featured: boolean
+          reviews: Json | null
+          specs: Json | null
+          title: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          description?: string | null
+          gallery?: Json | null
+          id?: string
+          image?: string | null
+          is_featured?: boolean
+          reviews?: Json | null
+          specs?: Json | null
+          title: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string | null
+          gallery?: Json | null
+          id?: string
+          image?: string | null
+          is_featured?: boolean
+          reviews?: Json | null
+          specs?: Json | null
+          title?: string
+        }
+        Relationships: []
+      }
+      branding_inquiries: {
+        Row: {
+          company: string | null
+          created_at: string
+          customer_name: string
+          email: string
+          id: string
+          message: string | null
+          product_id: string | null
+          quantity: number
+          status: string
+        }
+        Insert: {
+          company?: string | null
+          created_at?: string
+          customer_name: string
+          email: string
+          id?: string
+          message?: string | null
+          product_id?: string | null
+          quantity: number
+          status?: string
+        }
+        Update: {
+          company?: string | null
+          created_at?: string
+          customer_name?: string
+          email?: string
+          id?: string
+          message?: string | null
+          product_id?: string | null
+          quantity?: number
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "branding_inquiries_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "branding"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      lease_applications: {
+        Row: {
+          applicant_name: string
+          created_at: string
+          email: string
+          employment: string | null
+          id: string
+          message: string | null
+          phone: string | null
+          property_id: string | null
+          status: string
+        }
+        Insert: {
+          applicant_name: string
+          created_at?: string
+          email: string
+          employment?: string | null
+          id?: string
+          message?: string | null
+          phone?: string | null
+          property_id?: string | null
+          status?: string
+        }
+        Update: {
+          applicant_name?: string
+          created_at?: string
+          email?: string
+          employment?: string | null
+          id?: string
+          message?: string | null
+          phone?: string | null
+          property_id?: string | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lease_applications_product_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      payments: {
+        Row: {
+          amount: number
+          created_at: string
+          date: string
+          id: string
+          status: string
+          tenant_id: string | null
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          date: string
+          id?: string
+          status?: string
+          tenant_id?: string | null
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          date?: string
+          id?: string
+          status?: string
+          tenant_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payments_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      properties: {
+        Row: {
+          availability: boolean
+          bathrooms: number | null
+          bedrooms: number | null
+          created_at: string
+          description: string | null
+          features: Json | null
+          gallery: Json | null
+          id: string
+          image_url: string | null
+          is_featured: boolean
+          location: string | null
+          price: number
+          reviews: Json | null
+          title: string
+          type: string | null
+        }
+        Insert: {
+          availability?: boolean
+          bathrooms?: number | null
+          bedrooms?: number | null
+          created_at?: string
+          description?: string | null
+          features?: Json | null
+          gallery?: Json | null
+          id?: string
+          image_url?: string | null
+          is_featured?: boolean
+          location?: string | null
+          price: number
+          reviews?: Json | null
+          title: string
+          type?: string | null
+        }
+        Update: {
+          availability?: boolean
+          bathrooms?: number | null
+          bedrooms?: number | null
+          created_at?: string
+          description?: string | null
+          features?: Json | null
+          gallery?: Json | null
+          id?: string
+          image_url?: string | null
+          is_featured?: boolean
+          location?: string | null
+          price?: number
+          reviews?: Json | null
+          title?: string
+          type?: string | null
+        }
+        Relationships: []
+      }
+      tenants: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          email: string | null
+          id: string
+          lease_end_date: string | null
+          name: string
+          property_id: string | null
+          status: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          lease_end_date?: string | null
+          name: string
+          property_id?: string | null
+          status?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          lease_end_date?: string | null
+          name?: string
+          property_id?: string | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tenants_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      [_ in never]: never
+    }
+    Enums: {
+      product_category: "Corporate Apparel" | "Promotional Merchandise"
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
+  }
+}
+
+type DatabaseWithoutInternals = Omit<Database, "__InternalSupabase">
+
+type DefaultSchema = DatabaseWithoutInternals[Extract<keyof Database, "public">]
+
+export type Tables<
+  DefaultSchemaTableNameOrOptions extends
+    | keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])
+    | { schema: keyof DatabaseWithoutInternals },
+  TableName extends DefaultSchemaTableNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
+        DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
+    : never = never,
+> = DefaultSchemaTableNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
+      DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])[TableName] extends {
+      Row: infer R
+    }
+    ? R
+    : never
+  : DefaultSchemaTableNameOrOptions extends keyof (DefaultSchema["Tables"] &
+        DefaultSchema["Views"])
+    ? (DefaultSchema["Tables"] &
+        DefaultSchema["Views"])[DefaultSchemaTableNameOrOptions] extends {
+        Row: infer R
+      }
+      ? R
+      : never
+    : never
+
+export type TablesInsert<
+  DefaultSchemaTableNameOrOptions extends
+    | keyof DefaultSchema["Tables"]
+    | { schema: keyof DatabaseWithoutInternals },
+  TableName extends DefaultSchemaTableNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
+    : never = never,
+> = DefaultSchemaTableNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+      Insert: infer I
+    }
+    ? I
+    : never
+  : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
+    ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {
+        Insert: infer I
+      }
+      ? I
+      : never
+    : never
+
+export type TablesUpdate<
+  DefaultSchemaTableNameOrOptions extends
+    | keyof DefaultSchema["Tables"]
+    | { schema: keyof DatabaseWithoutInternals },
+  TableName extends DefaultSchemaTableNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
+    : never = never,
+> = DefaultSchemaTableNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+      Update: infer U
+    }
+    ? U
+    : never
+  : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
+    ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {
+        Update: infer U
+      }
+      ? U
+      : never
+    : never
+
+export type Enums<
+  DefaultSchemaEnumNameOrOptions extends
+    | keyof DefaultSchema["Enums"]
+    | { schema: keyof DatabaseWithoutInternals },
+  EnumName extends DefaultSchemaEnumNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]
+    : never = never,
+> = DefaultSchemaEnumNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"][EnumName]
+  : DefaultSchemaEnumNameOrOptions extends keyof DefaultSchema["Enums"]
+    ? DefaultSchema["Enums"][DefaultSchemaEnumNameOrOptions]
+    : never
+
+export type CompositeTypes<
+  PublicCompositeTypeNameOrOptions extends
+    | keyof DefaultSchema["CompositeTypes"]
+    | { schema: keyof DatabaseWithoutInternals },
+  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
+    : never = never,
+> = PublicCompositeTypeNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
+  : PublicCompositeTypeNameOrOptions extends keyof DefaultSchema["CompositeTypes"]
+    ? DefaultSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
+    : never
+
+export const Constants = {
+  public: {
+    Enums: {
+      product_category: ["Corporate Apparel", "Promotional Merchandise"],
+    },
+  },
+} as const
+````
+
+## File: client/lib/validations/schemas.ts
+````typescript
 import { z } from "zod";
+import { Database } from "../types/database.types";
 
 // Schema for a single gallery item
 export const galleryItemSchema = z.object({
@@ -11149,894 +12252,10 @@ export const leaseApplicationSchema = z.object({
 });
 
 export type LeaseApplication = z.infer<typeof leaseApplicationSchema>;
-</file>
+````
 
-<file path="client/app/about/page.tsx">
-import { Building, Printer, Recycle, Star, Users } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import type React from "react";
-
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
-// ==============================================
-// Page-Specific Components
-// ==============================================
-
-const Pillar = ({
-  icon,
-  title,
-  children,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  children: React.ReactNode;
-}) => (
-  <div className="text-center">
-    <div className="w-16 h-16 bg-primary/10 text-secondary rounded-full mx-auto flex items-center justify-center mb-4">
-      {icon}
-    </div>
-    <h4 className="font-bold text-lg text-secondary">{title}</h4>
-    <p className="text-sm text-gray-600 mt-1">{children}</p>
-  </div>
-);
-
-const LeadershipCard = ({
-  imageUrl,
-  name,
-  title,
-  bio,
-}: {
-  imageUrl: string;
-  name: string;
-  title: string;
-  bio: string;
-}) => (
-  <Card className="text-center">
-    <div className="relative h-48 w-48 rounded-full mx-auto mt-6 overflow-hidden shadow-lg">
-      <Image src={imageUrl} alt={name} fill className="object-cover" />
-    </div>
-    <CardHeader>
-      <CardTitle className="text-secondary">{name}</CardTitle>
-      <p className="text-primary font-semibold">{title}</p>
-    </CardHeader>
-    <CardContent>
-      <p className="text-gray-600 text-sm">{bio}</p>
-    </CardContent>
-  </Card>
-);
-
-const TimelineEvent = ({
-  year,
-  title,
-  description,
-  last = false,
-}: {
-  year: string;
-  title: string;
-  description: string;
-  last?: boolean;
-}) => (
-  <div className="flex">
-    <div className="flex flex-col items-center mr-6">
-      <div className="w-4 h-4 bg-primary rounded-full" />
-      {!last && <div className="w-px h-full bg-primary/30" />}
-    </div>
-    <div className="pb-12">
-      <p className="font-bold text-primary">{year}</p>
-      <h4 className="font-semibold text-lg text-secondary">{title}</h4>
-      <p className="text-gray-600 text-sm">{description}</p>
-    </div>
-  </div>
-);
-
-const FaqItem = ({
-  question,
-  answer,
-}: {
-  question: string;
-  answer: string;
-}) => (
-  <div className="border-b border-gray-200 py-4">
-    <h5 className="font-semibold text-lg text-secondary">{question}</h5>
-    <p className="text-gray-600 mt-2">{answer}</p>
-  </div>
-);
-
-// ==============================================
-// Main Page Component
-// ==============================================
-
-export default function AboutPage() {
-  return (
-    <div className="animate-fade-in space-y-24">
-      <header className="text-center">
-        <h1 className="text-5xl font-extrabold text-secondary tracking-tight">
-          Our Philosophy: The Letsheng Standard
-        </h1>
-        <p className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
-          Built on unwavering discipline and operational excellence, we deliver
-          unparalleled reliability and value across our synergistic divisions.
-        </p>
-      </header>
-
-      <main className="space-y-24">
-        <section>
-          <h2 className="text-4xl font-extrabold text-secondary text-center mb-12">
-            Meet Our Leadership
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            <LeadershipCard
-              imageUrl="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop"
-              name="Mr Kgotso Sondo"
-              title="CEO & Founder"
-              bio="Visionary leader with 20+ years in real estate development and strategic investment."
-            />
-            <LeadershipCard
-              imageUrl="https://images.unsplash.com/photo-1581093458791-9a7ca5a61cdb?q=80&w=2070&auto=format&fit=crop"
-              name="Jane Smith"
-              title="Head of Estates"
-              bio="Expert in property management, ensuring all our residential spaces meet the highest standards of quality."
-            />
-            <LeadershipCard
-              imageUrl="https://images.unsplash.com/photo-1554774853-7f2182d3a3c9?q=80&w=1974&auto=format&fit=crop"
-              name="Sam Wilson"
-              title="Director of Print Services"
-              bio="Master of print production, committed to delivering branding materials with uncompromising accuracy."
-            />
-          </div>
-        </section>
-
-        <section>
-          <h2 className="text-4xl font-extrabold text-secondary text-center mb-12">
-            Timeline of Excellence
-          </h2>
-          <div className="max-w-2xl mx-auto">
-            <TimelineEvent
-              year="2015"
-              title="Founding of Letsheng Holdings"
-              description="Established with a vision to create integrated value in property and business services."
-            />
-            <TimelineEvent
-              year="2018"
-              title="Acquisition of First Major Residential Estate"
-              description="Expanded into premium property management with the acquisition of the Soshanguve South complex."
-            />
-            <TimelineEvent
-              year="2020"
-              title="Launch of High-Fidelity Printing Division"
-              description="Diversified our service portfolio by launching Letsheng Print, offering state-of-the-art corporate branding solutions."
-            />
-            <TimelineEvent
-              year="2023"
-              title="Reached 500+ Residential Units Under Management"
-              description="A major milestone reflecting our commitment to quality and tenant satisfaction."
-              last
-            />
-          </div>
-        </section>
-
-        <section>
-          <h2 className="text-4xl font-extrabold text-secondary text-center mb-12">
-            Two Divisions, One Vision
-          </h2>
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <Card className="shadow-lg">
-              <CardHeader className="flex-row items-center">
-                <Building className="h-8 w-8 text-secondary" />
-                <CardTitle className="ml-4 text-2xl font-semibold text-secondary">
-                  Letsheng Estates
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600">
-                  Our Estates division is dedicated to curating and managing
-                  premium residential properties for peace of mind and long-term
-                  value.
-                </p>
-              </CardContent>
-            </Card>
-            <Card className="shadow-lg">
-              <CardHeader className="flex-row items-center">
-                <Printer className="h-8 w-8 text-secondary" />
-                <CardTitle className="ml-4 text-2xl font-semibold text-secondary">
-                  Letsheng Print
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600">
-                  Our Printing division provides high-fidelity branding and
-                  marketing materials, combining technology and craftsmanship.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
-
-        <section className="bg-gray-50/80 rounded-2xl py-16">
-          <div className="max-w-4xl mx-auto text-center">
-            <h3 className="text-3xl font-extrabold text-secondary mb-6">
-              Synergy in Action: A Case Study
-            </h3>
-            <p className="text-lg text-gray-600 mb-8">
-              A leading construction firm partnered with us to lease a block of
-              residential units for their executive team. Impressed by our
-              professionalism, they entrusted Letsheng Print with a complete
-              re-brand of their corporate apparel and on-site banners, ensuring
-              brand consistency and quality across the board.
-            </p>
-            <Link href="/contact">
-              <Button variant="default">Explore Our Integrated Services</Button>
-            </Link>
-          </div>
-        </section>
-
-        <section>
-          <h3 className="text-4xl font-extrabold text-secondary text-center mb-12">
-            Sustainability and Community Impact
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto text-center">
-            <Pillar
-              icon={<Recycle className="h-8 w-8" />}
-              title="Eco-Friendly Materials"
-            >
-              We prioritize the use of recycled and sustainable materials in our
-              print production, minimizing our environmental footprint.
-            </Pillar>
-            <Pillar
-              icon={<Building className="h-8 w-8" />}
-              title="Energy-Efficient Properties"
-            >
-              Our estates are managed with a focus on energy efficiency, from
-              smart lighting to water-saving fixtures.
-            </Pillar>
-            <Pillar
-              icon={<Users className="h-8 w-8" />}
-              title="Local Partnerships"
-            >
-              We actively partner with local suppliers and contractors,
-              contributing to the economic growth of our communities.
-            </Pillar>
-          </div>
-        </section>
-
-        <section>
-          <h2 className="text-4xl font-extrabold text-secondary text-center mb-12">
-            Client Success Stories
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <Card className="bg-white/60 p-6">
-              <div className="flex items-center mb-4">
-                <Star className="h-5 w-5 text-yellow-400 fill-current mr-1" />
-                <p className="font-bold text-secondary">
-                  Exceptional Management
-                </p>
-              </div>
-              <p className="text-gray-600 italic">
-                \"The management team\'s unwavering discipline is evident in how
-                well the property is maintained. It’s a pleasure to live here.\"
-              </p>
-              <p className="text-right mt-4 font-semibold">
-                - Residential Tenant
-              </p>
-            </Card>
-            <Card className="bg-white/60 p-6">
-              <div className="flex items-center mb-4">
-                <Star className="h-5 w-5 text-yellow-400 fill-current mr-1" />
-                <p className="font-bold text-secondary">
-                  Uncompromising Color Accuracy
-                </p>
-              </div>
-              <p className="text-gray-600 italic">
-                \"We rely on Letsheng for all our corporate branding. Their
-                color accuracy is second to none, which is critical for our
-                brand integrity.\"
-              </p>
-              <p className="text-right mt-4 font-semibold">
-                - Corporate Client
-              </p>
-            </Card>
-          </div>
-        </section>
-
-        <section className="bg-gray-50/80 rounded-2xl py-16">
-          <h2 className="text-4xl font-extrabold text-secondary text-center mb-12">
-            The Letsheng Standard Explained (FAQ)
-          </h2>
-          <div className="max-w-4xl mx-auto">
-            <FaqItem
-              question="What are the standard lease terms for your properties?"
-              answer="Our standard lease is for 12 months, but we offer flexible terms based on client needs. All terms are clearly outlined in our transparent tenancy agreements."
-            />
-            <FaqItem
-              question="What is the average timeline for a corporate apparel order?"
-              answer="Timelines vary by order size, but a standard order is typically completed within 7-10 business days after digital proof approval."
-            />
-            <FaqItem
-              question="How does the 'Digital Proof' process work?"
-              answer="Before any production begins, we provide a detailed digital mock-up of your design for your approval. This ensures complete satisfaction with the final product."
-            />
-          </div>
-        </section>
-
-        <section>
-          <Card className="bg-secondary text-white rounded-2xl p-6 md:p-12 shadow-2xl text-center">
-            <CardTitle className="text-4xl font-bold">
-              Partner with Excellence
-            </CardTitle>
-            <CardContent className="max-w-2xl mx-auto pt-6">
-              <p className="text-gray-300 text-lg">
-                For enterprise-level print programs, property management
-                inquiries, or strategic partnerships, connect with our Business
-                Development office.
-              </p>
-              <Link href="/contact">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="mt-8 font-bold text-white border-white hover:bg-white hover:text-secondary transition-transform transform hover:scale-105"
-                >
-                  Contact Business Services
-                </Button>
-              </Link>
-            </CardContent>
-          </Card>
-        </section>
-      </main>
-    </div>
-  );
-}
-</file>
-
-<file path="client/lib/types/database.types.ts">
-export type Json =
-  | string
-  | number
-  | boolean
-  | null
-  | { [key: string]: Json | undefined }
-  | Json[]
-
-export type Database = {
-  // Allows to automatically instantiate createClient with right options
-  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
-  __InternalSupabase: {
-    PostgrestVersion: "14.1"
-  }
-  public: {
-    Tables: {
-      branding: {
-        Row: {
-          category: string
-          created_at: string
-          description: string | null
-          gallery: Json | null
-          id: string
-          image: string | null
-          is_featured: boolean
-          reviews: Json | null
-          specs: Json | null
-          title: string
-        }
-        Insert: {
-          category: string
-          created_at?: string
-          description?: string | null
-          gallery?: Json | null
-          id?: string
-          image?: string | null
-          is_featured?: boolean
-          reviews?: Json | null
-          specs?: Json | null
-          title: string
-        }
-        Update: {
-          category?: string
-          created_at?: string
-          description?: string | null
-          gallery?: Json | null
-          id?: string
-          image?: string | null
-          is_featured?: boolean
-          reviews?: Json | null
-          specs?: Json | null
-          title?: string
-        }
-        Relationships: []
-      }
-      branding_inquiries: {
-        Row: {
-          company: string | null
-          created_at: string
-          customer_name: string
-          email: string
-          id: string
-          message: string | null
-          product_id: string | null
-          quantity: number
-          status: string
-        }
-        Insert: {
-          company?: string | null
-          created_at?: string
-          customer_name: string
-          email: string
-          id?: string
-          message?: string | null
-          product_id?: string | null
-          quantity: number
-          status?: string
-        }
-        Update: {
-          company?: string | null
-          created_at?: string
-          customer_name?: string
-          email?: string
-          id?: string
-          message?: string | null
-          product_id?: string | null
-          quantity?: number
-          status?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "branding_inquiries_product_id_fkey"
-            columns: ["product_id"]
-            isOneToOne: false
-            referencedRelation: "branding"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      lease_applications: {
-        Row: {
-          applicant_name: string
-          created_at: string
-          email: string
-          employment: string | null
-          id: string
-          message: string | null
-          phone: string | null
-          property_id: string | null
-          status: string
-        }
-        Insert: {
-          applicant_name: string
-          created_at?: string
-          email: string
-          employment?: string | null
-          id?: string
-          message?: string | null
-          phone?: string | null
-          property_id?: string | null
-          status?: string
-        }
-        Update: {
-          applicant_name?: string
-          created_at?: string
-          email?: string
-          employment?: string | null
-          id?: string
-          message?: string | null
-          phone?: string | null
-          property_id?: string | null
-          status?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "lease_applications_product_id_fkey"
-            columns: ["property_id"]
-            isOneToOne: false
-            referencedRelation: "properties"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      payments: {
-        Row: {
-          amount: number
-          created_at: string
-          date: string
-          id: string
-          status: string
-          tenant_id: string | null
-        }
-        Insert: {
-          amount: number
-          created_at?: string
-          date: string
-          id?: string
-          status?: string
-          tenant_id?: string | null
-        }
-        Update: {
-          amount?: number
-          created_at?: string
-          date?: string
-          id?: string
-          status?: string
-          tenant_id?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "payments_tenant_id_fkey"
-            columns: ["tenant_id"]
-            isOneToOne: false
-            referencedRelation: "tenants"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      properties: {
-        Row: {
-          availability: boolean
-          bathrooms: number | null
-          bedrooms: number | null
-          created_at: string
-          description: string | null
-          features: Json | null
-          gallery: Json | null
-          id: string
-          image_url: string | null
-          is_featured: boolean
-          location: string | null
-          price: number
-          reviews: Json | null
-          title: string
-          type: string | null
-        }
-        Insert: {
-          availability?: boolean
-          bathrooms?: number | null
-          bedrooms?: number | null
-          created_at?: string
-          description?: string | null
-          features?: Json | null
-          gallery?: Json | null
-          id?: string
-          image_url?: string | null
-          is_featured?: boolean
-          location?: string | null
-          price: number
-          reviews?: Json | null
-          title: string
-          type?: string | null
-        }
-        Update: {
-          availability?: boolean
-          bathrooms?: number | null
-          bedrooms?: number | null
-          created_at?: string
-          description?: string | null
-          features?: Json | null
-          gallery?: Json | null
-          id?: string
-          image_url?: string | null
-          is_featured?: boolean
-          location?: string | null
-          price?: number
-          reviews?: Json | null
-          title?: string
-          type?: string | null
-        }
-        Relationships: []
-      }
-      tenants: {
-        Row: {
-          avatar_url: string | null
-          created_at: string
-          email: string | null
-          id: string
-          lease_end_date: string | null
-          name: string
-          property_id: string | null
-          status: string
-        }
-        Insert: {
-          avatar_url?: string | null
-          created_at?: string
-          email?: string | null
-          id?: string
-          lease_end_date?: string | null
-          name: string
-          property_id?: string | null
-          status?: string
-        }
-        Update: {
-          avatar_url?: string | null
-          created_at?: string
-          email?: string | null
-          id?: string
-          lease_end_date?: string | null
-          name?: string
-          property_id?: string | null
-          status?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "tenants_property_id_fkey"
-            columns: ["property_id"]
-            isOneToOne: false
-            referencedRelation: "properties"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-    }
-    Views: {
-      [_ in never]: never
-    }
-    Functions: {
-      [_ in never]: never
-    }
-    Enums: {
-      product_category: "Corporate Apparel" | "Promotional Merchandise"
-    }
-    CompositeTypes: {
-      [_ in never]: never
-    }
-  }
-}
-
-type DatabaseWithoutInternals = Omit<Database, "__InternalSupabase">
-
-type DefaultSchema = DatabaseWithoutInternals[Extract<keyof Database, "public">]
-
-export type Tables<
-  DefaultSchemaTableNameOrOptions extends
-    | keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])
-    | { schema: keyof DatabaseWithoutInternals },
-  TableName extends DefaultSchemaTableNameOrOptions extends {
-    schema: keyof DatabaseWithoutInternals
-  }
-    ? keyof (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
-        DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
-    : never = never,
-> = DefaultSchemaTableNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals
-}
-  ? (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
-      DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])[TableName] extends {
-      Row: infer R
-    }
-    ? R
-    : never
-  : DefaultSchemaTableNameOrOptions extends keyof (DefaultSchema["Tables"] &
-        DefaultSchema["Views"])
-    ? (DefaultSchema["Tables"] &
-        DefaultSchema["Views"])[DefaultSchemaTableNameOrOptions] extends {
-        Row: infer R
-      }
-      ? R
-      : never
-    : never
-
-export type TablesInsert<
-  DefaultSchemaTableNameOrOptions extends
-    | keyof DefaultSchema["Tables"]
-    | { schema: keyof DatabaseWithoutInternals },
-  TableName extends DefaultSchemaTableNameOrOptions extends {
-    schema: keyof DatabaseWithoutInternals
-  }
-    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
-    : never = never,
-> = DefaultSchemaTableNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals
-}
-  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-      Insert: infer I
-    }
-    ? I
-    : never
-  : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
-    ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {
-        Insert: infer I
-      }
-      ? I
-      : never
-    : never
-
-export type TablesUpdate<
-  DefaultSchemaTableNameOrOptions extends
-    | keyof DefaultSchema["Tables"]
-    | { schema: keyof DatabaseWithoutInternals },
-  TableName extends DefaultSchemaTableNameOrOptions extends {
-    schema: keyof DatabaseWithoutInternals
-  }
-    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
-    : never = never,
-> = DefaultSchemaTableNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals
-}
-  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-      Update: infer U
-    }
-    ? U
-    : never
-  : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
-    ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {
-        Update: infer U
-      }
-      ? U
-      : never
-    : never
-
-export type Enums<
-  DefaultSchemaEnumNameOrOptions extends
-    | keyof DefaultSchema["Enums"]
-    | { schema: keyof DatabaseWithoutInternals },
-  EnumName extends DefaultSchemaEnumNameOrOptions extends {
-    schema: keyof DatabaseWithoutInternals
-  }
-    ? keyof DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]
-    : never = never,
-> = DefaultSchemaEnumNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals
-}
-  ? DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"][EnumName]
-  : DefaultSchemaEnumNameOrOptions extends keyof DefaultSchema["Enums"]
-    ? DefaultSchema["Enums"][DefaultSchemaEnumNameOrOptions]
-    : never
-
-export type CompositeTypes<
-  PublicCompositeTypeNameOrOptions extends
-    | keyof DefaultSchema["CompositeTypes"]
-    | { schema: keyof DatabaseWithoutInternals },
-  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
-    schema: keyof DatabaseWithoutInternals
-  }
-    ? keyof DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
-    : never = never,
-> = PublicCompositeTypeNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals
-}
-  ? DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
-  : PublicCompositeTypeNameOrOptions extends keyof DefaultSchema["CompositeTypes"]
-    ? DefaultSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
-    : never
-
-export const Constants = {
-  public: {
-    Enums: {
-      product_category: ["Corporate Apparel", "Promotional Merchandise"],
-    },
-  },
-} as const
-</file>
-
-<file path="admin/app/dashboard/properties/page.tsx">
-import {
-  Bath,
-  Bed,
-  CircleDollarSign,
-  Edit,
-  Eye,
-  Home,
-  MoreVertical,
-  Trash2,
-} from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { getProperties } from "./actions";
-
-export default async function AdminPropertiesPage() {
-  const properties = await getProperties();
-
-  return (
-    <div>
-      <div className="flex items-center gap-4 mb-4">
-        <div className="flex-1">
-          <h1 className="text-2xl font-bold">Estates Command</h1>
-          <p className="text-muted-foreground">
-            Manage your real estate portfolio.
-          </p>
-        </div>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-        {properties.map((p) => (
-          <Card
-            key={p.id}
-            className="rounded-xl shadow-lg border-gray-200/50 overflow-hidden flex flex-col"
-          >
-            <div className="relative h-48">
-              <Link href={`/dashboard/properties/property/${p.id}`}>
-                <Image
-                  src={p.image_url || ""}
-                  alt={p.title}
-                  fill
-                  className="object-cover"
-                />
-              </Link>
-              <div className="absolute top-2 right-2">
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="default" size="icon">
-                      <MoreVertical className="h-4 w-4" />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuItem>
-                      <Link
-                        href={`/dashboard/properties/property/${p.id}/edit`}
-                        className="flex items-center w-full"
-                      >
-                        <Edit className="h-4 w-4 mr-2" />
-                        Edit
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>
-                      <Eye className="h-4 w-4 mr-2" />
-                      View
-                    </DropdownMenuItem>
-                    <DropdownMenuItem className="text-red-500">
-                      <Trash2 className="h-4 w-4 mr-2" />
-                      Delete
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </div>
-            </div>
-
-            <CardHeader>
-              <div className="flex justify-between items-start">
-                <CardTitle className="text-2xl font-bold text-secondary leading-tight">
-                  {p.title}
-                </CardTitle>
-                <Badge
-                  variant={p.availability ? "default" : "destructive"}
-                  className="shrink-0"
-                >
-                  {p.availability ? "Available" : "Occupied"}
-                </Badge>
-              </div>
-              <p className="text-sm text-gray-500 pt-1">{p.location}</p>
-            </CardHeader>
-
-            <CardContent className="flex-grow">
-              <div className="flex items-center text-gray-600 space-x-4 mb-4">
-                <div className="flex items-center">
-                  <Bed className="h-5 w-5 mr-2" />
-                  <span>{p.bedrooms}</span>
-                </div>
-                <div className="flex items-center">
-                  <Bath className="h-5 w-5 mr-2" />
-                  <span>{p.bathrooms}</span>
-                </div>
-                <div className="flex items-center">
-                  <Home className="h-5 w-5 mr-2" />
-                  <span>{p.type}</span>
-                </div>
-              </div>
-              <p className="text-gray-700 leading-relaxed truncate">
-                {p.description}
-              </p>
-              <div className="mt-6 flex items-center text-2xl font-bold text-secondary">
-                <CircleDollarSign className="h-6 w-6 mr-2 text-primary" />R
-                {p.price.toLocaleString()}
-                <span className="text-sm font-normal text-gray-500 ml-2">
-                  / month
-                </span>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-    </div>
-  );
-}
-</file>
-
-<file path="admin/app/dashboard/page.tsx">
+## File: admin/app/dashboard/page.tsx
+````typescript
 import {
     AlertCircle,
     ArrowUpRight,
@@ -12204,9 +12423,142 @@ import {
       </div>
     );
   }
-</file>
+````
 
-<file path="admin/app/login/page.tsx">
+## File: admin/app/dashboard/properties/page.tsx
+````typescript
+import {
+  Bath,
+  Bed,
+  CircleDollarSign,
+  Edit,
+  Eye,
+  Home,
+  MoreVertical,
+  Trash2,
+} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { getProperties } from "./actions";
+
+export default async function AdminPropertiesPage() {
+  const properties = await getProperties();
+
+  return (
+    <div>
+      <div className="flex items-center gap-4 mb-4">
+        <div className="flex-1">
+          <h1 className="text-2xl font-bold">Estates Command</h1>
+          <p className="text-muted-foreground">
+            Manage your real estate portfolio.
+          </p>
+        </div>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+        {properties.map((p) => (
+          <Card
+            key={p.id}
+            className="rounded-xl shadow-lg border-gray-200/50 overflow-hidden flex flex-col"
+          >
+            <div className="relative h-48">
+              <Link href={`/dashboard/properties/property/${p.id}`}>
+                <Image
+                  src={p.image_url || ""}
+                  alt={p.title}
+                  fill
+                  className="object-cover"
+                />
+              </Link>
+              <div className="absolute top-2 right-2">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="default" size="icon">
+                      <MoreVertical className="h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem>
+                      <Link
+                        href={`/dashboard/properties/property/${p.id}/edit`}
+                        className="flex items-center w-full"
+                      >
+                        <Edit className="h-4 w-4 mr-2" />
+                        Edit
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                      <Eye className="h-4 w-4 mr-2" />
+                      View
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="text-red-500">
+                      <Trash2 className="h-4 w-4 mr-2" />
+                      Delete
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+            </div>
+
+            <CardHeader>
+              <div className="flex justify-between items-start">
+                <CardTitle className="text-2xl font-bold text-secondary leading-tight">
+                  {p.title}
+                </CardTitle>
+                <Badge
+                  variant={p.availability ? "default" : "destructive"}
+                  className="shrink-0"
+                >
+                  {p.availability ? "Available" : "Occupied"}
+                </Badge>
+              </div>
+              <p className="text-sm text-gray-500 pt-1">{p.location}</p>
+            </CardHeader>
+
+            <CardContent className="flex-grow">
+              <div className="flex items-center text-gray-600 space-x-4 mb-4">
+                <div className="flex items-center">
+                  <Bed className="h-5 w-5 mr-2" />
+                  <span>{p.bedrooms}</span>
+                </div>
+                <div className="flex items-center">
+                  <Bath className="h-5 w-5 mr-2" />
+                  <span>{p.bathrooms}</span>
+                </div>
+                <div className="flex items-center">
+                  <Home className="h-5 w-5 mr-2" />
+                  <span>{p.type}</span>
+                </div>
+              </div>
+              <p className="text-gray-700 leading-relaxed truncate">
+                {p.description}
+              </p>
+              <div className="mt-6 flex items-center text-2xl font-bold text-secondary">
+                <CircleDollarSign className="h-6 w-6 mr-2 text-primary" />R
+                {p.price.toLocaleString()}
+                <span className="text-sm font-normal text-gray-500 ml-2">
+                  / month
+                </span>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </div>
+  );
+}
+````
+
+## File: admin/app/login/page.tsx
+````typescript
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -12345,9 +12697,654 @@ export default function LoginPage() {
     </div>
   );
 }
-</file>
+````
 
-<file path="client/app/layout.tsx">
+## File: client/app/about/page.tsx
+````typescript
+import { 
+  Building, 
+  Droplet, 
+  Lightbulb, 
+  Printer, 
+  ShieldCheck, 
+  Sparkles, 
+  Star, 
+  Target, 
+  Users, 
+  ChevronRight, 
+  Zap,
+  Globe,
+  MapPin,
+  CheckCircle2,
+  TrendingUp
+} from "lucide-react";
+import Link from "next/link";
+import type React from "react";
+
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+
+// ==============================================
+// Page-Specific Components
+// ==============================================
+
+const Pillar = ({
+  icon,
+  title,
+  children,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  children: React.ReactNode;
+}) => (
+  <div className="text-center group">
+    <div className="w-16 h-16 bg-primary/10 text-secondary rounded-full mx-auto flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+      {icon}
+    </div>
+    <h4 className="font-bold text-lg text-secondary">{title}</h4>
+    <p className="text-sm text-gray-600 mt-1 leading-relaxed">{children}</p>
+  </div>
+);
+
+const LeadershipCard = ({
+  name,
+  title,
+  bio,
+}: {
+  name: string;
+  title: string;
+  bio: string;
+}) => (
+  <Card className="text-center pt-6 shadow-md border-none bg-white/50 backdrop-blur-sm">
+    <CardHeader className="pb-2">
+      <CardTitle className="text-secondary text-2xl">{name}</CardTitle>
+      <p className="text-primary font-semibold">{title}</p>
+    </CardHeader>
+    <CardContent>
+      <p className="text-gray-600 text-sm leading-relaxed">{bio}</p>
+    </CardContent>
+  </Card>
+);
+
+const InfoSection = ({ title, subtitle, children, className = "" }: { title: string; subtitle?: string; children: React.ReactNode; className?: string }) => (
+  <section className={`space-y-12 ${className}`}>
+    <div className="text-center space-y-4">
+      <h2 className="text-4xl font-extrabold text-secondary tracking-tight">{title}</h2>
+      {subtitle && <p className="text-gray-600 max-w-2xl mx-auto">{subtitle}</p>}
+    </div>
+    {children}
+  </section>
+);
+
+// ==============================================
+// Main Page Component
+// ==============================================
+
+export default function AboutPage() {
+  return (
+    <div className="animate-fade-in space-y-24 pb-20">
+      {/* Hero Header */}
+      <header className="text-center pt-10 px-4">
+        <Badge variant="outline" className="mb-4 py-1 px-4 text-primary border-primary/30 uppercase tracking-widest text-xs">
+          Est. 2023 • Mpumalanga, SA
+        </Badge>
+        <h1 className="text-5xl md:text-7xl font-extrabold text-secondary tracking-tight mb-6">
+          The Letsheng Standard
+        </h1>
+        <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          Letsheng Holdings is an innovative South African enterprise providing 
+          premium housing, high-fidelity branding, and essential community services. 
+          We are driven by a simple philosophy: <span className="text-secondary font-semibold italic">"Where comfort meets cleanliness and serenity."</span>
+        </p>
+      </header>
+
+      <main className="space-y-32">
+
+        {/* Vision & Mission */}
+        <section className="px-4">
+          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            <Card className="shadow-xl border-none bg-gradient-to-br from-white to-gray-50">
+              <CardHeader className="flex-row items-center space-x-4 pb-2">
+                <div className="p-3 bg-secondary/10 rounded-xl">
+                    <Target className="h-8 w-8 text-secondary" />
+                </div>
+                <CardTitle className="text-2xl font-bold text-secondary">Our Mission</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-600 leading-relaxed">
+                  To deliver innovative, affordable, and reliable services that address the growing demand for housing, cleanliness, and water security, while simultaneously empowering businesses through high-quality branding materials. We prioritize customer satisfaction and community wellbeing above all else.
+                </p>
+              </CardContent>
+            </Card>
+            <Card className="shadow-xl border-none bg-gradient-to-br from-white to-gray-50">
+              <CardHeader className="flex-row items-center space-x-4 pb-2">
+                <div className="p-3 bg-primary/10 rounded-xl">
+                    <Lightbulb className="h-8 w-8 text-primary" />
+                </div>
+                <CardTitle className="text-2xl font-bold text-secondary">Our Vision</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-600 leading-relaxed">
+                  To become South Africa's most trusted provider of modern living spaces, impactful corporate branding, and reliable essential services. We envision a future where our integrated solutions make our clients' lives easier, more secure, and highly successful.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+
+        {/* The Synergy Story - NEW */}
+        <InfoSection 
+          title="Integrated Excellence" 
+          subtitle="How our divisions work together to elevate your lifestyle and business."
+          className="max-w-6xl mx-auto px-4"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              <h3 className="text-2xl font-bold text-secondary">One Company, Complete Solutions</h3>
+              <p className="text-gray-600 leading-relaxed">
+                At Letsheng Holdings, we believe that quality of life and business success are built on the same foundation: reliability. 
+                Whether we are providing a private sanctuary for a young professional or crafting the corporate identity for a growing firm, 
+                our approach remains the same—combining modern technology with genuine craftsmanship.
+              </p>
+              <ul className="space-y-3">
+                {[
+                  "Properties managed with tenant-first technology",
+                  "Branding produced with high-fidelity accuracy",
+                  "Logistics infrastructure supporting nationwide delivery",
+                  "Future-proof utility security (Jojo tanks & solar)"
+                ].map((item, index) => (
+                  <li key={index} className="flex items-center text-gray-700 font-medium">
+                    <CheckCircle2 className="h-5 w-5 text-primary mr-3" /> {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="bg-secondary/5 p-8 rounded-3xl border border-secondary/10">
+              <div className="grid sm:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-4">
+                <div className="p-4 bg-white rounded-2xl shadow-sm text-center">
+                  <Globe className="h-8 w-8 text-primary mx-auto mb-2" />
+                  <p className="text-xs font-bold uppercase text-gray-400">Reach</p>
+                  <p className="text-lg font-bold text-secondary">National</p>
+                </div>
+                <div className="p-4 bg-white rounded-2xl shadow-sm text-center">
+                  <Users className="h-8 w-8 text-primary mx-auto mb-2" />
+                  <p className="text-xs font-bold uppercase text-gray-400">Focus</p>
+                  <p className="text-lg font-bold text-secondary">Community</p>
+                </div>
+                <div className="p-4 bg-white rounded-2xl shadow-sm text-center">
+                  <TrendingUp className="h-8 w-8 text-primary mx-auto mb-2" />
+                  <p className="text-xs font-bold uppercase text-gray-400">Growth</p>
+                  <p className="text-lg font-bold text-secondary">200% YoY</p>
+                </div>
+                <div className="p-4 bg-white rounded-2xl shadow-sm text-center">
+                  <MapPin className="h-8 w-8 text-primary mx-auto mb-2" />
+                  <p className="text-xs font-bold uppercase text-gray-400">Base</p>
+                  <p className="text-lg font-bold text-secondary">Mpumalanga</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </InfoSection>
+
+        {/* Why Choose Us / Differentiators */}
+        <InfoSection title="The Letsheng Advantage" subtitle="What sets our integrated divisions apart from the rest.">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto px-4">
+            <div className="p-6 rounded-2xl bg-white shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+              <ShieldCheck className="h-10 w-10 text-primary mb-4" />
+              <h4 className="font-bold text-lg mb-2">Unmatched Privacy</h4>
+              <p className="text-sm text-gray-600">Our rental units prioritize your personal space with en-suite bathrooms and private facilities as standard.</p>
+            </div>
+            <div className="p-6 rounded-2xl bg-white shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+              <Zap className="h-10 w-10 text-primary mb-4" />
+              <h4 className="font-bold text-lg mb-2">Utility Security</h4>
+              <p className="text-sm text-gray-600">Equipped with Jojo tanks and backup systems, we ensure municipal outages don't disrupt your daily life.</p>
+            </div>
+            <div className="p-6 rounded-2xl bg-white shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+              <Printer className="h-10 w-10 text-primary mb-4" />
+              <h4 className="font-bold text-lg mb-2">High-Fidelity Branding</h4>
+              <p className="text-sm text-gray-600">Our digital proofing and premium inks ensure 100% brand accuracy for your corporate identity.</p>
+            </div>
+            <div className="p-6 rounded-2xl bg-white shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+              <Globe className="h-10 w-10 text-primary mb-4" />
+              <h4 className="font-bold text-lg mb-2">National Logistics</h4>
+              <p className="text-sm text-gray-600">We maintain the infrastructure to deliver branding projects and services across all nine provinces.</p>
+            </div>
+          </div>
+        </InfoSection>
+
+        {/* Synergistic Divisions */}
+        <section className="bg-secondary/5 rounded-[3rem] py-20 px-6 mx-4">
+          <InfoSection title="Our Strategic Pillars" subtitle="Four divisions, one commitment to excellence.">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+              <Card className="border-none shadow-lg">
+                <CardHeader>
+                  <Building className="h-10 w-10 text-primary mb-2" />
+                  <CardTitle>Letsheng Estates</CardTitle>
+                  <Badge className="bg-green-100 text-green-700 hover:bg-green-100 border-none w-fit">Active Division</Badge>
+                </CardHeader>
+                <CardContent className="text-sm text-gray-600">
+                  Modern, secure rental units tailored for the working class. Includes en-suite bathrooms, carports, and consistent water supply.
+                </CardContent>
+              </Card>
+
+              <Card className="border-none shadow-lg">
+                <CardHeader>
+                  <Printer className="h-10 w-10 text-primary mb-2" />
+                  <CardTitle>Letsheng Print</CardTitle>
+                  <Badge className="bg-green-100 text-green-700 hover:bg-green-100 border-none w-fit">Active Division</Badge>
+                </CardHeader>
+                <CardContent className="text-sm text-gray-600">
+                  Precision branding and marketing materials. We combine technology and craftsmanship to deliver apparel, banners, and more.
+                </CardContent>
+              </Card>
+
+              <Card className="border-none shadow-lg opacity-80">
+                <CardHeader>
+                  <Sparkles className="h-10 w-10 text-gray-400 mb-2" />
+                  <CardTitle>Cleaning Solutions</CardTitle>
+                  <Badge variant="secondary" className="w-fit">Upcoming</Badge>
+                </CardHeader>
+                <CardContent className="text-sm text-gray-600">
+                  Industrial-grade bulk detergents for schools and offices. Promoting nationwide hygiene at an affordable price point.
+                </CardContent>
+              </Card>
+
+              <Card className="border-none shadow-lg opacity-80">
+                <CardHeader>
+                  <Droplet className="h-10 w-10 text-gray-400 mb-2" />
+                  <CardTitle>Bulk Water Supply</CardTitle>
+                  <Badge variant="secondary" className="w-fit">Upcoming</Badge>
+                </CardHeader>
+                <CardContent className="text-sm text-gray-600">
+                  Safe, purified water distribution for rural communities and businesses to ensure consistent water security.
+                </CardContent>
+              </Card>
+            </div>
+          </InfoSection>
+        </section>
+
+        {/* Future Outlook / Timeline */}
+        <InfoSection title="Our Growth Roadmap" subtitle="Strategic expansion plans through 2029.">
+          <div className="max-w-4xl mx-auto relative px-6">
+            <div className="absolute left-8 top-0 bottom-0 w-px bg-gray-200 hidden md:block" />
+            
+            <div className="space-y-12">
+              {[
+                { 
+                  title: "Facility Expansion", 
+                  desc: "Acquiring more properties and increasing the count of affordable rental units across new provinces." 
+                },
+                { 
+                  title: "Premium Housing Launch", 
+                  desc: "Developing semi-luxury units for professionals seeking higher-end living solutions in urban hubs." 
+                },
+                { 
+                  title: "Digital Transformation", 
+                  desc: "Launching a tenant portal for payments and an e-commerce platform for our branding and supply services." 
+                },
+                { 
+                  title: "Sustainable Infrastructure", 
+                  desc: "Implementing solar-powered water systems and eco-friendly manufacturing for our industrial products." 
+                }
+              ].map((step, i) => (
+                <div key={i} className="relative md:pl-16">
+                  <div className="hidden md:block absolute left-6 top-2 w-4 h-4 rounded-full bg-primary border-4 border-white shadow-sm" />
+                  <h4 className="font-bold text-xl text-secondary">{step.title}</h4>
+                  <p className="text-gray-600 leading-relaxed">{step.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </InfoSection>
+
+        {/* Core Values */}
+        <InfoSection title="Our Core Values">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-5xl mx-auto px-4">
+            <Pillar icon={<ShieldCheck className="h-8 w-8" />} title="Honesty">
+              Building long-lasting trust through total transparency in every lease and every print project.
+            </Pillar>
+            <Pillar icon={<Lightbulb className="h-8 w-8" />} title="Innovation">
+              Constantly upgrading our facilities and print technology to stay ahead of market demands.
+            </Pillar>
+            <Pillar icon={<Users className="h-8 w-8" />} title="Team Work">
+              Uplifting South African communities through the collective effort of our diverse, talented team.
+            </Pillar>
+          </div>
+        </InfoSection>
+
+        {/* Leadership Section - Text Focused */}
+        <InfoSection title="Strategic Leadership" subtitle="The minds behind our national expansion.">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto px-4">
+            <LeadershipCard
+              name="Kgotso Sondo"
+              title="CEO & Founder"
+              bio="Directing the strategic vision and scaling Letsheng Holdings as a national force in property and industrial sectors."
+            />
+            <LeadershipCard
+              name="Operations Team"
+              title="Service Coordination"
+              bio="Ensuring quality control across our estates and high-fidelity accuracy in our branding production house."
+            />
+            <LeadershipCard
+              name="Admin & Client Support"
+              title="Compliance & Support"
+              bio="Dedicated to handling tenant relations, branding inquiries, and maintaining our high regulatory standards."
+            />
+          </div>
+        </InfoSection>
+
+        {/* Split CTA Section */}
+        <section className="max-w-7xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="group bg-secondary rounded-[2.5rem] p-12 text-white flex flex-col justify-between hover:scale-[1.02] transition-all duration-300 shadow-2xl relative overflow-hidden">
+              <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
+                 <Building className="h-32 w-32" />
+              </div>
+              <div className="relative z-10">
+                <h3 className="text-4xl text-primary font-bold mb-4 tracking-tight">Looking for a Home?</h3>
+                <p className="text-gray-300 text-lg mb-8 max-w-sm leading-relaxed">Secure your spot in one of our private, modern rental units today. Explore our latest vacancies.</p>
+              </div>
+              <Link href="/estates" className="relative z-10 inline-flex items-center text-primary text-xl font-bold hover:gap-3 transition-all">
+                Browse Properties <ChevronRight className="ml-1 h-6 w-6" />
+              </Link>
+            </div>
+            
+            <div className="group bg-primary rounded-[2.5rem] p-12 text-white flex flex-col justify-between hover:scale-[1.02] transition-all duration-300 shadow-2xl relative overflow-hidden">
+               <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
+                 <Printer className="h-32 w-32 text-secondary" />
+              </div>
+              <div className="relative z-10">
+                <h3 className="text-4xl font-bold mb-4 tracking-tight text-secondary">Need Branding?</h3>
+                <p className="text-blue-100 text-lg mb-8 max-w-sm leading-relaxed">From apparel to large scale signage, we bring your corporate vision to life with high-fidelity printing.</p>
+              </div>
+              <Link href="/branding" className="relative z-10 inline-flex items-center text-secondary text-xl font-bold hover:gap-3 transition-all">
+                Start a Project <ChevronRight className="ml-1 h-6 w-6" />
+              </Link>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  );
+}
+````
+
+## File: admin/app/layout.tsx
+````typescript
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+
+import "./globals.css";
+import { Toaster } from "@/components/ui/toaster";
+import { createClient } from "@/lib/supabase/server";
+import { redirect } from "next/navigation";
+
+const inter = Inter({ subsets: ["latin"] });
+
+export const metadata: Metadata = {
+  title: "Admin Dashboard",
+  description: "Manage your properties and tenants with ease.",
+};
+
+export default async function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
+  const supabase = await createClient()
+  const { data, error } = await supabase.auth.getUser()
+  console.log('layout', data,error )
+  // if (error || !data.user) {
+  //   redirect('/login')
+  // }
+  return (
+    <html lang="en">
+      <body className={inter.className}>
+        {children}
+        <Toaster />
+      </body>
+    </html>
+  );
+}
+````
+
+## File: admin/package.json
+````json
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build --turbopack",
+    "start": "next start",
+    "lint": "biome check --write ",
+    "typecheck": "tsc --noEmit",
+    "format": "biome format --write"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
+    "@radix-ui/react-avatar": "^1.1.11",
+    "@radix-ui/react-dialog": "^1.1.15",
+    "@radix-ui/react-dropdown-menu": "^2.1.16",
+    "@radix-ui/react-icons": "^1.3.2",
+    "@radix-ui/react-label": "^2.1.8",
+    "@radix-ui/react-select": "^2.2.6",
+    "@radix-ui/react-separator": "^1.1.8",
+    "@radix-ui/react-slot": "^1.2.4",
+    "@radix-ui/react-switch": "^1.2.6",
+    "@radix-ui/react-tabs": "^1.1.13",
+    "@supabase/ssr": "^0.9.0",
+    "@supabase/supabase-js": "^2.99.0",
+    "class-variance-authority": "^0.7.1",
+    "lucide-react": "^0.575.0",
+    "next": "16.1.6",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-hook-form": "^7.71.2",
+    "sonner": "^2.0.7",
+    "supabase": "^2.77.0",
+    "tailwind-merge": "^3.5.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.2.0",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20.19.35",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "babel-plugin-react-compiler": "1.0.0",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
+````
+
+## File: client/app/branding/page.tsx
+````typescript
+import {
+  Paintbrush,
+  Tag,
+  Clock,
+  CheckCircle2,
+  CircleDollarSign,
+  ArrowRight,
+  Zap,
+  Layers
+} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+import { getBrandingProducts } from "./actions";
+
+function BrandingHero() {
+  return (
+    <section className="relative overflow-hidden bg-white pt-16 pb-12 md:pt-24 md:pb-20">
+      <div className="absolute top-0 left-0 -translate-y-12 -translate-x-12 blur-3xl opacity-10 pointer-events-none">
+        <div className="aspect-square h-[500px] rounded-full bg-primary" />
+      </div>
+
+      <div className="container relative z-10 mx-auto px-6 text-center">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/5 border border-secondary/10 mb-6">
+          <Layers className="h-4 w-4 text-primary" />
+          <span className="text-[10px] font-bold uppercase tracking-widest text-secondary">
+            Custom Corporate Identity
+          </span>
+        </div>
+
+        <h1 className="text-5xl md:text-7xl font-extrabold text-secondary tracking-tight mb-6">
+          Letsheng <span className="text-primary">Branding</span>
+        </h1>
+
+        <p className="max-w-2xl mx-auto text-lg md:text-xl text-gray-600 leading-relaxed mb-10">
+          We translate your vision into tangible professional assets. From high-quality
+          apparel to full-scale corporate identity kits, we build the visual
+          tools for your business growth.
+        </p>
+
+        <div className="flex flex-wrap items-center justify-center gap-6 mb-12 text-sm font-medium text-gray-500">
+          <div className="flex items-center gap-2">
+            <Paintbrush className="h-5 w-5 text-primary" />
+            <span>Custom Design</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Zap className="h-5 w-5 text-primary" />
+            <span>Rapid Production</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default async function BrandingPage() {
+  const products = await getBrandingProducts();
+
+  return (
+    <div className="animate-fade-in">
+      <BrandingHero />
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+        {products.map((p) => (
+          <Card
+            key={p.id}
+            className="rounded-xl shadow-lg border-gray-200/50 overflow-hidden flex flex-col transition-all hover:shadow-xl"
+          >
+            <div className="relative aspect-square overflow-hidden">
+              <Link href={`/branding/${p.id}`}>
+                <Image
+                  src={p.image ?? ""}
+                  alt={p.title}
+                  fill
+                  className="object-cover"
+                />
+                {p.is_featured && (
+                  <div className="absolute top-4 left-4">
+                    <Badge className="bg-primary text-secondary font-bold">
+                      Featured
+                    </Badge>
+                  </div>
+                )}
+              </Link>
+            </div>
+
+            <CardHeader>
+              <div className="flex justify-between items-start">
+                <CardTitle className="text-2xl font-bold text-secondary leading-tight">
+                  {p.title}
+                </CardTitle>
+                <Badge variant="outline" className="shrink-0 border-primary text-primary bg-primary/5">
+                  {p.category}
+                </Badge>
+              </div>
+              <p className="text-sm text-gray-500 pt-1">Professional Identity Solutions</p>
+            </CardHeader>
+
+            <CardContent className="flex-grow">
+              <div className="flex items-center text-gray-600 space-x-4 mb-4">
+                <div className="flex items-center text-sm">
+                  <Tag className="h-4 w-4 mr-2 text-primary" />
+                  <span>Premium</span>
+                </div>
+                <div className="flex items-center text-sm">
+                  <Clock className="h-4 w-4 mr-2 text-primary" />
+                  <span>Quick</span>
+                </div>
+                <div className="flex items-center text-sm">
+                  <CheckCircle2 className="h-4 w-4 mr-2 text-primary" />
+                  <span>Bulk Ready</span>
+                </div>
+              </div>
+
+              <p className="text-gray-700 leading-relaxed line-clamp-2 mb-6">
+                {p.description}
+              </p>
+
+              {/* Simplified Specifications List */}
+              <div className="space-y-2 pt-4">
+                <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Specifications</p>
+                {(p.specs as any[]).slice(0, 3).map((spec) => (
+                  <div key={spec.label} className="flex justify-between text-sm border-b border-gray-50 pb-1">
+                    <span className="text-gray-500">{spec.label}</span>
+                    <span className="font-medium text-secondary">{spec.value}</span>
+                  </div>
+                ))}
+              </div>
+
+
+            </CardContent>
+
+            <CardFooter className="bg-gray-50/50 px-6 py-4 flex items-center justify-between mt-auto ">
+              <Link href={`/branding/${p.id}`}>
+                <Button size="sm" variant="outline">View Catalog</Button>
+              </Link>
+              <Link href={`/branding/${p.id}/order`}>
+                <Button size="sm" variant="default">
+                  Get a Quote <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+            </CardFooter>
+          </Card>
+        ))}
+      </div>
+
+      {/* Trust Banner */}
+      <section className="mt-20 p-8 rounded-2xl bg-secondary text-white">
+        <div className="max-w-4xl mx-auto text-center space-y-6">
+          <h2 className="text-3xl text-primary font-bold">Custom Branding Workflow</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-4">
+            <div>
+              <div className="text-primary font-black text-xl mb-1">01. Quote</div>
+              <p className="text-sm text-gray-400">Tailored estimate in 24 hours.</p>
+            </div>
+            <div>
+              <div className="text-primary font-black text-xl mb-1">02. Proof</div>
+              <p className="text-sm text-gray-400">Approve designs before we print.</p>
+            </div>
+            <div>
+              <div className="text-primary font-black text-xl mb-1">03. Deliver</div>
+              <p className="text-sm text-gray-400">Fast nationwide delivery.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+````
+
+## File: client/app/layout.tsx
+````typescript
 import "./globals.css";
 
 import type { Metadata } from "next";
@@ -12403,7 +13400,7 @@ export default function RootLayout({
       <body className={`${inter.className} bg-gray-50/80 text-gray-800`}>
         <div className="flex flex-col min-h-screen">
           <Header />
-          <main className="flex-grow container mx-auto px-4 md:px-8 py-12">
+          <main className="flex-grow container mx-auto px-2 md:px-8 py-12">
             {children}
           </main>
           <Footer />
@@ -12414,96 +13411,10 @@ export default function RootLayout({
     </html>
   );
 }
-</file>
+````
 
-<file path="admin/app/layout.tsx">
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-
-import "./globals.css";
-import { Toaster } from "@/components/ui/toaster";
-import { createClient } from "@/lib/supabase/server";
-import { redirect } from "next/navigation";
-
-const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: "Admin Dashboard",
-  description: "Manage your properties and tenants with ease.",
-};
-
-export default async function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
-  const supabase = await createClient()
-  const { data, error } = await supabase.auth.getUser()
-  console.log('layout', data,error )
-  // if (error || !data.user) {
-  //   redirect('/login')
-  // }
-  return (
-    <html lang="en">
-      <body className={inter.className}>
-        {children}
-        <Toaster />
-      </body>
-    </html>
-  );
-}
-</file>
-
-<file path="admin/package.json">
-{
-  "name": "my-app",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
-    "start": "next start",
-    "lint": "biome check --write ",
-    "typecheck": "tsc --noEmit",
-    "format": "biome format --write"
-  },
-  "dependencies": {
-    "@hookform/resolvers": "^5.2.2",
-    "@radix-ui/react-avatar": "^1.1.11",
-    "@radix-ui/react-dialog": "^1.1.15",
-    "@radix-ui/react-dropdown-menu": "^2.1.16",
-    "@radix-ui/react-icons": "^1.3.2",
-    "@radix-ui/react-label": "^2.1.8",
-    "@radix-ui/react-select": "^2.2.6",
-    "@radix-ui/react-separator": "^1.1.8",
-    "@radix-ui/react-slot": "^1.2.4",
-    "@radix-ui/react-switch": "^1.2.6",
-    "@radix-ui/react-tabs": "^1.1.13",
-    "@supabase/ssr": "^0.9.0",
-    "@supabase/supabase-js": "^2.99.0",
-    "class-variance-authority": "^0.7.1",
-    "lucide-react": "^0.575.0",
-    "next": "16.1.6",
-    "react": "19.2.3",
-    "react-dom": "19.2.3",
-    "react-hook-form": "^7.71.2",
-    "sonner": "^2.0.7",
-    "supabase": "^2.77.0",
-    "tailwind-merge": "^3.5.0",
-    "zod": "^4.3.6"
-  },
-  "devDependencies": {
-    "@biomejs/biome": "2.2.0",
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20.19.35",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "babel-plugin-react-compiler": "1.0.0",
-    "tailwindcss": "^4",
-    "typescript": "^5"
-  }
-}
-</file>
-
-<file path="client/app/properties/[id]/page.tsx">
+## File: client/app/properties/[id]/page.tsx
+````typescript
 import {
   Bath,
   Bed,
@@ -12689,449 +13600,10 @@ export default async function PropertyDetailPage({
     </div>
   );
 }
-</file>
+````
 
-<file path="client/app/properties/page.tsx">
-import { Bath, Bed, CircleDollarSign, Home } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-
-import TermsOfTenancy from "@/components/terms/TermsOfTenancy";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-
-import { getProperties } from "./actions";
-
-export default async function PropertiesPage() {
-  const properties = await getProperties();
-
-  return (
-    <div className="animate-fade-in">
-      <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-secondary">
-          Letsheng Estates
-        </h1>
-        <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
-          Discover curated living spaces designed for comfort, security, and
-          discerning taste. Our portfolio combines premium locations with
-          attentive management.
-        </p>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-        {properties.map((p) => (
-          <Card
-            key={p.id}
-            className="rounded-xl shadow-lg border-gray-200/50 overflow-hidden flex flex-col"
-          >
-            <div className="relative h-48">
-              <Link href={`/properties/${p.id}`}>
-                <Image
-                  src={p.image_url ?? ""}
-                  alt={p.title}
-                  fill
-                  className="object-cover"
-                />
-              </Link>
-            </div>
-
-            <CardHeader>
-              <div className="flex justify-between items-start">
-                <CardTitle className="text-2xl font-bold text-secondary leading-tight">
-                  {p.title}
-                </CardTitle>
-                <Badge
-                  variant={p.availability ? "default" : "destructive"}
-                  className="shrink-0"
-                >
-                  {p.availability ? "Available" : "Occupied"}
-                </Badge>
-              </div>
-              <p className="text-sm text-gray-500 pt-1">{p.location}</p>
-            </CardHeader>
-
-            <CardContent className="flex-grow">
-              <div className="flex items-center text-gray-600 space-x-4 mb-4">
-                <div className="flex items-center">
-                  <Bed className="h-5 w-5 mr-2" />
-                  <span>{p.bedrooms}</span>
-                </div>
-                <div className="flex items-center">
-                  <Bath className="h-5 w-5 mr-2" />
-                  <span>{p.bathrooms}</span>
-                </div>
-                <div className="flex items-center">
-                  <Home className="h-5 w-5 mr-2" />
-                  <span>{p.type}</span>
-                </div>
-              </div>
-              <p className="text-gray-700 leading-relaxed">{p.description}</p>
-              <div className="mt-6 flex items-center text-2xl font-bold text-secondary">
-                <CircleDollarSign className="h-6 w-6 mr-2 text-primary" />R
-                {p.price.toLocaleString()}
-                <span className="text-sm font-normal text-gray-500 ml-2">
-                  / month
-                </span>
-              </div>
-            </CardContent>
-
-            <CardFooter className="bg-gray-50/50 px-6 py-4 flex items-center justify-between mt-auto">
-              <Link href={`/properties/${p.id}`}>
-                <Button variant="outline">View Details</Button>
-              </Link>
-              <Link href={`/properties/${p.id}/apply-to-lease`}>
-                <Button variant="default">Apply to Lease</Button>
-              </Link>
-            </CardFooter>
-          </Card>
-        ))}
-      </div>
-      <TermsOfTenancy />
-    </div>
-  );
-}
-</file>
-
-<file path="client/app/page.tsx">
-import {
-  ArrowRight,
-  Bath,
-  Bed,
-  FileText,
-  Search,
-  Star,
-  Users,
-} from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import type React from "react";
-
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { getBrandingProducts } from "./branding/actions";
-import { getProperties } from "./properties/actions";
-
-const FeaturedPropertyCard = ({
-  id,
-  imageUrl,
-  title,
-  price,
-  bedrooms,
-  bathrooms,
-  description,
-}: {
-  id: string;
-  imageUrl: string;
-  title: string;
-  price: string;
-  bedrooms: number | null;
-  bathrooms: number | null;
-  description: string;
-}) => (
-  <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
-    <div className="relative h-56">
-      <Image src={imageUrl} alt={title} fill className="object-cover" />
-    </div>
-    <CardHeader>
-      <CardTitle className="text-secondary">{title}</CardTitle>
-    </CardHeader>
-    <CardContent className="flex flex-col flex-grow">
-      <p className="text-gray-600 mb-4 line-clamp-3 flex-grow">{description}</p>
-      <div className="flex items-center text-gray-600 space-x-4 mb-4">
-        <div className="flex items-center">
-          <Bed className="h-5 w-5 mr-2" />
-          <span>{bedrooms ?? 0} Beds</span>
-        </div>
-        <div className="flex items-center">
-          <Bath className="h-5 w-5 mr-2" />
-          <span>{bathrooms ?? 0} Baths</span>
-        </div>
-      </div>
-      <p className="font-bold text-lg text-primary mb-4">{price}</p>
-      <Link href={`/properties/${id}`} className="mt-auto block">
-        <Button variant="outline" className="w-full">
-          View Details
-        </Button>
-      </Link>
-    </CardContent>
-  </Card>
-);
-
-const FeaturedProductCard = ({
-  id,
-  image,
-  title,
-  category,
-  description,
-}: {
-  id: string;
-  image: string;
-  title: string;
-  category: string;
-  description: string;
-}) => (
-  <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
-    <div className="relative h-80 ">
-      <Image src={image} alt={title} fill className="object-cover" />
-    </div>
-    <CardHeader>
-      <Badge variant="default" className="font-semibold mb-2 w-fit">
-        {category}
-      </Badge>
-      <CardTitle className="text-secondary">{title}</CardTitle>
-    </CardHeader>
-    <CardContent className="flex flex-col flex-grow">
-      <p className="text-gray-600 line-clamp-3 flex-grow">{description}</p>
-      <Link href={`/branding/${id}`} className="mt-4 block">
-        <Button variant="outline" className="w-full">
-          View Product Details
-        </Button>
-      </Link>
-    </CardContent>
-  </Card>
-);
-
-const TestimonialCard = ({
-  quote,
-  author,
-  authorRole,
-}: {
-  quote: string;
-  author: string;
-  authorRole: string;
-}) => (
-  <Card className="bg-white/60 p-6 text-center">
-    <div className="flex justify-center mb-4">
-      <Star
-        key={`${author}-${quote}-${authorRole}-star-1`}
-        className="h-5 w-5 text-yellow-400 fill-current"
-      />
-      <Star
-        key={`${author}-${quote}-${authorRole}-star-2`}
-        className="h-5 w-5 text-yellow-400 fill-current"
-      />
-      <Star
-        key={`${author}-${quote}-${authorRole}-star-3`}
-        className="h-5 w-5 text-yellow-400 fill-current"
-      />
-      <Star
-        key={`${author}-${quote}-${authorRole}-star-4`}
-        className="h-5 w-5 text-yellow-400 fill-current"
-      />
-      <Star
-        key={`${author}-${quote}-${authorRole}-star-5`}
-        className="h-5 w-5 text-yellow-400 fill-current"
-      />
-    </div>
-    <p className="text-gray-600 italic mb-4">\"{quote}\"</p>
-    <p className="font-bold text-secondary">{author}</p>
-    <p className="text-sm text-gray-500">{authorRole}</p>
-  </Card>
-);
-
-const NextStep = ({
-  icon,
-  title,
-  description,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-}) => (
-  <div className="flex items-start">
-    <div className="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center mr-6 flex-shrink-0">
-      {icon}
-    </div>
-    <div>
-      <h4 className="font-bold text-lg text-secondary">{title}</h4>
-      <p className="text-gray-600">{description}</p>
-    </div>
-  </div>
-);
-
-export default async function HomePage() {
-  const properties = await getProperties();
-  const featuredProperties = properties.filter((p) => p.is_featured);
-  const products = await getBrandingProducts();
-  const featuredProducts = products.filter((p) => p.is_featured);
-
-  return (
-    <div className="animate-fade-in space-y-24">
-      {/* Header */}
-      <header
-        className="relative bg-secondary rounded-2xl shadow-2xl overflow-hidden -mt-4"
-        style={{
-          backgroundImage: `radial-gradient(circle at top right,rgba(6, 61, 68, 0.6), transparent), radial-gradient(circle at bottom left, #002147, #001a38)`,
-        }}
-      >
-        <Image
-          src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=2070&auto=format&fit=crop"
-          alt="Modern architectural home at dusk"
-          fill
-          className="object-cover opacity-40"
-        />
-        <div className="relative text-center p-12">
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-primary/80">
-            Elevating Ambitions
-          </h1>
-          <p className="mt-6 text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto">
-            Your strategic partner for premium residential estates and
-            high-fidelity corporate branding.
-          </p>
-          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" asChild>
-              <Link href="/properties">Explore Residential Estates</Link>
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-primary text-white hover:bg-primary hover:text-secondary"
-              asChild
-            >
-              <Link href="/branding">Discover Branding Solutions</Link>
-            </Button>
-          </div>
-        </div>
-      </header>
-
-      {/* Featured Estates */}
-      <section>
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-extrabold text-secondary">
-            Featured Estates
-          </h2>
-          <p className="mt-3 text-lg text-gray-600 max-w-2xl mx-auto">
-            Discover our premier properties, offering unparalleled comfort and
-            modern living.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredProperties.map((p) => (
-            <FeaturedPropertyCard
-              key={p.id}
-              id={p.id}
-              imageUrl={p.image_url ?? ""}
-              title={p.title}
-              price={`R ${p.price.toLocaleString()}`}
-              bedrooms={p.bedrooms}
-              bathrooms={p.bathrooms}
-              description={p.description ?? ""}
-            />
-          ))}
-        </div>
-        <div className="text-center mt-12">
-          <Link href="/properties">
-            <Button>
-              Explore All Properties <ArrowRight className="h-4 w-4 ml-2" />
-            </Button>
-          </Link>
-        </div>
-      </section>
-
-      {/* Featured Products */}
-      <section>
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-extrabold text-secondary">
-            Featured Products
-          </h2>
-          <p className="mt-3 text-lg text-gray-600 max-w-2xl mx-auto">
-            Explore our flagship branded products, crafted with quality and
-            precision.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredProducts.map((p) => (
-            <FeaturedProductCard
-              key={p.id}
-              id={p.id}
-              image={p.image ?? ""}
-              title={p.title}
-              category={p.category ?? ""}
-              description={p.description ?? ""}
-            />
-          ))}
-        </div>
-        <div className="text-center mt-12">
-          <Link href="/branding">
-            <Button>
-              Discover All Products <ArrowRight className="h-4 w-4 ml-2" />
-            </Button>
-          </Link>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section>
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-extrabold text-secondary">
-            Partnerships Rooted in Quality
-          </h2>
-          <p className="mt-3 text-lg text-gray-600 max-w-2xl mx-auto">
-            Our success is measured by the success of our clients and tenants.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          <TestimonialCard
-            quote="The leasing process was transparent and the property management is top-notch. Highly recommended for professionals."
-            author="Thabo Ndlovu"
-            authorRole="Tenant, Soshanguve South"
-          />
-          <TestimonialCard
-            quote="Letsheng Branding delivered our branded merchandise ahead of schedule with impeccable quality. A reliable partner."
-            author="Jane Smith"
-            authorRole="Marketing Manager, ABC Corp"
-          />
-          <TestimonialCard
-            quote="A seamless experience from start to finish. The attention to detail in their properties is evident."
-            author="Priya Patel"
-            authorRole="Resident, Centurion"
-          />
-        </div>
-      </section>
-
-      {/* Next Steps Guide */}
-      <section className="bg-gray-50/80 rounded-2xl py-16 -mx-4 md:-mx-8 px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-extrabold text-secondary">
-            Your Path to Partnership
-          </h2>
-          <p className="mt-3 text-lg text-gray-600 max-w-2xl mx-auto">
-            Engaging with us is a straightforward process. Here\'s how you can
-            get started.
-          </p>
-        </div>
-        <div className="max-w-4xl mx-auto space-y-10">
-          <NextStep
-            icon={<Search className="w-6 h-6" />}
-            title="1. Explore"
-            description="Browse our available properties or review our corporate branding services to identify what fits your needs."
-          />
-          <NextStep
-            icon={<FileText className="w-6 h-6" />}
-            title="2. Inquire"
-            description="Request a property viewing through our contact form or submit a detailed brief for your branding project."
-          />
-          <NextStep
-            icon={<Users className="w-6 h-6" />}
-            title="3. Partner"
-            description="We finalize the lease agreement or execute the branding project, welcoming you as a valued partner."
-          />
-        </div>
-      </section>
-    </div>
-  );
-}
-</file>
-
-<file path="admin/lib/validations/schemas.ts">
+## File: admin/lib/validations/schemas.ts
+````typescript
 import { z } from "zod";
 
 // Schema for a single gallery item
@@ -13243,6 +13715,541 @@ export const leaseApplicationSchema = z.object({
 });
 
 export type LeaseApplication = z.infer<typeof leaseApplicationSchema>;
-</file>
+````
 
-</files>
+## File: client/app/properties/page.tsx
+````typescript
+import { Bath, Bed, CircleDollarSign, Home, MapPin, ShieldCheck, Stars } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+
+import TermsOfTenancy from "@/components/terms/TermsOfTenancy";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+import { getProperties } from "./actions";
+
+function EstatesHero() {
+  return (
+    <section className="relative overflow-hidden bg-white pt-16 pb-12 md:pt-24 md:pb-20">
+      <div className="absolute top-0 right-0 -translate-y-12 translate-x-12 blur-3xl opacity-10 pointer-events-none">
+        <div className="aspect-square h-[500px] rounded-full bg-primary" />
+      </div>
+
+      <div className="container relative z-10 mx-auto px-6 text-center">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/5 border border-secondary/10 mb-6">
+          <Stars className="h-4 w-4 text-primary" />
+          <span className="text-[10px] font-bold uppercase tracking-widest text-secondary">
+            Premium Property Management
+          </span>
+        </div>
+
+        <h1 className="text-5xl md:text-7xl font-extrabold text-secondary tracking-tight mb-6">
+          Letsheng <span className="text-primary">Estates</span>
+        </h1>
+
+        <p className="max-w-2xl mx-auto text-lg md:text-xl text-gray-600 leading-relaxed mb-10">
+          Discover curated living spaces designed for comfort, security, and
+          discerning taste. Our portfolio combines premium locations with
+          attentive, professional management.
+        </p>
+
+        <div className="flex flex-wrap items-center justify-center gap-6 mb-12 text-sm font-medium text-gray-500">
+          <div className="flex items-center gap-2">
+            <ShieldCheck className="h-5 w-5 text-primary" />
+            <span>Secure Rentals</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <MapPin className="h-5 w-5 text-primary" />
+            <span>Prime Locations</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default async function PropertiesPage() {
+  const properties = await getProperties();
+
+  return (
+    <div className="animate-fade-in">
+      <EstatesHero />
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+        {properties.map((p) => (
+          <Card
+            key={p.id}
+            className="rounded-xl shadow-lg border-gray-200/50 overflow-hidden flex flex-col transition-all hover:shadow-xl"
+          >
+           <div className="relative h-64"> {/* Consistent Height */}
+              <Link href={`/properties/${p.id}`}>
+                <Image
+                  src={p.image_url ?? ""}
+                  alt={p.title}
+                  fill
+                  className="object-cover"
+                />
+              </Link>
+            </div>
+
+            <CardHeader>
+              <div className="flex justify-between items-start">
+                <CardTitle className="text-2xl font-bold text-secondary leading-tight">
+                  {p.title}
+                </CardTitle>
+                <Badge
+                  variant={p.availability ? "default" : "destructive"}
+                  className="shrink-0"
+                >
+                  {p.availability ? "Available" : "Occupied"}
+                </Badge>
+              </div>
+              <p className="text-sm text-gray-500 pt-1 flex items-center">
+                <MapPin className="h-3 w-3 mr-1" /> {p.location}
+              </p>
+            </CardHeader>
+
+            <CardContent className="flex-grow">
+              <div className="flex items-center text-gray-600 space-x-4 mb-4">
+                <div className="flex items-center text-sm">
+                  <Bed className="h-4 w-4 mr-2 text-primary" />
+                  <span>{p.bedrooms}</span>
+                </div>
+                <div className="flex items-center text-sm">
+                  <Bath className="h-4 w-4 mr-2 text-primary" />
+                  <span>{p.bathrooms}</span>
+                </div>
+                <div className="flex items-center text-sm">
+                  <Home className="h-4 w-4 mr-2 text-primary" />
+                  <span>{p.type}</span>
+                </div>
+              </div>
+              <p className="text-gray-700 leading-relaxed line-clamp-2">{p.description}</p>
+
+              <div className="mt-6 flex items-center text-2xl font-bold text-secondary">
+                <CircleDollarSign className="h-6 w-6 mr-2 text-primary" />R
+                {p.price.toLocaleString()}
+                <span className="text-sm font-normal text-gray-500 ml-2">/ month</span>
+              </div>
+            </CardContent>
+
+            <CardFooter className="bg-gray-50/50 px-6 py-4 flex items-center justify-between mt-auto ">
+              <Link href={`/properties/${p.id}`}>
+                <Button size="sm" variant="outline">View Details</Button>
+              </Link>
+              <Link href={`/properties/${p.id}/apply-to-lease`}>
+                <Button size="sm" variant="default">Apply to Lease</Button>
+              </Link>
+            </CardFooter>
+          </Card>
+        ))}
+      </div>
+      <TermsOfTenancy />
+    </div>
+  );
+}
+````
+
+## File: client/app/page.tsx
+````typescript
+import {
+  ArrowRight,
+  Bath,
+  Bed,
+  FileText,
+  Search,
+  Star,
+  Users,
+  CheckCircle2,
+  MapPin,
+} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import type React from "react";
+
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { getBrandingProducts } from "./branding/actions";
+import { getProperties } from "./properties/actions";
+import WaterDetergentsSpotlight from "@/components/branding/waterDetergents";
+
+// ==============================================
+// Sub-Components
+// ==============================================
+
+const FeaturedPropertyCard = ({
+  id,
+  imageUrl,
+  title,
+  price,
+  bedrooms,
+  bathrooms,
+  description,
+}: {
+  id: string;
+  imageUrl: string;
+  title: string;
+  price: string;
+  bedrooms: number | null;
+  bathrooms: number | null;
+  description: string;
+}) => (
+  <Card className="group overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border-none bg-white flex flex-col">
+    <div className="relative h-64 overflow-hidden"> {/* Consistent Height */}
+              <Link href={`/properties/${id}`}>
+                <Image
+                  src={imageUrl ?? ""}
+                  alt={title}
+                  fill
+                  className="object-cover"
+                />
+              </Link>
+          
+      <div className="absolute top-4 right-4">
+        <Badge className="bg-primary text-secondary font-bold px-3 py-1">Featured Estate</Badge>
+      </div>
+    </div>
+    <CardHeader className="pb-2">
+      <div >
+        <CardTitle className="text-secondary text-xl font-bold">{title}</CardTitle>
+
+      </div>
+    </CardHeader>
+    <CardContent className="flex flex-col flex-grow">
+      <p className="text-gray-600 mb-6 line-clamp-2 text-sm leading-relaxed flex-grow">{description}</p>
+      <p className="font-black text-primary">{price}</p>
+      <div className="flex items-center text-gray-500 gap-4 mb-6 py-4 border-y border-gray-50">
+        <div className="flex items-center text-xs font-medium">
+          <Bed className="h-4 w-4 mr-1.5 text-primary" />
+          <span>{bedrooms ?? 0} Bedrooms</span>
+        </div>
+        <div className="flex items-center text-xs font-medium">
+          <Bath className="h-4 w-4 mr-1.5 text-primary" />
+          <span>{bathrooms ?? 0} bathrooms</span>
+        </div>
+      </div>
+      <Button asChild className="w-full bg-secondary hover:bg-secondary/90">
+        <Link href={`/properties/${id}`}>View Property</Link>
+      </Button>
+    </CardContent>
+  </Card>
+);
+
+const FeaturedProductCard = ({
+  id,
+  image,
+  title,
+  category,
+  description,
+}: {
+  id: string;
+  image: string;
+  title: string;
+  category: string;
+  description: string;
+}) => (
+  <Card className="group overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border-none flex flex-col">
+    <div className="relative aspect-square bg-gray-100 overflow-hidden">
+  <Link href={`/branding/${id}`}>
+    <Image
+      src={image ?? "/placeholder-branding.jpg"}
+      alt={title}
+      fill
+      className="object-cover transition-transform duration-500 hover:scale-105"
+    />
+     <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+        <p className="text-white text-sm font-medium">High-Fidelity Branding Solutions</p>
+      </div>
+  </Link>
+</div>
+    
+    <CardHeader>
+      <Badge variant="outline" className="border-primary text-primary font-bold mb-2 w-fit uppercase text-[10px] tracking-widest">
+        {category}
+      </Badge>
+      <CardTitle className="text-secondary font-bold">{title}</CardTitle>
+    </CardHeader>
+    <CardContent className="flex flex-col flex-grow">
+      <p className="text-gray-600 text-sm line-clamp-2 mb-6 flex-grow">{description}</p>
+      <Button variant="outline" asChild className="w-full border-secondary text-secondary hover:bg-secondary hover:text-white">
+        <Link href={`/branding/${id}`}>Request Quote</Link>
+      </Button>
+    </CardContent>
+  </Card>
+);
+
+const TestimonialCard = ({
+  quote,
+  author,
+  authorRole,
+}: {
+  quote: string;
+  author: string;
+  authorRole: string;
+}) => (
+  <Card className="bg-white/60 backdrop-blur-md p-8 border-none shadow-sm hover:shadow-md transition-shadow">
+    <div className="flex mb-4">
+      {[...Array(5)].map((_, i) => (
+        <Star key={i} className="h-4 w-4 text-yellow-500 fill-current" />
+      ))}
+    </div>
+    <p className="text-gray-700 italic mb-6 leading-relaxed">"{quote}"</p>
+    <div>
+      <p className="font-bold text-secondary">{author}</p>
+      <p className="text-xs text-primary font-semibold uppercase tracking-wider">{authorRole}</p>
+    </div>
+  </Card>
+);
+
+const NextStep = ({
+  icon,
+  title,
+  description,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+}) => (
+  <div className="flex items-start group">
+    <div className="w-14 h-14 bg-white shadow-sm text-primary rounded-2xl flex items-center justify-center mr-6 flex-shrink-0 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+      {icon}
+    </div>
+    <div>
+      <h4 className="font-bold text-xl text-secondary mb-1">{title}</h4>
+      <p className="text-gray-600 leading-relaxed">{description}</p>
+    </div>
+  </div>
+);
+
+// ==============================================
+// Main Page Component
+// ==============================================
+
+export default async function HomePage() {
+  const properties = await getProperties();
+  const featuredProperties = properties.filter((p) => p.is_featured).slice(0, 3);
+  const products = await getBrandingProducts();
+  const featuredProducts = products.filter((p) => p.is_featured).slice(0, 3);
+
+  return (
+    <div className="animate-fade-in space-y-32 pb-20">
+      <header className="relative min-h-[85vh] lg:min-h-[80vh] flex items-center bg-secondary rounded-[2rem] md:rounded-[3rem] shadow-2xl overflow-hidden mx-2 md:mx-4 mt-2 border border-white/5">
+        {/* Background Layer: Image + Gradient Mesh */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop"
+            alt="Premium Property Background"
+            fill
+            className="object-cover grayscale-[50%] select-none opacity-40 lg:opacity-30"
+            priority
+          />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(6,61,68,0.4),transparent_50%)]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-secondary/90 via-secondary/50 to-secondary" />
+        </div>
+
+        <div className="relative z-10 container mx-auto px-4 sm:px-8 py-12 md:py-24 grid lg:grid-cols-2 items-center gap-12 lg:gap-16">
+          {/* Left Column: Copy & Actions */}
+          <div className="space-y-6 md:space-y-10 text-center lg:text-left">
+            {/* Badge - Responsive padding and text size */}
+            <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 px-3 py-1.5 md:px-4 md:py-2 rounded-full backdrop-blur-md">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+              </span>
+              <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.15em] md:tracking-[0.2em] text-gray-300">
+                Est. 2023 • Leading South African Enterprise
+              </span>
+            </div>
+
+            {/* Heading - Responsive font sizes */}
+            <div className="space-y-4">
+              <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white leading-[1.1] lg:leading-[0.9]">
+                Elevating <br />
+                <span className="text-primary italic drop-shadow-[0_0_15px_rgba(var(--primary),0.3)]">Ambitions</span>
+              </h1>
+              <p className="text-lg md:text-xl lg:text-2xl text-gray-400 max-w-xl mx-auto lg:mx-0 leading-relaxed font-light">
+                Your strategic partner for <span className="text-white font-medium">premium residential estates</span> and
+                <span className="text-white font-medium"> high-fidelity corporate branding</span>.
+              </p>
+            </div>
+
+            {/* Buttons - Stack on mobile, side-by-side on sm+ */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
+              <Button size="lg" className="h-14 md:h-16 px-8 md:px-10 text-base md:text-lg font-bold shadow-[0_10px_20px_-10px_rgba(var(--primary),0.5)] transition-transform hover:scale-105 active:scale-95 hover:bg-white hover:text-secondary transition-all bg-primary text-secondary" asChild>
+                <Link href="/properties">Explore Estates</Link>
+              </Button>
+              <Button size="lg" variant="outline" className="h-14 md:h-16 px-8 md:px-10 text-base md:text-lg font-bold border-white/10 bg-primary/10 text-white hover:bg-white hover:text-secondary transition-all backdrop-blur-sm" asChild>
+                <Link href="/branding">Branding Solutions</Link>
+              </Button>
+            </div>
+
+            {/* Stats - Responsive borders and alignment */}
+            <div className="pt-8 flex items-center justify-center lg:justify-start gap-6 md:gap-8 text-gray-500 border-t border-white/5 w-full lg:w-fit">
+              <div className="text-center lg:text-left">
+                <p className="text-white font-bold text-lg md:text-xl">100%</p>
+                <p className="text-[9px] md:text-[10px] uppercase tracking-widest">Reliability</p>
+              </div>
+              <div className="text-center lg:text-left">
+                <p className="text-white font-bold text-lg md:text-xl">24/7</p>
+                <p className="text-[9px] md:text-[10px] uppercase tracking-widest">Support</p>
+              </div>
+              <div className="text-center lg:text-left">
+                <p className="text-white font-bold text-lg md:text-xl">ZA</p>
+                <p className="text-[9px] md:text-[10px] uppercase tracking-widest">National</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: Visual Elements (Hidden on mobile for better focus) */}
+          <div className="hidden lg:grid grid-cols-2 gap-4 relative">
+            {/* Your visual grid of cards go here as previously designed */}
+          </div>
+        </div>
+      </header>
+
+      {/* Featured Estates - FIRST Section */}
+      <section className="container mx-auto px-6">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+          <div className="max-w-2xl">
+            <h2 className="text-4xl md:text-5xl font-black text-secondary tracking-tight">
+              Featured Estates
+            </h2>
+            <p className="mt-4 text-lg text-gray-600 leading-relaxed">
+              Discover our premier properties in Mpumalanga and Gauteng, offering unparalleled comfort,
+              private en-suites, and reliable utility security.
+            </p>
+          </div>
+          <Button variant="ghost" className="text-primary font-bold hover:bg-primary/5 hover:text-secondary" asChild>
+            <Link href="/properties" className="flex items-center">
+              View All Properties <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {featuredProperties.map((p) => (
+            <FeaturedPropertyCard
+              key={p.id}
+              id={p.id}
+              imageUrl={p.image_url ?? ""}
+              title={p.title}
+              price={`R ${p.price.toLocaleString()}`}
+              bedrooms={p.bedrooms}
+              bathrooms={p.bathrooms}
+              description={p.description ?? ""}
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* Featured Products - SECOND Section */}
+      <section className="container mx-auto px-6">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+          <div className="max-w-2xl">
+            <h2 className="text-4xl md:text-5xl font-black text-secondary tracking-tight">
+              High-Fidelity Branding
+            </h2>
+            <p className="mt-4 text-lg text-gray-600 leading-relaxed">
+              Elevate your corporate identity with precision-crafted apparel, signage, and marketing
+              materials designed for national impact.
+            </p>
+          </div>
+          <Button variant="ghost" className="text-primary font-bold hover:bg-primary/5 hover:text-secondary" asChild>
+            <Link href="/branding" className="flex items-center">
+              Full Catalog <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {featuredProducts.map((p) => (
+            <FeaturedProductCard
+              key={p.id}
+              id={p.id}
+              image={p.image ?? ""}
+              title={p.title}
+              category={p.category ?? ""}
+              description={p.description ?? ""}
+            />
+          ))}
+        </div>
+      </section>
+      <WaterDetergentsSpotlight />
+      {/* Testimonials */}
+      <section className="bg-secondary/5 py-24 mx-4 rounded-[3rem]">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16 space-y-4">
+            <h2 className="text-4xl font-black text-secondary tracking-tight">
+              Trusted Across South Africa
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Our success is defined by the satisfaction of the communities we serve.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <TestimonialCard
+              quote="The leasing process was transparent and the property management is top-notch. Truly a sanctuary for professionals."
+              author="Thabo Ndlovu"
+              authorRole="Tenant, Soshanguve South"
+            />
+            <TestimonialCard
+              quote="Letsheng Branding delivered our corporate gear ahead of schedule with impeccable color accuracy. Incredible partners."
+              author="Sarah Mokoena"
+              authorRole="Operations Director"
+            />
+            <TestimonialCard
+              quote="A seamless experience. The attention to detail in their estates—from the Jojo tanks to the en-suite finishes—is evident."
+              author="Priya Patel"
+              authorRole="Resident, Mpumalanga"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Next Steps Guide */}
+      <section className="container mx-auto px-6">
+        <div className="bg-primary/5 rounded-[3rem] p-8 md:p-20 border border-primary/10">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className="space-y-8">
+              <h2 className="text-4xl md:text-5xl font-black text-secondary tracking-tight">
+                Your Path to Partnership
+              </h2>
+              <p className="text-lg text-gray-600 leading-relaxed">
+                Whether you're looking for a modern home or professional branding,
+                our process is designed for speed and transparency.
+              </p>
+              <Button size="lg" asChild className="h-14 px-10">
+                <Link href="/contact">Get Started Today</Link>
+              </Button>
+            </div>
+            <div className="space-y-12">
+              <NextStep
+                icon={<Search className="w-6 h-6" />}
+                title="1. Explore"
+                description="Browse our verified property listings or our comprehensive branding product catalog."
+              />
+              <NextStep
+                icon={<FileText className="w-6 h-6" />}
+                title="2. Consult"
+                description="Submit a viewing request or a branding brief. Our team will provide a tailored proposal within 24 hours."
+              />
+              <NextStep
+                icon={<CheckCircle2 className="w-6 h-6" />}
+                title="3. Deliver"
+                description="Finalize your lease or approve your brand proofs. We handle the logistics and final execution."
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+````
