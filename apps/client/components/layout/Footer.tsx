@@ -1,5 +1,7 @@
 import {
   Building2,
+  Droplet,
+  ExternalLink,
   Facebook,
   Info,
   Linkedin,
@@ -7,13 +9,10 @@ import {
   MapPin,
   Phone,
   Printer,
-  Droplet,
-  Sparkles,
-  ExternalLink,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
+import { businessInfo } from "@/lib/business";
 
 const FooterLink = ({
   href,
@@ -76,14 +75,13 @@ export default function Footer() {
               </h3>
             </Link>
             <p className="text-gray-400 text-sm text-center md:text-left leading-relaxed max-w-xs">
-              "Where comfort meets cleanliness and serenity."
-              Providing premium residential spaces and high-fidelity branding solutions across South Africa.
+              "{businessInfo.tagline}" {businessInfo.description}
             </p>
             <div className="flex space-x-3">
-              <SocialIcon href="https://www.linkedin.com/company/letsheng-holdings">
+              <SocialIcon href={businessInfo.social.linkedin}>
                 <Linkedin className="h-5 w-5" />
               </SocialIcon>
-              <SocialIcon href="https://www.facebook.com/profile.php?id=100088899263799">
+              <SocialIcon href={businessInfo.social.facebook}>
                 <Facebook className="h-5 w-5" />
               </SocialIcon>
             </div>
@@ -96,7 +94,7 @@ export default function Footer() {
             </h3>
             <ul className="space-y-4">
               <li>
-                <FooterLink href="/estates" icon={<Building2 className="h-4 w-4 mr-3 text-primary/60" />}>
+                <FooterLink href="/properties" icon={<Building2 className="h-4 w-4 mr-3 text-primary/60" />}>
                   Letsheng Estates
                 </FooterLink>
               </li>
@@ -105,15 +103,10 @@ export default function Footer() {
                   Letsheng Print & Brand
                 </FooterLink>
               </li>
-              <li className="flex items-center opacity-50">
-                <Sparkles className="h-4 w-4 mr-3 text-gray-500" />
-                <span className="text-sm text-gray-400 mr-2">Cleaning Solutions</span>
-                <Badge variant="outline" className="text-[10px] px-1 py-0 border-gray-500 text-gray-500">Soon</Badge>
-              </li>
-              <li className="flex items-center opacity-50">
-                <Droplet className="h-4 w-4 mr-3 text-gray-500" />
-                <span className="text-sm text-gray-400 mr-2">Bulk Water Supply</span>
-                <Badge variant="outline" className="text-[10px] px-1 py-0 border-gray-500 text-gray-500">Soon</Badge>
+              <li>
+                <FooterLink href="/waterDetergents" icon={<Droplet className="h-4 w-4 mr-3 text-primary/60" />}>
+                  Water and Detergents
+                </FooterLink>
               </li>
             </ul>
           </div>
@@ -151,19 +144,19 @@ export default function Footer() {
               <li className="flex items-start gap-3 justify-center md:justify-start">
                 <MapPin className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
                 <span className="text-gray-400 text-sm leading-relaxed">
-                  1294 MAHAMBA STREET PHOLA, OGIES, MPUMALANGA 2233
+                  {businessInfo.address}
                 </span>
               </li>
               <li className="flex items-center gap-3 justify-center md:justify-start">
                 <Phone className="h-5 w-5 text-primary flex-shrink-0" />
                 <span className="text-gray-400 text-sm">
-                  +27 83 753 5424 / +27 83 222 692
+                  {businessInfo.phones.join(" / ")}
                 </span>
               </li>
               <li className="flex items-center gap-3 justify-center md:justify-start">
                 <Mail className="h-5 w-5 text-primary flex-shrink-0" />
                 <span className="text-gray-400 text-sm break-all">
-                  kgotso@letshengholdings.co.za / elsie@letshengholdings.co.za
+                  {businessInfo.emails.join(" / ")}
                 </span>
               </li>
             </ul>
@@ -173,8 +166,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-gray-500 text-xs text-center md:text-left">
-            &copy; {new Date().getFullYear()} LETSHENG HOLDINGS (Pty) Ltd.
-            Reg: 2023/123456/07. All Rights Reserved.
+            &copy; {new Date().getFullYear()} {businessInfo.legalName}. All Rights Reserved.
           </p>
           <div className="flex space-x-6 text-xs text-gray-500">
             <Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>

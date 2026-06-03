@@ -1,9 +1,9 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Loader2, ArrowRight, Package, Upload, User } from 'lucide-react';
+import { ArrowRight, Loader2, Package, Upload, User } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useState, useTransition } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
@@ -19,15 +19,12 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
-import { type Branding, brandingInquirySchema } from '@repo/supabase';
+import {
+  type Branding,
+  type BrandingInquiry,
+  brandingInquirySchema,
+} from '@repo/supabase';
 
 interface BrandingOrderFormProps {
   product: Branding;
@@ -37,19 +34,19 @@ export default function BrandingOrderForm({ product }: BrandingOrderFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  const form = useForm<any>({
+  const form = useForm<BrandingInquiry>({
     resolver: zodResolver(brandingInquirySchema),
     defaultValues: {
-      name: '',
+      customer_name: '',
       email: '',
       company: '',
       quantity: 1,
       message: '',
-      productId: product.id,
+      product_id: product.id ?? '',
     },
   });
 
-  async function onSubmit(data: any) {
+  async function onSubmit(data: BrandingInquiry) {
     setIsLoading(true);
     try {
       const result = await submitBrandingInquiry(data);
@@ -69,7 +66,7 @@ export default function BrandingOrderForm({ product }: BrandingOrderFormProps) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <input type="hidden" {...form.register('productId')} />
+        <input type="hidden" {...form.register('product_id')} />
         <Card>
           <CardHeader>
             <CardTitle className="text-2xl flex items-center text-secondary">
@@ -80,7 +77,7 @@ export default function BrandingOrderForm({ product }: BrandingOrderFormProps) {
           <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <FormField
               control={form.control}
-              name="name"
+              name="customer_name"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Full Name</FormLabel>
@@ -176,11 +173,8 @@ export default function BrandingOrderForm({ product }: BrandingOrderFormProps) {
                   <p className="text-gray-700 font-semibold mb-2">
                     Drag & drop your vector artwork, or
                   </p>
-                  <Button type="button" variant="outline">
-                    Browse Files
-                  </Button>
                   <p className="text-xs text-gray-500 mt-4">
-                    Recommended formats: PDF, AI, EPS, SVG.
+                    Paste artwork links in the project brief. Recommended formats: PDF, AI, EPS, SVG.
                   </p>
                 </Card>
               </FormControl>

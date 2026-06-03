@@ -1,6 +1,8 @@
+import { requireAdminUser } from "../auth";
 import { createSupabaseServerClient } from "../server";
 
 export async function getDashboardKpis() {
+    await requireAdminUser();
     const supabase = await createSupabaseServerClient();
 
     const { data: properties, error: propertiesError } = await supabase
@@ -53,6 +55,7 @@ export async function getDashboardKpis() {
 }
 
 export async function getRecentLeases() {
+    await requireAdminUser();
     const supabase = await createSupabaseServerClient();
 
     const { data, error } = await supabase
@@ -71,11 +74,17 @@ export async function getRecentLeases() {
         return [];
     }
 
-    return data.map((lease: any) => ({
-        id: lease.id,
-        tenant: lease.name,
-        property: lease.properties?.title || 'N/A',
-        amount: lease.properties?.price ? `R${lease.properties.price.toLocaleString()}/mo` : 'N/A',
-        status: lease.status,
-    }));
+    return data.map((lease) => {
+        const property = Array.isArray(lease.properties)
+            ? lease.properties[0]
+            : lease.properties;
+
+        return {
+            id: lease.id,
+            tenant: lease.name,
+            property: property?.title || 'N/A',
+            amount: property?.price ? `R${property.price.toLocaleString()}/mo` : 'N/A',
+            status: lease.status,
+        };
+    });
 }

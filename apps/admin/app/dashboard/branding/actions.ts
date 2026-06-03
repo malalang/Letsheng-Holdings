@@ -1,8 +1,56 @@
 'use server';
 
-import { getBranding as getBrandingProductsService, getBrandingById as getBrandingProductService, createBranding as createBrandingProductService, updateBranding as updateBrandingProductService, deleteBranding as deleteBrandingProductService, type Branding } from "@repo/supabase";
 import { revalidatePath } from 'next/cache';
+
 import { triggerRevalidation } from '@/lib/revalidation';
+import {
+  createBranding as createBrandingProductService,
+  deleteBranding as deleteBrandingProductService,
+  getBrandingById as getBrandingProductService,
+  getBranding as getBrandingProductsService,
+  updateBranding as updateBrandingProductService,
+  type Branding,
+  type Json,
+  type TablesInsert,
+  type TablesUpdate,
+} from "@repo/supabase";
+
+function getErrorMessage(error: unknown) {
+  return error instanceof Error ? error.message : "An unexpected error occurred.";
+}
+
+function toJson(value: unknown): Json | null {
+  return value === undefined ? null : (value as Json | null);
+}
+
+function toBrandingInsert(product: Branding): TablesInsert<"branding"> {
+  return {
+    id: product.id,
+    title: product.title,
+    category: product.category,
+    description: product.description,
+    image: product.image,
+    is_featured: product.is_featured,
+    specs: toJson(product.specs),
+    gallery: toJson(product.gallery),
+    reviews: toJson(product.reviews),
+  };
+}
+
+function toBrandingUpdate(product: Partial<Branding>): TablesUpdate<"branding"> {
+  const payload: TablesUpdate<"branding"> = {};
+
+  if (product.title !== undefined) payload.title = product.title;
+  if (product.category !== undefined) payload.category = product.category;
+  if (product.description !== undefined) payload.description = product.description;
+  if (product.image !== undefined) payload.image = product.image;
+  if (product.is_featured !== undefined) payload.is_featured = product.is_featured;
+  if (product.specs !== undefined) payload.specs = toJson(product.specs);
+  if (product.gallery !== undefined) payload.gallery = toJson(product.gallery);
+  if (product.reviews !== undefined) payload.reviews = toJson(product.reviews);
+
+  return payload;
+}
 
 // Action to fetch all branding products
 export async function getBrandingProducts() {
@@ -29,13 +77,13 @@ export async function createBrandingProduct(
   product: Branding,
 ): Promise<{ success: boolean; error?: string }> {
   try {
-    await createBrandingProductService(product as any);
+    await createBrandingProductService(toBrandingInsert(product));
     revalidatePath('/dashboard/branding');
     await triggerRevalidation({ path: '/branding' });
     return { success: true };
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error creating branding product:', error);
-    return { success: false, error: error.message };
+    return { success: false, error: getErrorMessage(error) };
   }
 }
 
@@ -45,15 +93,15 @@ export async function updateBrandingProduct(
   product: Partial<Branding>,
 ): Promise<{ success: boolean; error?: string }> {
   try {
-    await updateBrandingProductService(id, product as any);
+    await updateBrandingProductService(id, toBrandingUpdate(product));
     revalidatePath('/dashboard/branding');
     revalidatePath(`/dashboard/branding/brand/${id}`);
     await triggerRevalidation({ path: `/branding/${id}` });
     await triggerRevalidation({ path: '/branding' });
     return { success: true };
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error updating branding product:', error);
-    return { success: false, error: error.message };
+    return { success: false, error: getErrorMessage(error) };
   }
 }
 
@@ -66,8 +114,8 @@ export async function deleteBrandingProduct(
     revalidatePath('/dashboard/branding');
     await triggerRevalidation({ path: '/branding' });
     return { success: true };
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error deleting branding product:', error);
-    return { success: false, error: error.message };
+    return { success: false, error: getErrorMessage(error) };
   }
 }

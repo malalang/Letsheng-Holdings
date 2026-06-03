@@ -119,11 +119,11 @@ const Header = () => {
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Link
-              href="/dashboard/orders/new"
+              href="/dashboard/branding/new"
               className="flex items-center w-full"
             >
               <ShoppingCart className="h-4 w-4 mr-2" />
-              Order
+              Branding Product
             </Link>
           </DropdownMenuItem>
         </DropdownMenuContent>

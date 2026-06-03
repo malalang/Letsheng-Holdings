@@ -1,9 +1,8 @@
 import { Mail, MapPin, Phone } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { businessInfo } from "@/lib/business";
+import { ContactForm } from "./contact-form";
 
 export default function ContactPage() {
   return (
@@ -23,37 +22,8 @@ export default function ContactPage() {
           <CardHeader>
             <CardTitle className="text-secondary">Send us a Message</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
-            <div>
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Name
-              </label>
-              <Input id="name" placeholder="Your Name" />
-            </div>
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Email
-              </label>
-              <Input id="email" type="email" placeholder="Your Email" />
-            </div>
-            <div>
-              <label
-                htmlFor="message"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Message
-              </label>
-              <Textarea id="message" placeholder="Your Message" />
-            </div>
-            <Button size="lg" className="w-full font-bold">
-              Send Message
-            </Button>
+          <CardContent>
+            <ContactForm />
           </CardContent>
         </Card>
 
@@ -68,23 +38,25 @@ export default function ContactPage() {
               <MapPin className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
               <div>
                 <h4 className="font-semibold">Our Office</h4>
-                <p>39 Mvubu Street, Soshanguve South, Pretoria, 0152</p>
+                <p>{businessInfo.address}</p>
               </div>
             </div>
             <div className="flex items-start gap-4">
               <Phone className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
               <div>
                 <h4 className="font-semibold">Phone</h4>
-                <p>+27 76 348 9454</p>
-                <p>+27 67 019 1941</p>
+                {businessInfo.phones.map((phone) => (
+                  <p key={phone}>{phone}</p>
+                ))}
               </div>
             </div>
             <div className="flex items-start gap-4">
               <Mail className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
               <div>
                 <h4 className="font-semibold">Email</h4>
-                <p>letshengholdings@gmail.com</p>
-                <p>info@letshengholdings.co.za</p>
+                {businessInfo.emails.map((email) => (
+                  <p key={email}>{email}</p>
+                ))}
               </div>
             </div>
           </CardContent>

@@ -342,7 +342,7 @@ export default function AboutPage() {
                 <h3 className="text-4xl text-primary font-bold mb-4 tracking-tight">Looking for a Home?</h3>
                 <p className="text-gray-300 text-lg mb-8 max-w-sm leading-relaxed">Secure your spot in one of our private, modern rental units today. Explore our latest vacancies.</p>
               </div>
-              <Link href="/estates" className="relative z-10 inline-flex items-center text-primary text-xl font-bold hover:gap-3 transition-all">
+              <Link href="/properties" className="relative z-10 inline-flex items-center text-primary text-xl font-bold hover:gap-3 transition-all">
                 Browse Properties <ChevronRight className="ml-1 h-6 w-6" />
               </Link>
             </div>

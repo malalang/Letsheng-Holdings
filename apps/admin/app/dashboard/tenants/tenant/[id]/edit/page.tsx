@@ -1,4 +1,4 @@
-import {type Tenant } from "@repo/supabase";
+import { type Tenant } from "@repo/supabase";
 import { getTenantById } from "../../../actions";
 import TenantForm from "../../../tenant-form";
 
@@ -13,6 +13,6 @@ export default async function EditTenantPage({ params }: {
     }
 
     return (
-        <TenantForm tenant={tenant as Tenant } />
+        <TenantForm tenant={tenant as Tenant & { id: string }} />
     );
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowLeft, PlusCircle, Trash2 } from "lucide-react";
+import { ArrowLeft, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
@@ -36,22 +36,26 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { tenantSchema, type Tenant, type Payment } from "@repo/supabase";
+import { type Tenant, type Payment } from "@repo/supabase";
 import { createTenant, deleteTenant, updateTenant } from "./actions";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { createSupabaseBrowserClient } from "@repo/supabase";
 import { z } from "zod";
-import { FieldValues } from "react-hook-form";
 
-// Create a form-specific schema that overrides the date to be a string
-const formSchema = tenantSchema.omit({ id: true, avatar_url: true }).extend({
-    lease_end_date: z.string().optional().nullable(),
+const formSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z.union([z.string().email("Invalid email address"), z.literal("")]),
+  property_id: z.string().optional().nullable(),
+  status: z.enum(["Active", "Inactive", "Pending"]),
+  lease_end_date: z.string().optional().nullable(),
 });
 type FormValues = z.infer<typeof formSchema>;
 
+type TenantRecord = Tenant & { id: string };
+
 interface TenantFormProps {
-  tenant?: Tenant;
+  tenant?: TenantRecord;
   payments?: (Payment & { id: string })[];
 }
 
@@ -76,7 +80,10 @@ export default function TenantForm({ tenant, payments }: TenantFormProps) {
       resolver: zodResolver(formSchema),
       defaultValues: tenant
         ? {
-            ...tenant,
+            name: tenant.name,
+            email: tenant.email ?? "",
+            property_id: tenant.property_id ?? "",
+            status: tenant.status,
             lease_end_date: formatDateForInput(tenant.lease_end_date),
           }
         : {
@@ -103,14 +110,17 @@ export default function TenantForm({ tenant, payments }: TenantFormProps) {
   }, []);
 
   async function onSubmit(data: FormValues) {
-    const dataForAction = {
-        ...data,
-        lease_end_date: data.lease_end_date ? new Date(data.lease_end_date) : null,
+    const dataForAction: Omit<Tenant, "id" | "avatar_url"> = {
+      name: data.name,
+      email: data.email || null,
+      property_id: data.property_id || null,
+      status: data.status,
+      lease_end_date: data.lease_end_date ? new Date(data.lease_end_date) : null,
     };
 
     const action = tenant
     ? await updateTenant(tenant.id, dataForAction)
-    : await createTenant(dataForAction as Omit<Tenant, 'id' | 'avatar_url'>);
+    : await createTenant(dataForAction);
 
   if (action.success) {
     router.push("/dashboard/tenants");
@@ -250,19 +260,11 @@ export default function TenantForm({ tenant, payments }: TenantFormProps) {
 
           {tenant && payments && (
             <Card>
-              <CardHeader className="flex flex-row items-center justify-between">
-                <div>
-                  <CardTitle>Payment History</CardTitle>
-                  <CardDescription>
-                    A record of all payments made by the tenant.
-                  </CardDescription>
-                </div>
-                <Link href={`/dashboard/tenants/${tenant.id}/payments/new`}>
-                  <Button size="sm" variant="outline">
-                    <PlusCircle className="mr-2 h-4 w-4" />
-                    Add Payment
-                  </Button>
-                </Link>
+              <CardHeader>
+                <CardTitle>Payment History</CardTitle>
+                <CardDescription>
+                  A record of all payments made by the tenant.
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <Table>

@@ -2,11 +2,9 @@ import {
   Archive,
   BookUser,
   Building2,
-  Cog,
   Home,
   Package2,
   ShoppingCart,
-  UserCog,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -56,18 +54,6 @@ const Sidebar = () => {
               icon={<Archive className="h-4 w-4" />}
             >
               Submissions
-            </SidebarLink>
-            <SidebarLink
-              href="/dashboard/users"
-              icon={<UserCog className="h-4 w-4" />}
-            >
-              User Management
-            </SidebarLink>
-            <SidebarLink
-              href="/dashboard/settings"
-              icon={<Cog className="h-4 w-4" />}
-            >
-              Settings
             </SidebarLink>
           </nav>
         </div>

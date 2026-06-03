@@ -8,6 +8,7 @@ import { FaWhatsapp } from "react-icons/fa";
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import { Toaster } from "@/components/ui/toaster";
+import { businessInfo } from "@/lib/business";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,12 +19,12 @@ export const metadata: Metadata = {
   },
   description:
     "Your strategic partner for premium residential estates and high-fidelity corporate branding. We build environments and create identities that empower success.",
-  metadataBase: new URL("https://your-domain.com"),
+  metadataBase: new URL(businessInfo.domain),
   openGraph: {
     type: "website",
     locale: "en_ZA",
-    url: "https://your-domain.com",
-    siteName: "Letsheng Holdings",
+    url: businessInfo.domain,
+    siteName: businessInfo.name,
   },
   robots: {
     index: true,
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
 
 const WhatsAppButton = () => (
   <Link
-    href="https://wa.me/27682045095"
+    href={businessInfo.whatsappHref}
     target="_blank"
     rel="noopener noreferrer"
     className="fixed bottom-8 right-8 z-50 p-4 rounded-full shadow-lg transition-transform transform hover:scale-110"

@@ -12,10 +12,9 @@ import BrandingForm from "../../../branding-form";
 import { getBrandingProduct } from "../../../actions";
 import {
   galleryItemSchema,
-  specItemSchema,
   reviewSchema,
+  specItemSchema,
 } from "@repo/supabase";
-import { z } from "zod";
 
 export default async function EditBrandingPage({
   params,
@@ -39,9 +38,9 @@ export default async function EditBrandingPage({
     );
   }
 
-  const specs = z.array(specItemSchema).safeParse(productData.specs);
-  const gallery = z.array(galleryItemSchema).safeParse(productData.gallery);
-  const reviews = z.array(reviewSchema).safeParse(productData.reviews);
+  const specs = specItemSchema.array().safeParse(productData.specs);
+  const gallery = galleryItemSchema.array().safeParse(productData.gallery);
+  const reviews = reviewSchema.array().safeParse(productData.reviews);
 
   const product = {
     ...productData,

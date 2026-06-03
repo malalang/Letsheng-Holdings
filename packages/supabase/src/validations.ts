@@ -9,7 +9,8 @@ export const galleryItemSchema = z.object({
   title: z.string().min(1, "Title is required"),
   description: z.string().optional(),
 });
-export type galleryItem = z.infer<typeof galleryItemSchema>;
+export type GalleryItem = z.infer<typeof galleryItemSchema>;
+export type galleryItem = GalleryItem;
 
 // Schema for a single review
 export const reviewSchema = z.object({
@@ -18,6 +19,7 @@ export const reviewSchema = z.object({
   rating: z.number().min(1).max(5),
   comment: z.string().min(1, "Comment is required"),
 });
+export type Review = z.infer<typeof reviewSchema>;
 
 // Schema for a single feature, which is just a string
 export const featureSchema = z.string();
@@ -47,6 +49,7 @@ export const specItemSchema = z.object({
   label: z.string().min(1, "Label is required"),
   value: z.string().min(1, "Value is required"),
 });
+export type SpecItem = z.infer<typeof specItemSchema>;
 
 // Schema for a branding product. Note: `image` is used for the main image URL.
 export const brandingSchema = z.object({
@@ -93,10 +96,21 @@ export const brandingInquirySchema = z.object({
   company: z.string().optional(),
   quantity: z.coerce.number().positive("Quantity must be a positive number"),
   message: z.string().optional(),
-  product_id: z.string(),
+  product_id: z.string().min(1, "Product is required"),
 });
 
 export type BrandingInquiry = z.infer<typeof brandingInquirySchema>;
+
+// Schema for a general contact message
+export const contactMessageSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Invalid email address"),
+  phone: z.string().optional(),
+  subject: z.string().optional(),
+  message: z.string().min(1, "Message is required"),
+});
+
+export type ContactMessage = z.infer<typeof contactMessageSchema>;
 
 // Schema for a lease application
 export const leaseApplicationSchema = z.object({

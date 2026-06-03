@@ -1,5 +1,6 @@
+import { requireAdminUser } from "../auth";
 import { createSupabaseServerClient } from "../server";
-import { Tables, TablesInsert, TablesUpdate } from "../types/database.types";
+import { TablesInsert, TablesUpdate } from "../types/database.types";
 
 export async function getBranding() {
   const supabase = await createSupabaseServerClient();
@@ -30,6 +31,7 @@ export async function getBrandingById(id: string) {
 }
 
 export async function createBranding(branding: TablesInsert<"branding">) {
+  await requireAdminUser();
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
     .from("branding")
@@ -41,6 +43,7 @@ export async function createBranding(branding: TablesInsert<"branding">) {
 }
 
 export async function updateBranding(id: string, branding: TablesUpdate<"branding">) {
+  await requireAdminUser();
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
     .from("branding")
@@ -53,6 +56,7 @@ export async function updateBranding(id: string, branding: TablesUpdate<"brandin
 }
 
 export async function deleteBranding(id: string) {
+  await requireAdminUser();
   const supabase = await createSupabaseServerClient();
   const { error } = await supabase.from("branding").delete().eq("id", id);
   if (error) throw new Error(error.message);
@@ -70,6 +74,7 @@ export async function submitBrandingInquiry(inquiry: TablesInsert<"branding_inqu
 }
 
 export async function getBrandingInquiries() {
+  await requireAdminUser();
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
     .from("branding_inquiries")
@@ -79,6 +84,7 @@ export async function getBrandingInquiries() {
 }
 
 export async function updateBrandingInquiryStatus(id: string, status: string) {
+  await requireAdminUser();
   const supabase = await createSupabaseServerClient();
   const { error } = await supabase
     .from("branding_inquiries")
@@ -88,6 +94,7 @@ export async function updateBrandingInquiryStatus(id: string, status: string) {
 }
 
 export async function deleteBrandingInquiry(id: string) {
+  await requireAdminUser();
   const supabase = await createSupabaseServerClient();
   const { error } = await supabase
     .from("branding_inquiries")

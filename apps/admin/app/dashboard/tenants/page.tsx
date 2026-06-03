@@ -83,12 +83,16 @@ export default async function AdminTenantsPage() {
                     </div>
                   </TableCell>
                   <TableCell className="text-muted-foreground">
-                    <Link
-                      href={`/dashboard/properties/${tenant.property_id}`}
-                      className="hover:underline"
-                    >
-                      {tenant.property?.title ?? 'N/A'}
-                    </Link>
+                    {tenant.property_id ? (
+                      <Link
+                        href={`/dashboard/properties/property/${tenant.property_id}`}
+                        className="hover:underline"
+                      >
+                        {tenant.property?.title ?? 'N/A'}
+                      </Link>
+                    ) : (
+                      'N/A'
+                    )}
                   </TableCell>
                   <TableCell className="text-center">
                     <Badge className={getStatusBadgeClass(tenant.status as Tenant["status"])}>

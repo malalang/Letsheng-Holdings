@@ -1,5 +1,6 @@
+import { requireAdminUser } from "../auth";
 import { createSupabaseServerClient } from "../server";
-import { Tables, TablesInsert, TablesUpdate } from "../types/database.types";
+import { TablesInsert, TablesUpdate } from "../types/database.types";
 
 export async function getProperties() {
   const supabase = await createSupabaseServerClient();
@@ -30,6 +31,7 @@ export async function getPropertyById(id: string) {
 }
 
 export async function createProperty(property: TablesInsert<"properties">) {
+  await requireAdminUser();
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
     .from("properties")
@@ -41,6 +43,7 @@ export async function createProperty(property: TablesInsert<"properties">) {
 }
 
 export async function updateProperty(id: string, property: TablesUpdate<"properties">) {
+  await requireAdminUser();
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
     .from("properties")
@@ -53,6 +56,7 @@ export async function updateProperty(id: string, property: TablesUpdate<"propert
 }
 
 export async function deleteProperty(id: string) {
+  await requireAdminUser();
   const supabase = await createSupabaseServerClient();
   const { error } = await supabase.from("properties").delete().eq("id", id);
   if (error) throw new Error(error.message);
@@ -70,6 +74,7 @@ export async function submitLeaseApplication(application: TablesInsert<"lease_ap
 }
 
 export async function getLeaseApplications() {
+  await requireAdminUser();
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
     .from("lease_applications")
@@ -79,6 +84,7 @@ export async function getLeaseApplications() {
 }
 
 export async function updateLeaseApplicationStatus(id: string, status: string) {
+  await requireAdminUser();
   const supabase = await createSupabaseServerClient();
   const { error } = await supabase
     .from("lease_applications")
@@ -88,6 +94,7 @@ export async function updateLeaseApplicationStatus(id: string, status: string) {
 }
 
 export async function deleteLeaseApplication(id: string) {
+  await requireAdminUser();
   const supabase = await createSupabaseServerClient();
   const { error } = await supabase
     .from("lease_applications")
