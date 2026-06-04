@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { galleryItemSchema, reviewSchema, specItemSchema } from "@repo/supabase";
 import { getBrandingProduct } from "../../actions";
 
 export default async function BrandingDetailPage({
@@ -32,6 +33,15 @@ export default async function BrandingDetailPage({
     );
   }
 
+  const parsedSpecs = specItemSchema.array().safeParse(product.specs ?? []);
+  const parsedGallery = galleryItemSchema
+    .array()
+    .safeParse(product.gallery ?? []);
+  const parsedReviews = reviewSchema.array().safeParse(product.reviews ?? []);
+  const specs = parsedSpecs.success ? parsedSpecs.data : [];
+  const gallery = parsedGallery.success ? parsedGallery.data : [];
+  const reviews = parsedReviews.success ? parsedReviews.data : [];
+
   return (
     <div className="mx-auto max-w-6xl">
       <div className="mb-4 flex items-center justify-between">
@@ -54,12 +64,18 @@ export default async function BrandingDetailPage({
           <Card>
             <CardHeader className="p-0">
               <div className="relative h-96">
-                <Image
-                  src={product.image ?? ''}
-                  alt={product.title}
-                  fill
-                  className="object-cover rounded-t-lg"
-                />
+                {product.image ? (
+                  <Image
+                    src={product.image}
+                    alt={product.title}
+                    fill
+                    className="object-cover rounded-t-lg"
+                  />
+                ) : (
+                  <div className="flex h-full items-center justify-center rounded-t-lg bg-muted text-sm text-muted-foreground">
+                    No product image
+                  </div>
+                )}
               </div>
             </CardHeader>
             <CardContent className="pt-6">
@@ -76,14 +92,14 @@ export default async function BrandingDetailPage({
             </CardContent>
           </Card>
 
-          {product.specs && (product.specs as any[]).length > 0 && (
+          {specs.length > 0 && (
             <Card>
               <CardHeader>
                 <CardTitle>Specifications</CardTitle>
               </CardHeader>
               <CardContent>
                 <ul className="grid grid-cols-2 gap-x-6 gap-y-2">
-                  {(product.specs as any[]).map((spec) => (
+                  {specs.map((spec) => (
                     <li key={spec.label} className="flex items-center gap-2">
                       <CheckCircle className="h-5 w-5 text-green-500" />
                       <span>
@@ -96,13 +112,13 @@ export default async function BrandingDetailPage({
             </Card>
           )}
 
-          {product.gallery && (product.gallery as any[]).length > 0 && (
+          {gallery.length > 0 && (
             <Card>
               <CardHeader>
                 <CardTitle>Product Gallery</CardTitle>
               </CardHeader>
               <CardContent className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {(product.gallery as any[]).map((image) => (
+                {gallery.map((image) => (
                   <div key={image.imageUrl} className="relative h-48">
                     <Image
                       src={image.imageUrl}
@@ -132,19 +148,22 @@ export default async function BrandingDetailPage({
             </CardContent>
           </Card>
 
-          {product.reviews && (product.reviews as any[]).length > 0 && (
+          {reviews.length > 0 && (
             <Card>
               <CardHeader>
                 <CardTitle>Client Reviews</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                {(product.reviews as any[]).map((review) => (
-                  <div key={review.id} className="p-4 rounded-lg border">
+                {reviews.map((review, reviewIndex) => (
+                  <div
+                    key={review.id ?? `${review.author}-${reviewIndex}`}
+                    className="p-4 rounded-lg border"
+                  >
                     <div className="flex items-center mb-2">
                       <div className="flex items-center">
                         {[...Array(review.rating)].map((_, i) => (
                           <Star
-                            key={`${review.id}-star-${i}`}
+                            key={`${review.id ?? review.author}-${reviewIndex}-star-${i}`}
                             className="h-4 w-4 text-yellow-400 fill-current"
                           />
                         ))}

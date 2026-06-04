@@ -15,6 +15,8 @@ import {
 
 import { getProperties } from "./actions";
 
+export const dynamic = "force-dynamic";
+
 function EstatesHero() {
   return (
     <section className="relative overflow-hidden bg-white pt-16 pb-12 md:pt-24 md:pb-20">
@@ -71,7 +73,7 @@ export default async function PropertiesPage() {
            <div className="relative h-64"> {/* Consistent Height */}
               <Link href={`/properties/${p.id}`}>
                 <Image
-                  src={p.image_url ?? ""}
+                  src={p.image_url ?? "/logo.jpg"}
                   alt={p.title}
                   fill
                   className="object-cover"

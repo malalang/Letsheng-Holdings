@@ -1,6 +1,7 @@
-import { Eye, ShoppingCart, Star } from "lucide-react";
+import { ShoppingCart, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { galleryItemSchema, reviewSchema, specItemSchema } from "@repo/supabase";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -19,6 +20,15 @@ export default async function ProductPage({
     return <div>Product not found</div>;
   }
 
+  const parsedSpecs = specItemSchema.array().safeParse(product.specs ?? []);
+  const parsedGallery = galleryItemSchema
+    .array()
+    .safeParse(product.gallery ?? []);
+  const parsedReviews = reviewSchema.array().safeParse(product.reviews ?? []);
+  const specs = parsedSpecs.success ? parsedSpecs.data : [];
+  const gallery = parsedGallery.success ? parsedGallery.data : [];
+  const reviews = parsedReviews.success ? parsedReviews.data : [];
+
   return (
     <div className="animate-fade-in">
       <Card className="max-w-4xl mx-auto">
@@ -26,7 +36,7 @@ export default async function ProductPage({
           <div className="grid md:grid-cols-2 gap-12 items-start">
             <div className="relative h-96 rounded-2xl shadow-lg overflow-hidden">
               <Image
-                src={product.image ?? ''}
+                src={product.image ?? "/logo.jpg"}
                 alt={product.title}
                 fill
                 className="object-cover"
@@ -43,13 +53,13 @@ export default async function ProductPage({
                 {product.description}
               </p>
 
-              {product.specs && (product.specs as any[]).length > 0 && (
+              {specs.length > 0 && (
                 <Card className="mt-6">
                   <CardHeader>
                     <CardTitle>Specifications</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-2">
-                    {(product.specs as any[]).map((spec) => (
+                    {specs.map((spec) => (
                       <div
                         key={spec.label}
                         className="flex justify-between text-sm"
@@ -77,13 +87,13 @@ export default async function ProductPage({
           </div>
         </CardHeader>
         <CardContent className="mt-6">
-          {product.gallery && (product.gallery as any[]).length > 0 && (
+          {gallery.length > 0 && (
             <div className="mt-8">
               <h3 className="text-2xl font-bold text-secondary mb-4">
                 Product Gallery
               </h3>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {(product.gallery as any[]).slice(0, 3).map((image) => (
+                {gallery.slice(0, 3).map((image) => (
                   <div key={image.imageUrl} className="relative h-48">
                     <Image
                       src={image.imageUrl}
@@ -99,7 +109,7 @@ export default async function ProductPage({
                     </div>
                   </div>
                 ))}
-                {(product.gallery as any[]).length > 3 && (
+                {gallery.length > 3 && (
                   <Link
                     href={`/branding/${product.id}/gallery`}
                     className="relative h-48 flex items-center justify-center bg-gray-200 rounded-lg"
@@ -111,13 +121,13 @@ export default async function ProductPage({
             </div>
           )}
 
-          {product.reviews && (product.reviews as any[]).length > 0 && (
+          {reviews.length > 0 && (
             <div className="mt-8">
               <h3 className="text-2xl font-bold text-secondary mb-4">
                 Reviews
               </h3>
               <div className="space-y-4">
-                {(product.reviews as any[]).map((review, index) => (
+                {reviews.map((review, index) => (
                   <Card
                     key={`${review.author}-${index}`}
                     className="bg-gray-50/50"

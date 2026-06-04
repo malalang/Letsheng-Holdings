@@ -5,7 +5,6 @@ import {
   FileText,
   Search,
   Star,
-  Users,
   CheckCircle2,
   MapPin,
 } from "lucide-react";
@@ -19,6 +18,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getBrandingProducts } from "./branding/actions";
 import { getProperties } from "./properties/actions";
 import WaterDetergentsSpotlight from "@/components/branding/waterDetergents";
+
+export const dynamic = "force-dynamic";
 
 // ==============================================
 // Sub-Components
@@ -45,7 +46,7 @@ const FeaturedPropertyCard = ({
     <div className="relative h-64 overflow-hidden"> {/* Consistent Height */}
               <Link href={`/properties/${id}`}>
                 <Image
-                  src={imageUrl ?? ""}
+                  src={imageUrl || "/logo.jpg"}
                   alt={title}
                   fill
                   className="object-cover"
@@ -98,8 +99,8 @@ const FeaturedProductCard = ({
   <Card className="group overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border-none flex flex-col">
     <div className="relative aspect-square bg-gray-100 overflow-hidden">
   <Link href={`/branding/${id}`}>
-    <Image
-      src={image ?? "/placeholder-branding.jpg"}
+      <Image
+      src={image || "/logo.jpg"}
       alt={title}
       fill
       className="object-cover transition-transform duration-500 hover:scale-105"
@@ -277,7 +278,7 @@ export default async function HomePage() {
             <FeaturedPropertyCard
               key={p.id}
               id={p.id}
-              imageUrl={p.image_url ?? ""}
+              imageUrl={p.image_url ?? "/logo.jpg"}
               title={p.title}
               price={`R ${p.price.toLocaleString()}`}
               bedrooms={p.bedrooms}
@@ -311,7 +312,7 @@ export default async function HomePage() {
             <FeaturedProductCard
               key={p.id}
               id={p.id}
-              image={p.image ?? ""}
+              image={p.image ?? "/logo.jpg"}
               title={p.title}
               category={p.category ?? ""}
               description={p.description ?? ""}

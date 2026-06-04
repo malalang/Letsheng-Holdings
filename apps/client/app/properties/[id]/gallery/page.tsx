@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { galleryItemSchema } from "@repo/supabase";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -18,6 +19,11 @@ export default async function PropertyGalleryPage({
     return <div>Property not found</div>;
   }
 
+  const parsedGallery = galleryItemSchema
+    .array()
+    .safeParse(property.gallery ?? []);
+  const gallery = parsedGallery.success ? parsedGallery.data : [];
+
   return (
     <div className="animate-fade-in">
       <div className="text-center mb-12">
@@ -28,8 +34,9 @@ export default async function PropertyGalleryPage({
           <Button variant="outline">Back to Property Details</Button>
         </Link>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {(property.gallery as any[]).map((image) => (
+      {gallery.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {gallery.map((image) => (
           <Card
             key={image.imageUrl}
             className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
@@ -49,8 +56,13 @@ export default async function PropertyGalleryPage({
               <p className="text-gray-600">{image.description}</p>
             </CardContent>
           </Card>
-        ))}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <Card className="p-8 text-center text-muted-foreground">
+          No gallery images are available for this property yet.
+        </Card>
+      )}
     </div>
   );
 }

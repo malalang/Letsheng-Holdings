@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
+import type { z } from 'zod';
 
 import { submitBrandingInquiry } from '@/app/branding/actions';
 import { Button } from '@/components/ui/button';
@@ -30,11 +31,13 @@ interface BrandingOrderFormProps {
   product: Branding;
 }
 
+type BrandingInquiryFormValues = z.input<typeof brandingInquirySchema>;
+
 export default function BrandingOrderForm({ product }: BrandingOrderFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  const form = useForm<BrandingInquiry>({
+  const form = useForm<BrandingInquiryFormValues, unknown, BrandingInquiry>({
     resolver: zodResolver(brandingInquirySchema),
     defaultValues: {
       customer_name: '',
@@ -112,7 +115,11 @@ export default function BrandingOrderForm({ product }: BrandingOrderFormProps) {
                 <FormItem className="md:col-span-2">
                   <FormLabel>Company Name (Optional)</FormLabel>
                   <FormControl>
-                    <Input placeholder="e.g., Acme Corporation" {...field} />
+                    <Input
+                      placeholder="e.g., Acme Corporation"
+                      {...field}
+                      value={field.value ?? ""}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -141,7 +148,8 @@ export default function BrandingOrderForm({ product }: BrandingOrderFormProps) {
                       min="1"
                       placeholder="Minimum 1"
                       {...field}
-                      onChange={(e) => field.onChange(+e.target.value)}
+                      value={field.value ?? ""}
+                      onChange={(e) => field.onChange(e.target.value)}
                     />
                   </FormControl>
                   <FormMessage />
@@ -159,6 +167,7 @@ export default function BrandingOrderForm({ product }: BrandingOrderFormProps) {
                       rows={6}
                       placeholder="Please describe your project, including desired colors, branding placement, and any critical deadlines..."
                       {...field}
+                      value={field.value ?? ""}
                     />
                   </FormControl>
                   <FormMessage />

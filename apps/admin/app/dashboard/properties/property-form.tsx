@@ -5,6 +5,7 @@ import { Loader2, PlusCircle, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
+import type { z } from "zod";
 
 import { UploadImage } from "@/components/upload-image";
 import { createProperty, deleteProperty, updateProperty } from "./actions";
@@ -43,12 +44,14 @@ interface PropertyFormProps {
   property?: Property;
 }
 
+type PropertyFormValues = z.input<typeof propertySchema>;
+
 export default function PropertyForm({ property }: PropertyFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const router = useRouter();
 
-  const form = useForm<Property>({
+  const form = useForm<PropertyFormValues, unknown, Property>({
     resolver: zodResolver(propertySchema),
     defaultValues: property
       ? {
@@ -545,7 +548,11 @@ export default function PropertyForm({ property }: PropertyFormProps) {
                                 <FormItem>
                                   <FormLabel>Comment</FormLabel>
                                   <FormControl>
-                                    <Textarea rows={2} {...field} value={field.value ?? '.'} />
+                                    <Textarea
+                                      rows={2}
+                                      {...field}
+                                      value={field.value ?? ""}
+                                    />
                                   </FormControl>
                                   <FormMessage />
                                 </FormItem>
@@ -561,7 +568,7 @@ export default function PropertyForm({ property }: PropertyFormProps) {
                       size="sm"
                       className="mt-6"
                       onClick={() =>
-                        appendReview({ author: "", rating: 5, comment: "" } as any)
+                        appendReview({ author: "", rating: 5, comment: "" })
                       }
                     >
                       <PlusCircle className="mr-2 h-4 w-4" />

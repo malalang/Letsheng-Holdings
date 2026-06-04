@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { toast } from "@/components/ui/use-toast";
+import type { z } from 'zod';
 
 import { UploadImage } from "@/components/upload-image";
 import { Button } from '@/components/ui/button';
@@ -46,12 +47,14 @@ interface BrandingFormProps {
   product?: Branding;
 }
 
+type BrandingFormValues = z.input<typeof brandingSchema>;
+
 export default function BrandingForm({ product }: BrandingFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const router = useRouter();
 
-  const form = useForm<Branding>({
+  const form = useForm<BrandingFormValues, unknown, Branding>({
     resolver: zodResolver(brandingSchema),
     defaultValues: product
       ? {
@@ -467,7 +470,7 @@ export default function BrandingForm({ product }: BrandingFormProps) {
             </CardContent>
           </Card>
           <div className="flex flex-col gap-2">
-            <Button type="submit" onClick={()=>onSubmit(form.getValues())} variant="default" disabled={isLoading}>
+            <Button type="submit" variant="default" disabled={isLoading}>
               {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               {product ? 'Save Changes' : 'Create Product'}
             </Button>

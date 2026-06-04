@@ -27,9 +27,11 @@ malalang.md
 .DS_Store
 *.pem
 .turbo
+**/supabase/.temp/
 
 # debug
 npm-debug.log*
+package-lock.json
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*

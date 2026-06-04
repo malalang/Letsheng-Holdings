@@ -1,7 +1,6 @@
 import {
   Bath,
   Bed,
-  Camera,
   CheckCircle,
   CircleDollarSign,
   Home,
@@ -10,6 +9,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { featureSchema, galleryItemSchema, reviewSchema } from "@repo/supabase";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -29,13 +29,22 @@ export default async function PropertyDetailPage({
     return <div>Property not found</div>;
   }
 
+  const parsedFeatures = featureSchema.array().safeParse(property.features ?? []);
+  const parsedGallery = galleryItemSchema
+    .array()
+    .safeParse(property.gallery ?? []);
+  const parsedReviews = reviewSchema.array().safeParse(property.reviews ?? []);
+  const features = parsedFeatures.success ? parsedFeatures.data : [];
+  const gallery = parsedGallery.success ? parsedGallery.data : [];
+  const reviews = parsedReviews.success ? parsedReviews.data : [];
+
   return (
     <div className="animate-fade-in">
       <Card className="max-w-4xl mx-auto">
         <CardHeader>
           <div className="relative h-96">
             <Image
-              src={property.image_url ?? ""}
+              src={property.image_url ?? "/logo.jpg"}
               alt={property.title}
               fill
               className="object-cover rounded-t-xl"
@@ -78,7 +87,7 @@ export default async function PropertyDetailPage({
 
           <h3 className="text-2xl font-bold text-secondary mb-4">Features</h3>
           <ul className="grid grid-cols-2 gap-2 text-gray-700 mb-8">
-            {(property.features as string[]).map((feature) => (
+            {features.map((feature) => (
               <li key={feature} className="flex items-center">
                 <CheckCircle className="h-5 w-5 mr-2 text-green-500" />
                 {feature}
@@ -86,13 +95,13 @@ export default async function PropertyDetailPage({
             ))}
           </ul>
 
-          {property.gallery && (property.gallery as any[]).length > 0 && (
+          {gallery.length > 0 && (
             <div className="mt-8">
               <h3 className="text-2xl font-bold text-secondary mb-4">
                 Property Gallery
               </h3>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {(property.gallery as any[]).slice(0, 3).map((image) => (
+                {gallery.slice(0, 3).map((image) => (
                   <div key={image.imageUrl} className="relative h-48">
                     <Image
                       src={image.imageUrl}
@@ -108,7 +117,7 @@ export default async function PropertyDetailPage({
                     </div>
                   </div>
                 ))}
-                {(property.gallery as any[]).length > 5 && (
+                {gallery.length > 3 && (
                   <Link
                     href={`/properties/${property.id}/gallery`}
                     className="relative h-48 flex items-center justify-center bg-gray-200 rounded-lg"
@@ -120,13 +129,13 @@ export default async function PropertyDetailPage({
             </div>
           )}
 
-          {property.reviews && (property.reviews as any[]).length > 0 && (
+          {reviews.length > 0 && (
             <div className="mt-8">
               <h3 className="text-2xl font-bold text-secondary mb-4">
                 Reviews
               </h3>
               <div className="space-y-4">
-                {(property.reviews as any[]).map((review, index) => (
+                {reviews.map((review, index) => (
                   <Card
                     key={`${review.author}-${index}`}
                     className="bg-gray-50/50"

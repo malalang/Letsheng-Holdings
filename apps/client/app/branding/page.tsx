@@ -23,6 +23,8 @@ import {
 
 import { getBrandingProducts } from "./actions";
 
+export const dynamic = "force-dynamic";
+
 function BrandingHero() {
   return (
     <section className="relative overflow-hidden bg-white pt-16 pb-12 md:pt-24 md:pb-20">
@@ -79,7 +81,7 @@ export default async function BrandingPage() {
             <div className="relative aspect-square overflow-hidden">
               <Link href={`/branding/${p.id}`}>
                 <Image
-                  src={p.image ?? ""}
+                  src={p.image ?? "/logo.jpg"}
                   alt={p.title}
                   fill
                   className="object-cover"

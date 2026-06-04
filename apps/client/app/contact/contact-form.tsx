@@ -87,7 +87,7 @@ export function ContactForm() {
             <FormItem>
               <FormLabel>Phone</FormLabel>
               <FormControl>
-                <Input placeholder="+27..." {...field} />
+                <Input placeholder="+27..." {...field} value={field.value ?? ""} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -100,7 +100,11 @@ export function ContactForm() {
             <FormItem>
               <FormLabel>Subject</FormLabel>
               <FormControl>
-                <Input placeholder="How can we help?" {...field} />
+                <Input
+                  placeholder="How can we help?"
+                  {...field}
+                  value={field.value ?? ""}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>

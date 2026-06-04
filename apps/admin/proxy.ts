@@ -12,7 +12,18 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
-  if (user && pathname === "/login") {
+  if (!user) {
+    return response;
+  }
+
+  const { data: isAdmin, error: adminError } = await supabase.rpc("is_admin");
+  const hasAdminAccess = !adminError && isAdmin === true;
+
+  if (!hasAdminAccess && pathname !== "/login") {
+    return NextResponse.redirect(new URL("/login?error=unauthorized", request.url));
+  }
+
+  if (hasAdminAccess && pathname === "/login") {
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
