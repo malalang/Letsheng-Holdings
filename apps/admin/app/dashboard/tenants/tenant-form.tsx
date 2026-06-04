@@ -65,7 +65,7 @@ const formatDateForInput = (date: Date | string | null | undefined): string => {
     try {
       const dateObj = new Date(date);
       if (isNaN(dateObj.getTime())) return '';
-      return dateObj.toISOString().split('T')[0];
+      return dateObj.toISOString().split('T')[0] ?? '';
     } catch (e) {
       return '';
     }

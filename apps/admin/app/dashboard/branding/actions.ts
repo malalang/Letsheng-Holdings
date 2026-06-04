@@ -4,16 +4,18 @@ import { revalidatePath } from 'next/cache';
 
 import { triggerRevalidation } from '@/lib/revalidation';
 import {
-  createBranding as createBrandingProductService,
-  deleteBranding as deleteBrandingProductService,
-  getBrandingById as getBrandingProductService,
-  getBranding as getBrandingProductsService,
-  updateBranding as updateBrandingProductService,
   type Branding,
   type Json,
   type TablesInsert,
   type TablesUpdate,
 } from "@repo/supabase";
+import {
+  createBranding as createBrandingProductService,
+  deleteBranding as deleteBrandingProductService,
+  getBrandingById as getBrandingProductService,
+  getBranding as getBrandingProductsService,
+  updateBranding as updateBrandingProductService,
+} from "@repo/supabase/services/branding";
 
 function getErrorMessage(error: unknown) {
   return error instanceof Error ? error.message : "An unexpected error occurred.";

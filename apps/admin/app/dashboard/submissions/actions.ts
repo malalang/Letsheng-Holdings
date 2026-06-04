@@ -1,7 +1,16 @@
 'use server';
 
-import { updateBrandingInquiryStatus as updateBrandingInquiryStatusService, deleteBrandingInquiry as deleteBrandingInquiryService, updateLeaseApplicationStatus as updateLeaseApplicationStatusService, deleteLeaseApplication as deleteLeaseApplicationService, getLeaseApplications as getLeaseApplicationsService, getBrandingInquiries as getBrandingInquiriesService } from "@repo/supabase";
 import { revalidatePath } from 'next/cache';
+import {
+  updateBrandingInquiryStatus as updateBrandingInquiryStatusService,
+  deleteBrandingInquiry as deleteBrandingInquiryService,
+  getBrandingInquiries as getBrandingInquiriesService,
+} from "@repo/supabase/services/branding";
+import {
+  updateLeaseApplicationStatus as updateLeaseApplicationStatusService,
+  deleteLeaseApplication as deleteLeaseApplicationService,
+  getLeaseApplications as getLeaseApplicationsService,
+} from "@repo/supabase/services/properties";
 
 // Action to update the status of a branding inquiry
 export async function updateBrandingInquiryStatus(id: string, status: string) {

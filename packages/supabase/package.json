@@ -4,6 +4,44 @@
   "private": true,
   "main": "./src/index.ts",
   "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./client": {
+      "types": "./src/client.ts",
+      "default": "./src/client.ts"
+    },
+    "./server": {
+      "types": "./src/server.ts",
+      "default": "./src/server.ts"
+    },
+    "./proxy": {
+      "types": "./src/middleware.ts",
+      "default": "./src/middleware.ts"
+    },
+    "./middleware": {
+      "types": "./src/middleware.ts",
+      "default": "./src/middleware.ts"
+    },
+    "./auth": {
+      "types": "./src/auth.ts",
+      "default": "./src/auth.ts"
+    },
+    "./validations": {
+      "types": "./src/validations.ts",
+      "default": "./src/validations.ts"
+    },
+    "./types": {
+      "types": "./src/types/database.types.ts",
+      "default": "./src/types/database.types.ts"
+    },
+    "./services/*": {
+      "types": "./src/services/*.ts",
+      "default": "./src/services/*.ts"
+    }
+  },
   "dependencies": {
     "@supabase/ssr": "^0.9.0",
     "@supabase/supabase-js": "^2.99.0",

@@ -29,7 +29,7 @@ export const propertySchema = z.object({
   id: z.string().optional(),
   title: z.string().min(3, "Title must be at least 3 characters"),
   description: z.string().optional().nullable(),
-  price: z.coerce.number().positive("Price must be a positive number"),
+  price: z.number().positive("Price must be a positive number"),
   location: z.string().min(3, "Location is required").nullable(),
   availability: z.boolean(),
   image_url: z.string().url("Must be a valid URL").nullable(),
@@ -94,7 +94,7 @@ export const brandingInquirySchema = z.object({
   customer_name: z.string().min(1, "Name is required"),
   email: z.string().email("Invalid email address"),
   company: z.string().optional(),
-  quantity: z.coerce.number().positive("Quantity must be a positive number"),
+  quantity: z.number().positive("Quantity must be a positive number"),
   message: z.string().optional(),
   product_id: z.string().min(1, "Product is required"),
 });

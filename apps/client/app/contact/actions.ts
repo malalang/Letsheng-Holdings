@@ -2,9 +2,9 @@
 
 import {
   contactMessageSchema,
-  submitContactMessage,
   type ContactMessage,
 } from "@repo/supabase";
+import { submitContactMessage } from "@repo/supabase/services/contact";
 
 export async function sendContactMessage(
   data: ContactMessage,

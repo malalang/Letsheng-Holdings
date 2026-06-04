@@ -3,16 +3,18 @@
 import { revalidatePath } from "next/cache";
 
 import {
-  createTenant as createTenantService,
-  deleteTenant as deleteTenantService,
-  getTenants as getTenantsService,
-  getTenantById as getTenantByIdService,
   tenantSchema,
-  updateTenant as updateTenantService,
   type TablesInsert,
   type TablesUpdate,
   type Tenant,
 } from "@repo/supabase";
+import {
+  createTenant as createTenantService,
+  deleteTenant as deleteTenantService,
+  getTenants as getTenantsService,
+  getTenantById as getTenantByIdService,
+  updateTenant as updateTenantService,
+} from "@repo/supabase/services/tenants";
 
 type TenantRow = Omit<Tenant, "lease_end_date"> & {
   lease_end_date: string | null;

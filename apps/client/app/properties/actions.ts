@@ -1,14 +1,34 @@
 'use server';
 
-import { getProperties as getPropertiesService, getPropertyById as getPropertyByIdService, submitLeaseApplication as submitLeaseApplicationService, leaseApplicationSchema } from "@repo/supabase";
 import { z } from "zod";
+import {
+  leaseApplicationSchema,
+  propertySchema,
+  type Property,
+} from "@repo/supabase";
+import {
+  getProperties as getPropertiesService,
+  getPropertyById as getPropertyByIdService,
+  submitLeaseApplication as submitLeaseApplicationService,
+} from "@repo/supabase/services/properties";
 
-export async function getProperties(){
-  return await getPropertiesService();
+export type PropertyRecord = Property & { id: string };
+
+function parsePropertyRecord(data: unknown): PropertyRecord {
+  const property = propertySchema.parse(data);
+  if (!property.id) {
+    throw new Error("Property record is missing an id.");
+  }
+  return property as PropertyRecord;
 }
 
-export async function getPropertyById(id: string){
-  return await getPropertyByIdService(id);
+export async function getProperties(): Promise<PropertyRecord[]>{
+  const properties = await getPropertiesService();
+  return properties.map(parsePropertyRecord);
+}
+
+export async function getPropertyById(id: string): Promise<PropertyRecord>{
+  return parsePropertyRecord(await getPropertyByIdService(id));
 }
 
 export async function submitLeaseApplication(data: z.infer<typeof leaseApplicationSchema>) {

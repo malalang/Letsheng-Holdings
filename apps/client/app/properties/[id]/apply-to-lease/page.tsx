@@ -12,13 +12,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { getPropertyById, submitLeaseApplication } from "../../actions";
+import { getPropertyById, submitLeaseApplication, type PropertyRecord } from "../../actions";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { leaseApplicationSchema, LeaseApplication } from "@repo/supabase";
 import { toast } from "sonner";
 import { useEffect, useState } from "react";
-import { Property } from "@repo/supabase";
 import { useParams } from 'next/navigation';
 
 function ApplyToLeaseForm({ propertyId, propertyTitle, propertyPrice }: { propertyId: string, propertyTitle: string, propertyPrice: number }) {
@@ -116,7 +115,7 @@ function ApplyToLeaseForm({ propertyId, propertyTitle, propertyPrice }: { proper
 export default function ApplyToLeasePage() {
   const params = useParams();
   const id = params.id as string;
-  const [property, setProperty] = useState<Property | null>(null);
+  const [property, setProperty] = useState<PropertyRecord | null>(null);
 
   useEffect(() => {
     if (!id) return;

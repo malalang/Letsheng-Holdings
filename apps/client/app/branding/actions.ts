@@ -1,25 +1,40 @@
 'use server';
 
 import {
+  brandingSchema,
   brandingInquirySchema,
+  type Branding,
+  type BrandingInquiry,
+} from "@repo/supabase";
+import {
   getBranding as getBrandingProductsService,
   getBrandingById as getBrandingProductService,
   submitBrandingInquiry as submitBrandingInquiryService,
-  type BrandingInquiry,
-} from "@repo/supabase";
+} from "@repo/supabase/services/branding";
 
-export async function getBrandingProducts() {
+export type BrandingRecord = Branding & { id: string };
+
+function parseBrandingRecord(data: unknown): BrandingRecord {
+  const product = brandingSchema.parse(data);
+  if (!product.id) {
+    throw new Error("Branding record is missing an id.");
+  }
+  return product as BrandingRecord;
+}
+
+export async function getBrandingProducts(): Promise<BrandingRecord[]> {
   try {
-    return await getBrandingProductsService();
+    const products = await getBrandingProductsService();
+    return products.map(parseBrandingRecord);
   } catch (error) {
     console.error('Error fetching branding products:', error);
     return [];
   }
 }
 
-export async function getBrandingProduct(id: string) {
+export async function getBrandingProduct(id: string): Promise<BrandingRecord | null> {
   try {
-    return await getBrandingProductService(id);
+    return parseBrandingRecord(await getBrandingProductService(id));
   } catch (error) {
     console.error('Error fetching branding product:', error);
     return null;

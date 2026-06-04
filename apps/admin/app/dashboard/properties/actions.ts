@@ -4,17 +4,19 @@ import { revalidatePath } from "next/cache";
 
 import { triggerRevalidation } from "@/lib/revalidation";
 import {
-  createProperty as createPropertyService,
-  deleteProperty as deletePropertyService,
-  getProperties as getPropertiesService,
-  getPropertyById as getPropertyByIdService,
   propertySchema,
-  updateProperty as updatePropertyService,
   type Json,
   type Property,
   type TablesInsert,
   type TablesUpdate,
 } from "@repo/supabase";
+import {
+  createProperty as createPropertyService,
+  deleteProperty as deletePropertyService,
+  getProperties as getPropertiesService,
+  getPropertyById as getPropertyByIdService,
+  updateProperty as updatePropertyService,
+} from "@repo/supabase/services/properties";
 
 function getErrorMessage(error: unknown) {
   return error instanceof Error ? error.message : "An unexpected error occurred.";
