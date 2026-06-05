@@ -34,9 +34,9 @@ const ServiceCard = ({
 }) => (
   <Card className="group overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border-none bg-white flex flex-col justify-between rounded-[2rem]">
     <div>
-      <div className="relative h-64 bg-secondary/5 flex items-center justify-center overflow-hidden">
+      <div className="relative aspect-square bg-secondary/5 flex items-center justify-center overflow-hidden">
         <Image
-          src={imageUrl}
+          src={imageUrl || "/logo.jpg"}
           alt={title}
           fill
           className="object-cover group-hover:scale-110 transition-transform duration-500"
@@ -101,7 +101,7 @@ export default function ServicesPage() {
               <span className="text-primary italic">Services & Divisions</span>
             </h1>
             <p className="text-xl text-gray-400 max-w-xl leading-relaxed">
-              Explore our core business divisions dedicated to high-fidelity printing, 
+              Explore our core business divisions dedicated to high-fidelity printing,
               premium property management, and essential water and detergents supply.
             </p>
           </div>
@@ -115,7 +115,7 @@ export default function ServicesPage() {
             Comprehensive Solutions
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Delivering national impact with professional property management, 
+            Delivering national impact with professional property management,
             high-fidelity products, and absolute reliability across South Africa.
           </p>
         </div>
@@ -172,9 +172,9 @@ export default function ServicesPage() {
                 Our Operational Standards
               </h2>
               <p className="text-gray-600 leading-relaxed">
-                At Letsheng Holdings, each division operates under stringent quality controls 
-                designed to meet industry regulations and customer expectations. Whether managing 
-                large-scale print runs or supplying thousands of liters of clean water, 
+                At Letsheng Holdings, each division operates under stringent quality controls
+                designed to meet industry regulations and customer expectations. Whether managing
+                large-scale print runs or supplying thousands of liters of clean water,
                 our promise remains reliability and absolute precision.
               </p>
               <div className="space-y-4 pt-2">
