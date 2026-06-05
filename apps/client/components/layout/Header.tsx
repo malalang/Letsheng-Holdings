@@ -55,15 +55,10 @@ export default function Header() {
             <NavLink href="/" onLinkClick={onLinkClick}>
               Home
             </NavLink>
-            <NavLink href="/properties" onLinkClick={onLinkClick}>
-              Estates
+            <NavLink href="/services" onLinkClick={onLinkClick}>
+              services
             </NavLink>
-            <NavLink href="/branding" onLinkClick={onLinkClick}>
-              Branding
-            </NavLink>
-            <NavLink href="/waterDetergents" onLinkClick={onLinkClick}>
-              Water and Detergents
-            </NavLink>
+
             <NavLink href="/about" onLinkClick={onLinkClick}>
               About
             </NavLink>
@@ -97,17 +92,11 @@ export default function Header() {
                   <NavLink href="/" onLinkClick={onLinkClick}>
                     Home
                   </NavLink>
-                  <NavLink href="/properties" onLinkClick={onLinkClick}>
-                    Estates
-                  </NavLink>
-                  <NavLink href="/branding" onLinkClick={onLinkClick}>
-                    Branding
-                  </NavLink>
-                  <NavLink href="/waterDetergents" onLinkClick={onLinkClick}>
-                    Water and Detergents
+                  <NavLink href="/services" onLinkClick={onLinkClick}>
+                    services
                   </NavLink>
                   <NavLink href="/about" onLinkClick={onLinkClick}>
-                    About Us
+                    About
                   </NavLink>
                   <Link href="/contact" className="mt-4">
                     <Button className="w-full bg-primary text-secondary font-bold hover:bg-primary/90">
