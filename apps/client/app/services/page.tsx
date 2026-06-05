@@ -1,13 +1,8 @@
 import {
-  Printer,
-  Droplet,
-  ShieldCheck,
   ArrowRight,
   Sparkles,
   CheckCircle2,
-  FileText,
-  ExternalLink,
-  Layers,
+  ShieldCheck,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -19,32 +14,34 @@ import { Badge } from "@/components/ui/badge";
 
 export const metadata: Metadata = {
   title: "Our Services | Letsheng Holdings",
-  description: "Discover the professional services offered by Letsheng Holdings, including print & branding, water & detergents division, and our client data privacy policy.",
+  description: "Discover the professional services offered by Letsheng Holdings, including print & branding, property management, and water & detergents division.",
 };
 
 const ServiceCard = ({
   title,
   description,
   link,
-  icon: Icon,
   badgeText,
   features,
+  imageUrl,
 }: {
   title: string;
   description: string;
   link: string;
-  icon: any;
   badgeText: string;
   features: string[];
+  imageUrl: string;
 }) => (
   <Card className="group overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border-none bg-white flex flex-col justify-between rounded-[2rem]">
     <div>
-      <div className="relative h-48 bg-secondary/5 flex items-center justify-center overflow-hidden">
-        {/* Animated background circle */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent group-hover:scale-110 transition-transform duration-500" />
-        <div className="w-16 h-16 bg-primary/10 text-primary rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-          <Icon className="h-8 w-8" />
-        </div>
+      <div className="relative h-64 bg-secondary/5 flex items-center justify-center overflow-hidden">
+        <Image
+          src={imageUrl}
+          alt={title}
+          fill
+          className="object-cover group-hover:scale-110 transition-transform duration-500"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-secondary/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         <div className="absolute top-4 right-4">
           <Badge className="bg-primary text-secondary font-bold px-3 py-1 border-none">
             {badgeText}
@@ -105,7 +102,7 @@ export default function ServicesPage() {
             </h1>
             <p className="text-xl text-gray-400 max-w-xl leading-relaxed">
               Explore our core business divisions dedicated to high-fidelity printing, 
-              essential water and detergents supply, and our robust privacy commitment.
+              premium property management, and essential water and detergents supply.
             </p>
           </div>
         </div>
@@ -118,8 +115,8 @@ export default function ServicesPage() {
             Comprehensive Solutions
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Delivering national impact with high-fidelity products, safety compliance, 
-            and absolute reliability across South Africa.
+            Delivering national impact with professional property management, 
+            high-fidelity products, and absolute reliability across South Africa.
           </p>
         </div>
 
@@ -128,8 +125,8 @@ export default function ServicesPage() {
             title="Letsheng Print & Brand"
             description="Elevate your corporate identity with precision-crafted apparel, signage, corporate gifts, and high-fidelity marketing materials."
             link="/branding"
-            icon={Printer}
             badgeText="Branding & Print"
+            imageUrl="/services/Brandings.png"
             features={[
               "Custom Corporate Clothing",
               "High-Fidelity Screen Printing",
@@ -138,29 +135,29 @@ export default function ServicesPage() {
             ]}
           />
           <ServiceCard
+            title="Letsheng Estates"
+            description="Premium residential properties and professional estate management services focused on comfort, security, and quality living."
+            link="/properties"
+            badgeText="Property Management"
+            imageUrl="/services/properties.png"
+            features={[
+              "Premium Residential Estates",
+              "Secure Rental Properties",
+              "Professional Management",
+              "Prime Locations",
+            ]}
+          />
+          <ServiceCard
             title="Water and Detergents"
             description="Pure SABS-standard bulk water delivery and premium-strength biodegradable cleaning detergents for commercial and industrial settings."
             link="/waterDetergents"
-            icon={Droplet}
             badgeText="Utilities & Chemicals"
+            imageUrl="/services/WaterAndDetergents.png"
             features={[
               "Potable Bulk Water Trucking",
               "Emergency Tank Refills",
               "Biodegradable Detergents",
               "Industrial-Strength Formulation",
-            ]}
-          />
-          <ServiceCard
-            title="Privacy Policy"
-            description="Our formal compliance framework and data governance commitment to protecting customer, tenant, and stakeholder information."
-            link="/privacy"
-            icon={ShieldCheck}
-            badgeText="Security & Compliance"
-            features={[
-              "POPIA Compliant Governance",
-              "Strict Data Security",
-              "Transparent Information Audit",
-              "Secure Application Portals",
             ]}
           />
         </div>
