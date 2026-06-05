@@ -6,14 +6,11 @@ export async function submitContactMessage(
   message: TablesInsert<"contact_messages">,
 ) {
   const supabase = await createSupabaseServerClient();
-  const { data, error } = await supabase
+  const { error } = await supabase
     .from("contact_messages")
-    .insert({ ...message, status: "New" })
-    .select()
-    .single();
+    .insert({ ...message, status: "New" });
 
   if (error) throw new Error(error.message);
-  return data;
 }
 
 export async function getContactMessages() {

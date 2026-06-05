@@ -64,13 +64,10 @@ export async function deleteProperty(id: string) {
 
 export async function submitLeaseApplication(application: TablesInsert<"lease_applications">) {
   const supabase = await createSupabaseServerClient();
-  const { data, error } = await supabase
+  const { error } = await supabase
     .from("lease_applications")
-    .insert({ ...application, status: "Pending" })
-    .select()
-    .single();
+    .insert({ ...application, status: "Pending" });
   if (error) throw new Error(error.message);
-  return data;
 }
 
 export async function getLeaseApplications() {

@@ -64,13 +64,10 @@ export async function deleteBranding(id: string) {
 
 export async function submitBrandingInquiry(inquiry: TablesInsert<"branding_inquiries">) {
   const supabase = await createSupabaseServerClient();
-  const { data, error } = await supabase
+  const { error } = await supabase
     .from("branding_inquiries")
-    .insert({ ...inquiry, status: "New" })
-    .select()
-    .single();
+    .insert({ ...inquiry, status: "New" });
   if (error) throw new Error(error.message);
-  return data;
 }
 
 export async function getBrandingInquiries() {
