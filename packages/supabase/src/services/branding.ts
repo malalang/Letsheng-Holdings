@@ -66,7 +66,7 @@ export async function submitBrandingInquiry(inquiry: TablesInsert<"branding_inqu
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
     .from("branding_inquiries")
-    .insert(inquiry)
+    .insert({ ...inquiry, status: "New" })
     .select()
     .single();
   if (error) throw new Error(error.message);

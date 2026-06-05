@@ -66,7 +66,7 @@ export async function submitLeaseApplication(application: TablesInsert<"lease_ap
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
     .from("lease_applications")
-    .insert(application)
+    .insert({ ...application, status: "Pending" })
     .select()
     .single();
   if (error) throw new Error(error.message);

@@ -8,7 +8,7 @@ export async function submitContactMessage(
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
     .from("contact_messages")
-    .insert(message)
+    .insert({ ...message, status: "New" })
     .select()
     .single();
 
