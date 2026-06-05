@@ -55,6 +55,12 @@ export default function Header() {
             <NavLink href="/" onLinkClick={onLinkClick}>
               Home
             </NavLink>
+            <NavLink href="/properties" onLinkClick={onLinkClick}>
+              Estates
+            </NavLink>
+            <NavLink href="/branding" onLinkClick={onLinkClick}>
+              Branding
+            </NavLink>
             <NavLink href="/services" onLinkClick={onLinkClick}>
               services
             </NavLink>
@@ -91,6 +97,12 @@ export default function Header() {
                 <div className="flex flex-col space-y-4 pt-10">
                   <NavLink href="/" onLinkClick={onLinkClick}>
                     Home
+                  </NavLink>
+                  <NavLink href="/properties" onLinkClick={onLinkClick}>
+                    Estates
+                  </NavLink>
+                  <NavLink href="/branding" onLinkClick={onLinkClick}>
+                    Branding
                   </NavLink>
                   <NavLink href="/services" onLinkClick={onLinkClick}>
                     services
