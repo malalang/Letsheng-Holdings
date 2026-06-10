@@ -1,16 +1,20 @@
-'use client';
+"use client";
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { ArrowRight, Loader2, Package, Upload, User } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
-import type { z } from 'zod';
-
-import { submitBrandingInquiry } from '@/app/branding/actions';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  type Branding,
+  type BrandingInquiry,
+  brandingInquirySchema,
+} from "@repo/supabase";
+import { ArrowRight, Loader2, Package, Upload, User } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import type { z } from "zod";
+import { submitBrandingInquiry } from "@/app/branding/actions";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Form,
   FormControl,
@@ -18,14 +22,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import {
-  type Branding,
-  type BrandingInquiry,
-  brandingInquirySchema,
-} from '@repo/supabase';
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 interface BrandingOrderFormProps {
   product: Branding;
@@ -40,12 +39,12 @@ export default function BrandingOrderForm({ product }: BrandingOrderFormProps) {
   const form = useForm<BrandingInquiryFormValues, unknown, BrandingInquiry>({
     resolver: zodResolver(brandingInquirySchema),
     defaultValues: {
-      customer_name: '',
-      email: '',
-      company: '',
+      customer_name: "",
+      email: "",
+      company: "",
       quantity: 1,
-      message: '',
-      product_id: product.id ?? '',
+      message: "",
+      product_id: product.id ?? "",
     },
   });
 
@@ -54,13 +53,13 @@ export default function BrandingOrderForm({ product }: BrandingOrderFormProps) {
     try {
       const result = await submitBrandingInquiry(data);
       if (result.success) {
-        toast.success('Your inquiry has been submitted successfully.');
-        router.push('/branding');
+        toast.success("Your inquiry has been submitted successfully.");
+        router.push("/branding");
       } else {
-        toast.error(result.error || 'An unexpected error occurred.');
+        toast.error(result.error || "An unexpected error occurred.");
       }
     } catch (error) {
-      toast.error('An unexpected error occurred.');
+      toast.error("An unexpected error occurred.");
     } finally {
       setIsLoading(false);
     }
@@ -69,7 +68,7 @@ export default function BrandingOrderForm({ product }: BrandingOrderFormProps) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <input type="hidden" {...form.register('product_id')} />
+        <input type="hidden" {...form.register("product_id")} />
         <Card>
           <CardHeader>
             <CardTitle className="text-2xl flex items-center text-secondary">
@@ -183,7 +182,8 @@ export default function BrandingOrderForm({ product }: BrandingOrderFormProps) {
                     Drag & drop your vector artwork, or
                   </p>
                   <p className="text-xs text-gray-500 mt-4">
-                    Paste artwork links in the project brief. Recommended formats: PDF, AI, EPS, SVG.
+                    Paste artwork links in the project brief. Recommended
+                    formats: PDF, AI, EPS, SVG.
                   </p>
                 </Card>
               </FormControl>

@@ -13,7 +13,7 @@ export const sampleProperties = [
     bathrooms: 2,
     type: "Apartment",
     features: ["24/7 Security", "Concierge", "Pool", "Gym", "Secure Parking"],
-    is_featured : true,
+    is_featured: true,
     gallery: [
       {
         imageUrl:
@@ -89,7 +89,7 @@ export const sampleProperties = [
       "Housekeeping",
       "City Views",
     ],
-    is_featured : false,
+    is_featured: false,
     gallery: [
       {
         imageUrl:
@@ -142,7 +142,7 @@ export const sampleProperties = [
       "Fibre Internet",
       "Secure Parking",
     ],
-    is_featured : true,
+    is_featured: true,
     gallery: [],
     reviews: [],
     virtualTourUrl: null,
@@ -161,7 +161,7 @@ export const sampleProperties = [
     bathrooms: 2,
     type: "House",
     features: ["Garden", "Garage", "Modern Kitchen", "Security System"],
-    is_featured : true,
+    is_featured: true,
     gallery: [],
     reviews: [],
     virtualTourUrl: null,
@@ -180,7 +180,7 @@ export const sampleProperties = [
     bathrooms: 3,
     type: "House",
     features: ["Swimming Pool", "Large Garden", "Braai Area", "Double Garage"],
-    is_featured : false,
+    is_featured: false,
     gallery: [],
     reviews: [],
     virtualTourUrl: null,
@@ -204,7 +204,7 @@ export const sampleProperties = [
       "Gourmet Kitchen",
       "Landscaped Gardens",
     ],
-    is_featured : false,
+    is_featured: false,
     gallery: [],
     reviews: [],
     virtualTourUrl: null,

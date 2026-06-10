@@ -1,6 +1,6 @@
+import { galleryItemSchema } from "@repo/supabase";
 import Image from "next/image";
 import Link from "next/link";
-import { galleryItemSchema } from "@repo/supabase";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -37,25 +37,25 @@ export default async function PropertyGalleryPage({
       {gallery.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {gallery.map((image) => (
-          <Card
-            key={image.imageUrl}
-            className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
-          >
-            <div className="relative h-64">
-              <Image
-                src={image.imageUrl}
-                alt={image.title}
-                fill
-                className="object-cover"
-              />
-            </div>
-            <CardContent className="p-4">
-              <h3 className="text-lg font-bold text-secondary">
-                {image.title}
-              </h3>
-              <p className="text-gray-600">{image.description}</p>
-            </CardContent>
-          </Card>
+            <Card
+              key={image.imageUrl}
+              className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
+            >
+              <div className="relative h-64">
+                <Image
+                  src={image.imageUrl}
+                  alt={image.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <CardContent className="p-4">
+                <h3 className="text-lg font-bold text-secondary">
+                  {image.title}
+                </h3>
+                <p className="text-gray-600">{image.description}</p>
+              </CardContent>
+            </Card>
           ))}
         </div>
       ) : (

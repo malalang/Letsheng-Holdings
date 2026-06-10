@@ -1,20 +1,21 @@
-import {
-  ArrowRight,
-  Sparkles,
-  CheckCircle2,
-  ShieldCheck,
-} from "lucide-react";
+import { ArrowRight, CheckCircle2, ShieldCheck, Sparkles } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import type { Metadata } from "next";
-
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 export const metadata: Metadata = {
   title: "Our Services | Letsheng Holdings",
-  description: "Discover the professional services offered by Letsheng Holdings, including print & branding, property management, and water & detergents division.",
+  description:
+    "Discover the professional services offered by Letsheng Holdings, including print & branding, property management, and water & detergents division.",
 };
 
 const ServiceCard = ({
@@ -57,7 +58,10 @@ const ServiceCard = ({
         <p className="text-gray-600 text-sm leading-relaxed">{description}</p>
         <ul className="space-y-2 pt-2">
           {features.map((feature, index) => (
-            <li key={index} className="flex items-center text-xs font-semibold text-gray-500">
+            <li
+              key={index}
+              className="flex items-center text-xs font-semibold text-gray-500"
+            >
               <CheckCircle2 className="h-4 w-4 mr-2 text-primary flex-shrink-0" />
               <span>{feature}</span>
             </li>
@@ -66,7 +70,10 @@ const ServiceCard = ({
       </CardContent>
     </div>
     <CardFooter className="pt-4 pb-6">
-      <Button asChild className="w-full bg-secondary hover:bg-secondary/90 text-white font-bold group-hover:bg-primary group-hover:text-secondary transition-colors duration-300">
+      <Button
+        asChild
+        className="w-full bg-secondary hover:bg-secondary/90 text-white font-bold group-hover:bg-primary group-hover:text-secondary transition-colors duration-300"
+      >
         <Link href={link} className="flex items-center justify-center gap-2">
           Learn More <ArrowRight className="h-4 w-4" />
         </Link>
@@ -101,8 +108,9 @@ export default function ServicesPage() {
               <span className="text-primary italic">Services & Divisions</span>
             </h1>
             <p className="text-xl text-gray-400 max-w-xl leading-relaxed">
-              Explore our core business divisions dedicated to high-fidelity printing,
-              premium property management, and essential water and detergents supply.
+              Explore our core business divisions dedicated to high-fidelity
+              printing, premium property management, and essential water and
+              detergents supply.
             </p>
           </div>
         </div>
@@ -116,7 +124,8 @@ export default function ServicesPage() {
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Delivering national impact with professional property management,
-            high-fidelity products, and absolute reliability across South Africa.
+            high-fidelity products, and absolute reliability across South
+            Africa.
           </p>
         </div>
 
@@ -172,10 +181,11 @@ export default function ServicesPage() {
                 Our Operational Standards
               </h2>
               <p className="text-gray-600 leading-relaxed">
-                At Letsheng Holdings, each division operates under stringent quality controls
-                designed to meet industry regulations and customer expectations. Whether managing
-                large-scale print runs or supplying thousands of liters of clean water,
-                our promise remains reliability and absolute precision.
+                At Letsheng Holdings, each division operates under stringent
+                quality controls designed to meet industry regulations and
+                customer expectations. Whether managing large-scale print runs
+                or supplying thousands of liters of clean water, our promise
+                remains reliability and absolute precision.
               </p>
               <div className="space-y-4 pt-2">
                 <div className="flex gap-4 items-start">
@@ -183,8 +193,12 @@ export default function ServicesPage() {
                     <Sparkles className="h-5 w-5" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-secondary text-base">Modern Production</h4>
-                    <p className="text-gray-500 text-sm">State-of-the-art print and formulation machinery.</p>
+                    <h4 className="font-bold text-secondary text-base">
+                      Modern Production
+                    </h4>
+                    <p className="text-gray-500 text-sm">
+                      State-of-the-art print and formulation machinery.
+                    </p>
                   </div>
                 </div>
                 <div className="flex gap-4 items-start">
@@ -192,8 +206,13 @@ export default function ServicesPage() {
                     <ShieldCheck className="h-5 w-5" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-secondary text-base">Regulatory Alignment</h4>
-                    <p className="text-gray-500 text-sm">Strict adherence to South African chemical and water standards.</p>
+                    <h4 className="font-bold text-secondary text-base">
+                      Regulatory Alignment
+                    </h4>
+                    <p className="text-gray-500 text-sm">
+                      Strict adherence to South African chemical and water
+                      standards.
+                    </p>
                   </div>
                 </div>
               </div>

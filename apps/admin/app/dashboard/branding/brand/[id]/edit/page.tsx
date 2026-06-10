@@ -1,3 +1,8 @@
+import {
+  galleryItemSchema,
+  reviewSchema,
+  specItemSchema,
+} from "@repo/supabase";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -8,13 +13,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import BrandingForm from "../../../branding-form";
 import { getBrandingProduct } from "../../../actions";
-import {
-  galleryItemSchema,
-  reviewSchema,
-  specItemSchema,
-} from "@repo/supabase";
+import BrandingForm from "../../../branding-form";
 
 export default async function EditBrandingPage({
   params,

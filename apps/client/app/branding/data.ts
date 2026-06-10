@@ -15,7 +15,7 @@ export interface Product {
   icon?: LucideIcon;
   image: string;
   specs: { label: string; value: string }[];
-  is_featured : boolean;
+  is_featured: boolean;
   gallery: { title: string; description: string; imageUrl: string }[];
   reviews: { author: string; rating: number; comment: string }[];
 }
@@ -41,7 +41,7 @@ export const products: Product[] = [
       { label: "Weight", value: "180gsm" },
       { label: "Fit", value: "Unisex Classic" },
     ],
-    is_featured : true,
+    is_featured: true,
     gallery: [
       {
         title: "Front View",
@@ -88,7 +88,7 @@ export const products: Product[] = [
       { label: "Material", value: "AAA Grade Ceramic" },
       { label: "Printing", value: "Full-Color Dye-Sublimation" },
     ],
-    is_featured : true,
+    is_featured: true,
     gallery: [
       {
         title: "Mug in Hand",
@@ -137,7 +137,7 @@ export const products: Product[] = [
       { label: "Sizes", value: "A3, A2, A1" },
       { label: "Printing", value: "Full-Color" },
     ],
-    is_featured : false,
+    is_featured: false,
     gallery: [],
     reviews: [],
   },
@@ -155,7 +155,7 @@ export const products: Product[] = [
       { label: "Sizes", value: "Custom" },
       { label: "Features", value: "Weather-Resistant, Eyelets" },
     ],
-    is_featured : false,
+    is_featured: false,
     gallery: [],
     reviews: [],
   },

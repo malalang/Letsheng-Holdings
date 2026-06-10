@@ -1,16 +1,16 @@
-'use server';
+"use server";
 
-import { z } from "zod";
 import {
   leaseApplicationSchema,
-  propertySchema,
   type Property,
+  propertySchema,
 } from "@repo/supabase";
 import {
   getProperties as getPropertiesService,
   getPropertyById as getPropertyByIdService,
   submitLeaseApplication as submitLeaseApplicationService,
 } from "@repo/supabase/services/properties";
+import type { z } from "zod";
 
 export type PropertyRecord = Property & { id: string };
 
@@ -22,26 +22,28 @@ function parsePropertyRecord(data: unknown): PropertyRecord {
   return property as PropertyRecord;
 }
 
-export async function getProperties(): Promise<PropertyRecord[]>{
+export async function getProperties(): Promise<PropertyRecord[]> {
   const properties = await getPropertiesService();
   return properties.map(parsePropertyRecord);
 }
 
-export async function getPropertyById(id: string): Promise<PropertyRecord>{
+export async function getPropertyById(id: string): Promise<PropertyRecord> {
   return parsePropertyRecord(await getPropertyByIdService(id));
 }
 
-export async function submitLeaseApplication(data: z.infer<typeof leaseApplicationSchema>) {
-    const validatedData = leaseApplicationSchema.safeParse(data);
+export async function submitLeaseApplication(
+  data: z.infer<typeof leaseApplicationSchema>,
+) {
+  const validatedData = leaseApplicationSchema.safeParse(data);
 
-    if (!validatedData.success) {
-        return { success: false, error: 'Invalid data' };
-    }
+  if (!validatedData.success) {
+    return { success: false, error: "Invalid data" };
+  }
 
-    try {
-        await submitLeaseApplicationService(validatedData.data);
-        return { success: true };
-    } catch (error: any) {
-        return { success: false, error: error.message };
-    }
+  try {
+    await submitLeaseApplicationService(validatedData.data);
+    return { success: true };
+  } catch (error: any) {
+    return { success: false, error: error.message };
+  }
 }

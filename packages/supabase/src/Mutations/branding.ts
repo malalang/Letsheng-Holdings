@@ -1,34 +1,6 @@
 import { requireAdminUser } from "../auth";
 import { createSupabaseServerClient } from "../server";
-import { TablesInsert, TablesUpdate } from "../types/database.types";
-
-export async function getBranding() {
-  const supabase = await createSupabaseServerClient();
-  const { data, error } = await supabase.from("branding").select("*");
-  if (error) throw new Error(error.message);
-  return data;
-}
-
-export async function getFeaturedBranding() {
-  const supabase = await createSupabaseServerClient();
-  const { data, error } = await supabase
-    .from("branding")
-    .select("*")
-    .eq("is_featured", true);
-  if (error) throw new Error(error.message);
-  return data;
-}
-
-export async function getBrandingById(id: string) {
-  const supabase = await createSupabaseServerClient();
-  const { data, error } = await supabase
-    .from("branding")
-    .select("*")
-    .eq("id", id)
-    .single();
-  if (error) throw new Error(error.message);
-  return data;
-}
+import type { TablesInsert, TablesUpdate } from "../supabaseType";
 
 export async function createBranding(branding: TablesInsert<"branding">) {
   await requireAdminUser();
@@ -68,16 +40,6 @@ export async function submitBrandingInquiry(inquiry: TablesInsert<"branding_inqu
     .from("branding_inquiries")
     .insert({ ...inquiry, status: "New" });
   if (error) throw new Error(error.message);
-}
-
-export async function getBrandingInquiries() {
-  await requireAdminUser();
-  const supabase = await createSupabaseServerClient();
-  const { data, error } = await supabase
-    .from("branding_inquiries")
-    .select("*, branding(id, title)");
-  if (error) throw new Error(error.message);
-  return data;
 }
 
 export async function updateBrandingInquiryStatus(id: string, status: string) {

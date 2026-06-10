@@ -1,22 +1,20 @@
-'use client';
+"use client";
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Loader2, PlusCircle, Trash2 } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { useFieldArray, useForm } from 'react-hook-form';
-import { toast } from "@/components/ui/use-toast";
-import type { z } from 'zod';
-
-import { UploadImage } from "@/components/upload-image";
-import { Button } from '@/components/ui/button';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { type Branding, brandingSchema } from "@repo/supabase";
+import { Loader2, PlusCircle, Trash2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useFieldArray, useForm } from "react-hook-form";
+import type { z } from "zod";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
+} from "@/components/ui/card";
 import {
   Form,
   FormControl,
@@ -24,24 +22,25 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { Separator } from '@/components/ui/separator';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Textarea } from '@/components/ui/textarea';
-import { type Branding, brandingSchema } from '@repo/supabase';
+} from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/components/ui/use-toast";
+import { UploadImage } from "@/components/upload-image";
 import {
   createBrandingProduct,
   deleteBrandingProduct,
   updateBrandingProduct,
-} from './actions';
+} from "./actions";
 
 interface BrandingFormProps {
   product?: Branding;
@@ -63,10 +62,10 @@ export default function BrandingForm({ product }: BrandingFormProps) {
           gallery: product.gallery ?? [],
         }
       : {
-          title: '',
-          category: '',
-          description: '',
-          image: '',
+          title: "",
+          category: "",
+          description: "",
+          image: "",
           specs: [],
           is_featured: false,
           gallery: [],
@@ -83,81 +82,88 @@ export default function BrandingForm({ product }: BrandingFormProps) {
     }
   }, [product, form.reset]);
 
-  const { fields: galleryFields, append: appendGallery, remove: removeGallery } =
-    useFieldArray({
-      control: form.control,
-      name: 'gallery',
-    });
+  const {
+    fields: galleryFields,
+    append: appendGallery,
+    remove: removeGallery,
+  } = useFieldArray({
+    control: form.control,
+    name: "gallery",
+  });
 
-  const { fields: specFields, append: appendSpec, remove: removeSpec } =
-    useFieldArray({
-      control: form.control,
-      name: 'specs',
-    });
+  const {
+    fields: specFields,
+    append: appendSpec,
+    remove: removeSpec,
+  } = useFieldArray({
+    control: form.control,
+    name: "specs",
+  });
 
-    async function onSubmit(data: Branding) {
-      setIsLoading(true);
-      try {
-        if (product && product.id) {
-          const result = await updateBrandingProduct(product.id, data);
-          if (result.success) {
-            toast.success('Branding product has been updated successfully.');
-            router.push(`/dashboard/branding`);
-          } else {
-            toast.error(
-              result.error || 'An unexpected error occurred. Please try again.',
-            );
-          }
-        } else {
-          const result = await createBrandingProduct(data);
-          if (result.success) {
-            toast.success('New branding product has been created.');
-            router.push('/dashboard/branding');
-          } else {
-            toast.error(
-              result.error || 'An unexpected error occurred. Please try again.',
-            );
-          }
-        }
-        router.refresh();
-      } catch (error) {
-        console.error('Failed to save product:', error);
-        toast.error(
-          error instanceof Error
-            ? error.message
-            : 'An unexpected error occurred. Please try again.',
-        );
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    async function onDelete() {
-      if (!product || !product.id) return;
-  
-      setIsDeleting(true);
-      try {
-        const result = await deleteBrandingProduct(product.id);
+  async function onSubmit(data: Branding) {
+    setIsLoading(true);
+    try {
+      if (product && product.id) {
+        const result = await updateBrandingProduct(product.id, data);
         if (result.success) {
-          toast.success('Branding product has been deleted.');
-          router.push('/dashboard/branding');
+          toast.success("Branding product has been updated successfully.");
+          router.push(`/dashboard/branding`);
         } else {
           toast.error(
-            result.error || 'An unexpected error occurred while deleting. Please try again.',
+            result.error || "An unexpected error occurred. Please try again.",
           );
         }
-        router.refresh();
-      } catch (error) {
-        console.error('Failed to delete product:', error);
-        toast.error(
-          error instanceof Error
-            ? error.message
-            : 'An unexpected error occurred while deleting. Please try again.',
-        );
-      } finally {
-        setIsDeleting(false);
+      } else {
+        const result = await createBrandingProduct(data);
+        if (result.success) {
+          toast.success("New branding product has been created.");
+          router.push("/dashboard/branding");
+        } else {
+          toast.error(
+            result.error || "An unexpected error occurred. Please try again.",
+          );
+        }
       }
+      router.refresh();
+    } catch (error) {
+      console.error("Failed to save product:", error);
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : "An unexpected error occurred. Please try again.",
+      );
+    } finally {
+      setIsLoading(false);
     }
+  }
+
+  async function onDelete() {
+    if (!product || !product.id) return;
+
+    setIsDeleting(true);
+    try {
+      const result = await deleteBrandingProduct(product.id);
+      if (result.success) {
+        toast.success("Branding product has been deleted.");
+        router.push("/dashboard/branding");
+      } else {
+        toast.error(
+          result.error ||
+            "An unexpected error occurred while deleting. Please try again.",
+        );
+      }
+      router.refresh();
+    } catch (error) {
+      console.error("Failed to delete product:", error);
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : "An unexpected error occurred while deleting. Please try again.",
+      );
+    } finally {
+      setIsDeleting(false);
+    }
+  }
 
   return (
     <Form {...form}>
@@ -221,7 +227,7 @@ export default function BrandingForm({ product }: BrandingFormProps) {
                             placeholder="Provide a compelling description of the product..."
                             rows={5}
                             {...field}
-                            value={field.value ?? ''}
+                            value={field.value ?? ""}
                           />
                         </FormControl>
                         <FormMessage />
@@ -332,7 +338,7 @@ export default function BrandingForm({ product }: BrandingFormProps) {
                                     <Textarea
                                       rows={2}
                                       {...field}
-                                      value={field.value ?? ''}
+                                      value={field.value ?? ""}
                                     />
                                   </FormControl>
                                   <FormMessage />
@@ -350,9 +356,9 @@ export default function BrandingForm({ product }: BrandingFormProps) {
                       className="mt-6"
                       onClick={() =>
                         appendGallery({
-                          imageUrl: '',
-                          title: '',
-                          description: '',
+                          imageUrl: "",
+                          title: "",
+                          description: "",
                         })
                       }
                     >
@@ -425,7 +431,7 @@ export default function BrandingForm({ product }: BrandingFormProps) {
                     variant="outline"
                     size="sm"
                     className="mt-4"
-                    onClick={() => appendSpec({ label: '', value: '' })}
+                    onClick={() => appendSpec({ label: "", value: "" })}
                   >
                     <PlusCircle className="mr-2 h-4 w-4" />
                     Add Specification
@@ -449,7 +455,7 @@ export default function BrandingForm({ product }: BrandingFormProps) {
                     <FormLabel>Featured Status</FormLabel>
                     <Select
                       onValueChange={(value) =>
-                        field.onChange(value === 'true')
+                        field.onChange(value === "true")
                       }
                       defaultValue={String(field.value)}
                     >
@@ -472,7 +478,7 @@ export default function BrandingForm({ product }: BrandingFormProps) {
           <div className="flex flex-col gap-2">
             <Button type="submit" variant="default" disabled={isLoading}>
               {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              {product ? 'Save Changes' : 'Create Product'}
+              {product ? "Save Changes" : "Create Product"}
             </Button>
             {product && (
               <Button

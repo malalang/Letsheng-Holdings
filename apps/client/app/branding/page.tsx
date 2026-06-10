@@ -1,12 +1,12 @@
 import {
-  Paintbrush,
-  Tag,
-  Clock,
+  ArrowRight,
   CheckCircle2,
   CircleDollarSign,
-  ArrowRight,
+  Clock,
+  Layers,
+  Paintbrush,
+  Tag,
   Zap,
-  Layers
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -45,9 +45,9 @@ function BrandingHero() {
         </h1>
 
         <p className="max-w-2xl mx-auto text-lg md:text-xl text-gray-600 leading-relaxed mb-10">
-          We translate your vision into tangible professional assets. From high-quality
-          apparel to full-scale corporate identity kits, we build the visual
-          tools for your business growth.
+          We translate your vision into tangible professional assets. From
+          high-quality apparel to full-scale corporate identity kits, we build
+          the visual tools for your business growth.
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-6 mb-12 text-sm font-medium text-gray-500">
@@ -101,11 +101,16 @@ export default async function BrandingPage() {
                 <CardTitle className="text-2xl font-bold text-secondary leading-tight">
                   {p.title}
                 </CardTitle>
-                <Badge variant="outline" className="shrink-0 border-primary text-primary bg-primary/5">
+                <Badge
+                  variant="outline"
+                  className="shrink-0 border-primary text-primary bg-primary/5"
+                >
                   {p.category}
                 </Badge>
               </div>
-              <p className="text-sm text-gray-500 pt-1">Professional Identity Solutions</p>
+              <p className="text-sm text-gray-500 pt-1">
+                Professional Identity Solutions
+              </p>
             </CardHeader>
 
             <CardContent className="flex-grow">
@@ -130,21 +135,28 @@ export default async function BrandingPage() {
 
               {/* Simplified Specifications List */}
               <div className="space-y-2 pt-4">
-                <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Specifications</p>
+                <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">
+                  Specifications
+                </p>
                 {(p.specs as any[]).slice(0, 3).map((spec) => (
-                  <div key={spec.label} className="flex justify-between text-sm border-b border-gray-50 pb-1">
+                  <div
+                    key={spec.label}
+                    className="flex justify-between text-sm border-b border-gray-50 pb-1"
+                  >
                     <span className="text-gray-500">{spec.label}</span>
-                    <span className="font-medium text-secondary">{spec.value}</span>
+                    <span className="font-medium text-secondary">
+                      {spec.value}
+                    </span>
                   </div>
                 ))}
               </div>
-
-
             </CardContent>
 
             <CardFooter className="bg-gray-50/50 px-6 py-4 flex items-center justify-between mt-auto ">
               <Link href={`/branding/${p.id}`}>
-                <Button size="sm" variant="outline">View Catalog</Button>
+                <Button size="sm" variant="outline">
+                  View Catalog
+                </Button>
               </Link>
               <Link href={`/branding/${p.id}/order`}>
                 <Button size="sm" variant="default">
@@ -159,18 +171,30 @@ export default async function BrandingPage() {
       {/* Trust Banner */}
       <section className="mt-20 p-8 rounded-2xl bg-secondary text-white">
         <div className="max-w-4xl mx-auto text-center space-y-6">
-          <h2 className="text-3xl text-primary font-bold">Custom Branding Workflow</h2>
+          <h2 className="text-3xl text-primary font-bold">
+            Custom Branding Workflow
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-4">
             <div>
-              <div className="text-primary font-black text-xl mb-1">01. Quote</div>
-              <p className="text-sm text-gray-400">Tailored estimate in 24 hours.</p>
+              <div className="text-primary font-black text-xl mb-1">
+                01. Quote
+              </div>
+              <p className="text-sm text-gray-400">
+                Tailored estimate in 24 hours.
+              </p>
             </div>
             <div>
-              <div className="text-primary font-black text-xl mb-1">02. Proof</div>
-              <p className="text-sm text-gray-400">Approve designs before we print.</p>
+              <div className="text-primary font-black text-xl mb-1">
+                02. Proof
+              </div>
+              <p className="text-sm text-gray-400">
+                Approve designs before we print.
+              </p>
             </div>
             <div>
-              <div className="text-primary font-black text-xl mb-1">03. Deliver</div>
+              <div className="text-primary font-black text-xl mb-1">
+                03. Deliver
+              </div>
               <p className="text-sm text-gray-400">Fast nationwide delivery.</p>
             </div>
           </div>

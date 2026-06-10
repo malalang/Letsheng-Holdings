@@ -1,4 +1,12 @@
-import { Bath, Bed, CircleDollarSign, Home, MapPin, ShieldCheck, Stars } from "lucide-react";
+import {
+  Bath,
+  Bed,
+  CircleDollarSign,
+  Home,
+  MapPin,
+  ShieldCheck,
+  Stars,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -70,7 +78,9 @@ export default async function PropertiesPage() {
             key={p.id}
             className="rounded-xl shadow-lg border-gray-200/50 overflow-hidden flex flex-col transition-all hover:shadow-xl"
           >
-           <div className="relative h-64"> {/* Consistent Height */}
+            <div className="relative h-64">
+              {" "}
+              {/* Consistent Height */}
               <Link href={`/properties/${p.id}`}>
                 <Image
                   src={p.image_url ?? "/logo.jpg"}
@@ -113,21 +123,29 @@ export default async function PropertiesPage() {
                   <span>{p.type}</span>
                 </div>
               </div>
-              <p className="text-gray-700 leading-relaxed line-clamp-2">{p.description}</p>
+              <p className="text-gray-700 leading-relaxed line-clamp-2">
+                {p.description}
+              </p>
 
               <div className="mt-6 flex items-center text-2xl font-bold text-secondary">
                 <CircleDollarSign className="h-6 w-6 mr-2 text-primary" />R
                 {p.price.toLocaleString()}
-                <span className="text-sm font-normal text-gray-500 ml-2">/ month</span>
+                <span className="text-sm font-normal text-gray-500 ml-2">
+                  / month
+                </span>
               </div>
             </CardContent>
 
             <CardFooter className="bg-gray-50/50 px-6 py-4 flex items-center justify-between mt-auto ">
               <Link href={`/properties/${p.id}`}>
-                <Button size="sm" variant="outline">View Details</Button>
+                <Button size="sm" variant="outline">
+                  View Details
+                </Button>
               </Link>
               <Link href={`/properties/${p.id}/apply-to-lease`}>
-                <Button size="sm" variant="default">Apply to Lease</Button>
+                <Button size="sm" variant="default">
+                  Apply to Lease
+                </Button>
               </Link>
             </CardFooter>
           </Card>

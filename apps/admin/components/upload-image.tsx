@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { createSupabaseBrowserClient } from '@repo/supabase';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { toast } from 'sonner';
-import { useState, useRef, useEffect } from 'react';
-import { Loader2, Pencil, Trash2, Upload } from 'lucide-react';
-import Image from 'next/image';
+import { createSupabaseBrowserClient } from "@repo/supabase";
+import { Loader2, Pencil, Trash2, Upload } from "lucide-react";
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 interface UploadImageProps {
   onUploadSuccess: (url: string) => void;
@@ -29,12 +29,14 @@ export function UploadImage({
     setImageUrl(initialUrl || null);
   }, [initialUrl]);
 
-  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     const file = event.target.files?.[0];
     if (!file) return;
 
     setUploading(true);
-    const bucketName = 'letshengHoldings';
+    const bucketName = "letshengHoldings";
     const fileName = `${Date.now()}-${file.name}`;
     const filePath = folder ? `${folder}/${fileName}` : fileName;
 
@@ -53,9 +55,9 @@ export function UploadImage({
     if (data.publicUrl) {
       setImageUrl(data.publicUrl);
       onUploadSuccess(data.publicUrl);
-      toast.success('Image uploaded successfully!');
+      toast.success("Image uploaded successfully!");
     } else {
-      toast.error('Image uploaded, but failed to retrieve public URL.');
+      toast.error("Image uploaded, but failed to retrieve public URL.");
     }
 
     setUploading(false);
@@ -63,8 +65,8 @@ export function UploadImage({
 
   const handleRemoveImage = () => {
     setImageUrl(null);
-    onUploadSuccess(''); // Notify parent form to clear the value
-    toast.info('Image removed.');
+    onUploadSuccess(""); // Notify parent form to clear the value
+    toast.info("Image removed.");
   };
 
   const triggerFileInput = () => {
@@ -125,7 +127,9 @@ export function UploadImage({
           {uploading ? (
             <div className="flex flex-col items-center gap-2">
               <Loader2 className="mx-auto h-10 w-10 text-muted-foreground animate-spin" />
-              <p className="mt-2 text-sm font-medium text-primary">Uploading...</p>
+              <p className="mt-2 text-sm font-medium text-primary">
+                Uploading...
+              </p>
               <p className="text-xs text-muted-foreground">Please wait.</p>
             </div>
           ) : (

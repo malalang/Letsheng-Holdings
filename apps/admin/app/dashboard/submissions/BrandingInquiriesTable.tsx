@@ -1,33 +1,33 @@
-'use client';
+"use client";
 
-import { MoreHorizontal } from 'lucide-react';
-import Link from 'next/link';
-import { useState } from 'react';
-import { toast } from 'sonner'; 
-
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import type { BrandingInquiry } from "@repo/supabase";
+import { MoreHorizontal } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
+import { toast } from "sonner";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
+} from "@/components/ui/card";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog';
+} from "@/components/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+} from "@/components/ui/dropdown-menu";
 import {
   Table,
   TableBody,
@@ -35,16 +35,15 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import type { BrandingInquiry } from '@repo/supabase';
+} from "@/components/ui/table";
 
-import { deleteBrandingInquiry, updateBrandingInquiryStatus } from './actions';
+import { deleteBrandingInquiry, updateBrandingInquiryStatus } from "./actions";
 
 const statusVariantMap: {
-  [key: string]: 'default' | 'secondary' | 'destructive';
+  [key: string]: "default" | "secondary" | "destructive";
 } = {
-  New: 'secondary',
-  Contacted: 'default',
+  New: "secondary",
+  Contacted: "default",
 };
 
 // Extends the base BrandingInquiry to include database-specific fields
@@ -65,7 +64,9 @@ interface BrandingInquiriesTableProps {
   inquiries: BrandingInquiryWithProduct[];
 }
 
-export function BrandingInquiriesTable({ inquiries }: BrandingInquiriesTableProps) {
+export function BrandingInquiriesTable({
+  inquiries,
+}: BrandingInquiriesTableProps) {
   const [selectedInquiry, setSelectedInquiry] =
     useState<BrandingInquiryWithProduct | null>(null);
 
@@ -74,17 +75,17 @@ export function BrandingInquiriesTable({ inquiries }: BrandingInquiriesTableProp
     if (result.success) {
       toast.success(`Inquiry marked as ${status}.`);
     } else {
-      toast.error(result.error || 'Failed to update status.');
+      toast.error(result.error || "Failed to update status.");
     }
   };
 
   const handleDelete = async (id: string) => {
-    if (confirm('Are you sure you want to delete this inquiry?')) {
+    if (confirm("Are you sure you want to delete this inquiry?")) {
       const result = await deleteBrandingInquiry(id);
       if (result.success) {
-        toast.success('Inquiry has been deleted.');
+        toast.success("Inquiry has been deleted.");
       } else {
-        toast.error(result.error || 'Failed to delete inquiry.');
+        toast.error(result.error || "Failed to delete inquiry.");
       }
     }
   };
@@ -130,7 +131,7 @@ export function BrandingInquiriesTable({ inquiries }: BrandingInquiriesTableProp
                       {inquiry.email}
                     </div>
                   </TableCell>
-                  <TableCell>{inquiry.company || 'N/A'}</TableCell>
+                  <TableCell>{inquiry.company || "N/A"}</TableCell>
                   <TableCell className="text-center">
                     {inquiry.quantity}
                   </TableCell>
@@ -145,7 +146,11 @@ export function BrandingInquiriesTable({ inquiries }: BrandingInquiriesTableProp
                   <TableCell>
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
-                        <Button aria-haspopup="true" size="icon" variant="ghost">
+                        <Button
+                          aria-haspopup="true"
+                          size="icon"
+                          variant="ghost"
+                        >
                           <MoreHorizontal className="h-4 w-4" />
                           <span className="sr-only">Toggle menu</span>
                         </Button>
@@ -159,12 +164,14 @@ export function BrandingInquiriesTable({ inquiries }: BrandingInquiriesTableProp
                         </DropdownMenuItem>
                         <DropdownMenuItem
                           onClick={() =>
-                            handleStatusUpdate(inquiry.id, 'Contacted')
+                            handleStatusUpdate(inquiry.id, "Contacted")
                           }
                         >
                           Mark as Contacted
                         </DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => handleDelete(inquiry.id)}>
+                        <DropdownMenuItem
+                          onClick={() => handleDelete(inquiry.id)}
+                        >
                           Delete
                         </DropdownMenuItem>
                       </DropdownMenuContent>
@@ -180,13 +187,17 @@ export function BrandingInquiriesTable({ inquiries }: BrandingInquiriesTableProp
       {selectedInquiry && (
         <Dialog
           open={!!selectedInquiry}
-          onOpenChange={(isOpen: boolean) => !isOpen && setSelectedInquiry(null)}
+          onOpenChange={(isOpen: boolean) =>
+            !isOpen && setSelectedInquiry(null)
+          }
         >
           <DialogContent className="sm:max-w-lg">
             <DialogHeader>
-              <DialogTitle>Inquiry for {selectedInquiry.product_title}</DialogTitle>
+              <DialogTitle>
+                Inquiry for {selectedInquiry.product_title}
+              </DialogTitle>
               <DialogDescription>
-                Submitted on{' '}
+                Submitted on{" "}
                 {new Date(selectedInquiry.created_at).toLocaleString()}
               </DialogDescription>
             </DialogHeader>
@@ -195,7 +206,7 @@ export function BrandingInquiriesTable({ inquiries }: BrandingInquiriesTableProp
                 <h4 className="font-semibold">Contact Information</h4>
                 <p>Name: {selectedInquiry.customer_name}</p>
                 <p>Email: {selectedInquiry.email}</p>
-                <p>Company: {selectedInquiry.company || 'Not provided'}</p>
+                <p>Company: {selectedInquiry.company || "Not provided"}</p>
               </div>
               <div className="space-y-1">
                 <h4 className="font-semibold">Project Details</h4>
@@ -203,7 +214,7 @@ export function BrandingInquiriesTable({ inquiries }: BrandingInquiriesTableProp
                 <div>
                   <h5 className="font-semibold">Message:</h5>
                   <p className="text-sm text-gray-700 mt-1">
-                    {selectedInquiry.message || 'No message provided.'}
+                    {selectedInquiry.message || "No message provided."}
                   </p>
                 </div>
               </div>

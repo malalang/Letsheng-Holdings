@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   Archive,
@@ -11,11 +11,11 @@ import {
   Package2,
   PlusCircle,
   ShoppingCart,
-} from 'lucide-react';
-import Link from 'next/link';
-import { useState } from 'react';
-
-import { Button } from '@/components/ui/button';
+} from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
+import { logout } from "@/app/login/actions";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -23,9 +23,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { logout } from '@/app/login/actions';
+} from "@/components/ui/dropdown-menu";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);

@@ -1,12 +1,9 @@
-'use server';
+"use server";
 
-import { revalidatePath } from "next/cache";
-
-import { triggerRevalidation } from "@/lib/revalidation";
 import {
-  propertySchema,
   type Json,
   type Property,
+  propertySchema,
   type TablesInsert,
   type TablesUpdate,
 } from "@repo/supabase";
@@ -17,9 +14,13 @@ import {
   getPropertyById as getPropertyByIdService,
   updateProperty as updatePropertyService,
 } from "@repo/supabase/services/properties";
+import { revalidatePath } from "next/cache";
+import { triggerRevalidation } from "@/lib/revalidation";
 
 function getErrorMessage(error: unknown) {
-  return error instanceof Error ? error.message : "An unexpected error occurred.";
+  return error instanceof Error
+    ? error.message
+    : "An unexpected error occurred.";
 }
 
 function toJson(value: unknown): Json | null {
@@ -45,7 +46,9 @@ function toPropertyInsert(property: Property): TablesInsert<"properties"> {
   };
 }
 
-function toPropertyUpdate(property: Omit<Property, "id">): TablesUpdate<"properties"> {
+function toPropertyUpdate(
+  property: Omit<Property, "id">,
+): TablesUpdate<"properties"> {
   return {
     title: property.title,
     description: property.description,
@@ -65,7 +68,7 @@ function toPropertyUpdate(property: Omit<Property, "id">): TablesUpdate<"propert
 
 export async function getProperties() {
   try {
-    return await getPropertiesService() as Property[];
+    return (await getPropertiesService()) as Property[];
   } catch (error: unknown) {
     throw new Error(getErrorMessage(error));
   }
@@ -73,7 +76,7 @@ export async function getProperties() {
 
 export async function getPropertyById(id: string) {
   try {
-    return await getPropertyByIdService(id) as Property;
+    return (await getPropertyByIdService(id)) as Property;
   } catch (error: unknown) {
     throw new Error(getErrorMessage(error));
   }
@@ -85,7 +88,7 @@ export async function createProperty(data: Property) {
   try {
     await createPropertyService(toPropertyInsert(validatedData));
     revalidatePath("/dashboard/properties");
-    await triggerRevalidation({ path: '/properties' });
+    await triggerRevalidation({ path: "/properties" });
   } catch (error: unknown) {
     throw new Error(getErrorMessage(error));
   }
@@ -105,7 +108,7 @@ export async function updateProperty(
     revalidatePath("/dashboard/properties");
     revalidatePath(`/dashboard/properties/property/${id}`);
     await triggerRevalidation({ path: `/properties/${id}` });
-    await triggerRevalidation({ path: '/properties' });
+    await triggerRevalidation({ path: "/properties" });
     return { success: true, error: null };
   } catch (e: unknown) {
     console.error("Validation or unexpected error:", e);
@@ -117,7 +120,7 @@ export async function deleteProperty(id: string) {
   try {
     await deletePropertyService(id);
     revalidatePath("/dashboard/properties");
-    await triggerRevalidation({ path: '/properties' });
+    await triggerRevalidation({ path: "/properties" });
   } catch (error: unknown) {
     throw new Error(getErrorMessage(error));
   }

@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 interface ClientDateProps {
   dateString: string | null | undefined;
-  format?: 'date' | 'datetime';
+  format?: "date" | "datetime";
 }
 
-export function ClientDate({ dateString, format = 'date' }: ClientDateProps) {
-  const [formatted, setFormatted] = useState('');
+export function ClientDate({ dateString, format = "date" }: ClientDateProps) {
+  const [formatted, setFormatted] = useState("");
 
   useEffect(() => {
     // This effect runs only on the client, after the initial render,
@@ -16,25 +16,25 @@ export function ClientDate({ dateString, format = 'date' }: ClientDateProps) {
     if (dateString) {
       const date = new Date(dateString);
       if (isNaN(date.getTime())) {
-        setFormatted('Invalid Date');
+        setFormatted("Invalid Date");
         return;
       }
-      
-      if (format === 'datetime') {
+
+      if (format === "datetime") {
         // Using a consistent, non-locale-specific format
         const year = date.getFullYear();
-        const month = (date.getMonth() + 1).toString().padStart(2, '0');
-        const day = date.getDate().toString().padStart(2, '0');
-        const hours = date.getHours().toString().padStart(2, '0');
-        const minutes = date.getMinutes().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, "0");
+        const day = date.getDate().toString().padStart(2, "0");
+        const hours = date.getHours().toString().padStart(2, "0");
+        const minutes = date.getMinutes().toString().padStart(2, "0");
         setFormatted(`${year}-${month}-${day} ${hours}:${minutes}`);
       } else {
         // Just the date part, in a consistent YYYY-MM-DD format
-        const isoString = date.toISOString().split('T')[0];
-        setFormatted(isoString ?? 'Invalid Date');
+        const isoString = date.toISOString().split("T")[0];
+        setFormatted(isoString ?? "Invalid Date");
       }
     } else {
-      setFormatted('N/A');
+      setFormatted("N/A");
     }
   }, [dateString, format]);
 

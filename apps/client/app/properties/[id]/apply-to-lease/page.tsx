@@ -1,5 +1,11 @@
-'use client';
+"use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { type LeaseApplication, leaseApplicationSchema } from "@repo/supabase";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -12,16 +18,27 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { getPropertyById, submitLeaseApplication, type PropertyRecord } from "../../actions";
-import { useForm, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { leaseApplicationSchema, LeaseApplication } from "@repo/supabase";
-import { toast } from "sonner";
-import { useEffect, useState } from "react";
-import { useParams } from 'next/navigation';
+import {
+  getPropertyById,
+  type PropertyRecord,
+  submitLeaseApplication,
+} from "../../actions";
 
-function ApplyToLeaseForm({ propertyId, propertyTitle, propertyPrice }: { propertyId: string, propertyTitle: string, propertyPrice: number }) {
-  const { register, handleSubmit, formState: { errors }, control } = useForm<LeaseApplication>({
+function ApplyToLeaseForm({
+  propertyId,
+  propertyTitle,
+  propertyPrice,
+}: {
+  propertyId: string;
+  propertyTitle: string;
+  propertyPrice: number;
+}) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    control,
+  } = useForm<LeaseApplication>({
     resolver: zodResolver(leaseApplicationSchema),
     defaultValues: {
       property_id: propertyId,
@@ -62,18 +79,39 @@ function ApplyToLeaseForm({ propertyId, propertyTitle, propertyPrice }: { proper
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
                 <Label htmlFor="applicant_name">Full Name</Label>
-                <Input id="applicant_name" placeholder="Enter your full name" {...register("applicant_name")} />
-                {errors.applicant_name && <p className="text-red-500 text-sm">{errors.applicant_name.message}</p>}
+                <Input
+                  id="applicant_name"
+                  placeholder="Enter your full name"
+                  {...register("applicant_name")}
+                />
+                {errors.applicant_name && (
+                  <p className="text-red-500 text-sm">
+                    {errors.applicant_name.message}
+                  </p>
+                )}
               </div>
               <div className="space-y-2">
                 <Label htmlFor="email">Email Address</Label>
-                <Input id="email" type="email" placeholder="Enter your email address" {...register("email")} />
-                {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="Enter your email address"
+                  {...register("email")}
+                />
+                {errors.email && (
+                  <p className="text-red-500 text-sm">{errors.email.message}</p>
+                )}
               </div>
               <div className="space-y-2">
                 <Label htmlFor="phone">Phone Number</Label>
-                <Input id="phone" placeholder="Enter your phone number" {...register("phone")} />
-                {errors.phone && <p className="text-red-500 text-sm">{errors.phone.message}</p>}
+                <Input
+                  id="phone"
+                  placeholder="Enter your phone number"
+                  {...register("phone")}
+                />
+                {errors.phone && (
+                  <p className="text-red-500 text-sm">{errors.phone.message}</p>
+                )}
               </div>
               <div className="space-y-2">
                 <Label htmlFor="employment">Employment Status</Label>
@@ -87,20 +125,32 @@ function ApplyToLeaseForm({ propertyId, propertyTitle, propertyPrice }: { proper
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="employed">Employed</SelectItem>
-                        <SelectItem value="self-employed">Self-Employed</SelectItem>
+                        <SelectItem value="self-employed">
+                          Self-Employed
+                        </SelectItem>
                         <SelectItem value="unemployed">Unemployed</SelectItem>
                         <SelectItem value="student">Student</SelectItem>
                       </SelectContent>
                     </Select>
                   )}
                 />
-                {errors.employment && <p className="text-red-500 text-sm">{errors.employment.message}</p>}
+                {errors.employment && (
+                  <p className="text-red-500 text-sm">
+                    {errors.employment.message}
+                  </p>
+                )}
               </div>
             </div>
             <div className="space-y-2">
               <Label htmlFor="message">Additional Information</Label>
-              <Textarea id="message" placeholder="Tell us about yourself and your leasing needs" {...register("message")} />
-              {errors.message && <p className="text-red-500 text-sm">{errors.message.message}</p>}
+              <Textarea
+                id="message"
+                placeholder="Tell us about yourself and your leasing needs"
+                {...register("message")}
+              />
+              {errors.message && (
+                <p className="text-red-500 text-sm">{errors.message.message}</p>
+              )}
             </div>
             <Button type="submit" className="w-full">
               Submit Application
@@ -131,5 +181,11 @@ export default function ApplyToLeasePage() {
     return <div>Loading...</div>;
   }
 
-  return <ApplyToLeaseForm propertyId={property.id} propertyTitle={property.title} propertyPrice={property.price} />;
+  return (
+    <ApplyToLeaseForm
+      propertyId={property.id}
+      propertyTitle={property.title}
+      propertyPrice={property.price}
+    />
+  );
 }

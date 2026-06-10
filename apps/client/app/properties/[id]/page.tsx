@@ -1,3 +1,4 @@
+import { featureSchema, galleryItemSchema, reviewSchema } from "@repo/supabase";
 import {
   Bath,
   Bed,
@@ -9,7 +10,6 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { featureSchema, galleryItemSchema, reviewSchema } from "@repo/supabase";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -29,7 +29,9 @@ export default async function PropertyDetailPage({
     return <div>Property not found</div>;
   }
 
-  const parsedFeatures = featureSchema.array().safeParse(property.features ?? []);
+  const parsedFeatures = featureSchema
+    .array()
+    .safeParse(property.features ?? []);
   const parsedGallery = galleryItemSchema
     .array()
     .safeParse(property.gallery ?? []);
@@ -110,9 +112,7 @@ export default async function PropertyDetailPage({
                       className="object-cover rounded-lg"
                     />
                     <div className="absolute bottom-0 left-0 bg-secondary/70 text-white p-2 w-full rounded-b-lg">
-                      <h4 className="font-bold text-primary">
-                        {image.title}
-                      </h4>
+                      <h4 className="font-bold text-primary">{image.title}</h4>
                       <p className="text-sm">{image.description}</p>
                     </div>
                   </div>
@@ -178,11 +178,7 @@ export default async function PropertyDetailPage({
               </Link>
             )}
             <Link href="/contact">
-              <Button
-                size="lg"
-                variant="outline"
-                className="w-full"
-              >
+              <Button size="lg" variant="outline" className="w-full">
                 Request a Viewing
               </Button>
             </Link>

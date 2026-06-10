@@ -1,3 +1,4 @@
+import type { Tenant } from "@repo/supabase";
 import { Edit, Eye, MoreHorizontal, PlusCircle, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -20,7 +21,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { getTenants } from "./actions";
-import { type Tenant } from "@repo/supabase";
 
 const getStatusBadgeClass = (status: Tenant["status"]) => {
   switch (status) {
@@ -71,7 +71,10 @@ export default async function AdminTenantsPage() {
                   <TableCell className="font-medium">
                     <div className="flex items-center gap-3">
                       <Avatar className="h-9 w-9">
-                        <AvatarImage src={tenant.avatar_url ?? undefined} alt={tenant.name} />
+                        <AvatarImage
+                          src={tenant.avatar_url ?? undefined}
+                          alt={tenant.name}
+                        />
                         <AvatarFallback>{tenant.name.charAt(0)}</AvatarFallback>
                       </Avatar>
                       <div className="grid gap-0.5">
@@ -88,19 +91,25 @@ export default async function AdminTenantsPage() {
                         href={`/dashboard/properties/property/${tenant.property_id}`}
                         className="hover:underline"
                       >
-                        {tenant.property?.title ?? 'N/A'}
+                        {tenant.property?.title ?? "N/A"}
                       </Link>
                     ) : (
-                      'N/A'
+                      "N/A"
                     )}
                   </TableCell>
                   <TableCell className="text-center">
-                    <Badge className={getStatusBadgeClass(tenant.status as Tenant["status"])}>
+                    <Badge
+                      className={getStatusBadgeClass(
+                        tenant.status as Tenant["status"],
+                      )}
+                    >
                       {tenant.status}
                     </Badge>
                   </TableCell>
                   <TableCell className="text-right font-semibold">
-                    {tenant.lease_end_date ? new Date(tenant.lease_end_date).toLocaleDateString() : 'N/A'}
+                    {tenant.lease_end_date
+                      ? new Date(tenant.lease_end_date).toLocaleDateString()
+                      : "N/A"}
                   </TableCell>
                   <TableCell className="text-center">
                     <DropdownMenu>

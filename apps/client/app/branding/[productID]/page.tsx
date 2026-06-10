@@ -1,7 +1,11 @@
+import {
+  galleryItemSchema,
+  reviewSchema,
+  specItemSchema,
+} from "@repo/supabase";
 import { ShoppingCart, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { galleryItemSchema, reviewSchema, specItemSchema } from "@repo/supabase";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -81,7 +85,6 @@ export default async function ProductPage({
                     Order
                   </Button>
                 </Link>
-
               </div>
             </div>
           </div>
@@ -102,9 +105,7 @@ export default async function ProductPage({
                       className="object-cover rounded-lg"
                     />
                     <div className="absolute bottom-0 left-0 bg-secondary/70 text-white p-2 w-full rounded-b-lg">
-                      <h4 className="font-bold text-primary">
-                        {image.title}
-                      </h4>
+                      <h4 className="font-bold text-primary">{image.title}</h4>
                       <p className="text-sm">{image.description}</p>
                     </div>
                   </div>

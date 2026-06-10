@@ -20,7 +20,9 @@ export async function proxy(request: NextRequest) {
   const hasAdminAccess = !adminError && isAdmin === true;
 
   if (!hasAdminAccess && pathname !== "/login") {
-    return NextResponse.redirect(new URL("/login?error=unauthorized", request.url));
+    return NextResponse.redirect(
+      new URL("/login?error=unauthorized", request.url),
+    );
   }
 
   if (hasAdminAccess && pathname === "/login") {

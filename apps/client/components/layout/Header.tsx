@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { Menu } from "lucide-react";
 import Image from "next/image";
@@ -68,7 +68,6 @@ export default function Header() {
             <NavLink href="/about" onLinkClick={onLinkClick}>
               About
             </NavLink>
-
           </nav>
           <div className="flex items-center gap-4">
             <Link href="/contact" className="hidden md:block">

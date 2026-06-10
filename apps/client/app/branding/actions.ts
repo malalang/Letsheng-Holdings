@@ -1,14 +1,14 @@
-'use server';
+"use server";
 
 import {
-  brandingSchema,
-  brandingInquirySchema,
   type Branding,
   type BrandingInquiry,
+  brandingInquirySchema,
+  brandingSchema,
 } from "@repo/supabase";
 import {
-  getBranding as getBrandingProductsService,
   getBrandingById as getBrandingProductService,
+  getBranding as getBrandingProductsService,
   submitBrandingInquiry as submitBrandingInquiryService,
 } from "@repo/supabase/services/branding";
 
@@ -27,16 +27,18 @@ export async function getBrandingProducts(): Promise<BrandingRecord[]> {
     const products = await getBrandingProductsService();
     return products.map(parseBrandingRecord);
   } catch (error) {
-    console.error('Error fetching branding products:', error);
+    console.error("Error fetching branding products:", error);
     return [];
   }
 }
 
-export async function getBrandingProduct(id: string): Promise<BrandingRecord | null> {
+export async function getBrandingProduct(
+  id: string,
+): Promise<BrandingRecord | null> {
   try {
     return parseBrandingRecord(await getBrandingProductService(id));
   } catch (error) {
-    console.error('Error fetching branding product:', error);
+    console.error("Error fetching branding product:", error);
     return null;
   }
 }
@@ -49,7 +51,7 @@ export async function submitBrandingInquiry(
   if (!validatedFields.success) {
     return {
       success: false,
-      error: 'Invalid data provided.',
+      error: "Invalid data provided.",
     };
   }
 
@@ -57,10 +59,10 @@ export async function submitBrandingInquiry(
     await submitBrandingInquiryService(validatedFields.data);
     return { success: true };
   } catch (error) {
-    console.error('Supabase error:', error);
+    console.error("Supabase error:", error);
     return {
       success: false,
-      error: 'An unexpected error occurred. Please try again.',
+      error: "An unexpected error occurred. Please try again.",
     };
   }
 }

@@ -1,3 +1,4 @@
+import { featureSchema, galleryItemSchema, reviewSchema } from "@repo/supabase";
 import {
   ArrowLeft,
   Bath,
@@ -20,7 +21,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { featureSchema, galleryItemSchema, reviewSchema } from "@repo/supabase";
 import { getPropertyById } from "../../actions";
 
 export default async function PropertyDetailsPage({
@@ -43,7 +43,9 @@ export default async function PropertyDetailsPage({
     );
   }
 
-  const parsedFeatures = featureSchema.array().safeParse(property.features ?? []);
+  const parsedFeatures = featureSchema
+    .array()
+    .safeParse(property.features ?? []);
   const parsedGallery = galleryItemSchema
     .array()
     .safeParse(property.gallery ?? []);

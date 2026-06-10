@@ -1,35 +1,35 @@
-'use client';
+"use client";
 
-import { MoreHorizontal } from 'lucide-react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { toast } from 'sonner';
-
-import { ClientDate } from '@/components/ClientDate';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import type { LeaseApplication } from "@repo/supabase";
+import { MoreHorizontal } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { toast } from "sonner";
+import { ClientDate } from "@/components/ClientDate";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
+} from "@/components/ui/card";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog';
+} from "@/components/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+} from "@/components/ui/dropdown-menu";
 import {
   Table,
   TableBody,
@@ -37,19 +37,18 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import type { LeaseApplication } from '@repo/supabase';
+} from "@/components/ui/table";
 
 import {
   deleteLeaseApplication,
   updateLeaseApplicationStatus,
-} from './actions';
+} from "./actions";
 
 const statusVariantMap: {
-  [key: string]: 'default' | 'secondary' | 'destructive';
+  [key: string]: "default" | "secondary" | "destructive";
 } = {
-  Pending: 'secondary',
-  Reviewed: 'default',
+  Pending: "secondary",
+  Reviewed: "default",
 };
 
 // Extends the base LeaseApplication to include database-specific fields
@@ -77,7 +76,11 @@ export function LeaseApplicationsTable({
   const [selectedApplication, setSelectedApplication] =
     useState<LeaseApplicationWithDetails | null>(null);
 
-  const handleAddTenant = (applicantName: string, email: string, propertyId: string) => {
+  const handleAddTenant = (
+    applicantName: string,
+    email: string,
+    propertyId: string,
+  ) => {
     const params = new URLSearchParams({
       name: applicantName,
       email,
@@ -91,17 +94,17 @@ export function LeaseApplicationsTable({
     if (result.success) {
       toast.success(`Application marked as ${status}.`);
     } else {
-      toast.error(result.error || 'Failed to update status.');
+      toast.error(result.error || "Failed to update status.");
     }
   };
 
   const handleDelete = async (id: string) => {
-    if (confirm('Are you sure you want to delete this application?')) {
+    if (confirm("Are you sure you want to delete this application?")) {
       const result = await deleteLeaseApplication(id);
       if (result.success) {
-        toast.success('Application has been deleted.');
+        toast.success("Application has been deleted.");
       } else {
-        toast.error(result.error || 'Failed to delete application.');
+        toast.error(result.error || "Failed to delete application.");
       }
     }
   };
@@ -173,12 +176,18 @@ export function LeaseApplicationsTable({
                           View Details
                         </DropdownMenuItem>
                         <DropdownMenuItem
-                          onClick={() => handleStatusUpdate(app.id, 'Reviewed')}
+                          onClick={() => handleStatusUpdate(app.id, "Reviewed")}
                         >
                           Mark as Reviewed
                         </DropdownMenuItem>
                         <DropdownMenuItem
-                          onClick={() => handleAddTenant(app.applicant_name, app.email, app.property_id)}
+                          onClick={() =>
+                            handleAddTenant(
+                              app.applicant_name,
+                              app.email,
+                              app.property_id,
+                            )
+                          }
                         >
                           Add as Tenant
                         </DropdownMenuItem>
@@ -197,7 +206,9 @@ export function LeaseApplicationsTable({
       {selectedApplication && (
         <Dialog
           open={!!selectedApplication}
-          onOpenChange={(isOpen: boolean) => !isOpen && setSelectedApplication(null)}
+          onOpenChange={(isOpen: boolean) =>
+            !isOpen && setSelectedApplication(null)
+          }
         >
           <DialogContent className="sm:max-w-lg">
             <DialogHeader>
@@ -205,8 +216,11 @@ export function LeaseApplicationsTable({
                 Lease Application for {selectedApplication.property_title}
               </DialogTitle>
               <DialogDescription>
-                Submitted by {selectedApplication.applicant_name} on{' '}
-                <ClientDate dateString={selectedApplication.created_at} format="datetime" />
+                Submitted by {selectedApplication.applicant_name} on{" "}
+                <ClientDate
+                  dateString={selectedApplication.created_at}
+                  format="datetime"
+                />
               </DialogDescription>
             </DialogHeader>
             <div className="space-y-4 py-4">
@@ -214,16 +228,16 @@ export function LeaseApplicationsTable({
                 <h4 className="font-semibold">Applicant Details</h4>
                 <p>Name: {selectedApplication.applicant_name}</p>
                 <p>Email: {selectedApplication.email}</p>
-                <p>Phone: {selectedApplication.phone || 'Not provided'}</p>
+                <p>Phone: {selectedApplication.phone || "Not provided"}</p>
                 <p>
-                  Employment:{' '}
-                  {selectedApplication.employment || 'Not specified'}
+                  Employment:{" "}
+                  {selectedApplication.employment || "Not specified"}
                 </p>
               </div>
               <div className="space-y-1">
                 <h4 className="font-semibold">Additional Information</h4>
                 <p className="text-sm text-gray-700">
-                  {selectedApplication.message || 'No message provided.'}
+                  {selectedApplication.message || "No message provided."}
                 </p>
               </div>
             </div>

@@ -1,13 +1,10 @@
-'use server';
+"use server";
 
-import { revalidatePath } from 'next/cache';
-
-import { triggerRevalidation } from '@/lib/revalidation';
-import {
-  type Branding,
-  type Json,
-  type TablesInsert,
-  type TablesUpdate,
+import type {
+  Branding,
+  Json,
+  TablesInsert,
+  TablesUpdate,
 } from "@repo/supabase";
 import {
   createBranding as createBrandingProductService,
@@ -16,9 +13,13 @@ import {
   getBranding as getBrandingProductsService,
   updateBranding as updateBrandingProductService,
 } from "@repo/supabase/services/branding";
+import { revalidatePath } from "next/cache";
+import { triggerRevalidation } from "@/lib/revalidation";
 
 function getErrorMessage(error: unknown) {
-  return error instanceof Error ? error.message : "An unexpected error occurred.";
+  return error instanceof Error
+    ? error.message
+    : "An unexpected error occurred.";
 }
 
 function toJson(value: unknown): Json | null {
@@ -39,14 +40,18 @@ function toBrandingInsert(product: Branding): TablesInsert<"branding"> {
   };
 }
 
-function toBrandingUpdate(product: Partial<Branding>): TablesUpdate<"branding"> {
+function toBrandingUpdate(
+  product: Partial<Branding>,
+): TablesUpdate<"branding"> {
   const payload: TablesUpdate<"branding"> = {};
 
   if (product.title !== undefined) payload.title = product.title;
   if (product.category !== undefined) payload.category = product.category;
-  if (product.description !== undefined) payload.description = product.description;
+  if (product.description !== undefined)
+    payload.description = product.description;
   if (product.image !== undefined) payload.image = product.image;
-  if (product.is_featured !== undefined) payload.is_featured = product.is_featured;
+  if (product.is_featured !== undefined)
+    payload.is_featured = product.is_featured;
   if (product.specs !== undefined) payload.specs = toJson(product.specs);
   if (product.gallery !== undefined) payload.gallery = toJson(product.gallery);
   if (product.reviews !== undefined) payload.reviews = toJson(product.reviews);
@@ -59,7 +64,7 @@ export async function getBrandingProducts() {
   try {
     return await getBrandingProductsService();
   } catch (error) {
-    console.error('Error fetching branding products:', error);
+    console.error("Error fetching branding products:", error);
     return [];
   }
 }
@@ -69,7 +74,7 @@ export async function getBrandingProduct(id: string) {
   try {
     return await getBrandingProductService(id);
   } catch (error) {
-    console.error('Error fetching branding product:', error);
+    console.error("Error fetching branding product:", error);
     return null;
   }
 }
@@ -80,11 +85,11 @@ export async function createBrandingProduct(
 ): Promise<{ success: boolean; error?: string }> {
   try {
     await createBrandingProductService(toBrandingInsert(product));
-    revalidatePath('/dashboard/branding');
-    await triggerRevalidation({ path: '/branding' });
+    revalidatePath("/dashboard/branding");
+    await triggerRevalidation({ path: "/branding" });
     return { success: true };
   } catch (error: unknown) {
-    console.error('Error creating branding product:', error);
+    console.error("Error creating branding product:", error);
     return { success: false, error: getErrorMessage(error) };
   }
 }
@@ -96,13 +101,13 @@ export async function updateBrandingProduct(
 ): Promise<{ success: boolean; error?: string }> {
   try {
     await updateBrandingProductService(id, toBrandingUpdate(product));
-    revalidatePath('/dashboard/branding');
+    revalidatePath("/dashboard/branding");
     revalidatePath(`/dashboard/branding/brand/${id}`);
     await triggerRevalidation({ path: `/branding/${id}` });
-    await triggerRevalidation({ path: '/branding' });
+    await triggerRevalidation({ path: "/branding" });
     return { success: true };
   } catch (error: unknown) {
-    console.error('Error updating branding product:', error);
+    console.error("Error updating branding product:", error);
     return { success: false, error: getErrorMessage(error) };
   }
 }
@@ -113,11 +118,11 @@ export async function deleteBrandingProduct(
 ): Promise<{ success: boolean; error?: string }> {
   try {
     await deleteBrandingProductService(id);
-    revalidatePath('/dashboard/branding');
-    await triggerRevalidation({ path: '/branding' });
+    revalidatePath("/dashboard/branding");
+    await triggerRevalidation({ path: "/branding" });
     return { success: true };
   } catch (error: unknown) {
-    console.error('Error deleting branding product:', error);
+    console.error("Error deleting branding product:", error);
     return { success: false, error: getErrorMessage(error) };
   }
 }

@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { galleryItemSchema } from "@repo/supabase";
+import Image from "next/image";
 
 import { Card } from "@/components/ui/card";
 import { getBrandingProduct } from "../../actions";

@@ -1,14 +1,14 @@
-import { createSupabaseServerClient } from '@repo/supabase/server'
-import { redirect } from 'next/navigation'
+import { createSupabaseServerClient } from "@repo/supabase/server";
+import { redirect } from "next/navigation";
 
 export default async function AdminHomePage() {
-  const supabase = await createSupabaseServerClient()
+  const supabase = await createSupabaseServerClient();
 
-  const { data } = await supabase.auth.getUser()
-  console.log("home page", data.user)
+  const { data } = await supabase.auth.getUser();
+  console.log("home page", data.user);
   if (data.user) {
-    redirect('/dashboard')
+    redirect("/dashboard");
   } else {
-    redirect('/login')
+    redirect("/login");
   }
 }

@@ -45,7 +45,7 @@ export default async function AdminBrandingPage() {
             <div className="relative aspect-square overflow-hidden">
               <Link href={`/dashboard/branding/brand/${p.id}`}>
                 <Image
-                  src={p.image ?? ''}
+                  src={p.image ?? ""}
                   alt={p.title}
                   fill
                   className="object-cover"

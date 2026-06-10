@@ -30,7 +30,9 @@ export default function TermsPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-2xl font-bold text-secondary">Quotes and Services</h2>
+        <h2 className="text-2xl font-bold text-secondary">
+          Quotes and Services
+        </h2>
         <p className="text-gray-600">
           Quotes, production timelines, and service availability are confirmed
           directly by {businessInfo.name}. Final terms may vary by project,
@@ -41,7 +43,8 @@ export default function TermsPage() {
       <section className="space-y-3">
         <h2 className="text-2xl font-bold text-secondary">Contact</h2>
         <p className="text-gray-600">
-          For questions about these terms, contact {businessInfo.emails.join(" or ")}.
+          For questions about these terms, contact{" "}
+          {businessInfo.emails.join(" or ")}.
         </p>
       </section>
     </div>

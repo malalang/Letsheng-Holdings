@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { type ContactMessage, contactMessageSchema } from "@repo/supabase";
 import { Loader2, Send } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -17,10 +17,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  contactMessageSchema,
-  type ContactMessage,
-} from "@repo/supabase";
 import { sendContactMessage } from "./actions";
 
 export function ContactForm() {
@@ -87,7 +83,11 @@ export function ContactForm() {
             <FormItem>
               <FormLabel>Phone</FormLabel>
               <FormControl>
-                <Input placeholder="+27..." {...field} value={field.value ?? ""} />
+                <Input
+                  placeholder="+27..."
+                  {...field}
+                  value={field.value ?? ""}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>

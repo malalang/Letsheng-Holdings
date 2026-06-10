@@ -4,11 +4,11 @@
   /* Core Colors */
   --color-background: #f0f2f5; /* Light gray background for content area */
   --color-foreground: #002147; /* Default text color (Navy) */
-  --color-primary: #49b3e0;      /* Primary action color (Light Blue) */
+  --color-primary: #49b3e0; /* Primary action color (Light Blue) */
   --color-primary-foreground: #002147; /* Text on primary color */
-  --color-secondary: #002147;    /* Secondary color (Navy) */
+  --color-secondary: #002147; /* Secondary color (Navy) */
   --color-secondary-foreground: #ffffff; /* Text on secondary color */
-  --color-destructive: #ef4444;  /* Red for destructive actions */
+  --color-destructive: #ef4444; /* Red for destructive actions */
   --color-destructive-foreground: #ffffff;
 
   /* Component Colors */
@@ -18,11 +18,11 @@
   --color-popover-foreground: #002147;
   --color-muted: #f3f4f6;
   --color-muted-foreground: #6b7280; /* Gray text */
-  --color-accent: #eef8fd;       /* Light blue for hover/active states */
+  --color-accent: #eef8fd; /* Light blue for hover/active states */
   --color-accent-foreground: #002147;
-  --color-border: #e5e7eb;       /* Light gray for borders */
+  --color-border: #e5e7eb; /* Light gray for borders */
   --color-input: #e5e7eb;
-  --color-ring: #49b3e0;         /* Primary color for focus rings */
+  --color-ring: #49b3e0; /* Primary color for focus rings */
 }
 
 @layer base {
@@ -50,10 +50,17 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    font-family:
+      Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+      "Helvetica Neue", Arial;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-bold;
   }
 }

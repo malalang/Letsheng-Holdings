@@ -21,10 +21,12 @@ export default function PrivacyPage() {
       </header>
 
       <section className="space-y-3">
-        <h2 className="text-2xl font-bold text-secondary">Information We Use</h2>
+        <h2 className="text-2xl font-bold text-secondary">
+          Information We Use
+        </h2>
         <p className="text-gray-600">
-          We may collect your name, email address, phone number, message content,
-          and the property or branding product you asked about.
+          We may collect your name, email address, phone number, message
+          content, and the property or branding product you asked about.
         </p>
       </section>
 

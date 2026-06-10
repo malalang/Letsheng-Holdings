@@ -1,9 +1,17 @@
-'use client';
+"use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  createSupabaseBrowserClient,
+  type Payment,
+  type Tenant,
+} from "@repo/supabase";
 import { ArrowLeft, Trash2 } from "lucide-react";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -36,12 +44,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { type Tenant, type Payment } from "@repo/supabase";
 import { createTenant, deleteTenant, updateTenant } from "./actions";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { createSupabaseBrowserClient } from "@repo/supabase";
-import { z } from "zod";
 
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -61,46 +64,50 @@ interface TenantFormProps {
 
 // Helper to format date for input
 const formatDateForInput = (date: Date | string | null | undefined): string => {
-    if (!date) return '';
-    try {
-      const dateObj = new Date(date);
-      if (isNaN(dateObj.getTime())) return '';
-      return dateObj.toISOString().split('T')[0] ?? '';
-    } catch (e) {
-      return '';
-    }
-  };
+  if (!date) return "";
+  try {
+    const dateObj = new Date(date);
+    if (isNaN(dateObj.getTime())) return "";
+    return dateObj.toISOString().split("T")[0] ?? "";
+  } catch (e) {
+    return "";
+  }
+};
 
 export default function TenantForm({ tenant, payments }: TenantFormProps) {
-    const router = useRouter();
-    const searchParams = useSearchParams();
-    const [properties, setProperties] = useState<{ id: string; title: string }[]>([]);
-    
-    const form = useForm<FormValues>({
-      resolver: zodResolver(formSchema),
-      defaultValues: tenant
-        ? {
-            name: tenant.name,
-            email: tenant.email ?? "",
-            property_id: tenant.property_id ?? "",
-            status: tenant.status,
-            lease_end_date: formatDateForInput(tenant.lease_end_date),
-          }
-        : {
-            name: searchParams.get('name') || "",
-            email: searchParams.get('email') || "",
-            property_id: searchParams.get('property_id') || "",
-            status: "Pending",
-            lease_end_date: "",
-          },
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [properties, setProperties] = useState<{ id: string; title: string }[]>(
+    [],
+  );
+
+  const form = useForm<FormValues>({
+    resolver: zodResolver(formSchema),
+    defaultValues: tenant
+      ? {
+          name: tenant.name,
+          email: tenant.email ?? "",
+          property_id: tenant.property_id ?? "",
+          status: tenant.status,
+          lease_end_date: formatDateForInput(tenant.lease_end_date),
+        }
+      : {
+          name: searchParams.get("name") || "",
+          email: searchParams.get("email") || "",
+          property_id: searchParams.get("property_id") || "",
+          status: "Pending",
+          lease_end_date: "",
+        },
   });
 
   useEffect(() => {
     const fetchProperties = async () => {
       const supabase = createSupabaseBrowserClient();
-      const { data, error } = await supabase.from('properties').select('id, title');
+      const { data, error } = await supabase
+        .from("properties")
+        .select("id, title");
       if (error) {
-        console.error('Error fetching properties:', error);
+        console.error("Error fetching properties:", error);
       } else if (data) {
         setProperties(data);
       }
@@ -115,19 +122,21 @@ export default function TenantForm({ tenant, payments }: TenantFormProps) {
       email: data.email || null,
       property_id: data.property_id || null,
       status: data.status,
-      lease_end_date: data.lease_end_date ? new Date(data.lease_end_date) : null,
+      lease_end_date: data.lease_end_date
+        ? new Date(data.lease_end_date)
+        : null,
     };
 
     const action = tenant
-    ? await updateTenant(tenant.id, dataForAction)
-    : await createTenant(dataForAction);
+      ? await updateTenant(tenant.id, dataForAction)
+      : await createTenant(dataForAction);
 
-  if (action.success) {
-    router.push("/dashboard/tenants");
-    router.refresh();
-  } else {
-    console.error(action.error);
-  }
+    if (action.success) {
+      router.push("/dashboard/tenants");
+      router.refresh();
+    } else {
+      console.error(action.error);
+    }
   }
 
   async function handleDelete() {
@@ -184,7 +193,11 @@ export default function TenantForm({ tenant, payments }: TenantFormProps) {
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input placeholder="e.g., john.doe@example.com" {...field} value={field.value ?? ''}/>
+                      <Input
+                        placeholder="e.g., john.doe@example.com"
+                        {...field}
+                        value={field.value ?? ""}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -198,7 +211,7 @@ export default function TenantForm({ tenant, payments }: TenantFormProps) {
                     <FormLabel>Property</FormLabel>
                     <Select
                       onValueChange={field.onChange}
-                      value={field.value || ''}
+                      value={field.value || ""}
                     >
                       <FormControl>
                         <SelectTrigger>
@@ -207,9 +220,9 @@ export default function TenantForm({ tenant, payments }: TenantFormProps) {
                       </FormControl>
                       <SelectContent>
                         {properties.map((property) => (
-                            <SelectItem key={property.id} value={property.id}>
-                                {property.title}
-                            </SelectItem>
+                          <SelectItem key={property.id} value={property.id}>
+                            {property.title}
+                          </SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
@@ -249,7 +262,7 @@ export default function TenantForm({ tenant, payments }: TenantFormProps) {
                   <FormItem>
                     <FormLabel>Lease End Date</FormLabel>
                     <FormControl>
-                      <Input type="date" {...field} value={field.value ?? ''} />
+                      <Input type="date" {...field} value={field.value ?? ""} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -278,7 +291,9 @@ export default function TenantForm({ tenant, payments }: TenantFormProps) {
                   <TableBody>
                     {payments.map((payment) => (
                       <TableRow key={payment.id}>
-                        <TableCell>{new Date(payment.date).toLocaleDateString()}</TableCell>
+                        <TableCell>
+                          {new Date(payment.date).toLocaleDateString()}
+                        </TableCell>
                         <TableCell>${payment.amount.toFixed(2)}</TableCell>
                         <TableCell>{payment.status}</TableCell>
                       </TableRow>
@@ -291,7 +306,11 @@ export default function TenantForm({ tenant, payments }: TenantFormProps) {
 
           <div className="flex justify-end gap-2">
             {tenant && (
-              <Button variant="destructive" type="button" onClick={handleDelete}>
+              <Button
+                variant="destructive"
+                type="button"
+                onClick={handleDelete}
+              >
                 <Trash2 className="mr-2 h-4 w-4" />
                 Delete Tenant
               </Button>

@@ -1,20 +1,19 @@
-'use server';
-
-import { revalidatePath } from "next/cache";
+"use server";
 
 import {
-  tenantSchema,
   type TablesInsert,
   type TablesUpdate,
   type Tenant,
+  tenantSchema,
 } from "@repo/supabase";
 import {
   createTenant as createTenantService,
   deleteTenant as deleteTenantService,
-  getTenants as getTenantsService,
   getTenantById as getTenantByIdService,
+  getTenants as getTenantsService,
   updateTenant as updateTenantService,
 } from "@repo/supabase/services/tenants";
+import { revalidatePath } from "next/cache";
 
 type TenantRow = Omit<Tenant, "lease_end_date"> & {
   lease_end_date: string | null;
@@ -25,7 +24,9 @@ export type TenantWithProperty = TenantRow & {
 };
 
 function getErrorMessage(error: unknown) {
-  return error instanceof Error ? error.message : "An unexpected error occurred.";
+  return error instanceof Error
+    ? error.message
+    : "An unexpected error occurred.";
 }
 
 function toLeaseEndDate(value: Tenant["lease_end_date"] | undefined) {
@@ -52,7 +53,8 @@ function toTenantUpdate(
 
   if (tenant.name !== undefined) payload.name = tenant.name;
   if (tenant.email !== undefined) payload.email = tenant.email;
-  if (tenant.property_id !== undefined) payload.property_id = tenant.property_id;
+  if (tenant.property_id !== undefined)
+    payload.property_id = tenant.property_id;
   if (tenant.status !== undefined) payload.status = tenant.status;
   if (tenant.lease_end_date !== undefined) {
     payload.lease_end_date = toLeaseEndDate(tenant.lease_end_date);
@@ -74,7 +76,9 @@ export async function getTenants() {
   }
 }
 
-export async function createTenant(formData: Omit<Tenant, "id" | "avatar_url">) {
+export async function createTenant(
+  formData: Omit<Tenant, "id" | "avatar_url">,
+) {
   const insertSchema = tenantSchema.omit({ id: true, avatar_url: true });
   const validatedData = insertSchema.parse(formData);
 
@@ -90,9 +94,11 @@ export async function createTenant(formData: Omit<Tenant, "id" | "avatar_url">) 
 
 export async function updateTenant(
   id: string,
-  formData: Partial<Omit<Tenant, "id" | "avatar_url">>
+  formData: Partial<Omit<Tenant, "id" | "avatar_url">>,
 ) {
-  const partialTenantSchema = tenantSchema.partial().omit({ id: true, avatar_url: true });
+  const partialTenantSchema = tenantSchema
+    .partial()
+    .omit({ id: true, avatar_url: true });
   const validatedData = partialTenantSchema.parse(formData);
 
   try {

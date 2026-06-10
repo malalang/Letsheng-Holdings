@@ -1,15 +1,12 @@
-'use client';
+"use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { type Property, propertySchema } from "@repo/supabase";
 import { Loader2, PlusCircle, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import type { z } from "zod";
-
-import { UploadImage } from "@/components/upload-image";
-import { createProperty, deleteProperty, updateProperty } from "./actions";
-
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -38,7 +35,8 @@ import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
-import { type Property, propertySchema } from "@repo/supabase";
+import { UploadImage } from "@/components/upload-image";
+import { createProperty, deleteProperty, updateProperty } from "./actions";
 
 interface PropertyFormProps {
   property?: Property;
@@ -82,11 +80,14 @@ export default function PropertyForm({ property }: PropertyFormProps) {
     name: "gallery",
   });
 
-  const { fields: reviewFields, append: appendReview, remove: removeReview, } = useFieldArray({
+  const {
+    fields: reviewFields,
+    append: appendReview,
+    remove: removeReview,
+  } = useFieldArray({
     control: form.control,
     name: "reviews",
   });
-
 
   async function onSubmit(data: Property) {
     setIsLoading(true);
@@ -352,7 +353,11 @@ export default function PropertyForm({ property }: PropertyFormProps) {
                                 <FormItem>
                                   <FormLabel>Description</FormLabel>
                                   <FormControl>
-                                    <Textarea rows={2} {...field} value={field.value ?? ''} />
+                                    <Textarea
+                                      rows={2}
+                                      {...field}
+                                      value={field.value ?? ""}
+                                    />
                                   </FormControl>
                                   <FormMessage />
                                 </FormItem>
@@ -535,7 +540,15 @@ export default function PropertyForm({ property }: PropertyFormProps) {
                                 <FormItem>
                                   <FormLabel>Rating</FormLabel>
                                   <FormControl>
-                                    <Input type="number" {...field} onChange={(e) => field.onChange(parseInt(e.target.value, 10) || 0)} />
+                                    <Input
+                                      type="number"
+                                      {...field}
+                                      onChange={(e) =>
+                                        field.onChange(
+                                          parseInt(e.target.value, 10) || 0,
+                                        )
+                                      }
+                                    />
                                   </FormControl>
                                   <FormMessage />
                                 </FormItem>

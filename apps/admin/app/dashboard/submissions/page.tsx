@@ -1,7 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { getBrandingInquiries, getLeaseApplications } from "./actions";
 import { BrandingInquiriesTable } from "./BrandingInquiriesTable";
 import { LeaseApplicationsTable } from "./LeaseApplicationsTable";
-import { getLeaseApplications, getBrandingInquiries } from "./actions";
 
 export default async function SubmissionsPage() {
   const applications = await getLeaseApplications();
