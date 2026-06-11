@@ -1,19 +1,20 @@
 "use server";
 
 import {
-  type Json,
-  type Property,
-  propertySchema,
-  type TablesInsert,
-  type TablesUpdate,
-} from "@repo/supabase";
-import {
   createProperty as createPropertyService,
   deleteProperty as deletePropertyService,
+  updateProperty as updatePropertyService,
+} from "@repo/supabase/Mutations/properties";
+import {
   getProperties as getPropertiesService,
   getPropertyById as getPropertyByIdService,
-  updateProperty as updatePropertyService,
-} from "@repo/supabase/services/properties";
+} from "@repo/supabase/Queries/properties";
+import type {
+  Json,
+  TablesInsert,
+  TablesUpdate,
+} from "@repo/supabase/supabaseType";
+import { type Property, propertySchema } from "@repo/supabase/validations";
 import { revalidatePath } from "next/cache";
 import { triggerRevalidation } from "@/lib/revalidation";
 

@@ -2,14 +2,14 @@
 
 import {
   deleteBrandingInquiry as deleteBrandingInquiryService,
-  getBrandingInquiries as getBrandingInquiriesService,
   updateBrandingInquiryStatus as updateBrandingInquiryStatusService,
-} from "@repo/supabase/services/branding";
+} from "@repo/supabase/Mutations/branding";
 import {
   deleteLeaseApplication as deleteLeaseApplicationService,
-  getLeaseApplications as getLeaseApplicationsService,
   updateLeaseApplicationStatus as updateLeaseApplicationStatusService,
-} from "@repo/supabase/services/properties";
+} from "@repo/supabase/Mutations/properties";
+import { getBrandingInquiries as getBrandingInquiriesService } from "@repo/supabase/Queries/branding";
+import { getLeaseApplications as getLeaseApplicationsService } from "@repo/supabase/Queries/properties";
 import { revalidatePath } from "next/cache";
 
 // Action to update the status of a branding inquiry

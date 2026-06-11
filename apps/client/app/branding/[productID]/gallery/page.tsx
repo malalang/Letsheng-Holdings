@@ -1,4 +1,4 @@
-import { galleryItemSchema } from "@repo/supabase";
+import { galleryItemSchema } from "@repo/supabase/validations";
 import Image from "next/image";
 
 import { Card } from "@/components/ui/card";

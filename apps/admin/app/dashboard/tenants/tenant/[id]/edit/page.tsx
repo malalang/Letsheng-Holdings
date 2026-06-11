@@ -1,4 +1,4 @@
-import type { Tenant } from "@repo/supabase";
+import type { Tenant } from "@repo/supabase/validations";
 import { getTenantById } from "../../../actions";
 import TenantForm from "../../../tenant-form";
 

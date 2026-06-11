@@ -5,7 +5,7 @@ import {
   type Branding,
   type BrandingInquiry,
   brandingInquirySchema,
-} from "@repo/supabase";
+} from "@repo/supabase/validations";
 import { ArrowRight, Loader2, Package, Upload, User } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

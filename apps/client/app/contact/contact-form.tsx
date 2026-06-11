@@ -1,7 +1,10 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { type ContactMessage, contactMessageSchema } from "@repo/supabase";
+import {
+  type ContactMessage,
+  contactMessageSchema,
+} from "@repo/supabase/validations";
 import { Loader2, Send } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";

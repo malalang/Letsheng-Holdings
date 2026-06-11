@@ -1,4 +1,4 @@
-import type { Tenant } from "@repo/supabase";
+import type { Tenant } from "@repo/supabase/validations";
 import { Edit, Eye, MoreHorizontal, PlusCircle, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";

@@ -2,7 +2,7 @@ import {
   galleryItemSchema,
   reviewSchema,
   specItemSchema,
-} from "@repo/supabase";
+} from "@repo/supabase/validations";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";

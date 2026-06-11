@@ -1,7 +1,10 @@
 "use server";
 
-import { type ContactMessage, contactMessageSchema } from "@repo/supabase";
-import { submitContactMessage } from "@repo/supabase/services/contact";
+import { submitContactMessage } from "@repo/supabase/Mutations/contact";
+import {
+  type ContactMessage,
+  contactMessageSchema,
+} from "@repo/supabase/validations";
 
 export async function sendContactMessage(
   data: ContactMessage,

@@ -1,7 +1,10 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { type LeaseApplication, leaseApplicationSchema } from "@repo/supabase";
+import {
+  type LeaseApplication,
+  leaseApplicationSchema,
+} from "@repo/supabase/validations";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";

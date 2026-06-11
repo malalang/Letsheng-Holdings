@@ -1,18 +1,16 @@
 "use server";
 
 import {
-  type TablesInsert,
-  type TablesUpdate,
-  type Tenant,
-  tenantSchema,
-} from "@repo/supabase";
-import {
   createTenant as createTenantService,
   deleteTenant as deleteTenantService,
+  updateTenant as updateTenantService,
+} from "@repo/supabase/Mutations/tenants";
+import {
   getTenantById as getTenantByIdService,
   getTenants as getTenantsService,
-  updateTenant as updateTenantService,
-} from "@repo/supabase/services/tenants";
+} from "@repo/supabase/Queries/tenants";
+import type { TablesInsert, TablesUpdate } from "@repo/supabase/supabaseType";
+import { type Tenant, tenantSchema } from "@repo/supabase/validations";
 import { revalidatePath } from "next/cache";
 
 type TenantRow = Omit<Tenant, "lease_end_date"> & {

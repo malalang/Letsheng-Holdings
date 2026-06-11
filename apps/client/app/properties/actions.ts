@@ -1,15 +1,15 @@
 "use server";
 
+import { submitLeaseApplication as submitLeaseApplicationService } from "@repo/supabase/Mutations/properties";
+import {
+  getProperties as getPropertiesService,
+  getPropertyById as getPropertyByIdService,
+} from "@repo/supabase/Queries/properties";
 import {
   leaseApplicationSchema,
   type Property,
   propertySchema,
-} from "@repo/supabase";
-import {
-  getProperties as getPropertiesService,
-  getPropertyById as getPropertyByIdService,
-  submitLeaseApplication as submitLeaseApplicationService,
-} from "@repo/supabase/services/properties";
+} from "@repo/supabase/validations";
 import type { z } from "zod";
 
 export type PropertyRecord = Property & { id: string };

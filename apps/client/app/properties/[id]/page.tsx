@@ -1,4 +1,8 @@
-import { featureSchema, galleryItemSchema, reviewSchema } from "@repo/supabase";
+import {
+  featureSchema,
+  galleryItemSchema,
+  reviewSchema,
+} from "@repo/supabase/validations";
 import {
   Bath,
   Bed,

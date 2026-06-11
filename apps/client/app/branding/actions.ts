@@ -1,16 +1,16 @@
 "use server";
 
+import { submitBrandingInquiry as submitBrandingInquiryService } from "@repo/supabase/Mutations/branding";
+import {
+  getBrandingById as getBrandingProductService,
+  getBranding as getBrandingProductsService,
+} from "@repo/supabase/Queries/branding";
 import {
   type Branding,
   type BrandingInquiry,
   brandingInquirySchema,
   brandingSchema,
-} from "@repo/supabase";
-import {
-  getBrandingById as getBrandingProductService,
-  getBranding as getBrandingProductsService,
-  submitBrandingInquiry as submitBrandingInquiryService,
-} from "@repo/supabase/services/branding";
+} from "@repo/supabase/validations";
 
 export type BrandingRecord = Branding & { id: string };
 

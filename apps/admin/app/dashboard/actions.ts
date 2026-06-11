@@ -3,7 +3,7 @@
 import {
   getDashboardKpis as getDashboardKpisService,
   getRecentLeases as getRecentLeasesService,
-} from "@repo/supabase/services/dashboard";
+} from "@repo/supabase/Queries/dashboard";
 
 export async function getDashboardKpis() {
   return await getDashboardKpisService();

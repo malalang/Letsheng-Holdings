@@ -1,18 +1,20 @@
 "use server";
 
-import type {
-  Branding,
-  Json,
-  TablesInsert,
-  TablesUpdate,
-} from "@repo/supabase";
 import {
   createBranding as createBrandingProductService,
   deleteBranding as deleteBrandingProductService,
+  updateBranding as updateBrandingProductService,
+} from "@repo/supabase/Mutations/branding";
+import {
   getBrandingById as getBrandingProductService,
   getBranding as getBrandingProductsService,
-  updateBranding as updateBrandingProductService,
-} from "@repo/supabase/services/branding";
+} from "@repo/supabase/Queries/branding";
+import type {
+  Json,
+  TablesInsert,
+  TablesUpdate,
+} from "@repo/supabase/supabaseType";
+import type { Branding } from "@repo/supabase/validations";
 import { revalidatePath } from "next/cache";
 import { triggerRevalidation } from "@/lib/revalidation";
 

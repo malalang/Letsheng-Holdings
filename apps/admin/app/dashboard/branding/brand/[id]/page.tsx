@@ -2,7 +2,7 @@ import {
   galleryItemSchema,
   reviewSchema,
   specItemSchema,
-} from "@repo/supabase";
+} from "@repo/supabase/validations";
 import { ArrowLeft, CheckCircle, Edit, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
