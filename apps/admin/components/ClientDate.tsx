@@ -15,7 +15,7 @@ export function ClientDate({ dateString, format = "date" }: ClientDateProps) {
     // which prevents a hydration mismatch.
     if (dateString) {
       const date = new Date(dateString);
-      if (isNaN(date.getTime())) {
+      if (Number.isNaN(date.getTime())) {
         setFormatted("Invalid Date");
         return;
       }

@@ -120,9 +120,11 @@ export function UploadImage({
           </div>
         </div>
       ) : (
-        <div
+        <button
+          type="button"
           className="flex w-full max-w-lg justify-center rounded-lg border-2 border-dashed border-muted-foreground/25 px-6 py-10 text-center cursor-pointer hover:border-primary/50 transition-colors"
           onClick={triggerFileInput}
+          disabled={uploading}
         >
           {uploading ? (
             <div className="flex flex-col items-center gap-2">
@@ -143,7 +145,7 @@ export function UploadImage({
               </p>
             </div>
           )}
-        </div>
+        </button>
       )}
     </div>
   );

@@ -92,7 +92,7 @@ export default function PropertyForm({ property }: PropertyFormProps) {
   async function onSubmit(data: Property) {
     setIsLoading(true);
     try {
-      if (property && property.id) {
+      if (property?.id) {
         const result = await updateProperty(property.id, data);
         if (result.success) {
           toast.success("Property has been updated successfully.");

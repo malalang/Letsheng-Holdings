@@ -1,7 +1,6 @@
 import {
   ArrowRight,
   CheckCircle2,
-  CircleDollarSign,
   Clock,
   Layers,
   Paintbrush,

@@ -58,7 +58,7 @@ export default function BrandingOrderForm({ product }: BrandingOrderFormProps) {
       } else {
         toast.error(result.error || "An unexpected error occurred.");
       }
-    } catch (error) {
+    } catch (_error) {
       toast.error("An unexpected error occurred.");
     } finally {
       setIsLoading(false);

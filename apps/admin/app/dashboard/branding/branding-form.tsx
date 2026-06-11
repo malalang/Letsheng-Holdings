@@ -103,7 +103,7 @@ export default function BrandingForm({ product }: BrandingFormProps) {
   async function onSubmit(data: Branding) {
     setIsLoading(true);
     try {
-      if (product && product.id) {
+      if (product?.id) {
         const result = await updateBrandingProduct(product.id, data);
         if (result.success) {
           toast.success("Branding product has been updated successfully.");

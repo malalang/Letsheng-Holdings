@@ -9,7 +9,6 @@ import {
   Printer,
   ShieldCheck,
   Sparkles,
-  Star,
   Target,
   TrendingUp,
   Users,
@@ -18,7 +17,6 @@ import {
 import Link from "next/link";
 import type React from "react";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 // ==============================================

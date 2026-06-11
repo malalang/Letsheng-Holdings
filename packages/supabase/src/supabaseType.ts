@@ -328,7 +328,7 @@ export type Database = {
     }
     Functions: {
       is_admin: {
-        Args: Record<PropertyKey, never>
+        Args: never
         Returns: boolean
       }
     }

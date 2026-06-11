@@ -4,7 +4,6 @@ import {
   Bed,
   CheckCircle2,
   FileText,
-  MapPin,
   Search,
   Star,
 } from "lucide-react";

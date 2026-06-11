@@ -1,6 +1,5 @@
 "use client";
 
-import type { LeaseApplication } from "@repo/supabase";
 import { MoreHorizontal } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
