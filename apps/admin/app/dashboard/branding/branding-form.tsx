@@ -6,7 +6,6 @@ import { Loader2, PlusCircle, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
-import type { z } from "zod";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -46,7 +45,7 @@ interface BrandingFormProps {
   product?: Branding;
 }
 
-type BrandingFormValues = z.input<typeof brandingSchema>;
+type BrandingFormValues = Branding;
 
 export default function BrandingForm({ product }: BrandingFormProps) {
   const [isLoading, setIsLoading] = useState(false);

@@ -6,7 +6,6 @@ import { Loader2, PlusCircle, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
-import type { z } from "zod";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -42,7 +41,7 @@ interface PropertyFormProps {
   property?: Property;
 }
 
-type PropertyFormValues = z.input<typeof propertySchema>;
+type PropertyFormValues = Property;
 
 export default function PropertyForm({ property }: PropertyFormProps) {
   const [isLoading, setIsLoading] = useState(false);
