@@ -1,4 +1,5 @@
 import { requireAdminUser } from "../auth";
+import { CACHE_PATHS, CACHE_TAGS, mutationResult } from "../cache";
 import { createSupabaseServerClient } from "../server";
 import type { TablesInsert, TablesUpdate } from "../supabaseType";
 
@@ -11,7 +12,15 @@ export async function createBranding(branding: TablesInsert<"branding">) {
     .select()
     .single();
   if (error) throw new Error(error.message);
-  return data;
+  return mutationResult(data, {
+    tags: [CACHE_TAGS.branding, CACHE_TAGS.brandingItem(data.id)],
+    paths: [
+      CACHE_PATHS.home,
+      CACHE_PATHS.branding,
+      CACHE_PATHS.brandingItem(data.id),
+    ],
+    mode: "immediate",
+  });
 }
 
 export async function updateBranding(id: string, branding: TablesUpdate<"branding">) {
@@ -24,7 +33,15 @@ export async function updateBranding(id: string, branding: TablesUpdate<"brandin
     .select()
     .single();
   if (error) throw new Error(error.message);
-  return data;
+  return mutationResult(data, {
+    tags: [CACHE_TAGS.branding, CACHE_TAGS.brandingItem(id)],
+    paths: [
+      CACHE_PATHS.home,
+      CACHE_PATHS.branding,
+      CACHE_PATHS.brandingItem(id),
+    ],
+    mode: "immediate",
+  });
 }
 
 export async function deleteBranding(id: string) {
@@ -32,6 +49,15 @@ export async function deleteBranding(id: string) {
   const supabase = await createSupabaseServerClient();
   const { error } = await supabase.from("branding").delete().eq("id", id);
   if (error) throw new Error(error.message);
+  return mutationResult(undefined, {
+    tags: [CACHE_TAGS.branding, CACHE_TAGS.brandingItem(id)],
+    paths: [
+      CACHE_PATHS.home,
+      CACHE_PATHS.branding,
+      CACHE_PATHS.brandingItem(id),
+    ],
+    mode: "immediate",
+  });
 }
 
 export async function submitBrandingInquiry(inquiry: TablesInsert<"branding_inquiries">) {
@@ -40,6 +66,10 @@ export async function submitBrandingInquiry(inquiry: TablesInsert<"branding_inqu
     .from("branding_inquiries")
     .insert({ ...inquiry, status: "New" });
   if (error) throw new Error(error.message);
+  return mutationResult(undefined, {
+    tags: [CACHE_TAGS.brandingInquiries],
+    mode: "immediate",
+  });
 }
 
 export async function updateBrandingInquiryStatus(id: string, status: string) {
@@ -50,6 +80,10 @@ export async function updateBrandingInquiryStatus(id: string, status: string) {
     .update({ status })
     .eq("id", id);
   if (error) throw new Error(error.message);
+  return mutationResult(undefined, {
+    tags: [CACHE_TAGS.brandingInquiries],
+    mode: "immediate",
+  });
 }
 
 export async function deleteBrandingInquiry(id: string) {
@@ -60,4 +94,8 @@ export async function deleteBrandingInquiry(id: string) {
     .delete()
     .eq("id", id);
   if (error) throw new Error(error.message);
+  return mutationResult(undefined, {
+    tags: [CACHE_TAGS.brandingInquiries],
+    mode: "immediate",
+  });
 }

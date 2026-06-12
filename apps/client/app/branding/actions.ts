@@ -2,15 +2,12 @@
 
 import { submitBrandingInquiry as submitBrandingInquiryService } from "@repo/supabase/Mutations/branding";
 import {
-  getBrandingById as getBrandingProductService,
-  getBranding as getBrandingProductsService,
-} from "@repo/supabase/Queries/branding";
-import {
   type Branding,
   type BrandingInquiry,
   brandingInquirySchema,
   brandingSchema,
 } from "@repo/supabase/validations";
+import { getCachedBrandingRowById, getCachedBrandingRows } from "../_lib/data";
 
 export type BrandingRecord = Branding & { id: string };
 
@@ -24,7 +21,7 @@ function parseBrandingRecord(data: unknown): BrandingRecord {
 
 export async function getBrandingProducts(): Promise<BrandingRecord[]> {
   try {
-    const products = await getBrandingProductsService();
+    const products = await getCachedBrandingRows();
     return products.map(parseBrandingRecord);
   } catch (error) {
     console.error("Error fetching branding products:", error);
@@ -36,7 +33,7 @@ export async function getBrandingProduct(
   id: string,
 ): Promise<BrandingRecord | null> {
   try {
-    return parseBrandingRecord(await getBrandingProductService(id));
+    return parseBrandingRecord(await getCachedBrandingRowById(id));
   } catch (error) {
     console.error("Error fetching branding product:", error);
     return null;

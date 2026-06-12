@@ -1,14 +1,15 @@
+import { createSupabasePublicClient } from "../public";
 import { createSupabaseServerClient } from "../server";
 
 export async function getBranding() {
-  const supabase = await createSupabaseServerClient();
+  const supabase = createSupabasePublicClient();
   const { data, error } = await supabase.from("branding").select("*");
   if (error) throw new Error(error.message);
   return data;
 }
 
 export async function getFeaturedBranding() {
-  const supabase = await createSupabaseServerClient();
+  const supabase = createSupabasePublicClient();
   const { data, error } = await supabase
     .from("branding")
     .select("*")
@@ -18,7 +19,7 @@ export async function getFeaturedBranding() {
 }
 
 export async function getBrandingById(id: string) {
-  const supabase = await createSupabaseServerClient();
+  const supabase = createSupabasePublicClient();
   const { data, error } = await supabase
     .from("branding")
     .select("*")

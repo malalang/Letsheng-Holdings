@@ -12,6 +12,7 @@ import {
 import type { TablesInsert, TablesUpdate } from "@repo/supabase/supabaseType";
 import { type Tenant, tenantSchema } from "@repo/supabase/validations";
 import { revalidatePath } from "next/cache";
+import { triggerRevalidation } from "@/lib/revalidation";
 
 type TenantRow = Omit<Tenant, "lease_end_date"> & {
   lease_end_date: string | null;
@@ -81,9 +82,10 @@ export async function createTenant(
   const validatedData = insertSchema.parse(formData);
 
   try {
-    const data = await createTenantService(toTenantInsert(validatedData));
+    const result = await createTenantService(toTenantInsert(validatedData));
     revalidatePath("/dashboard/tenants");
-    return { success: true, data };
+    await triggerRevalidation(result.revalidate);
+    return { success: true, data: result.data };
   } catch (error: unknown) {
     console.error("Error creating tenant:", error);
     return { success: false, error: getErrorMessage(error) };
@@ -100,10 +102,11 @@ export async function updateTenant(
   const validatedData = partialTenantSchema.parse(formData);
 
   try {
-    const data = await updateTenantService(id, toTenantUpdate(validatedData));
+    const result = await updateTenantService(id, toTenantUpdate(validatedData));
     revalidatePath("/dashboard/tenants");
     revalidatePath(`/dashboard/tenants/${id}/edit`);
-    return { success: true, data };
+    await triggerRevalidation(result.revalidate);
+    return { success: true, data: result.data };
   } catch (error: unknown) {
     console.error("Error updating tenant:", error);
     return { success: false, error: getErrorMessage(error) };
@@ -112,9 +115,10 @@ export async function updateTenant(
 
 export async function deleteTenant(id: string) {
   try {
-    const data = await deleteTenantService(id);
+    const result = await deleteTenantService(id);
     revalidatePath("/dashboard/tenants");
-    return { success: true, data };
+    await triggerRevalidation(result.revalidate);
+    return { success: true, data: result.data };
   } catch (error: unknown) {
     console.error("Error deleting tenant:", error);
     return { success: false, error: getErrorMessage(error) };

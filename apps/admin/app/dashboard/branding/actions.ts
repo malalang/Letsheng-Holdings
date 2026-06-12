@@ -86,9 +86,11 @@ export async function createBrandingProduct(
   product: Branding,
 ): Promise<{ success: boolean; error?: string }> {
   try {
-    await createBrandingProductService(toBrandingInsert(product));
+    const result = await createBrandingProductService(
+      toBrandingInsert(product),
+    );
     revalidatePath("/dashboard/branding");
-    await triggerRevalidation({ path: "/branding" });
+    await triggerRevalidation(result.revalidate);
     return { success: true };
   } catch (error: unknown) {
     console.error("Error creating branding product:", error);
@@ -102,11 +104,13 @@ export async function updateBrandingProduct(
   product: Partial<Branding>,
 ): Promise<{ success: boolean; error?: string }> {
   try {
-    await updateBrandingProductService(id, toBrandingUpdate(product));
+    const result = await updateBrandingProductService(
+      id,
+      toBrandingUpdate(product),
+    );
     revalidatePath("/dashboard/branding");
     revalidatePath(`/dashboard/branding/brand/${id}`);
-    await triggerRevalidation({ path: `/branding/${id}` });
-    await triggerRevalidation({ path: "/branding" });
+    await triggerRevalidation(result.revalidate);
     return { success: true };
   } catch (error: unknown) {
     console.error("Error updating branding product:", error);
@@ -119,9 +123,9 @@ export async function deleteBrandingProduct(
   id: string,
 ): Promise<{ success: boolean; error?: string }> {
   try {
-    await deleteBrandingProductService(id);
+    const result = await deleteBrandingProductService(id);
     revalidatePath("/dashboard/branding");
-    await triggerRevalidation({ path: "/branding" });
+    await triggerRevalidation(result.revalidate);
     return { success: true };
   } catch (error: unknown) {
     console.error("Error deleting branding product:", error);

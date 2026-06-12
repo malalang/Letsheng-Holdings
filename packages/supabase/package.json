@@ -4,10 +4,12 @@
   "private": true,
   "exports": {
     "./client": "./src/client.ts",
+    "./public": "./src/public.ts",
     "./server": "./src/server.ts",
     "./middleware": "./src/middleware.ts",
     "./proxy": "./src/middleware.ts",
     "./auth": "./src/auth.ts",
+    "./cache": "./src/cache.ts",
     "./validations": "./src/validations.ts",
     "./supabaseType": "./src/supabaseType.ts",
     "./Queries/*": "./src/Queries/*.ts",

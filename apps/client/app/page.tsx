@@ -17,8 +17,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getBrandingProducts } from "./branding/actions";
 import { getProperties } from "./properties/actions";
 
-export const dynamic = "force-dynamic";
-
 // ==============================================
 // Sub-Components
 // ==============================================

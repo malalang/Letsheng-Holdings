@@ -2,15 +2,12 @@
 
 import { submitLeaseApplication as submitLeaseApplicationService } from "@repo/supabase/Mutations/properties";
 import {
-  getProperties as getPropertiesService,
-  getPropertyById as getPropertyByIdService,
-} from "@repo/supabase/Queries/properties";
-import {
   leaseApplicationSchema,
   type Property,
   propertySchema,
 } from "@repo/supabase/validations";
 import type { z } from "zod";
+import { getCachedPropertyRowById, getCachedPropertyRows } from "../_lib/data";
 
 export type PropertyRecord = Property & { id: string };
 
@@ -23,12 +20,12 @@ function parsePropertyRecord(data: unknown): PropertyRecord {
 }
 
 export async function getProperties(): Promise<PropertyRecord[]> {
-  const properties = await getPropertiesService();
+  const properties = await getCachedPropertyRows();
   return properties.map(parsePropertyRecord);
 }
 
 export async function getPropertyById(id: string): Promise<PropertyRecord> {
-  return parsePropertyRecord(await getPropertyByIdService(id));
+  return parsePropertyRecord(await getCachedPropertyRowById(id));
 }
 
 export async function submitLeaseApplication(

@@ -23,8 +23,6 @@ import {
 
 import { getProperties } from "./actions";
 
-export const dynamic = "force-dynamic";
-
 function EstatesHero() {
   return (
     <section className="relative overflow-hidden bg-white pt-16 pb-12 md:pt-24 md:pb-20">

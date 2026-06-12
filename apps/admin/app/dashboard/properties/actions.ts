@@ -87,9 +87,9 @@ export async function createProperty(data: Property) {
   const validatedData = propertySchema.parse(data);
 
   try {
-    await createPropertyService(toPropertyInsert(validatedData));
+    const result = await createPropertyService(toPropertyInsert(validatedData));
     revalidatePath("/dashboard/properties");
-    await triggerRevalidation({ path: "/properties" });
+    await triggerRevalidation(result.revalidate);
   } catch (error: unknown) {
     throw new Error(getErrorMessage(error));
   }
@@ -104,12 +104,14 @@ export async function updateProperty(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { id: _, ...updateData } = validatedData;
 
-    await updatePropertyService(id, toPropertyUpdate(updateData));
+    const result = await updatePropertyService(
+      id,
+      toPropertyUpdate(updateData),
+    );
 
     revalidatePath("/dashboard/properties");
     revalidatePath(`/dashboard/properties/property/${id}`);
-    await triggerRevalidation({ path: `/properties/${id}` });
-    await triggerRevalidation({ path: "/properties" });
+    await triggerRevalidation(result.revalidate);
     return { success: true, error: null };
   } catch (e: unknown) {
     console.error("Validation or unexpected error:", e);
@@ -119,9 +121,9 @@ export async function updateProperty(
 
 export async function deleteProperty(id: string) {
   try {
-    await deletePropertyService(id);
+    const result = await deletePropertyService(id);
     revalidatePath("/dashboard/properties");
-    await triggerRevalidation({ path: "/properties" });
+    await triggerRevalidation(result.revalidate);
   } catch (error: unknown) {
     throw new Error(getErrorMessage(error));
   }
