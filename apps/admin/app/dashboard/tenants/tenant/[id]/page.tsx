@@ -20,14 +20,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  type PaymentStatus,
-  samplePayments,
-  sampleTenants,
-  type TenantStatus,
-} from "../../data";
+import { getTenantById, getPaymentsByTenantId } from "@repo/supabase/Queries/tenants";
 
-const getStatusBadgeClass = (status: TenantStatus | PaymentStatus) => {
+const getStatusBadgeClass = (status: string) => {
   switch (status) {
     case "Active":
       return "bg-green-500 text-white";
@@ -50,7 +45,7 @@ export default async function Page({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const tenant = sampleTenants.find((t) => t.id === id);
+  const tenant = await getTenantById(id);
 
   if (!tenant) {
     return (
@@ -66,7 +61,7 @@ export default async function Page({
     );
   }
 
-  const payments = samplePayments.filter((p) => p.tenantId === id);
+  const payments = await getPaymentsByTenantId(id);
 
   return (
     <div className="mx-auto max-w-5xl">
@@ -90,7 +85,7 @@ export default async function Page({
           <CardHeader>
             <div className="flex items-center gap-4">
               <Avatar className="h-16 w-16">
-                <AvatarImage src={tenant.avatarUrl} alt={tenant.name} />
+                <AvatarImage src={tenant.avatar_url || ""} alt={tenant.name} />
                 <AvatarFallback>{tenant.name.charAt(0)}</AvatarFallback>
               </Avatar>
               <div>
@@ -106,7 +101,7 @@ export default async function Page({
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <p className="text-sm font-medium text-gray-500">Property</p>
-                <p className="font-semibold">{tenant.property}</p>
+                <p className="font-semibold">{tenant.properties?.title}</p>
               </div>
               <div>
                 <p className="text-sm font-medium text-gray-500">Status</p>
@@ -118,7 +113,7 @@ export default async function Page({
                 <p className="text-sm font-medium text-gray-500">
                   Lease End Date
                 </p>
-                <p className="font-semibold">{tenant.leaseEndDate}</p>
+                <p className="font-semibold">{tenant.lease_end_date}</p>
               </div>
             </div>
           </CardContent>
@@ -141,7 +136,7 @@ export default async function Page({
                 {payments.map((payment) => (
                   <TableRow key={payment.id}>
                     <TableCell>{payment.date}</TableCell>
-                    <TableCell>${payment.amount.toFixed(2)}</TableCell>
+                    <TableCell>${(payment.amount as number).toFixed(2)}</TableCell>
                     <TableCell>
                       <Badge className={getStatusBadgeClass(payment.status)}>
                         {payment.status}

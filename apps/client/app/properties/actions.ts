@@ -7,7 +7,7 @@ import {
   propertySchema,
 } from "@repo/supabase/validations";
 import type { z } from "zod";
-import { getCachedPropertyRowById, getCachedPropertyRows } from "../_lib/data";
+import { getCachedPropertyRowById, getCachedPropertyRows } from "../_lib/cached-public-data";
 
 export type PropertyRecord = Property & { id: string };
 

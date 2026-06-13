@@ -2,12 +2,12 @@
   "name": "letsheng-holdings",
   "private": true,
   "scripts": {
+    "dev": "turbo run dev",
     "build": "turbo run build --concurrency=1",
-    "dev": "turbo dev",
-    "lint": "pnpm --recursive --workspace-concurrency=1 --if-present run lint",
-    "lint:fix": "pnpm --recursive --workspace-concurrency=1 --if-present run lint:fix",
-    "typecheck": "turbo typecheck",
-    "format": "turbo format"
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "format": "biome format --write .",
+    "typecheck": "turbo run typecheck"
   },
   "devDependencies": {
     "turbo": "^2.7.1"

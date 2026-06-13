@@ -32,3 +32,14 @@ export async function getPayments() {
   if (error) throw new Error(error.message);
   return data;
 }
+
+export async function getPaymentsByTenantId(tenantId: string) {
+  await requireAdminUser();
+  const supabase = await createSupabaseServerClient();
+  const { data, error } = await supabase
+    .from("payments")
+    .select("*")
+    .eq("tenant_id", tenantId);
+  if (error) throw new Error(error.message);
+  return data;
+}

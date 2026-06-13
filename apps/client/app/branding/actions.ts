@@ -7,7 +7,7 @@ import {
   brandingInquirySchema,
   brandingSchema,
 } from "@repo/supabase/validations";
-import { getCachedBrandingRowById, getCachedBrandingRows } from "../_lib/data";
+import { getCachedBrandingRowById, getCachedBrandingRows } from "../_lib/cached-public-data";
 
 export type BrandingRecord = Branding & { id: string };
 
