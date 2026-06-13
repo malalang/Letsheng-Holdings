@@ -5,8 +5,6 @@ import {
   type LeaseApplication,
   leaseApplicationSchema,
 } from "@repo/supabase/validations";
-import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -21,13 +19,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  getPropertyById,
-  type PropertyRecord,
-  submitLeaseApplication,
-} from "../../actions";
+import { submitLeaseApplication } from "../../actions";
 
-function ApplyToLeaseForm({
+export default function LeaseApplicationForm({
   propertyId,
   propertyTitle,
   propertyPrice,
@@ -162,33 +156,5 @@ function ApplyToLeaseForm({
         </CardContent>
       </Card>
     </div>
-  );
-}
-
-export default function ApplyToLeasePage() {
-  const params = useParams();
-  const id = params.id as string;
-  const [property, setProperty] = useState<PropertyRecord | null>(null);
-
-  useEffect(() => {
-    if (!id) return;
-    const fetchProperty = async () => {
-      const propertyData = await getPropertyById(id);
-      setProperty(propertyData);
-    };
-
-    fetchProperty();
-  }, [id]);
-
-  if (!property) {
-    return <div>Loading...</div>;
-  }
-
-  return (
-    <ApplyToLeaseForm
-      propertyId={property.id}
-      propertyTitle={property.title}
-      propertyPrice={property.price}
-    />
   );
 }
