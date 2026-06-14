@@ -14,7 +14,7 @@ import type {
   TablesInsert,
   TablesUpdate,
 } from "@repo/supabase/supabaseType";
-import { type Property, propertySchema } from "@repo/supabase/validations";
+import { type Property, propertySchema } from "@repo/contracts/property";
 import { revalidatePath } from "next/cache";
 import { triggerRevalidation } from "@/lib/revalidation";
 
@@ -36,12 +36,12 @@ function toPropertyInsert(property: Property): TablesInsert<"properties"> {
     price: property.price,
     location: property.location,
     availability: property.availability,
-    image_url: property.image_url,
+    image_url: property.imageUrl,
     bedrooms: property.bedrooms,
     bathrooms: property.bathrooms,
     type: property.type,
     features: toJson(property.features),
-    is_featured: property.is_featured,
+    is_featured: property.isFeatured,
     gallery: toJson(property.gallery),
     reviews: toJson(property.reviews),
   };
@@ -56,12 +56,12 @@ function toPropertyUpdate(
     price: property.price,
     location: property.location,
     availability: property.availability,
-    image_url: property.image_url,
+    image_url: property.imageUrl,
     bedrooms: property.bedrooms,
     bathrooms: property.bathrooms,
     type: property.type,
     features: toJson(property.features),
-    is_featured: property.is_featured,
+    is_featured: property.isFeatured,
     gallery: toJson(property.gallery),
     reviews: toJson(property.reviews),
   };
@@ -69,7 +69,12 @@ function toPropertyUpdate(
 
 export async function getProperties() {
   try {
-    return (await getPropertiesService()) as Property[];
+    const rawProperties = await getPropertiesService();
+    return rawProperties.map(p => ({
+      ...p,
+      imageUrl: p.image_url,
+      isFeatured: p.is_featured,
+    })) as Property[];
   } catch (error: unknown) {
     throw new Error(getErrorMessage(error));
   }
@@ -77,7 +82,12 @@ export async function getProperties() {
 
 export async function getPropertyById(id: string) {
   try {
-    return (await getPropertyByIdService(id)) as Property;
+    const p = await getPropertyByIdService(id);
+    return {
+      ...p,
+      imageUrl: p.image_url,
+      isFeatured: p.is_featured,
+    } as Property;
   } catch (error: unknown) {
     throw new Error(getErrorMessage(error));
   }

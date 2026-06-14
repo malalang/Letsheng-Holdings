@@ -12,6 +12,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@repo/contracts": "workspace:*",
     "@repo/supabase": "workspace:*",
     "zod": "catalog:",
     "clsx": "catalog:",

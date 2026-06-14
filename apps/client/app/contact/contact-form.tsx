@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   type ContactMessage,
   contactMessageSchema,
-} from "@repo/supabase/validations";
+} from "@repo/contracts/contact";
 import { Loader2, Send } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";

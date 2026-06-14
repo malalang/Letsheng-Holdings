@@ -32,6 +32,7 @@
     "@radix-ui/react-slot": "catalog:",
     "@radix-ui/react-switch": "catalog:",
     "@radix-ui/react-tabs": "catalog:",
+    "@repo/contracts": "workspace:*",
     "@repo/supabase": "workspace:*",
     "class-variance-authority": "catalog:",
     "clsx": "catalog:",

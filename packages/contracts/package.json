@@ -1,0 +1,22 @@
+{
+  "name": "@repo/contracts",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    "./property": "./src/property.ts",
+    "./branding": "./src/branding.ts",
+    "./leaseApplication": "./src/leaseApplication.ts",
+    "./tenant": "./src/tenant.ts",
+    "./contact": "./src/contact.ts",
+    "./actionResult": "./src/actionResult.ts",
+    "./revalidation": "./src/revalidation.ts",
+    "./env": "./src/env.ts"
+  },
+  "dependencies": {
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "typescript": "catalog:"
+  }
+}

@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   type LeaseApplication,
   leaseApplicationSchema,
-} from "@repo/supabase/validations";
+} from "@repo/contracts/leaseApplication";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -38,13 +38,13 @@ export default function LeaseApplicationForm({
   } = useForm<LeaseApplication>({
     resolver: zodResolver(leaseApplicationSchema),
     defaultValues: {
-      property_id: propertyId,
+      propertyId: propertyId,
     },
   });
 
   const onSubmit = async (data: LeaseApplication) => {
     const result = await submitLeaseApplication(data);
-    if (result.success) {
+    if (result.ok) {
       toast.success("Application submitted successfully!");
     } else {
       toast.error(result.error);
@@ -75,15 +75,15 @@ export default function LeaseApplicationForm({
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <Label htmlFor="applicant_name">Full Name</Label>
+                <Label htmlFor="applicantName">Full Name</Label>
                 <Input
-                  id="applicant_name"
+                  id="applicantName"
                   placeholder="Enter your full name"
-                  {...register("applicant_name")}
+                  {...register("applicantName")}
                 />
-                {errors.applicant_name && (
+                {errors.applicantName && (
                   <p className="text-red-500 text-sm">
-                    {errors.applicant_name.message}
+                    {errors.applicantName.message}
                   </p>
                 )}
               </div>

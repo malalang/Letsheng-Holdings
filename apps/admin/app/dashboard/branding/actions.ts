@@ -14,7 +14,7 @@ import type {
   TablesInsert,
   TablesUpdate,
 } from "@repo/supabase/supabaseType";
-import type { Branding } from "@repo/supabase/validations";
+import type { Branding } from "@repo/contracts/branding";
 import { revalidatePath } from "next/cache";
 import { triggerRevalidation } from "@/lib/revalidation";
 
@@ -35,7 +35,7 @@ function toBrandingInsert(product: Branding): TablesInsert<"branding"> {
     category: product.category,
     description: product.description,
     image: product.image,
-    is_featured: product.is_featured,
+    is_featured: product.isFeatured,
     specs: toJson(product.specs),
     gallery: toJson(product.gallery),
     reviews: toJson(product.reviews),
@@ -52,8 +52,8 @@ function toBrandingUpdate(
   if (product.description !== undefined)
     payload.description = product.description;
   if (product.image !== undefined) payload.image = product.image;
-  if (product.is_featured !== undefined)
-    payload.is_featured = product.is_featured;
+  if (product.isFeatured !== undefined)
+    payload.is_featured = product.isFeatured;
   if (product.specs !== undefined) payload.specs = toJson(product.specs);
   if (product.gallery !== undefined) payload.gallery = toJson(product.gallery);
   if (product.reviews !== undefined) payload.reviews = toJson(product.reviews);

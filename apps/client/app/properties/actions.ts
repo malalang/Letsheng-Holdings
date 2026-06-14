@@ -2,17 +2,24 @@
 
 import { submitLeaseApplication as submitLeaseApplicationService } from "@repo/supabase/Mutations/properties";
 import {
-  leaseApplicationSchema,
-  type Property,
   propertySchema,
-} from "@repo/supabase/validations";
-import type { z } from "zod";
+  type Property,
+} from "@repo/contracts/property";
+import { leaseApplicationSchema, type LeaseApplication } from "@repo/contracts/leaseApplication";
+import { type ActionResult } from "@repo/contracts/actionResult";
 import { getCachedPropertyRowById, getCachedPropertyRows } from "../_lib/cached-public-data";
 
 export type PropertyRecord = Property & { id: string };
 
 function parsePropertyRecord(data: unknown): PropertyRecord {
-  const property = propertySchema.parse(data);
+  // Map snake_case from DB to camelCase for schema
+  const dbData = data as any;
+  const mappedData = {
+    ...dbData,
+    imageUrl: dbData.image_url,
+    isFeatured: dbData.is_featured,
+  };
+  const property = propertySchema.parse(mappedData);
   if (!property.id) {
     throw new Error("Property record is missing an id.");
   }
@@ -29,18 +36,27 @@ export async function getPropertyById(id: string): Promise<PropertyRecord> {
 }
 
 export async function submitLeaseApplication(
-  data: z.infer<typeof leaseApplicationSchema>,
-) {
+  data: LeaseApplication,
+): Promise<ActionResult> {
   const validatedData = leaseApplicationSchema.safeParse(data);
 
   if (!validatedData.success) {
-    return { success: false, error: "Invalid data" };
+    return {
+      ok: false,
+      error: "Invalid data",
+      fieldErrors: validatedData.error.flatten().fieldErrors as Record<string, string[]>,
+    };
   }
 
   try {
-    await submitLeaseApplicationService(validatedData.data);
-    return { success: true };
+    const { applicantName, propertyId, ...rest } = validatedData.data;
+    await submitLeaseApplicationService({
+      ...rest,
+      applicant_name: applicantName,
+      property_id: propertyId,
+    });
+    return { ok: true, message: "Application submitted successfully!" };
   } catch (error: any) {
-    return { success: false, error: error.message };
+    return { ok: false, error: error.message };
   }
 }

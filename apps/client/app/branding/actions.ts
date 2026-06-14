@@ -6,13 +6,20 @@ import {
   type BrandingInquiry,
   brandingInquirySchema,
   brandingSchema,
-} from "@repo/supabase/validations";
+} from "@repo/contracts/branding";
+import { type ActionResult } from "@repo/contracts/actionResult";
 import { getCachedBrandingRowById, getCachedBrandingRows } from "../_lib/cached-public-data";
 
 export type BrandingRecord = Branding & { id: string };
 
 function parseBrandingRecord(data: unknown): BrandingRecord {
-  const product = brandingSchema.parse(data);
+  // Map snake_case from DB to camelCase for schema
+  const dbData = data as any;
+  const mappedData = {
+    ...dbData,
+    isFeatured: dbData.is_featured,
+  };
+  const product = brandingSchema.parse(mappedData);
   if (!product.id) {
     throw new Error("Branding record is missing an id.");
   }
@@ -42,23 +49,29 @@ export async function getBrandingProduct(
 
 export async function submitBrandingInquiry(
   data: BrandingInquiry,
-): Promise<{ success: boolean; error?: string }> {
+): Promise<ActionResult> {
   const validatedFields = brandingInquirySchema.safeParse(data);
 
   if (!validatedFields.success) {
     return {
-      success: false,
+      ok: false,
       error: "Invalid data provided.",
+      fieldErrors: validatedFields.error.flatten().fieldErrors as Record<string, string[]>,
     };
   }
 
   try {
-    await submitBrandingInquiryService(validatedFields.data);
-    return { success: true };
+    const { customerName, productId, ...rest } = validatedFields.data;
+    await submitBrandingInquiryService({
+      ...rest,
+      customer_name: customerName,
+      product_id: productId,
+    });
+    return { ok: true, message: "Inquiry submitted successfully!" };
   } catch (error) {
     console.error("Supabase error:", error);
     return {
-      success: false,
+      ok: false,
       error: "An unexpected error occurred. Please try again.",
     };
   }

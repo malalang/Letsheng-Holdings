@@ -3,9 +3,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   type Branding,
+} from "@repo/contracts/property";
+import {
   type BrandingInquiry,
   brandingInquirySchema,
-} from "@repo/supabase/validations";
+} from "@repo/contracts/branding";
 import { ArrowRight, Loader2, Package, Upload, User } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -38,12 +40,12 @@ export default function BrandingOrderForm({ product }: BrandingOrderFormProps) {
   const form = useForm<BrandingInquiryFormValues, unknown, BrandingInquiry>({
     resolver: zodResolver(brandingInquirySchema),
     defaultValues: {
-      customer_name: "",
+      customerName: "",
       email: "",
       company: "",
       quantity: 1,
       message: "",
-      product_id: product.id ?? "",
+      productId: product.id ?? "",
     },
   });
 
@@ -51,7 +53,7 @@ export default function BrandingOrderForm({ product }: BrandingOrderFormProps) {
     setIsLoading(true);
     try {
       const result = await submitBrandingInquiry(data);
-      if (result.success) {
+      if (result.ok) {
         toast.success("Your inquiry has been submitted successfully.");
         router.push("/branding");
       } else {
@@ -67,7 +69,7 @@ export default function BrandingOrderForm({ product }: BrandingOrderFormProps) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <input type="hidden" {...form.register("product_id")} />
+        <input type="hidden" {...form.register("productId")} />
         <Card>
           <CardHeader>
             <CardTitle className="text-2xl flex items-center text-secondary">
@@ -78,7 +80,7 @@ export default function BrandingOrderForm({ product }: BrandingOrderFormProps) {
           <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <FormField
               control={form.control}
-              name="customer_name"
+              name="customerName"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Full Name</FormLabel>
