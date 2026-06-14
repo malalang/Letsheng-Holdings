@@ -325,7 +325,7 @@ export default async function HomePage() {
             <FeaturedPropertyCard
               key={p.id}
               id={p.id}
-              imageUrl={p.image_url ?? "/logo.jpg"}
+              imageUrl={p.imageUrl ?? "/logo.jpg"}
               title={p.title}
               price={`R ${p.price.toLocaleString()}`}
               bedrooms={p.bedrooms}
