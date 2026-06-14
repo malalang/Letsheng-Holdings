@@ -104,7 +104,7 @@ export default function BrandingForm({ product }: BrandingFormProps) {
     try {
       if (product?.id) {
         const result = await updateBrandingProduct(product.id, data);
-        if (result.success) {
+        if (result.ok) {
           toast.success("Branding product has been updated successfully.");
           router.push(`/dashboard/branding`);
         } else {
@@ -114,7 +114,7 @@ export default function BrandingForm({ product }: BrandingFormProps) {
         }
       } else {
         const result = await createBrandingProduct(data);
-        if (result.success) {
+        if (result.ok) {
           toast.success("New branding product has been created.");
           router.push("/dashboard/branding");
         } else {
@@ -142,7 +142,7 @@ export default function BrandingForm({ product }: BrandingFormProps) {
     setIsDeleting(true);
     try {
       const result = await deleteBrandingProduct(product.id);
-      if (result.success) {
+      if (result.ok) {
         toast.success("Branding product has been deleted.");
         router.push("/dashboard/branding");
       } else {
@@ -448,7 +448,7 @@ export default function BrandingForm({ product }: BrandingFormProps) {
             <CardContent>
               <FormField
                 control={form.control}
-                name="is_featured"
+                name="isFeatured"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Featured Status</FormLabel>

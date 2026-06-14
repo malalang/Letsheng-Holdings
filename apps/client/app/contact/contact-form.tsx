@@ -39,7 +39,7 @@ export function ContactForm() {
     setIsSubmitting(true);
     try {
       const result = await sendContactMessage(data);
-      if (result.success) {
+      if (result.ok) {
         toast.success("Message sent successfully.");
         form.reset();
       } else {
