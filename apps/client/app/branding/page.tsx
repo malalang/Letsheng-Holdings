@@ -83,7 +83,7 @@ export default async function BrandingPage() {
                   fill
                   className="object-cover"
                 />
-                {p.is_featured && (
+                {p.isFeatured && (
                   <div className="absolute top-4 left-4">
                     <Badge className="bg-primary text-secondary font-bold">
                       Featured
