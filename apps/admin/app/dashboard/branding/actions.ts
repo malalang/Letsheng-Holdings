@@ -15,6 +15,7 @@ import type {
   TablesUpdate,
 } from "@repo/supabase/supabaseType";
 import type { Branding } from "@repo/contracts/branding";
+import type { ActionResult } from "@repo/contracts/actionResult";
 import { revalidatePath } from "next/cache";
 import { triggerRevalidation } from "@/lib/revalidation";
 
@@ -84,17 +85,17 @@ export async function getBrandingProduct(id: string) {
 // Action to create a new branding product
 export async function createBrandingProduct(
   product: Branding,
-): Promise<{ success: boolean; error?: string }> {
+): Promise<ActionResult> {
   try {
     const result = await createBrandingProductService(
       toBrandingInsert(product),
     );
     revalidatePath("/dashboard/branding");
     await triggerRevalidation(result.revalidate);
-    return { success: true };
+    return { ok: true };
   } catch (error: unknown) {
     console.error("Error creating branding product:", error);
-    return { success: false, error: getErrorMessage(error) };
+    return { ok: false, error: getErrorMessage(error) };
   }
 }
 
@@ -102,7 +103,7 @@ export async function createBrandingProduct(
 export async function updateBrandingProduct(
   id: string,
   product: Partial<Branding>,
-): Promise<{ success: boolean; error?: string }> {
+): Promise<ActionResult> {
   try {
     const result = await updateBrandingProductService(
       id,
@@ -111,24 +112,24 @@ export async function updateBrandingProduct(
     revalidatePath("/dashboard/branding");
     revalidatePath(`/dashboard/branding/brand/${id}`);
     await triggerRevalidation(result.revalidate);
-    return { success: true };
+    return { ok: true };
   } catch (error: unknown) {
     console.error("Error updating branding product:", error);
-    return { success: false, error: getErrorMessage(error) };
+    return { ok: false, error: getErrorMessage(error) };
   }
 }
 
 // Action to delete a branding product
 export async function deleteBrandingProduct(
   id: string,
-): Promise<{ success: boolean; error?: string }> {
+): Promise<ActionResult> {
   try {
     const result = await deleteBrandingProductService(id);
     revalidatePath("/dashboard/branding");
     await triggerRevalidation(result.revalidate);
-    return { success: true };
+    return { ok: true };
   } catch (error: unknown) {
     console.error("Error deleting branding product:", error);
-    return { success: false, error: getErrorMessage(error) };
+    return { ok: false, error: getErrorMessage(error) };
   }
 }

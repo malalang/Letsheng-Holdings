@@ -191,10 +191,10 @@ const NextStep = ({
 export default async function HomePage() {
   const properties = await getProperties();
   const featuredProperties = properties
-    .filter((p) => p.is_featured)
+    .filter((p) => p.isFeatured)
     .slice(0, 3);
   const products = await getBrandingProducts();
-  const featuredProducts = products.filter((p) => p.is_featured).slice(0, 3);
+  const featuredProducts = products.filter((p) => p.isFeatured).slice(0, 3);
 
   return (
     <div className="animate-fade-in space-y-32 pb-20">
