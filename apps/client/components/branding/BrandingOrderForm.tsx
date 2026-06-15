@@ -3,8 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   type Branding,
-} from "@repo/contracts/property";
-import {
   type BrandingInquiry,
   brandingInquirySchema,
 } from "@repo/contracts/branding";
