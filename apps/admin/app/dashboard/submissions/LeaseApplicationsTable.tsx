@@ -53,15 +53,15 @@ const statusVariantMap: {
 // Extends the base LeaseApplication to include database-specific fields
 interface LeaseApplicationWithDetails {
   id: string;
-  created_at: string;
+  createdAt: string;
   status: string;
-  applicant_name: string;
+  applicantName: string;
   email: string;
   phone: string | null;
   employment: "employed" | "self-employed" | "unemployed" | "student" | null;
   message: string | null;
-  property_title: string;
-  property_id: string;
+  propertyTitle: string;
+  propertyId: string;
 }
 
 interface LeaseApplicationsTableProps {
@@ -83,14 +83,14 @@ export function LeaseApplicationsTable({
     const params = new URLSearchParams({
       name: applicantName,
       email,
-      property_id: propertyId,
+      propertyId: propertyId,
     });
     router.push(`/dashboard/tenants/new?${params.toString()}`);
   };
 
   const handleStatusUpdate = async (id: string, status: string) => {
     const result = await updateLeaseApplicationStatus(id, status);
-    if (result.ok) {
+    if (result.success) {
       toast.success(`Application marked as ${status}.`);
     } else {
       toast.error(result.error || "Failed to update status.");
@@ -100,7 +100,7 @@ export function LeaseApplicationsTable({
   const handleDelete = async (id: string) => {
     if (confirm("Are you sure you want to delete this application?")) {
       const result = await deleteLeaseApplication(id);
-      if (result.ok) {
+      if (result.success) {
         toast.success("Application has been deleted.");
       } else {
         toast.error(result.error || "Failed to delete application.");
@@ -135,14 +135,14 @@ export function LeaseApplicationsTable({
                 <TableRow key={app.id}>
                   <TableCell className="font-medium">
                     <Link
-                      href={`/dashboard/properties/property/${app.property_id}`}
+                      href={`/dashboard/properties/property/${app.propertyId}`}
                       className="hover:underline"
                     >
-                      {app.property_title}
+                      {app.propertyTitle}
                     </Link>
                   </TableCell>
                   <TableCell>
-                    <div className="font-medium">{app.applicant_name}</div>
+                    <div className="font-medium">{app.applicantName}</div>
                     <div className="text-sm text-muted-foreground">
                       {app.email}
                     </div>
@@ -153,7 +153,7 @@ export function LeaseApplicationsTable({
                     </Badge>
                   </TableCell>
                   <TableCell>
-                    <ClientDate dateString={app.created_at} />
+                    <ClientDate dateString={app.createdAt} />
                   </TableCell>
                   <TableCell>
                     <DropdownMenu>
@@ -182,9 +182,9 @@ export function LeaseApplicationsTable({
                         <DropdownMenuItem
                           onClick={() =>
                             handleAddTenant(
-                              app.applicant_name,
+                              app.applicantName,
                               app.email,
-                              app.property_id,
+                              app.propertyId,
                             )
                           }
                         >
@@ -212,12 +212,12 @@ export function LeaseApplicationsTable({
           <DialogContent className="sm:max-w-lg">
             <DialogHeader>
               <DialogTitle>
-                Lease Application for {selectedApplication.property_title}
+                Lease Application for {selectedApplication.propertyTitle}
               </DialogTitle>
               <DialogDescription>
-                Submitted by {selectedApplication.applicant_name} on{" "}
+                Submitted by {selectedApplication.applicantName} on{" "}
                 <ClientDate
-                  dateString={selectedApplication.created_at}
+                  dateString={selectedApplication.createdAt}
                   format="datetime"
                 />
               </DialogDescription>
@@ -225,7 +225,7 @@ export function LeaseApplicationsTable({
             <div className="space-y-4 py-4">
               <div className="space-y-1">
                 <h4 className="font-semibold">Applicant Details</h4>
-                <p>Name: {selectedApplication.applicant_name}</p>
+                <p>Name: {selectedApplication.applicantName}</p>
                 <p>Email: {selectedApplication.email}</p>
                 <p>Phone: {selectedApplication.phone || "Not provided"}</p>
                 <p>

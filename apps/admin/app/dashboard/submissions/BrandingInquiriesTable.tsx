@@ -48,15 +48,15 @@ const statusVariantMap: {
 // Extends the base BrandingInquiry to include database-specific fields
 interface BrandingInquiryWithProduct {
   id: string;
-  created_at: string;
+  createdAt: string;
   status: string;
-  customer_name: string;
+  customerName: string;
   email: string;
   company: string | null;
   quantity: number;
   message: string | null;
-  product_title: string;
-  product_id: string;
+  productTitle: string;
+  productId: string;
 }
 
 interface BrandingInquiriesTableProps {
@@ -71,7 +71,7 @@ export function BrandingInquiriesTable({
 
   const handleStatusUpdate = async (id: string, status: string) => {
     const result = await updateBrandingInquiryStatus(id, status);
-    if (result.ok) {
+    if (result.success) {
       toast.success(`Inquiry marked as ${status}.`);
     } else {
       toast.error(result.error || "Failed to update status.");
@@ -81,7 +81,7 @@ export function BrandingInquiriesTable({
   const handleDelete = async (id: string) => {
     if (confirm("Are you sure you want to delete this inquiry?")) {
       const result = await deleteBrandingInquiry(id);
-      if (result.ok) {
+      if (result.success) {
         toast.success("Inquiry has been deleted.");
       } else {
         toast.error(result.error || "Failed to delete inquiry.");
@@ -118,14 +118,14 @@ export function BrandingInquiriesTable({
                 <TableRow key={inquiry.id}>
                   <TableCell className="font-medium">
                     <Link
-                      href={`/dashboard/branding/brand/${inquiry.product_id}`}
+                      href={`/dashboard/branding/brand/${inquiry.productId}`}
                       className="hover:underline"
                     >
-                      {inquiry.product_title}
+                      {inquiry.productTitle}
                     </Link>
                   </TableCell>
                   <TableCell>
-                    <div className="font-medium">{inquiry.customer_name}</div>
+                    <div className="font-medium">{inquiry.customerName}</div>
                     <div className="text-sm text-muted-foreground">
                       {inquiry.email}
                     </div>
@@ -140,7 +140,7 @@ export function BrandingInquiriesTable({
                     </Badge>
                   </TableCell>
                   <TableCell>
-                    {new Date(inquiry.created_at).toLocaleDateString()}
+                    {new Date(inquiry.createdAt).toLocaleDateString()}
                   </TableCell>
                   <TableCell>
                     <DropdownMenu>
@@ -193,17 +193,17 @@ export function BrandingInquiriesTable({
           <DialogContent className="sm:max-w-lg">
             <DialogHeader>
               <DialogTitle>
-                Inquiry for {selectedInquiry.product_title}
+                Inquiry for {selectedInquiry.productTitle}
               </DialogTitle>
               <DialogDescription>
                 Submitted on{" "}
-                {new Date(selectedInquiry.created_at).toLocaleString()}
+                {new Date(selectedInquiry.createdAt).toLocaleString()}
               </DialogDescription>
             </DialogHeader>
             <div className="space-y-4 py-4">
               <div className="space-y-1">
                 <h4 className="font-semibold">Contact Information</h4>
-                <p>Name: {selectedInquiry.customer_name}</p>
+                <p>Name: {selectedInquiry.customerName}</p>
                 <p>Email: {selectedInquiry.email}</p>
                 <p>Company: {selectedInquiry.company || "Not provided"}</p>
               </div>

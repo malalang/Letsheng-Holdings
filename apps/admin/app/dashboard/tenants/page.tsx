@@ -72,7 +72,7 @@ export default async function AdminTenantsPage() {
                     <div className="flex items-center gap-3">
                       <Avatar className="h-9 w-9">
                         <AvatarImage
-                          src={tenant.avatar_url ?? undefined}
+                          src={tenant.avatarUrl ?? undefined}
                           alt={tenant.name}
                         />
                         <AvatarFallback>{tenant.name.charAt(0)}</AvatarFallback>
@@ -86,9 +86,9 @@ export default async function AdminTenantsPage() {
                     </div>
                   </TableCell>
                   <TableCell className="text-muted-foreground">
-                    {tenant.property_id ? (
+                    {tenant.propertyId ? (
                       <Link
-                        href={`/dashboard/properties/property/${tenant.property_id}`}
+                        href={`/dashboard/properties/property/${tenant.propertyId}`}
                         className="hover:underline"
                       >
                         {tenant.property?.title ?? "N/A"}

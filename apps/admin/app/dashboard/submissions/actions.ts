@@ -66,9 +66,15 @@ export async function getLeaseApplications() {
   try {
     const data = await getLeaseApplicationsService();
     return data.map((app: any) => ({
-      ...app,
-      property_title: app.properties?.title ?? "Property Not Found",
-      property_id: app.properties?.id ?? "",
+      id: app.id,
+      createdAt: app.created_at,
+      status: app.status,
+      applicantName: app.applicant_name,
+      email: app.email,
+      phone: app.phone,
+      message: app.message,
+      propertyTitle: app.properties?.title ?? "Property Not Found",
+      propertyId: app.properties?.id ?? "",
     }));
   } catch (error) {
     console.error("Error fetching lease applications:", error);
@@ -81,9 +87,16 @@ export async function getBrandingInquiries() {
   try {
     const data = await getBrandingInquiriesService();
     return data.map((inquiry: any) => ({
-      ...inquiry,
-      product_title: inquiry.branding?.title ?? "Product Not Found",
-      product_id: inquiry.branding?.id ?? "",
+      id: inquiry.id,
+      createdAt: inquiry.created_at,
+      status: inquiry.status,
+      customerName: inquiry.customer_name,
+      email: inquiry.email,
+      company: inquiry.company,
+      quantity: inquiry.quantity,
+      message: inquiry.message,
+      productTitle: inquiry.branding?.title ?? "Product Not Found",
+      productId: inquiry.branding?.id ?? "",
     }));
   } catch (error) {
     console.error("Error fetching branding inquiries:", error);
