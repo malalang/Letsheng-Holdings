@@ -160,7 +160,7 @@ export const propertySchema = z.object({
     z.string().trim().min(3, "Location is required"),
   ),
   availability: z.boolean(),
-  image_url: nullableImageSourceSchema("Must be a valid image URL or app path"),
+  imageUrl: nullableImageSourceSchema("Must be a valid image URL or app path"),
   bedrooms: nullableNumberSchema(
     z.number().int().min(1, "Must have at least one bedroom"),
   ),
@@ -169,7 +169,7 @@ export const propertySchema = z.object({
   ),
   type: nullableStringSchema(z.string().trim().min(1, "Type is required")),
   features: z.array(featureSchema).optional().nullable(),
-  is_featured: z.boolean(),
+  isFeatured: z.boolean(),
   gallery: z.array(galleryItemSchema).optional().nullable(),
   reviews: z.array(reviewSchema).optional().nullable(),
 });
@@ -191,7 +191,7 @@ export const brandingSchema = z.object({
   description: optionalNullableStringSchema(z.string().trim()),
   image: nullableImageSourceSchema("Must be a valid image URL or app path"),
   specs: z.array(specItemSchema).optional().nullable(),
-  is_featured: z.boolean(),
+  isFeatured: z.boolean(),
   gallery: z.array(galleryItemSchema).optional().nullable(),
   reviews: z.array(reviewSchema).optional().nullable(),
 });
@@ -203,10 +203,10 @@ export const tenantSchema = z.object({
     id: z.string().optional(),
     name: z.string().trim().min(1, "Name is required"),
     email: optionalNullableEmailSchema,
-    property_id: nullableStringSchema(z.string()),
+    propertyId: nullableStringSchema(z.string()),
     status: z.enum(["Active", "Inactive", "Pending"]),
-    lease_end_date: nullableDateSchema,
-    avatar_url: nullableImageSourceSchema(
+    leaseEndDate: nullableDateSchema,
+    avatarUrl: nullableImageSourceSchema(
       "Must be a valid image URL or app path.",
     ).optional(),
   });
@@ -221,14 +221,14 @@ export const paymentSchema = z.object({
   ),
   date: dateInputSchema,
   status: z.enum(["Paid", "Pending", "Late"]),
-  tenant_id: optionalNullableStringSchema(z.string()),
+  tenantId: optionalNullableStringSchema(z.string()),
 });
 
 export type Payment = z.infer<typeof paymentSchema>;
 
 // Schema for a branding inquiry
 export const brandingInquirySchema = z.object({
-  customer_name: z.string().trim().min(1, "Name is required"),
+  customerName: z.string().trim().min(1, "Name is required"),
   email: emailSchema,
   company: optionalNullableStringSchema(z.string().trim()),
   quantity: numberInputSchema(
@@ -238,7 +238,7 @@ export const brandingInquirySchema = z.object({
       .positive("Quantity must be a positive number"),
   ),
   message: optionalNullableStringSchema(z.string().trim()),
-  product_id: z.string().min(1, "Product is required"),
+  productId: z.string().min(1, "Product is required"),
 });
 
 export type BrandingInquiry = z.infer<typeof brandingInquirySchema>;
@@ -256,12 +256,12 @@ export type ContactMessage = z.infer<typeof contactMessageSchema>;
 
 // Schema for a lease application
 export const leaseApplicationSchema = z.object({
-  applicant_name: z.string().trim().min(1, "Name is required"),
+  applicantName: z.string().trim().min(1, "Name is required"),
   email: emailSchema,
   phone: optionalNullableStringSchema(z.string().trim()),
   employment: z.enum(["employed", "self-employed", "unemployed", "student"]),
   message: optionalNullableStringSchema(z.string().trim()),
-  property_id: z.string(),
+  propertyId: z.string(),
 });
 
 export type LeaseApplication = z.infer<typeof leaseApplicationSchema>;
