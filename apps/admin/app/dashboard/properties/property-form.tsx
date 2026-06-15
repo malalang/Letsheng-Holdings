@@ -628,7 +628,7 @@ export default function PropertyForm({ property }: PropertyFormProps) {
               />
               <FormField
                 control={form.control}
-                name="is_featured"
+                name="isFeatured"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Featured Status</FormLabel>
