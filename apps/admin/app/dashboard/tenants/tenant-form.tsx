@@ -128,7 +128,7 @@ export default function TenantForm({ tenant, payments }: TenantFormProps) {
       ? await updateTenant(tenant.id, dataForAction)
       : await createTenant(dataForAction);
 
-    if (action.success) {
+    if (action.ok) {
       router.push("/dashboard/tenants");
       router.refresh();
     } else {
@@ -139,7 +139,7 @@ export default function TenantForm({ tenant, payments }: TenantFormProps) {
   async function handleDelete() {
     if (tenant) {
       const action = await deleteTenant(tenant.id);
-      if (action.success) {
+      if (action.ok) {
         router.push("/dashboard/tenants");
         router.refresh();
       } else {
