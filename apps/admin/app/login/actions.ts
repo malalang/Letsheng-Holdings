@@ -20,14 +20,16 @@ export async function login(values: LoginFormValues) {
 
   if (error) {
     return {
+      ok: false,
       error: error.message,
     };
   } else if (data.user) {
     return {
-      success: true,
+      ok: true,
     };
   }
   return {
+    ok: false,
     error: "An unknown error occurred.",
   };
 }
