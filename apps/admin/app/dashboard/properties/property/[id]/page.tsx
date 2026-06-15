@@ -183,8 +183,8 @@ export default async function PropertyDetailsPage({
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-muted-foreground">Featured</span>
-                <Badge variant={property.is_featured ? "default" : "secondary"}>
-                  {property.is_featured ? "Yes" : "No"}
+                <Badge variant={property.isFeatured ? "default" : "secondary"}>
+                  {property.isFeatured ? "Yes" : "No"}
                 </Badge>
               </div>
               <Separator />

@@ -63,7 +63,7 @@ export default function PropertyForm({ property }: PropertyFormProps) {
           price: 0,
           location: "",
           availability: true,
-          image_url: "",
+          imageUrl: "",
           bedrooms: 1,
           bathrooms: 1,
           type: "Apartment",
@@ -93,7 +93,7 @@ export default function PropertyForm({ property }: PropertyFormProps) {
     try {
       if (property?.id) {
         const result = await updateProperty(property.id, data);
-        if (result.success) {
+        if (result.ok) {
           toast.success("Property has been updated successfully.");
           router.push(`/dashboard/properties/property/${property.id}`);
         } else {

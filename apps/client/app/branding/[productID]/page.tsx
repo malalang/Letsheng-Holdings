@@ -1,8 +1,8 @@
 import {
   galleryItemSchema,
   reviewSchema,
-  specItemSchema,
-} from "@repo/supabase/validations";
+} from "@repo/contracts/property";
+import { specItemSchema } from "@repo/contracts/branding";
 import { ShoppingCart, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";

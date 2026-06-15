@@ -51,7 +51,7 @@ export default function LoginPage() {
       toast.error("Login Failed", {
         description: result.error,
       });
-    } else if (result.success) {
+    } else if (result.ok) {
       toast.success("Login Successful", {
         description: "Redirecting to dashboard...",
       });

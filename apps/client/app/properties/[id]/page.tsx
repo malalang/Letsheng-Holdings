@@ -50,7 +50,7 @@ export default async function PropertyDetailPage({
         <CardHeader>
           <div className="relative h-96">
             <Image
-              src={property.image_url ?? "/logo.jpg"}
+              src={property.imageUrl ?? "/logo.jpg"}
               alt={property.title}
               fill
               className="object-cover rounded-t-xl"

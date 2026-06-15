@@ -107,8 +107,8 @@ export default async function AdminTenantsPage() {
                     </Badge>
                   </TableCell>
                   <TableCell className="text-right font-semibold">
-                    {tenant.lease_end_date
-                      ? new Date(tenant.lease_end_date).toLocaleDateString()
+                    {tenant.leaseEndDate
+                      ? new Date(tenant.leaseEndDate).toLocaleDateString()
                       : "N/A"}
                   </TableCell>
                   <TableCell className="text-center">
@@ -159,3 +159,5 @@ export default async function AdminTenantsPage() {
     </div>
   );
 }
+}
+

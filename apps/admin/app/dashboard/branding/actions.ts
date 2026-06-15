@@ -62,10 +62,25 @@ function toBrandingUpdate(
   return payload;
 }
 
+function toBranding(row: any): Branding {
+  return {
+    id: row.id,
+    title: row.title,
+    category: row.category,
+    description: row.description,
+    image: row.image,
+    isFeatured: row.is_featured,
+    specs: row.specs as any,
+    gallery: row.gallery as any,
+    reviews: row.reviews as any,
+  };
+}
+
 // Action to fetch all branding products
-export async function getBrandingProducts() {
+export async function getBrandingProducts(): Promise<Branding[]> {
   try {
-    return await getBrandingProductsService();
+    const data = await getBrandingProductsService();
+    return data.map(toBranding);
   } catch (error) {
     console.error("Error fetching branding products:", error);
     return [];
@@ -73,9 +88,10 @@ export async function getBrandingProducts() {
 }
 
 // Action to fetch a single branding product by its ID
-export async function getBrandingProduct(id: string) {
+export async function getBrandingProduct(id: string): Promise<Branding | null> {
   try {
-    return await getBrandingProductService(id);
+    const data = await getBrandingProductService(id);
+    return data ? toBranding(data) : null;
   } catch (error) {
     console.error("Error fetching branding product:", error);
     return null;

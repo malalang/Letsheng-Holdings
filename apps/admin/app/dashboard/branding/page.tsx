@@ -92,10 +92,10 @@ export default async function AdminBrandingPage() {
                   {p.title}
                 </CardTitle>
                 <Badge
-                  variant={p.is_featured ? "default" : "secondary"}
+                  variant={p.isFeatured ? "default" : "secondary"}
                   className="shrink-0"
                 >
-                  {p.is_featured ? "Featured" : "Standard"}
+                  {p.isFeatured ? "Featured" : "Standard"}
                 </Badge>
               </div>
               <CardDescription>{p.category}</CardDescription>

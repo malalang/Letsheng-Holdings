@@ -43,7 +43,7 @@ export default async function AdminPropertiesPage() {
             <div className="relative h-48">
               <Link href={`/dashboard/properties/property/${p.id}`}>
                 <Image
-                  src={p.image_url || ""}
+                  src={p.imageUrl || ""}
                   alt={p.title}
                   fill
                   className="object-cover"

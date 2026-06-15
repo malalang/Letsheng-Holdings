@@ -81,7 +81,7 @@ export default async function PropertiesPage() {
               {/* Consistent Height */}
               <Link href={`/properties/${p.id}`}>
                 <Image
-                  src={p.image_url ?? "/logo.jpg"}
+                  src={p.imageUrl ?? "/logo.jpg"}
                   alt={p.title}
                   fill
                   className="object-cover"

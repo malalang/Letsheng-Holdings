@@ -66,7 +66,7 @@ export default function BrandingForm({ product }: BrandingFormProps) {
           description: "",
           image: "",
           specs: [],
-          is_featured: false,
+          isFeatured: false,
           gallery: [],
         },
   });

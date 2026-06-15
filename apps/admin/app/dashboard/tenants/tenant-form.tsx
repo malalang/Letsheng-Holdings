@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createSupabaseBrowserClient } from "@repo/supabase/client";
-import type { Payment, Tenant } from "@repo/supabase/validations";
+import type { Payment, Tenant } from "@repo/contracts/tenant";
 import { ArrowLeft, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -46,9 +46,9 @@ import { createTenant, deleteTenant, updateTenant } from "./actions";
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.union([z.string().email("Invalid email address"), z.literal("")]),
-  property_id: z.string().optional().nullable(),
+  propertyId: z.string().optional().nullable(),
   status: z.enum(["Active", "Inactive", "Pending"]),
-  lease_end_date: z.string().optional().nullable(),
+  leaseEndDate: z.string().optional().nullable(),
 });
 type FormValues = z.infer<typeof formSchema>;
 
@@ -84,16 +84,16 @@ export default function TenantForm({ tenant, payments }: TenantFormProps) {
       ? {
           name: tenant.name,
           email: tenant.email ?? "",
-          property_id: tenant.property_id ?? "",
+          propertyId: tenant.propertyId ?? "",
           status: tenant.status,
-          lease_end_date: formatDateForInput(tenant.lease_end_date),
+          leaseEndDate: formatDateForInput(tenant.leaseEndDate),
         }
       : {
           name: searchParams.get("name") || "",
           email: searchParams.get("email") || "",
-          property_id: searchParams.get("property_id") || "",
+          propertyId: searchParams.get("propertyId") || "",
           status: "Pending",
-          lease_end_date: "",
+          leaseEndDate: "",
         },
   });
 
@@ -114,13 +114,13 @@ export default function TenantForm({ tenant, payments }: TenantFormProps) {
   }, []);
 
   async function onSubmit(data: FormValues) {
-    const dataForAction: Omit<Tenant, "id" | "avatar_url"> = {
+    const dataForAction: Omit<Tenant, "id" | "avatarUrl"> = {
       name: data.name,
       email: data.email || null,
-      property_id: data.property_id || null,
+      propertyId: data.propertyId || null,
       status: data.status,
-      lease_end_date: data.lease_end_date
-        ? new Date(data.lease_end_date)
+      leaseEndDate: data.leaseEndDate
+        ? new Date(data.leaseEndDate)
         : null,
     };
 
@@ -202,7 +202,7 @@ export default function TenantForm({ tenant, payments }: TenantFormProps) {
               />
               <FormField
                 control={form.control}
-                name="property_id"
+                name="propertyId"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Property</FormLabel>
@@ -254,7 +254,7 @@ export default function TenantForm({ tenant, payments }: TenantFormProps) {
               />
               <FormField
                 control={form.control}
-                name="lease_end_date"
+                name="leaseEndDate"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Lease End Date</FormLabel>
