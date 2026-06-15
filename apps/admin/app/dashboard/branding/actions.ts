@@ -36,7 +36,7 @@ function toBrandingInsert(product: Branding): TablesInsert<"branding"> {
     category: product.category,
     description: product.description,
     image: product.image,
-    is_featured: product.isFeatured,
+    isFeatured: product.isFeatured,
     specs: toJson(product.specs),
     gallery: toJson(product.gallery),
     reviews: toJson(product.reviews),
@@ -54,7 +54,7 @@ function toBrandingUpdate(
     payload.description = product.description;
   if (product.image !== undefined) payload.image = product.image;
   if (product.isFeatured !== undefined)
-    payload.is_featured = product.isFeatured;
+    payload.isFeatured = product.isFeatured;
   if (product.specs !== undefined) payload.specs = toJson(product.specs);
   if (product.gallery !== undefined) payload.gallery = toJson(product.gallery);
   if (product.reviews !== undefined) payload.reviews = toJson(product.reviews);
@@ -69,7 +69,7 @@ function toBranding(row: any): Branding {
     category: row.category,
     description: row.description,
     image: row.image,
-    isFeatured: row.is_featured,
+    isFeatured: row.isFeatured,
     specs: row.specs as any,
     gallery: row.gallery as any,
     reviews: row.reviews as any,

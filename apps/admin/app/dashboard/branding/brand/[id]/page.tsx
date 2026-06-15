@@ -145,8 +145,8 @@ export default async function BrandingDetailPage({
             <CardContent>
               <div className="flex items-center justify-between">
                 <span className="text-muted-foreground">Featured</span>
-                <Badge variant={product.is_featured ? "default" : "secondary"}>
-                  {product.is_featured ? "Yes" : "No"}
+                <Badge variant={product.isFeatured ? "default" : "secondary"}>
+                  {product.isFeatured ? "Yes" : "No"}
                 </Badge>
               </div>
             </CardContent>

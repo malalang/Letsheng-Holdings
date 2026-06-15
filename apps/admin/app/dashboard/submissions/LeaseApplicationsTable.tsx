@@ -90,7 +90,7 @@ export function LeaseApplicationsTable({
 
   const handleStatusUpdate = async (id: string, status: string) => {
     const result = await updateLeaseApplicationStatus(id, status);
-    if (result.success) {
+    if (result.ok) {
       toast.success(`Application marked as ${status}.`);
     } else {
       toast.error(result.error || "Failed to update status.");
@@ -100,7 +100,7 @@ export function LeaseApplicationsTable({
   const handleDelete = async (id: string) => {
     if (confirm("Are you sure you want to delete this application?")) {
       const result = await deleteLeaseApplication(id);
-      if (result.success) {
+      if (result.ok) {
         toast.success("Application has been deleted.");
       } else {
         toast.error(result.error || "Failed to delete application.");

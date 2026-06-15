@@ -4,464 +4,413 @@ export type Json =
   | boolean
   | null
   | { [key: string]: Json | undefined }
-  | Json[]
+  | Json[];
 
 export type Database = {
-  // Allows to automatically instantiate createClient with right options
-  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
-  __InternalSupabase: {
-    PostgrestVersion: "14.1"
-  }
   public: {
     Tables: {
       admin_users: {
         Row: {
-          created_at: string
-          updated_at: string
-          user_id: string
-        }
+          createdAt: string;
+          updatedAt: string;
+          userId: string;
+        };
         Insert: {
-          created_at?: string
-          updated_at?: string
-          user_id: string
-        }
+          createdAt?: string;
+          updatedAt?: string;
+          userId: string;
+        };
         Update: {
-          created_at?: string
-          updated_at?: string
-          user_id?: string
-        }
-        Relationships: []
-      }
+          createdAt?: string;
+          updatedAt?: string;
+          userId?: string;
+        };
+        Relationships: [];
+      };
       branding: {
         Row: {
-          category: string
-          created_at: string
-          description: string | null
-          gallery: Json | null
-          id: string
-          image: string | null
-          is_featured: boolean
-          reviews: Json | null
-          specs: Json | null
-          title: string
-        }
+          category: string;
+          createdAt: string;
+          description: string | null;
+          gallery: Json | null;
+          id: string;
+          image: string | null;
+          isFeatured: boolean;
+          reviews: Json | null;
+          specs: Json | null;
+          title: string;
+        };
         Insert: {
-          category: string
-          created_at?: string
-          description?: string | null
-          gallery?: Json | null
-          id?: string
-          image?: string | null
-          is_featured?: boolean
-          reviews?: Json | null
-          specs?: Json | null
-          title: string
-        }
+          category: string;
+          createdAt?: string;
+          description?: string | null;
+          gallery?: Json | null;
+          id?: string;
+          image?: string | null;
+          isFeatured?: boolean;
+          reviews?: Json | null;
+          specs?: Json | null;
+          title: string;
+        };
         Update: {
-          category?: string
-          created_at?: string
-          description?: string | null
-          gallery?: Json | null
-          id?: string
-          image?: string | null
-          is_featured?: boolean
-          reviews?: Json | null
-          specs?: Json | null
-          title?: string
-        }
-        Relationships: []
-      }
+          category?: string;
+          createdAt?: string;
+          description?: string | null;
+          gallery?: Json | null;
+          id?: string;
+          image?: string | null;
+          isFeatured?: boolean;
+          reviews?: Json | null;
+          specs?: Json | null;
+          title?: string;
+        };
+        Relationships: [];
+      };
       branding_inquiries: {
         Row: {
-          company: string | null
-          created_at: string
-          customer_name: string
-          email: string
-          id: string
-          message: string | null
-          product_id: string | null
-          quantity: number
-          status: string
-        }
+          createdAt: string;
+          customerName: string;
+          email: string;
+          company: string | null;
+          id: string;
+          message: string | null;
+          productId: string | null;
+          quantity: number;
+          status: string;
+        };
         Insert: {
-          company?: string | null
-          created_at?: string
-          customer_name: string
-          email: string
-          id?: string
-          message?: string | null
-          product_id?: string | null
-          quantity: number
-          status?: string
-        }
+          createdAt?: string;
+          customerName: string;
+          email: string;
+          company?: string | null;
+          id?: string;
+          message?: string | null;
+          productId?: string | null;
+          quantity: number;
+          status?: string;
+        };
         Update: {
-          company?: string | null
-          created_at?: string
-          customer_name?: string
-          email?: string
-          id?: string
-          message?: string | null
-          product_id?: string | null
-          quantity?: number
-          status?: string
-        }
+          createdAt?: string;
+          customerName?: string;
+          email?: string;
+          company?: string | null;
+          id?: string;
+          message?: string | null;
+          productId?: string | null;
+          quantity?: number;
+          status?: string;
+        };
         Relationships: [
           {
-            foreignKeyName: "branding_inquiries_product_id_fkey"
-            columns: ["product_id"]
-            isOneToOne: false
-            referencedRelation: "branding"
-            referencedColumns: ["id"]
+            foreignKeyName: "branding_inquiries_product_id_fkey";
+            columns: ["productId"];
+            isOneToOne: false;
+            referencedRelation: "branding";
+            referencedColumns: ["id"];
           },
-        ]
-      }
+        ];
+      };
       contact_messages: {
         Row: {
-          created_at: string
-          email: string
-          id: string
-          message: string
-          name: string
-          phone: string | null
-          status: string
-          subject: string | null
-        }
+          createdAt: string;
+          email: string;
+          id: string;
+          message: string;
+          name: string;
+          phone: string | null;
+          status: string;
+          subject: string | null;
+        };
         Insert: {
-          created_at?: string
-          email: string
-          id?: string
-          message: string
-          name: string
-          phone?: string | null
-          status?: string
-          subject?: string | null
-        }
+          createdAt?: string;
+          email: string;
+          id?: string;
+          message: string;
+          name: string;
+          phone?: string | null;
+          status?: string;
+          subject?: string | null;
+        };
         Update: {
-          created_at?: string
-          email?: string
-          id?: string
-          message?: string
-          name?: string
-          phone?: string | null
-          status?: string
-          subject?: string | null
-        }
-        Relationships: []
-      }
+          createdAt?: string;
+          email?: string;
+          id?: string;
+          message?: string;
+          name?: string;
+          phone?: string | null;
+          status?: string;
+          subject?: string | null;
+        };
+        Relationships: [];
+      };
       lease_applications: {
         Row: {
-          applicant_name: string
-          created_at: string
-          email: string
-          employment: string | null
-          id: string
-          message: string | null
-          phone: string | null
-          property_id: string | null
-          status: string
-        }
+          applicantName: string;
+          createdAt: string;
+          email: string;
+          employment: string | null;
+          id: string;
+          message: string | null;
+          phone: string | null;
+          propertyId: string | null;
+          status: string;
+        };
         Insert: {
-          applicant_name: string
-          created_at?: string
-          email: string
-          employment?: string | null
-          id?: string
-          message?: string | null
-          phone?: string | null
-          property_id?: string | null
-          status?: string
-        }
+          applicantName: string;
+          createdAt?: string;
+          email: string;
+          employment?: string | null;
+          id?: string;
+          message?: string | null;
+          phone?: string | null;
+          propertyId?: string | null;
+          status?: string;
+        };
         Update: {
-          applicant_name?: string
-          created_at?: string
-          email?: string
-          employment?: string | null
-          id?: string
-          message?: string | null
-          phone?: string | null
-          property_id?: string | null
-          status?: string
-        }
+          applicantName?: string;
+          createdAt?: string;
+          email?: string;
+          employment?: string | null;
+          id?: string;
+          message?: string | null;
+          phone?: string | null;
+          propertyId?: string | null;
+          status?: string;
+        };
         Relationships: [
           {
-            foreignKeyName: "lease_applications_product_id_fkey"
-            columns: ["property_id"]
-            isOneToOne: false
-            referencedRelation: "properties"
-            referencedColumns: ["id"]
+            foreignKeyName: "lease_applications_product_id_fkey";
+            columns: ["propertyId"];
+            isOneToOne: false;
+            referencedRelation: "properties";
+            referencedColumns: ["id"];
           },
-        ]
-      }
+        ];
+      };
       payments: {
         Row: {
-          amount: number
-          created_at: string
-          date: string
-          id: string
-          status: string
-          tenant_id: string | null
-        }
+          amount: number;
+          createdAt: string;
+          date: string;
+          id: string;
+          status: string;
+          tenantId: string | null;
+        };
         Insert: {
-          amount: number
-          created_at?: string
-          date: string
-          id?: string
-          status?: string
-          tenant_id?: string | null
-        }
+          amount: number;
+          createdAt?: string;
+          date: string;
+          id?: string;
+          status?: string;
+          tenantId?: string | null;
+        };
         Update: {
-          amount?: number
-          created_at?: string
-          date?: string
-          id?: string
-          status?: string
-          tenant_id?: string | null
-        }
+          amount?: number;
+          createdAt?: string;
+          date?: string;
+          id?: string;
+          status?: string;
+          tenantId?: string | null;
+        };
         Relationships: [
           {
-            foreignKeyName: "payments_tenant_id_fkey"
-            columns: ["tenant_id"]
-            isOneToOne: false
-            referencedRelation: "tenants"
-            referencedColumns: ["id"]
+            foreignKeyName: "payments_tenant_id_fkey";
+            columns: ["tenantId"];
+            isOneToOne: false;
+            referencedRelation: "tenants";
+            referencedColumns: ["id"];
           },
-        ]
-      }
+        ];
+      };
       properties: {
         Row: {
-          availability: boolean
-          bathrooms: number | null
-          bedrooms: number | null
-          created_at: string
-          description: string | null
-          features: Json | null
-          gallery: Json | null
-          id: string
-          image_url: string | null
-          is_featured: boolean
-          location: string | null
-          price: number
-          reviews: Json | null
-          title: string
-          type: string | null
-        }
+          availability: boolean;
+          bathrooms: number | null;
+          bedrooms: number | null;
+          createdAt: string;
+          description: string | null;
+          features: Json | null;
+          gallery: Json | null;
+          id: string;
+          imageUrl: string | null;
+          isFeatured: boolean;
+          location: string | null;
+          price: number;
+          reviews: Json | null;
+          title: string;
+          type: string | null;
+        };
         Insert: {
-          availability?: boolean
-          bathrooms?: number | null
-          bedrooms?: number | null
-          created_at?: string
-          description?: string | null
-          features?: Json | null
-          gallery?: Json | null
-          id?: string
-          image_url?: string | null
-          is_featured?: boolean
-          location?: string | null
-          price: number
-          reviews?: Json | null
-          title: string
-          type?: string | null
-        }
+          availability?: boolean;
+          bathrooms?: number | null;
+          bedrooms?: number | null;
+          createdAt?: string;
+          description?: string | null;
+          features?: Json | null;
+          gallery?: Json | null;
+          id?: string;
+          imageUrl?: string | null;
+          isFeatured?: boolean;
+          location?: string | null;
+          price: number;
+          reviews?: Json | null;
+          title: string;
+          type?: string | null;
+        };
         Update: {
-          availability?: boolean
-          bathrooms?: number | null
-          bedrooms?: number | null
-          created_at?: string
-          description?: string | null
-          features?: Json | null
-          gallery?: Json | null
-          id?: string
-          image_url?: string | null
-          is_featured?: boolean
-          location?: string | null
-          price?: number
-          reviews?: Json | null
-          title?: string
-          type?: string | null
-        }
-        Relationships: []
-      }
+          availability?: boolean;
+          bathrooms?: number | null;
+          bedrooms?: number | null;
+          createdAt?: string;
+          description?: string | null;
+          features?: Json | null;
+          gallery?: Json | null;
+          id?: string;
+          imageUrl?: string | null;
+          isFeatured?: boolean;
+          location?: string | null;
+          price?: number;
+          reviews?: Json | null;
+          title?: string;
+          type?: string | null;
+        };
+        Relationships: [];
+      };
       tenants: {
         Row: {
-          avatar_url: string | null
-          created_at: string
-          email: string | null
-          id: string
-          lease_end_date: string | null
-          name: string
-          property_id: string | null
-          status: string
-        }
+          avatarUrl: string | null;
+          createdAt: string;
+          email: string | null;
+          id: string;
+          leaseEndDate: string | null;
+          name: string;
+          propertyId: string | null;
+          status: string;
+        };
         Insert: {
-          avatar_url?: string | null
-          created_at?: string
-          email?: string | null
-          id?: string
-          lease_end_date?: string | null
-          name: string
-          property_id?: string | null
-          status?: string
-        }
+          avatarUrl?: string | null;
+          createdAt?: string;
+          email?: string | null;
+          id?: string;
+          leaseEndDate?: string | null;
+          name: string;
+          propertyId?: string | null;
+          status?: string;
+        };
         Update: {
-          avatar_url?: string | null
-          created_at?: string
-          email?: string | null
-          id?: string
-          lease_end_date?: string | null
-          name?: string
-          property_id?: string | null
-          status?: string
-        }
+          avatarUrl?: string | null;
+          createdAt?: string;
+          email?: string | null;
+          id?: string;
+          leaseEndDate?: string | null;
+          name?: string;
+          propertyId?: string | null;
+          status?: string;
+        };
         Relationships: [
           {
-            foreignKeyName: "tenants_property_id_fkey"
-            columns: ["property_id"]
-            isOneToOne: false
-            referencedRelation: "properties"
-            referencedColumns: ["id"]
+            foreignKeyName: "tenants_property_id_fkey";
+            columns: ["propertyId"];
+            isOneToOne: false;
+            referencedRelation: "properties";
+            referencedColumns: ["id"];
           },
-        ]
-      }
-    }
+        ];
+      };
+    };
     Views: {
-      [_ in never]: never
-    }
+      [_ in never]: never;
+    };
     Functions: {
-      is_admin: {
-        Args: never
-        Returns: boolean
-      }
-    }
+      [_ in never]: never;
+    };
     Enums: {
-      product_category: "Corporate Apparel" | "Promotional Merchandise"
-    }
+      [_ in never]: never;
+    };
     CompositeTypes: {
-      [_ in never]: never
-    }
-  }
-}
+      [_ in never]: never;
+    };
+  };
+};
 
-type DatabaseWithoutInternals = Omit<Database, "__InternalSupabase">
-
-type DefaultSchema = DatabaseWithoutInternals[Extract<keyof Database, "public">]
+type PublicSchema = Database[Extract<keyof Database, "public">];
 
 export type Tables<
-  DefaultSchemaTableNameOrOptions extends
-    | keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])
-    | { schema: keyof DatabaseWithoutInternals },
-  TableName extends DefaultSchemaTableNameOrOptions extends {
-    schema: keyof DatabaseWithoutInternals
-  }
-    ? keyof (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
-        DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
+  PublicTableNameOrOptions extends
+    | keyof (PublicSchema["Tables"] & PublicSchema["Views"])
+    | { schema: keyof Database },
+  TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
+    ? keyof (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
+        Database[PublicTableNameOrOptions["schema"]]["Views"])
     : never = never,
-> = DefaultSchemaTableNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals
-}
-  ? (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
-      DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])[TableName] extends {
-      Row: infer R
+> = PublicTableNameOrOptions extends { schema: keyof Database }
+  ? (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
+      Database[PublicTableNameOrOptions["schema"]]["Views"])[TableName] extends {
+      Row: infer R;
     }
     ? R
     : never
-  : DefaultSchemaTableNameOrOptions extends keyof (DefaultSchema["Tables"] &
-        DefaultSchema["Views"])
-    ? (DefaultSchema["Tables"] &
-        DefaultSchema["Views"])[DefaultSchemaTableNameOrOptions] extends {
-        Row: infer R
+  : PublicTableNameOrOptions extends keyof (PublicSchema["Tables"] &
+        PublicSchema["Views"])
+    ? (PublicSchema["Tables"] &
+        PublicSchema["Views"])[PublicTableNameOrOptions] extends {
+        Row: infer R;
       }
       ? R
       : never
-    : never
+    : never;
 
 export type TablesInsert<
-  DefaultSchemaTableNameOrOptions extends
-    | keyof DefaultSchema["Tables"]
-    | { schema: keyof DatabaseWithoutInternals },
-  TableName extends DefaultSchemaTableNameOrOptions extends {
-    schema: keyof DatabaseWithoutInternals
-  }
-    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
+  PublicTableNameOrOptions extends
+    | keyof PublicSchema["Tables"]
+    | { schema: keyof Database },
+  TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
+    ? keyof Database[PublicTableNameOrOptions["schema"]]["Tables"]
     : never = never,
-> = DefaultSchemaTableNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals
-}
-  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-      Insert: infer I
+> = PublicTableNameOrOptions extends { schema: keyof Database }
+  ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+      Insert: infer I;
     }
     ? I
     : never
-  : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
-    ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {
-        Insert: infer I
+  : PublicTableNameOrOptions extends keyof PublicSchema["Tables"]
+    ? PublicSchema["Tables"][PublicTableNameOrOptions] extends {
+        Insert: infer I;
       }
       ? I
       : never
-    : never
+    : never;
 
 export type TablesUpdate<
-  DefaultSchemaTableNameOrOptions extends
-    | keyof DefaultSchema["Tables"]
-    | { schema: keyof DatabaseWithoutInternals },
-  TableName extends DefaultSchemaTableNameOrOptions extends {
-    schema: keyof DatabaseWithoutInternals
-  }
-    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
+  PublicTableNameOrOptions extends
+    | keyof PublicSchema["Tables"]
+    | { schema: keyof Database },
+  TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
+    ? keyof Database[PublicTableNameOrOptions["schema"]]["Tables"]
     : never = never,
-> = DefaultSchemaTableNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals
-}
-  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-      Update: infer U
+> = PublicTableNameOrOptions extends { schema: keyof Database }
+  ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+      Update: infer U;
     }
     ? U
     : never
-  : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
-    ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {
-        Update: infer U
+  : PublicTableNameOrOptions extends keyof PublicSchema["Tables"]
+    ? PublicSchema["Tables"][PublicTableNameOrOptions] extends {
+        Update: infer U;
       }
       ? U
       : never
-    : never
+    : never;
 
 export type Enums<
-  DefaultSchemaEnumNameOrOptions extends
-    | keyof DefaultSchema["Enums"]
-    | { schema: keyof DatabaseWithoutInternals },
-  EnumName extends DefaultSchemaEnumNameOrOptions extends {
-    schema: keyof DatabaseWithoutInternals
-  }
-    ? keyof DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]
+  PublicEnumNameOrOptions extends
+    | keyof PublicSchema["Enums"]
+    | { schema: keyof Database },
+  EnumName extends PublicEnumNameOrOptions extends { schema: keyof Database }
+    ? keyof Database[PublicEnumNameOrOptions["schema"]]["Enums"]
     : never = never,
-> = DefaultSchemaEnumNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals
-}
-  ? DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"][EnumName]
-  : DefaultSchemaEnumNameOrOptions extends keyof DefaultSchema["Enums"]
-    ? DefaultSchema["Enums"][DefaultSchemaEnumNameOrOptions]
-    : never
-
-export type CompositeTypes<
-  PublicCompositeTypeNameOrOptions extends
-    | keyof DefaultSchema["CompositeTypes"]
-    | { schema: keyof DatabaseWithoutInternals },
-  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
-    schema: keyof DatabaseWithoutInternals
-  }
-    ? keyof DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
-    : never = never,
-> = PublicCompositeTypeNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals
-}
-  ? DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
-  : PublicCompositeTypeNameOrOptions extends keyof DefaultSchema["CompositeTypes"]
-    ? DefaultSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
-    : never
-
-export const Constants = {
-  public: {
-    Enums: {
-      product_category: ["Corporate Apparel", "Promotional Merchandise"],
-    },
-  },
-} as const
+> = PublicEnumNameOrOptions extends { schema: keyof Database }
+  ? Database[PublicEnumNameOrOptions["schema"]]["Enums"][EnumName]
+  : PublicEnumNameOrOptions extends keyof PublicSchema["Enums"]
+    ? PublicSchema["Enums"][PublicEnumNameOrOptions]
+    : never;

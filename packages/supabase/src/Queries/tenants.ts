@@ -39,7 +39,7 @@ export async function getPaymentsByTenantId(tenantId: string) {
   const { data, error } = await supabase
     .from("payments")
     .select("*")
-    .eq("tenant_id", tenantId);
+    .eq("tenantId", tenantId);
   if (error) throw new Error(error.message);
   return data;
 }

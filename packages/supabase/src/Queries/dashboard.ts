@@ -66,7 +66,7 @@ export async function getRecentLeases() {
             status,
             properties(title, price)
         `)
-        .order('created_at', { ascending: false })
+        .order('createdAt', { ascending: false })
         .limit(5);
 
     if (error) {

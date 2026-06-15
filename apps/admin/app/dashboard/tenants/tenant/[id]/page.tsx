@@ -85,7 +85,7 @@ export default async function Page({
           <CardHeader>
             <div className="flex items-center gap-4">
               <Avatar className="h-16 w-16">
-                <AvatarImage src={tenant.avatar_url || ""} alt={tenant.name} />
+                <AvatarImage src={tenant.avatarUrl || ""} alt={tenant.name} />
                 <AvatarFallback>{tenant.name.charAt(0)}</AvatarFallback>
               </Avatar>
               <div>
@@ -113,7 +113,7 @@ export default async function Page({
                 <p className="text-sm font-medium text-gray-500">
                   Lease End Date
                 </p>
-                <p className="font-semibold">{tenant.lease_end_date}</p>
+                <p className="font-semibold">{tenant.leaseEndDate ? new Date(tenant.leaseEndDate).toLocaleDateString() : "N/A"}</p>
               </div>
             </div>
           </CardContent>

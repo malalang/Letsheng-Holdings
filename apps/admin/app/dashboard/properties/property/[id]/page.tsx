@@ -1,8 +1,8 @@
 import {
-  featureSchema,
   galleryItemSchema,
   reviewSchema,
-} from "@repo/supabase/validations";
+  featureSchema,
+} from "@repo/contracts/property";
 import {
   ArrowLeft,
   Bath,
@@ -81,9 +81,9 @@ export default async function PropertyDetailsPage({
           <Card>
             <CardHeader className="p-0">
               <div className="relative h-96">
-                {property.image_url ? (
+                {property.imageUrl ? (
                   <Image
-                    src={property.image_url}
+                    src={property.imageUrl}
                     alt={property.title}
                     fill
                     className="object-cover rounded-t-lg"

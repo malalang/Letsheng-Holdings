@@ -12,52 +12,53 @@ import { getBrandingInquiries as getBrandingInquiriesService } from "@repo/supab
 import { getLeaseApplications as getLeaseApplicationsService } from "@repo/supabase/Queries/properties";
 import { revalidatePath } from "next/cache";
 import { triggerRevalidation } from "@/lib/revalidation";
+import type { ActionResult } from "@repo/contracts/actionResult";
 
 // Action to update the status of a branding inquiry
-export async function updateBrandingInquiryStatus(id: string, status: string) {
+export async function updateBrandingInquiryStatus(id: string, status: string): Promise<ActionResult> {
   try {
     const result = await updateBrandingInquiryStatusService(id, status);
     revalidatePath("/dashboard/submissions");
     await triggerRevalidation(result.revalidate);
-    return { success: true };
+    return { ok: true };
   } catch (error: any) {
-    return { success: false, error: error.message };
+    return { ok: false, error: error.message };
   }
 }
 
 // Action to delete a branding inquiry
-export async function deleteBrandingInquiry(id: string) {
+export async function deleteBrandingInquiry(id: string): Promise<ActionResult> {
   try {
     const result = await deleteBrandingInquiryService(id);
     revalidatePath("/dashboard/submissions");
     await triggerRevalidation(result.revalidate);
-    return { success: true };
+    return { ok: true };
   } catch (error: any) {
-    return { success: false, error: error.message };
+    return { ok: false, error: error.message };
   }
 }
 
 // Action to update the status of a lease application
-export async function updateLeaseApplicationStatus(id: string, status: string) {
+export async function updateLeaseApplicationStatus(id: string, status: string): Promise<ActionResult> {
   try {
     const result = await updateLeaseApplicationStatusService(id, status);
     revalidatePath("/dashboard/submissions");
     await triggerRevalidation(result.revalidate);
-    return { success: true };
+    return { ok: true };
   } catch (error: any) {
-    return { success: false, error: error.message };
+    return { ok: false, error: error.message };
   }
 }
 
 // Action to delete a lease application
-export async function deleteLeaseApplication(id: string) {
+export async function deleteLeaseApplication(id: string): Promise<ActionResult> {
   try {
     const result = await deleteLeaseApplicationService(id);
     revalidatePath("/dashboard/submissions");
     await triggerRevalidation(result.revalidate);
-    return { success: true };
+    return { ok: true };
   } catch (error: any) {
-    return { success: false, error: error.message };
+    return { ok: false, error: error.message };
   }
 }
 
@@ -65,16 +66,16 @@ export async function deleteLeaseApplication(id: string) {
 export async function getLeaseApplications() {
   try {
     const data = await getLeaseApplicationsService();
-    return data.map((app: any) => ({
+    return data.map((app) => ({
       id: app.id,
-      createdAt: app.created_at,
+      createdAt: app.createdAt,
       status: app.status,
-      applicantName: app.applicant_name,
+      applicantName: app.applicantName,
       email: app.email,
       phone: app.phone,
       message: app.message,
-      propertyTitle: app.properties?.title ?? "Property Not Found",
-      propertyId: app.properties?.id ?? "",
+      propertyTitle: (app.properties as any)?.title ?? "Property Not Found",
+      propertyId: (app.properties as any)?.id ?? "",
     }));
   } catch (error) {
     console.error("Error fetching lease applications:", error);
@@ -86,17 +87,17 @@ export async function getLeaseApplications() {
 export async function getBrandingInquiries() {
   try {
     const data = await getBrandingInquiriesService();
-    return data.map((inquiry: any) => ({
+    return data.map((inquiry) => ({
       id: inquiry.id,
-      createdAt: inquiry.created_at,
+      createdAt: inquiry.createdAt,
       status: inquiry.status,
-      customerName: inquiry.customer_name,
+      customerName: inquiry.customerName,
       email: inquiry.email,
       company: inquiry.company,
       quantity: inquiry.quantity,
       message: inquiry.message,
-      productTitle: inquiry.branding?.title ?? "Product Not Found",
-      productId: inquiry.branding?.id ?? "",
+      productTitle: (inquiry.branding as any)?.title ?? "Product Not Found",
+      productId: (inquiry.branding as any)?.id ?? "",
     }));
   } catch (error) {
     console.error("Error fetching branding inquiries:", error);

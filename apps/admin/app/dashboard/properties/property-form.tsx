@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { type Property, propertySchema } from "@repo/supabase/validations";
+import { type Property, propertySchema } from "@repo/contracts/property";
 import { Loader2, PlusCircle, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -68,7 +68,7 @@ export default function PropertyForm({ property }: PropertyFormProps) {
           bathrooms: 1,
           type: "Apartment",
           features: [],
-          is_featured: false,
+          isFeatured: false,
           gallery: [],
           reviews: [],
         },
@@ -259,7 +259,7 @@ export default function PropertyForm({ property }: PropertyFormProps) {
                   {/* Main Image Section */}
                   <FormField
                     control={form.control}
-                    name="image_url"
+                    name="imageUrl"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Main Property Image</FormLabel>
@@ -267,7 +267,7 @@ export default function PropertyForm({ property }: PropertyFormProps) {
                           <UploadImage
                             folder="properties"
                             onUploadSuccess={(url) => {
-                              form.setValue("image_url", url, {
+                              form.setValue("imageUrl", url, {
                                 shouldValidate: true,
                                 shouldDirty: true,
                               });

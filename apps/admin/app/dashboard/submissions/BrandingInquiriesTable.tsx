@@ -71,7 +71,7 @@ export function BrandingInquiriesTable({
 
   const handleStatusUpdate = async (id: string, status: string) => {
     const result = await updateBrandingInquiryStatus(id, status);
-    if (result.success) {
+    if (result.ok) {
       toast.success(`Inquiry marked as ${status}.`);
     } else {
       toast.error(result.error || "Failed to update status.");
@@ -81,7 +81,7 @@ export function BrandingInquiriesTable({
   const handleDelete = async (id: string) => {
     if (confirm("Are you sure you want to delete this inquiry?")) {
       const result = await deleteBrandingInquiry(id);
-      if (result.success) {
+      if (result.ok) {
         toast.success("Inquiry has been deleted.");
       } else {
         toast.error(result.error || "Failed to delete inquiry.");

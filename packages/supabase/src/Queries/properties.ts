@@ -14,7 +14,7 @@ export async function getFeaturedProperties() {
   const { data, error } = await supabase
     .from("properties")
     .select("*")
-    .eq("is_featured", true);
+    .eq("isFeatured", true);
   if (error) throw new Error(error.message);
   return data;
 }

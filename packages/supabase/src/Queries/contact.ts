@@ -7,7 +7,7 @@ export async function getContactMessages() {
   const { data, error } = await supabase
     .from("contact_messages")
     .select("*")
-    .order("created_at", { ascending: false });
+    .order("createdAt", { ascending: false });
 
   if (error) throw new Error(error.message);
   return data;

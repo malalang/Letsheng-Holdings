@@ -13,13 +13,7 @@ import { getCachedBrandingRowById, getCachedBrandingRows } from "../_lib/cached-
 export type BrandingRecord = Branding & { id: string };
 
 function parseBrandingRecord(data: unknown): BrandingRecord {
-  // Map snake_case from DB to camelCase for schema
-  const dbData = data as any;
-  const mappedData = {
-    ...dbData,
-    isFeatured: dbData.is_featured,
-  };
-  const product = brandingSchema.parse(mappedData);
+  const product = brandingSchema.parse(data);
   if (!product.id) {
     throw new Error("Branding record is missing an id.");
   }
@@ -61,12 +55,7 @@ export async function submitBrandingInquiry(
   }
 
   try {
-    const { customerName, productId, ...rest } = validatedFields.data;
-    await submitBrandingInquiryService({
-      ...rest,
-      customer_name: customerName,
-      product_id: productId,
-    });
+    await submitBrandingInquiryService(validatedFields.data);
     return { ok: true, message: "Inquiry submitted successfully!" };
   } catch (error) {
     console.error("Supabase error:", error);

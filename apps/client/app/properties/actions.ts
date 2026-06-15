@@ -12,14 +12,7 @@ import { getCachedPropertyRowById, getCachedPropertyRows } from "../_lib/cached-
 export type PropertyRecord = Property & { id: string };
 
 function parsePropertyRecord(data: unknown): PropertyRecord {
-  // Map snake_case from DB to camelCase for schema
-  const dbData = data as any;
-  const mappedData = {
-    ...dbData,
-    imageUrl: dbData.image_url,
-    isFeatured: dbData.is_featured,
-  };
-  const property = propertySchema.parse(mappedData);
+  const property = propertySchema.parse(data);
   if (!property.id) {
     throw new Error("Property record is missing an id.");
   }
@@ -49,12 +42,7 @@ export async function submitLeaseApplication(
   }
 
   try {
-    const { applicantName, propertyId, ...rest } = validatedData.data;
-    await submitLeaseApplicationService({
-      ...rest,
-      applicant_name: applicantName,
-      property_id: propertyId,
-    });
+    await submitLeaseApplicationService(validatedData.data);
     return { ok: true, message: "Application submitted successfully!" };
   } catch (error: any) {
     return { ok: false, error: error.message };

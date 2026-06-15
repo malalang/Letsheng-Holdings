@@ -11,11 +11,12 @@ import {
 } from "@repo/supabase/Queries/tenants";
 import type { TablesInsert, TablesUpdate } from "@repo/supabase/supabaseType";
 import { type Tenant, tenantSchema } from "@repo/contracts/tenant";
+import type { ActionResult } from "@repo/contracts/actionResult";
 import { revalidatePath } from "next/cache";
 import { triggerRevalidation } from "@/lib/revalidation";
 
 // NOTE: Tenant is imported from contracts which uses camelCase.
-// Database uses snake_case, mapping needed.
+// Database now also uses camelCase.
 
 export type TenantWithProperty = Tenant & {
   property: { title: string } | null;
@@ -38,9 +39,9 @@ function toTenantInsert(
   return {
     name: tenant.name,
     email: tenant.email,
-    property_id: tenant.propertyId,
+    propertyId: tenant.propertyId,
     status: tenant.status,
-    lease_end_date: toLeaseEndDate(tenant.leaseEndDate),
+    leaseEndDate: toLeaseEndDate(tenant.leaseEndDate),
   };
 }
 
@@ -52,10 +53,10 @@ function toTenantUpdate(
   if (tenant.name !== undefined) payload.name = tenant.name;
   if (tenant.email !== undefined) payload.email = tenant.email;
   if (tenant.propertyId !== undefined)
-    payload.property_id = tenant.propertyId;
+    payload.propertyId = tenant.propertyId;
   if (tenant.status !== undefined) payload.status = tenant.status;
   if (tenant.leaseEndDate !== undefined) {
-    payload.lease_end_date = toLeaseEndDate(tenant.leaseEndDate);
+    payload.leaseEndDate = toLeaseEndDate(tenant.leaseEndDate);
   }
 
   return payload;
@@ -65,13 +66,7 @@ export async function getTenants() {
   try {
     const tenants = await getTenantsService();
     return tenants.map((tenant) => ({
-      id: tenant.id,
-      name: tenant.name,
-      email: tenant.email,
-      propertyId: tenant.property_id,
-      status: tenant.status,
-      leaseEndDate: tenant.lease_end_date ? new Date(tenant.lease_end_date) : null,
-      avatarUrl: tenant.avatar_url,
+      ...tenant,
       property: tenant.properties ?? null,
     })) as TenantWithProperty[];
   } catch (error) {
@@ -82,7 +77,7 @@ export async function getTenants() {
 
 export async function createTenant(
   formData: Omit<Tenant, "id" | "avatarUrl">,
-) {
+): Promise<ActionResult<Tenant>> {
   const insertSchema = tenantSchema.omit({ id: true, avatarUrl: true });
   const validatedData = insertSchema.parse(formData);
 
@@ -90,17 +85,17 @@ export async function createTenant(
     const result = await createTenantService(toTenantInsert(validatedData));
     revalidatePath("/dashboard/tenants");
     await triggerRevalidation(result.revalidate);
-    return { success: true, data: result.data };
+    return { ok: true, data: result.data as Tenant };
   } catch (error: unknown) {
     console.error("Error creating tenant:", error);
-    return { success: false, error: getErrorMessage(error) };
+    return { ok: false, error: getErrorMessage(error) };
   }
 }
 
 export async function updateTenant(
   id: string,
   formData: Partial<Omit<Tenant, "id" | "avatarUrl">>,
-) {
+): Promise<ActionResult<Tenant>> {
   const partialTenantSchema = tenantSchema
     .partial()
     .omit({ id: true, avatarUrl: true });
@@ -111,22 +106,22 @@ export async function updateTenant(
     revalidatePath("/dashboard/tenants");
     revalidatePath(`/dashboard/tenants/${id}/edit`);
     await triggerRevalidation(result.revalidate);
-    return { success: true, data: result.data };
+    return { ok: true, data: result.data as Tenant };
   } catch (error: unknown) {
     console.error("Error updating tenant:", error);
-    return { success: false, error: getErrorMessage(error) };
+    return { ok: false, error: getErrorMessage(error) };
   }
 }
 
-export async function deleteTenant(id: string) {
+export async function deleteTenant(id: string): Promise<ActionResult> {
   try {
     const result = await deleteTenantService(id);
     revalidatePath("/dashboard/tenants");
     await triggerRevalidation(result.revalidate);
-    return { success: true, data: result.data };
+    return { ok: true };
   } catch (error: unknown) {
     console.error("Error deleting tenant:", error);
-    return { success: false, error: getErrorMessage(error) };
+    return { ok: false, error: getErrorMessage(error) };
   }
 }
 
@@ -134,15 +129,7 @@ export async function getTenantById(id: string) {
   try {
     const tenant = await getTenantByIdService(id);
     if (!tenant) return null;
-    return {
-      id: tenant.id,
-      name: tenant.name,
-      email: tenant.email,
-      propertyId: tenant.property_id,
-      status: tenant.status,
-      leaseEndDate: tenant.lease_end_date ? new Date(tenant.lease_end_date) : null,
-      avatarUrl: tenant.avatar_url,
-    } as Tenant;
+    return tenant as Tenant;
   } catch (error) {
     console.error("Error fetching tenant:", error);
     return null;

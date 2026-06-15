@@ -13,7 +13,7 @@ export async function getFeaturedBranding() {
   const { data, error } = await supabase
     .from("branding")
     .select("*")
-    .eq("is_featured", true);
+    .eq("isFeatured", true);
   if (error) throw new Error(error.message);
   return data;
 }
