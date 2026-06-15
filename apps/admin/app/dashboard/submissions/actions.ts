@@ -73,6 +73,7 @@ export async function getLeaseApplications() {
       applicantName: app.applicantName,
       email: app.email,
       phone: app.phone,
+      employment: app.employment as any,
       message: app.message,
       propertyTitle: (app.properties as any)?.title ?? "Property Not Found",
       propertyId: (app.properties as any)?.id ?? "",
