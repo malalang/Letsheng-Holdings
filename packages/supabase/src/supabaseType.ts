@@ -25,7 +25,15 @@ export type Database = {
           updatedAt?: string;
           userId?: string;
         };
-        Relationships: [];
+        Relationships: [
+          {
+            foreignKeyName: "admin_users_user_id_fkey";
+            columns: ["userId"];
+            isOneToOne: true;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
       };
       branding: {
         Row: {
@@ -68,10 +76,10 @@ export type Database = {
       };
       branding_inquiries: {
         Row: {
+          company: string | null;
           createdAt: string;
           customerName: string;
           email: string;
-          company: string | null;
           id: string;
           message: string | null;
           productId: string | null;
@@ -79,10 +87,10 @@ export type Database = {
           status: string;
         };
         Insert: {
+          company?: string | null;
           createdAt?: string;
           customerName: string;
           email: string;
-          company?: string | null;
           id?: string;
           message?: string | null;
           productId?: string | null;
@@ -90,10 +98,10 @@ export type Database = {
           status?: string;
         };
         Update: {
+          company?: string | null;
           createdAt?: string;
           customerName?: string;
           email?: string;
-          company?: string | null;
           id?: string;
           message?: string | null;
           productId?: string | null;
@@ -271,7 +279,7 @@ export type Database = {
           location?: string | null;
           price?: number;
           reviews?: Json | null;
-          title?: string;
+          title: string;
           type?: string | null;
         };
         Relationships: [];
