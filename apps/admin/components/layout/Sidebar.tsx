@@ -42,6 +42,12 @@ const Sidebar = () => {
               Tenants
             </SidebarLink>
             <SidebarLink
+              href="/dashboard/payments"
+              icon={<Package2 className="h-4 w-4" />}
+            >
+              Payments
+            </SidebarLink>
+            <SidebarLink
               href="/dashboard/branding"
               icon={<ShoppingCart className="h-4 w-4" />}
             >

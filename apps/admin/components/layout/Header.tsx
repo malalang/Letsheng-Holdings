@@ -77,6 +77,14 @@ const Header = () => {
             </Link>
             <Link
               className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-gray-300 hover:text-white hover:bg-primary/20"
+              href="/dashboard/payments"
+              onClick={() => setIsOpen(false)}
+            >
+              <Package2 className="h-4 w-4" />
+              Payments
+            </Link>
+            <Link
+              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-gray-300 hover:text-white hover:bg-primary/20"
               href="/dashboard/branding"
               onClick={() => setIsOpen(false)}
             >
