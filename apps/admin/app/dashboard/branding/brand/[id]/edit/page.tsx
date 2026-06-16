@@ -1,8 +1,5 @@
-import {
-  galleryItemSchema,
-  reviewSchema,
-} from "@repo/contracts/property";
 import { specItemSchema } from "@repo/contracts/branding";
+import { galleryItemSchema, reviewSchema } from "@repo/contracts/property";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";

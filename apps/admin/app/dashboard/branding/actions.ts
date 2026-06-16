@@ -1,5 +1,7 @@
 "use server";
 
+import type { ActionResult } from "@repo/contracts/actionResult";
+import type { Branding } from "@repo/contracts/branding";
 import {
   createBranding as createBrandingProductService,
   deleteBranding as deleteBrandingProductService,
@@ -14,8 +16,6 @@ import type {
   TablesInsert,
   TablesUpdate,
 } from "@repo/supabase/supabaseType";
-import type { Branding } from "@repo/contracts/branding";
-import type { ActionResult } from "@repo/contracts/actionResult";
 import { revalidatePath } from "next/cache";
 import { triggerRevalidation } from "@/lib/revalidation";
 
@@ -53,8 +53,7 @@ function toBrandingUpdate(
   if (product.description !== undefined)
     payload.description = product.description;
   if (product.image !== undefined) payload.image = product.image;
-  if (product.isFeatured !== undefined)
-    payload.isFeatured = product.isFeatured;
+  if (product.isFeatured !== undefined) payload.isFeatured = product.isFeatured;
   if (product.specs !== undefined) payload.specs = toJson(product.specs);
   if (product.gallery !== undefined) payload.gallery = toJson(product.gallery);
   if (product.reviews !== undefined) payload.reviews = toJson(product.reviews);
@@ -136,9 +135,7 @@ export async function updateBrandingProduct(
 }
 
 // Action to delete a branding product
-export async function deleteBrandingProduct(
-  id: string,
-): Promise<ActionResult> {
+export async function deleteBrandingProduct(id: string): Promise<ActionResult> {
   try {
     const result = await deleteBrandingProductService(id);
     revalidatePath("/dashboard/branding");

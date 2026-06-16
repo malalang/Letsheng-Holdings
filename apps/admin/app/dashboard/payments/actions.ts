@@ -1,7 +1,6 @@
 "use server";
 
 import { getPayments as getPaymentsService } from "@repo/supabase/Queries/tenants";
-import { revalidatePath } from "next/cache";
 
 export async function getPayments() {
   try {

@@ -1,5 +1,7 @@
 "use server";
 
+import type { ActionResult } from "@repo/contracts/actionResult";
+import { type Property, propertySchema } from "@repo/contracts/property";
 import {
   createProperty as createPropertyService,
   deleteProperty as deletePropertyService,
@@ -14,8 +16,6 @@ import type {
   TablesInsert,
   TablesUpdate,
 } from "@repo/supabase/supabaseType";
-import { type Property, propertySchema } from "@repo/contracts/property";
-import type { ActionResult } from "@repo/contracts/actionResult";
 import { revalidatePath } from "next/cache";
 import { triggerRevalidation } from "@/lib/revalidation";
 

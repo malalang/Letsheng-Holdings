@@ -1,5 +1,7 @@
 "use server";
 
+import type { ActionResult } from "@repo/contracts/actionResult";
+import { type Tenant, tenantSchema } from "@repo/contracts/tenant";
 import {
   createTenant as createTenantService,
   deleteTenant as deleteTenantService,
@@ -10,8 +12,6 @@ import {
   getTenants as getTenantsService,
 } from "@repo/supabase/Queries/tenants";
 import type { TablesInsert, TablesUpdate } from "@repo/supabase/supabaseType";
-import { type Tenant, tenantSchema } from "@repo/contracts/tenant";
-import type { ActionResult } from "@repo/contracts/actionResult";
 import { revalidatePath } from "next/cache";
 import { triggerRevalidation } from "@/lib/revalidation";
 
@@ -52,8 +52,7 @@ function toTenantUpdate(
 
   if (tenant.name !== undefined) payload.name = tenant.name;
   if (tenant.email !== undefined) payload.email = tenant.email;
-  if (tenant.propertyId !== undefined)
-    payload.propertyId = tenant.propertyId;
+  if (tenant.propertyId !== undefined) payload.propertyId = tenant.propertyId;
   if (tenant.status !== undefined) payload.status = tenant.status;
   if (tenant.leaseEndDate !== undefined) {
     payload.leaseEndDate = toLeaseEndDate(tenant.leaseEndDate);

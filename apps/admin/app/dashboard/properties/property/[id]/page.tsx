@@ -1,7 +1,7 @@
 import {
+  featureSchema,
   galleryItemSchema,
   reviewSchema,
-  featureSchema,
 } from "@repo/contracts/property";
 import {
   ArrowLeft,

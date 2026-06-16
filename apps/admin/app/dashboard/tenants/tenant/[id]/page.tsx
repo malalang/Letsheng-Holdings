@@ -1,6 +1,9 @@
+import {
+  getPaymentsByTenantId,
+  getTenantById,
+} from "@repo/supabase/Queries/tenants";
 import { ArrowLeft, Edit } from "lucide-react";
 import Link from "next/link";
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -20,7 +23,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { getTenantById, getPaymentsByTenantId } from "@repo/supabase/Queries/tenants";
 
 const getStatusBadgeClass = (status: string) => {
   switch (status) {
@@ -113,7 +115,11 @@ export default async function Page({
                 <p className="text-sm font-medium text-gray-500">
                   Lease End Date
                 </p>
-                <p className="font-semibold">{tenant.leaseEndDate ? new Date(tenant.leaseEndDate).toLocaleDateString() : "N/A"}</p>
+                <p className="font-semibold">
+                  {tenant.leaseEndDate
+                    ? new Date(tenant.leaseEndDate).toLocaleDateString()
+                    : "N/A"}
+                </p>
               </div>
             </div>
           </CardContent>
@@ -136,7 +142,9 @@ export default async function Page({
                 {payments.map((payment) => (
                   <TableRow key={payment.id}>
                     <TableCell>{payment.date}</TableCell>
-                    <TableCell>${(payment.amount as number).toFixed(2)}</TableCell>
+                    <TableCell>
+                      ${(payment.amount as number).toFixed(2)}
+                    </TableCell>
                     <TableCell>
                       <Badge className={getStatusBadgeClass(payment.status)}>
                         {payment.status}

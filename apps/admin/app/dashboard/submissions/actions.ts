@@ -1,5 +1,6 @@
 "use server";
 
+import type { ActionResult } from "@repo/contracts/actionResult";
 import {
   deleteBrandingInquiry as deleteBrandingInquiryService,
   updateBrandingInquiryStatus as updateBrandingInquiryStatusService,
@@ -12,10 +13,12 @@ import { getBrandingInquiries as getBrandingInquiriesService } from "@repo/supab
 import { getLeaseApplications as getLeaseApplicationsService } from "@repo/supabase/Queries/properties";
 import { revalidatePath } from "next/cache";
 import { triggerRevalidation } from "@/lib/revalidation";
-import type { ActionResult } from "@repo/contracts/actionResult";
 
 // Action to update the status of a branding inquiry
-export async function updateBrandingInquiryStatus(id: string, status: string): Promise<ActionResult> {
+export async function updateBrandingInquiryStatus(
+  id: string,
+  status: string,
+): Promise<ActionResult> {
   try {
     const result = await updateBrandingInquiryStatusService(id, status);
     revalidatePath("/dashboard/submissions");
@@ -39,7 +42,10 @@ export async function deleteBrandingInquiry(id: string): Promise<ActionResult> {
 }
 
 // Action to update the status of a lease application
-export async function updateLeaseApplicationStatus(id: string, status: string): Promise<ActionResult> {
+export async function updateLeaseApplicationStatus(
+  id: string,
+  status: string,
+): Promise<ActionResult> {
   try {
     const result = await updateLeaseApplicationStatusService(id, status);
     revalidatePath("/dashboard/submissions");
@@ -51,7 +57,9 @@ export async function updateLeaseApplicationStatus(id: string, status: string): 
 }
 
 // Action to delete a lease application
-export async function deleteLeaseApplication(id: string): Promise<ActionResult> {
+export async function deleteLeaseApplication(
+  id: string,
+): Promise<ActionResult> {
   try {
     const result = await deleteLeaseApplicationService(id);
     revalidatePath("/dashboard/submissions");

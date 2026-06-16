@@ -1,8 +1,8 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createSupabaseBrowserClient } from "@repo/supabase/client";
 import type { Payment, Tenant } from "@repo/contracts/tenant";
+import { createSupabaseBrowserClient } from "@repo/supabase/client";
 import { ArrowLeft, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -119,9 +119,7 @@ export default function TenantForm({ tenant, payments }: TenantFormProps) {
       email: data.email || null,
       propertyId: data.propertyId || null,
       status: data.status,
-      leaseEndDate: data.leaseEndDate
-        ? new Date(data.leaseEndDate)
-        : null,
+      leaseEndDate: data.leaseEndDate ? new Date(data.leaseEndDate) : null,
     };
 
     const action = tenant
