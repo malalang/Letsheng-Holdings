@@ -13,7 +13,6 @@ import {
 } from "@repo/supabase/Queries/tenants";
 import type { TablesInsert, TablesUpdate } from "@repo/supabase/supabaseType";
 import { revalidatePath } from "next/cache";
-import { triggerRevalidation } from "@/lib/revalidation";
 
 // NOTE: Tenant is imported from contracts which uses camelCase.
 // Database now also uses camelCase.
@@ -83,7 +82,6 @@ export async function createTenant(
   try {
     const result = await createTenantService(toTenantInsert(validatedData));
     revalidatePath("/dashboard/tenants");
-    await triggerRevalidation(result.revalidate);
     return { ok: true, data: result.data as Tenant };
   } catch (error: unknown) {
     console.error("Error creating tenant:", error);
@@ -104,7 +102,6 @@ export async function updateTenant(
     const result = await updateTenantService(id, toTenantUpdate(validatedData));
     revalidatePath("/dashboard/tenants");
     revalidatePath(`/dashboard/tenants/${id}/edit`);
-    await triggerRevalidation(result.revalidate);
     return { ok: true, data: result.data as Tenant };
   } catch (error: unknown) {
     console.error("Error updating tenant:", error);
@@ -114,9 +111,8 @@ export async function updateTenant(
 
 export async function deleteTenant(id: string): Promise<ActionResult> {
   try {
-    const result = await deleteTenantService(id);
+    await deleteTenantService(id);
     revalidatePath("/dashboard/tenants");
-    await triggerRevalidation(result.revalidate);
     return { ok: true };
   } catch (error: unknown) {
     console.error("Error deleting tenant:", error);
