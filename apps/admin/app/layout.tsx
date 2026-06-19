@@ -7,8 +7,9 @@ import { Toaster } from "@/components/ui/toaster";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Admin Dashboard",
-  description: "Manage your properties and tenants with ease.",
+  title: "Letsheng Holdings Admin Dashboard",
+  description:
+    "Manage Letsheng Holdings properties, tenants, branding inquiries, payments, and submissions.",
 };
 
 export default async function RootLayout({
