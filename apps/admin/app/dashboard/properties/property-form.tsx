@@ -6,6 +6,7 @@ import { Loader2, PlusCircle, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
+import { ArrayInput } from "@/components/admin/ArrayInput";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -461,32 +462,14 @@ export default function PropertyForm({ property }: PropertyFormProps) {
               <Card>
                 <CardHeader>
                   <CardTitle>Property Features</CardTitle>
-                  <CardDescription>Enter one feature per line.</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <FormField
+                  <ArrayInput
                     control={form.control}
                     name="features"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormControl>
-                          <Textarea
-                            placeholder={"e.g., 24/7 Security\nConcierge\nPool"}
-                            rows={5}
-                            {...field}
-                            onChange={(e) =>
-                              field.onChange(e.target.value.split("\n"))
-                            }
-                            value={
-                              Array.isArray(field.value)
-                                ? field.value.join("\n")
-                                : ""
-                            }
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
+                    label="Features"
+                    addLabel="Add feature"
+                    placeholder="Add a property feature"
                   />
                 </CardContent>
               </Card>
