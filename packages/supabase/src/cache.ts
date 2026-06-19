@@ -26,8 +26,8 @@ export const CACHE_PATHS = {
 export type RevalidationMode = "max" | "immediate";
 
 export interface RevalidationRequest {
-  tags?: readonly string[];
-  paths?: readonly string[];
+  tags?: string[];
+  paths?: string[];
   mode?: RevalidationMode;
 }
 
