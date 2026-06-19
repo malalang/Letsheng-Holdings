@@ -12,7 +12,6 @@ import {
 import { getBrandingInquiries as getBrandingInquiriesService } from "@repo/supabase/Queries/branding";
 import { getLeaseApplications as getLeaseApplicationsService } from "@repo/supabase/Queries/properties";
 import { revalidatePath } from "next/cache";
-import { triggerRevalidation } from "@/lib/revalidation";
 
 // Action to update the status of a branding inquiry
 export async function updateBrandingInquiryStatus(
@@ -20,9 +19,8 @@ export async function updateBrandingInquiryStatus(
   status: string,
 ): Promise<ActionResult> {
   try {
-    const result = await updateBrandingInquiryStatusService(id, status);
+    await updateBrandingInquiryStatusService(id, status);
     revalidatePath("/dashboard/submissions");
-    await triggerRevalidation(result.revalidate);
     return { ok: true };
   } catch (error: any) {
     return { ok: false, error: error.message };
@@ -32,9 +30,8 @@ export async function updateBrandingInquiryStatus(
 // Action to delete a branding inquiry
 export async function deleteBrandingInquiry(id: string): Promise<ActionResult> {
   try {
-    const result = await deleteBrandingInquiryService(id);
+    await deleteBrandingInquiryService(id);
     revalidatePath("/dashboard/submissions");
-    await triggerRevalidation(result.revalidate);
     return { ok: true };
   } catch (error: any) {
     return { ok: false, error: error.message };
@@ -47,9 +44,8 @@ export async function updateLeaseApplicationStatus(
   status: string,
 ): Promise<ActionResult> {
   try {
-    const result = await updateLeaseApplicationStatusService(id, status);
+    await updateLeaseApplicationStatusService(id, status);
     revalidatePath("/dashboard/submissions");
-    await triggerRevalidation(result.revalidate);
     return { ok: true };
   } catch (error: any) {
     return { ok: false, error: error.message };
@@ -61,9 +57,8 @@ export async function deleteLeaseApplication(
   id: string,
 ): Promise<ActionResult> {
   try {
-    const result = await deleteLeaseApplicationService(id);
+    await deleteLeaseApplicationService(id);
     revalidatePath("/dashboard/submissions");
-    await triggerRevalidation(result.revalidate);
     return { ok: true };
   } catch (error: any) {
     return { ok: false, error: error.message };

@@ -3,6 +3,20 @@ import { CACHE_PATHS, CACHE_TAGS, mutationResult } from "../cache";
 import { createSupabaseServerClient } from "../server";
 import type { TablesInsert, TablesUpdate } from "../supabaseType";
 
+function propertyRevalidation(id: string) {
+  return {
+    tags: [CACHE_TAGS.properties, CACHE_TAGS.property(id)],
+    paths: [
+      CACHE_PATHS.home,
+      CACHE_PATHS.properties,
+      CACHE_PATHS.property(id),
+      CACHE_PATHS.propertyGallery(id),
+      CACHE_PATHS.propertyLeaseApplication(id),
+    ],
+    mode: "immediate" as const,
+  };
+}
+
 export async function createProperty(property: TablesInsert<"properties">) {
   await requireAdminUser();
   const supabase = await createSupabaseServerClient();
@@ -12,18 +26,13 @@ export async function createProperty(property: TablesInsert<"properties">) {
     .select()
     .single();
   if (error) throw new Error(error.message);
-  return mutationResult(data, {
-    tags: [CACHE_TAGS.properties, CACHE_TAGS.property(data.id)],
-    paths: [
-      CACHE_PATHS.home,
-      CACHE_PATHS.properties,
-      CACHE_PATHS.property(data.id),
-    ],
-    mode: "immediate",
-  });
+  return mutationResult(data, propertyRevalidation(data.id));
 }
 
-export async function updateProperty(id: string, property: TablesUpdate<"properties">) {
+export async function updateProperty(
+  id: string,
+  property: TablesUpdate<"properties">,
+) {
   await requireAdminUser();
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
@@ -33,15 +42,7 @@ export async function updateProperty(id: string, property: TablesUpdate<"propert
     .select()
     .single();
   if (error) throw new Error(error.message);
-  return mutationResult(data, {
-    tags: [CACHE_TAGS.properties, CACHE_TAGS.property(id)],
-    paths: [
-      CACHE_PATHS.home,
-      CACHE_PATHS.properties,
-      CACHE_PATHS.property(id),
-    ],
-    mode: "immediate",
-  });
+  return mutationResult(data, propertyRevalidation(id));
 }
 
 export async function deleteProperty(id: string) {
@@ -49,18 +50,12 @@ export async function deleteProperty(id: string) {
   const supabase = await createSupabaseServerClient();
   const { error } = await supabase.from("properties").delete().eq("id", id);
   if (error) throw new Error(error.message);
-  return mutationResult(undefined, {
-    tags: [CACHE_TAGS.properties, CACHE_TAGS.property(id)],
-    paths: [
-      CACHE_PATHS.home,
-      CACHE_PATHS.properties,
-      CACHE_PATHS.property(id),
-    ],
-    mode: "immediate",
-  });
+  return mutationResult(undefined, propertyRevalidation(id));
 }
 
-export async function submitLeaseApplication(application: TablesInsert<"lease_applications">) {
+export async function submitLeaseApplication(
+  application: TablesInsert<"lease_applications">,
+) {
   const supabase = await createSupabaseServerClient();
   const { error } = await supabase
     .from("lease_applications")

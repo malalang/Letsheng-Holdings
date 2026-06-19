@@ -14,16 +14,20 @@ export const CACHE_PATHS = {
   home: "/",
   properties: "/properties",
   property: (id: string) => `/properties/${id}`,
+  propertyGallery: (id: string) => `/properties/${id}/gallery`,
+  propertyLeaseApplication: (id: string) => `/properties/${id}/apply-to-lease`,
   branding: "/branding",
   brandingItem: (id: string) => `/branding/${id}`,
+  brandingGallery: (id: string) => `/branding/${id}/gallery`,
+  brandingOrder: (id: string) => `/branding/${id}/order`,
   contact: "/contact",
 } as const;
 
 export type RevalidationMode = "max" | "immediate";
 
 export interface RevalidationRequest {
-  tags?: readonly string[];
-  paths?: readonly string[];
+  tags?: string[];
+  paths?: string[];
   mode?: RevalidationMode;
 }
 
