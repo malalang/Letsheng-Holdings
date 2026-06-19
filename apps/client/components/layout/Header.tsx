@@ -12,6 +12,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { businessInfo } from "@/lib/business";
 
 const NavLink = ({
   href,
@@ -42,13 +43,13 @@ export default function Header() {
           <Link href="/" className="flex items-center gap-3">
             <Image
               src="/logo.jpg"
-              alt="Letsheng Holdings Logo"
+              alt={`${businessInfo.name} Logo`}
               width={48}
               height={48}
               className="rounded-full shadow-md"
             />
             <span className="text-2xl font-bold text-white hidden sm:block">
-              Letsheng Holdings
+              {businessInfo.name}
             </span>
           </Link>
           <nav className="hidden md:flex items-center space-x-2">
