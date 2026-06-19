@@ -3,6 +3,20 @@ import { CACHE_PATHS, CACHE_TAGS, mutationResult } from "../cache";
 import { createSupabaseServerClient } from "../server";
 import type { TablesInsert, TablesUpdate } from "../supabaseType";
 
+function brandingRevalidation(id: string) {
+  return {
+    tags: [CACHE_TAGS.branding, CACHE_TAGS.brandingItem(id)],
+    paths: [
+      CACHE_PATHS.home,
+      CACHE_PATHS.branding,
+      CACHE_PATHS.brandingItem(id),
+      CACHE_PATHS.brandingGallery(id),
+      CACHE_PATHS.brandingOrder(id),
+    ],
+    mode: "immediate" as const,
+  };
+}
+
 export async function createBranding(branding: TablesInsert<"branding">) {
   await requireAdminUser();
   const supabase = await createSupabaseServerClient();
@@ -12,18 +26,13 @@ export async function createBranding(branding: TablesInsert<"branding">) {
     .select()
     .single();
   if (error) throw new Error(error.message);
-  return mutationResult(data, {
-    tags: [CACHE_TAGS.branding, CACHE_TAGS.brandingItem(data.id)],
-    paths: [
-      CACHE_PATHS.home,
-      CACHE_PATHS.branding,
-      CACHE_PATHS.brandingItem(data.id),
-    ],
-    mode: "immediate",
-  });
+  return mutationResult(data, brandingRevalidation(data.id));
 }
 
-export async function updateBranding(id: string, branding: TablesUpdate<"branding">) {
+export async function updateBranding(
+  id: string,
+  branding: TablesUpdate<"branding">,
+) {
   await requireAdminUser();
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
@@ -33,15 +42,7 @@ export async function updateBranding(id: string, branding: TablesUpdate<"brandin
     .select()
     .single();
   if (error) throw new Error(error.message);
-  return mutationResult(data, {
-    tags: [CACHE_TAGS.branding, CACHE_TAGS.brandingItem(id)],
-    paths: [
-      CACHE_PATHS.home,
-      CACHE_PATHS.branding,
-      CACHE_PATHS.brandingItem(id),
-    ],
-    mode: "immediate",
-  });
+  return mutationResult(data, brandingRevalidation(id));
 }
 
 export async function deleteBranding(id: string) {
@@ -49,18 +50,12 @@ export async function deleteBranding(id: string) {
   const supabase = await createSupabaseServerClient();
   const { error } = await supabase.from("branding").delete().eq("id", id);
   if (error) throw new Error(error.message);
-  return mutationResult(undefined, {
-    tags: [CACHE_TAGS.branding, CACHE_TAGS.brandingItem(id)],
-    paths: [
-      CACHE_PATHS.home,
-      CACHE_PATHS.branding,
-      CACHE_PATHS.brandingItem(id),
-    ],
-    mode: "immediate",
-  });
+  return mutationResult(undefined, brandingRevalidation(id));
 }
 
-export async function submitBrandingInquiry(inquiry: TablesInsert<"branding_inquiries">) {
+export async function submitBrandingInquiry(
+  inquiry: TablesInsert<"branding_inquiries">,
+) {
   const supabase = await createSupabaseServerClient();
   const { error } = await supabase
     .from("branding_inquiries")
