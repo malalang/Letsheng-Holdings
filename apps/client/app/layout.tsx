@@ -14,11 +14,10 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    default: "Letsheng Holdings | Premium Estates & Corporate Branding",
-    template: "%s | Letsheng Holdings",
+    default: businessInfo.seoTitle,
+    template: `%s | ${businessInfo.name}`,
   },
-  description:
-    "Your strategic partner for premium residential estates and high-fidelity corporate branding. We build environments and create identities that empower success.",
+  description: businessInfo.seoDescription,
   metadataBase: new URL(businessInfo.domain),
   openGraph: {
     type: "website",
