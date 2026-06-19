@@ -1,5 +1,3 @@
-import type { RevalidationRequest } from "@repo/contracts/revalidation";
-
 export const CACHE_TAGS = {
   properties: "properties",
   property: (id: string) => `property:${id}`,
@@ -24,6 +22,14 @@ export const CACHE_PATHS = {
   brandingOrder: (id: string) => `/branding/${id}/order`,
   contact: "/contact",
 } as const;
+
+export type RevalidationMode = "max" | "immediate";
+
+export interface RevalidationRequest {
+  tags?: readonly string[];
+  paths?: readonly string[];
+  mode?: RevalidationMode;
+}
 
 export interface MutationResult<T> {
   data: T;
