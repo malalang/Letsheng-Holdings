@@ -23,6 +23,16 @@
   --color-border: #e5e7eb; /* Light gray for borders */
   --color-input: #e5e7eb;
   --color-ring: #49b3e0; /* Primary color for focus rings */
+
+  /* Sidebar Colors */
+  --color-sidebar: #002147;
+  --color-sidebar-foreground: #d1d5db;
+  --color-sidebar-primary: #49b3e0;
+  --color-sidebar-primary-foreground: #002147;
+  --color-sidebar-accent: #0b2f5a;
+  --color-sidebar-accent-foreground: #ffffff;
+  --color-sidebar-border: #1f4b75;
+  --color-sidebar-ring: #49b3e0;
 }
 
 @layer base {
