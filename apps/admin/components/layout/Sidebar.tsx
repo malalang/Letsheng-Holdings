@@ -49,7 +49,7 @@ const Sidebar = () => {
           </span>
         </Link>
       </SidebarHeader>
-      <SidebarContent className="p-2 group-data-[collapsible=icon]:hidden">
+      <SidebarContent className="p-2">
         <SidebarMenu>
           {navItems.map((item) => (
             <SidebarMenuItem key={item.href}>
