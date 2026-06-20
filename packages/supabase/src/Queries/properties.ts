@@ -9,6 +9,14 @@ export async function getProperties() {
   return data;
 }
 
+export async function getAdminProperties() {
+  await requireAdminUser();
+  const supabase = await createSupabaseServerClient();
+  const { data, error } = await supabase.from("properties").select("*");
+  if (error) throw new Error(error.message);
+  return data;
+}
+
 export async function getFeaturedProperties() {
   const supabase = createSupabasePublicClient();
   const { data, error } = await supabase
@@ -21,6 +29,18 @@ export async function getFeaturedProperties() {
 
 export async function getPropertyById(id: string) {
   const supabase = createSupabasePublicClient();
+  const { data, error } = await supabase
+    .from("properties")
+    .select("*")
+    .eq("id", id)
+    .single();
+  if (error) throw new Error(error.message);
+  return data;
+}
+
+export async function getAdminPropertyById(id: string) {
+  await requireAdminUser();
+  const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
     .from("properties")
     .select("*")

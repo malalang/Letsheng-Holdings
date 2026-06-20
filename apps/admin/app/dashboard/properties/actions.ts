@@ -8,8 +8,8 @@ import {
   updateProperty as updatePropertyService,
 } from "@repo/supabase/Mutations/properties";
 import {
-  getProperties as getPropertiesService,
-  getPropertyById as getPropertyByIdService,
+  getAdminProperties as getAdminPropertiesService,
+  getAdminPropertyById as getAdminPropertyByIdService,
 } from "@repo/supabase/Queries/properties";
 import type {
   Json,
@@ -70,7 +70,7 @@ function toPropertyUpdate(
 
 export async function getProperties() {
   try {
-    const rawProperties = await getPropertiesService();
+    const rawProperties = await getAdminPropertiesService();
     return rawProperties as Property[];
   } catch (error: unknown) {
     throw new Error(getErrorMessage(error));
@@ -79,7 +79,7 @@ export async function getProperties() {
 
 export async function getPropertyById(id: string) {
   try {
-    const p = await getPropertyByIdService(id);
+    const p = await getAdminPropertyByIdService(id);
     return p as Property;
   } catch (error: unknown) {
     throw new Error(getErrorMessage(error));
