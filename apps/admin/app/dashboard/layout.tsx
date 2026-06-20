@@ -12,7 +12,7 @@ export default function DashboardLayout({
   return (
     <Provider>
       <Sidebar />
-      <Inset className="min-w-0 md:!ml-0">
+      <Inset className="min-w-0 md:!ml-64">
         <Header />
         <main className="flex-1 overflow-x-hidden p-4 sm:p-6 lg:p-8">
           {children}
