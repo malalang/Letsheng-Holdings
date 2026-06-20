@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   Sidebar as Shell,
   SidebarContent,
@@ -28,7 +29,13 @@ const navItems = [
   { href: "/dashboard/submissions", icon: Archive, label: "Submissions" },
 ];
 
+function isActivePath(pathname: string, href: string) {
+  return href === "/dashboard" ? pathname === href : pathname.startsWith(href);
+}
+
 const Sidebar = () => {
+  const pathname = usePathname();
+
   return (
     <Shell variant="inset" collapsible="icon" className="z-30">
       <SidebarHeader className="group-data-[collapsible=icon]:items-center group-data-[collapsible=icon]:px-2">
@@ -55,7 +62,8 @@ const Sidebar = () => {
             <SidebarMenuItem key={item.href}>
               <SidebarMenuButton
                 asChild
-                className="w-full justify-start hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                isActive={isActivePath(pathname, item.href)}
+                className="w-full justify-start transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:bg-sidebar-accent focus-visible:text-sidebar-accent-foreground data-[active=true]:bg-sidebar-accent data-[active=true]:text-sidebar-accent-foreground data-[active=true]:font-semibold"
               >
                 <Link href={item.href}>
                   <item.icon className="h-5 w-5" />
