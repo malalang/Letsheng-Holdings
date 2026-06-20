@@ -14,7 +14,7 @@ export default function DashboardLayout({
       <Sidebar />
       <Inset className="min-w-0">
         <Header />
-        <main className="flex-1 overflow-x-hidden p-4 sm:p-6 lg:p-8">
+        <main className="flex-1 overflow-x-hidden p-4 sm:p-5 lg:p-6">
           {children}
         </main>
       </Inset>
