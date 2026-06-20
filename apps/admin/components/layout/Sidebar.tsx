@@ -30,7 +30,7 @@ const navItems = [
 
 const Sidebar = () => {
   return (
-    <Shell variant="inset" collapsible="icon">
+    <Shell variant="inset" collapsible="icon" className="z-30">
       <SidebarHeader>
         <Link href="/dashboard" className="flex items-center gap-2">
           <Image
@@ -41,7 +41,7 @@ const Sidebar = () => {
             className="h-8 w-8 rounded-full object-cover shadow-md"
             priority
           />
-          <span className="text-lg font-semibold text-sidebar-foreground">
+          <span className="text-lg font-semibold text-sidebar-foreground group-data-[collapsible=icon]:hidden">
             Letsheng Admin
           </span>
         </Link>
