@@ -10,96 +10,58 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import {
+  Sidebar as Shell,
+  SidebarContent,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from "@/components/ui/sidebar";
+
+const navItems = [
+  { href: "/dashboard", icon: Home, label: "Dashboard" },
+  { href: "/dashboard/properties", icon: Building2, label: "Estates" },
+  { href: "/dashboard/tenants", icon: BookUser, label: "Tenants" },
+  { href: "/dashboard/payments", icon: Package2, label: "Payments" },
+  { href: "/dashboard/branding", icon: ShoppingCart, label: "Branding Shop" },
+  { href: "/dashboard/submissions", icon: Archive, label: "Submissions" },
+];
 
 const Sidebar = () => {
   return (
-    <div className="hidden border-r bg-secondary text-white md:block">
-      <div className="flex h-full max-h-screen flex-col gap-2">
-        <div className="flex h-14 items-center border-b border-primary/30 px-4 lg:h-[60px] lg:px-6">
-          <Link
-            href="/"
-            className="flex items-center gap-2 font-semibold text-white"
-          >
-            <Image
-              src="/logo.jpg"
-              alt="Letsheng Holdings logo"
-              width={32}
-              height={32}
-              className="size-8 rounded-full object-cover shadow-md"
-              priority
-            />
-            <span>Letsheng Inc.</span>
-          </Link>
-        </div>
-        <div className="flex-1">
-          <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-            <SidebarSection title="Core" />
-            <SidebarLink href="/dashboard" icon={<Home className="h-4 w-4" />}>
-              Dashboard
-            </SidebarLink>
-
-            <SidebarSection title="Operations" />
-            <SidebarLink
-              href="/dashboard/properties"
-              icon={<Building2 className="h-4 w-4" />}
-            >
-              Estates
-            </SidebarLink>
-            <SidebarLink
-              href="/dashboard/tenants"
-              icon={<BookUser className="h-4 w-4" />}
-            >
-              Tenants
-            </SidebarLink>
-            <SidebarLink
-              href="/dashboard/payments"
-              icon={<Package2 className="h-4 w-4" />}
-            >
-              Payments
-            </SidebarLink>
-            <SidebarLink
-              href="/dashboard/branding"
-              icon={<ShoppingCart className="h-4 w-4" />}
-            >
-              Branding Shop
-            </SidebarLink>
-
-            <SidebarSection title="Admin" />
-            <SidebarLink
-              href="/dashboard/submissions"
-              icon={<Archive className="h-4 w-4" />}
-            >
-              Submissions
-            </SidebarLink>
-          </nav>
-        </div>
-      </div>
-    </div>
+    <Shell variant="inset" collapsible="icon">
+      <SidebarHeader>
+        <Link href="/dashboard" className="flex items-center gap-2">
+          <Image
+            src="/logo.jpg"
+            alt="Letsheng Holdings logo"
+            width={32}
+            height={32}
+            className="h-8 w-8 rounded-full object-cover shadow-md"
+            priority
+          />
+          <span className="text-lg font-semibold text-sidebar-foreground">
+            Letsheng Admin
+          </span>
+        </Link>
+      </SidebarHeader>
+      <SidebarContent className="p-2">
+        <SidebarMenu>
+          {navItems.map((item) => (
+            <SidebarMenuItem key={item.href}>
+              <SidebarMenuButton asChild className="w-full justify-start">
+                <Link href={item.href}>
+                  <item.icon className="h-5 w-5" />
+                  <span>{item.label}</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          ))}
+        </SidebarMenu>
+      </SidebarContent>
+    </Shell>
   );
 };
-
-const SidebarSection = ({ title }: { title: string }) => (
-  <h3 className="px-3 py-2 text-xs font-semibold uppercase text-primary/50 tracking-wider">
-    {title}
-  </h3>
-);
-
-const SidebarLink = ({
-  href,
-  icon,
-  children,
-}: {
-  href: string;
-  icon: React.ReactNode;
-  children: React.ReactNode;
-}) => (
-  <Link
-    href={href}
-    className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-300 transition-all hover:text-white hover:bg-primary/20"
-  >
-    {icon}
-    {children}
-  </Link>
-);
 
 export default Sidebar;
