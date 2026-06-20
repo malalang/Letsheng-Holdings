@@ -6,6 +6,7 @@ import {
   Package2,
   ShoppingCart,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 const Sidebar = () => {
@@ -17,7 +18,14 @@ const Sidebar = () => {
             href="/"
             className="flex items-center gap-2 font-semibold text-white"
           >
-            <Package2 className="h-6 w-6 text-primary" />
+            <Image
+              src="/logo.jpg"
+              alt="Letsheng Holdings logo"
+              width={32}
+              height={32}
+              className="size-8 rounded-full object-cover shadow-md"
+              priority
+            />
             <span>Letsheng Inc.</span>
           </Link>
         </div>
