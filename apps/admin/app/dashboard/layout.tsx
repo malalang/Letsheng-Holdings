@@ -1,5 +1,6 @@
 import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
+import { SidebarInset as Inset, SidebarProvider as Provider } from "@/components/ui/sidebar";
 
 export const dynamic = "force-dynamic";
 
@@ -9,14 +10,14 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
+    <Provider>
       <Sidebar />
-      <div className="flex min-w-0 flex-col">
+      <Inset className="min-w-0">
         <Header />
         <main className="flex-1 overflow-x-hidden p-4 sm:p-6 lg:p-8">
           {children}
         </main>
-      </div>
-    </div>
+      </Inset>
+    </Provider>
   );
 }
