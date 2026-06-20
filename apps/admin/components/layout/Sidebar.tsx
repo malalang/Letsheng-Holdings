@@ -31,14 +31,17 @@ const navItems = [
 const Sidebar = () => {
   return (
     <Shell variant="inset" collapsible="icon" className="z-30">
-      <SidebarHeader>
-        <Link href="/dashboard" className="flex items-center gap-2">
+      <SidebarHeader className="group-data-[collapsible=icon]:items-center group-data-[collapsible=icon]:px-2">
+        <Link
+          href="/dashboard"
+          className="flex items-center gap-2 group-data-[collapsible=icon]:justify-center"
+        >
           <Image
             src="/logo.jpg"
             alt="Letsheng Holdings logo"
             width={32}
             height={32}
-            className="h-8 w-8 rounded-full object-cover shadow-md"
+            className="h-8 w-8 shrink-0 rounded-full object-cover shadow-md"
             priority
           />
           <span className="text-lg font-semibold text-sidebar-foreground group-data-[collapsible=icon]:hidden">
@@ -46,11 +49,14 @@ const Sidebar = () => {
           </span>
         </Link>
       </SidebarHeader>
-      <SidebarContent className="p-2">
+      <SidebarContent className="p-2 group-data-[collapsible=icon]:hidden">
         <SidebarMenu>
           {navItems.map((item) => (
             <SidebarMenuItem key={item.href}>
-              <SidebarMenuButton asChild className="w-full justify-start">
+              <SidebarMenuButton
+                asChild
+                className="w-full justify-start hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+              >
                 <Link href={item.href}>
                   <item.icon className="h-5 w-5" />
                   <span>{item.label}</span>
