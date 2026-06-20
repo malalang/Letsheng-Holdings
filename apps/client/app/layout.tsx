@@ -19,6 +19,9 @@ export const metadata: Metadata = {
   },
   description: businessInfo.seoDescription,
   metadataBase: new URL(businessInfo.domain),
+  icons: {
+    icon: "/logo.jpg",
+  },
   openGraph: {
     type: "website",
     locale: "en_ZA",
