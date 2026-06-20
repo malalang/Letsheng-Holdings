@@ -19,12 +19,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-  Tabs,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs";
-import { getProperties } from "./actions";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { deleteProperty, getProperties } from "./actions";
 
 const statusOptions = [
   { value: "all", label: "All" },
@@ -48,16 +44,25 @@ function getStatusFilter(
   return "all";
 }
 
+function getStatusHref(status: StatusOption) {
+  return status === "all"
+    ? "/dashboard/properties"
+    : `/dashboard/properties?status=${status}`;
+}
+
 export default async function AdminPropertiesPage({
   searchParams,
 }: {
-  searchParams?: { status?: string | string[] };
+  searchParams?: Promise<{ status?: string | string[] }>;
 }) {
+  const resolvedSearchParams = await searchParams;
   const properties = await getProperties();
-  const selectedStatus = getStatusFilter(searchParams?.status);
+  const selectedStatus = getStatusFilter(resolvedSearchParams?.status);
 
   const allProperties = properties;
-  const availableProperties = properties.filter((property) => property.availability);
+  const availableProperties = properties.filter(
+    (property) => property.availability,
+  );
   const unavailableProperties = properties.filter(
     (property) => !property.availability,
   );
@@ -66,12 +71,12 @@ export default async function AdminPropertiesPage({
     selectedStatus === "available"
       ? availableProperties
       : selectedStatus === "unavailable"
-      ? unavailableProperties
-      : allProperties;
+        ? unavailableProperties
+        : allProperties;
 
   return (
     <div>
-      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between mb-4">
+      <div className="mb-4 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div className="flex-1">
           <h1 className="text-2xl font-bold">Estates Command</h1>
           <p className="text-muted-foreground">
@@ -80,24 +85,20 @@ export default async function AdminPropertiesPage({
         </div>
       </div>
 
-      <Tabs defaultValue={selectedStatus}>
+      <Tabs value={selectedStatus}>
         <TabsList className="space-x-2">
           {statusOptions.map((option) => {
             const count =
               option.value === "all"
                 ? allProperties.length
                 : option.value === "available"
-                ? availableProperties.length
-                : unavailableProperties.length;
+                  ? availableProperties.length
+                  : unavailableProperties.length;
 
             return (
-              <TabsTrigger
-                key={option.value}
-                value={option.value}
-                asChild
-              >
+              <TabsTrigger key={option.value} value={option.value} asChild>
                 <Link
-                  href={`/dashboard/properties?status=${option.value}`}
+                  href={getStatusHref(option.value)}
                   className="inline-flex items-center justify-center rounded-sm px-3 py-1.5 text-sm font-medium"
                 >
                   {option.label} ({count})
@@ -109,20 +110,20 @@ export default async function AdminPropertiesPage({
       </Tabs>
 
       {statusProperties.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-muted p-12 text-center mt-8">
+        <div className="mt-8 rounded-2xl border border-dashed border-muted p-12 text-center">
           <h2 className="text-xl font-semibold">
             No {selectedStatus === "all" ? "properties" : `${selectedStatus} properties`} found.
           </h2>
-          <p className="text-sm text-muted-foreground mt-2">
+          <p className="mt-2 text-sm text-muted-foreground">
             Adjust the filter or add a new property to see it appear here.
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
+        <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {statusProperties.map((p) => (
             <Card
               key={p.id}
-              className="rounded-xl shadow-lg border-gray-200/50 overflow-hidden flex flex-col"
+              className="flex flex-col overflow-hidden rounded-xl border-gray-200/50 shadow-lg"
             >
               <div className="relative h-48">
                 <Link href={`/dashboard/properties/property/${p.id}`}>
@@ -141,31 +142,43 @@ export default async function AdminPropertiesPage({
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                      <DropdownMenuItem>
+                      <DropdownMenuItem asChild>
                         <Link
                           href={`/dashboard/properties/property/${p.id}/edit`}
-                          className="flex items-center w-full"
+                          className="flex w-full items-center"
                         >
-                          <Edit className="h-4 w-4 mr-2" />
+                          <Edit className="mr-2 h-4 w-4" />
                           Edit
                         </Link>
                       </DropdownMenuItem>
-                      <DropdownMenuItem>
-                        <Eye className="h-4 w-4 mr-2" />
-                        View
+                      <DropdownMenuItem asChild>
+                        <Link
+                          href={`/dashboard/properties/property/${p.id}`}
+                          className="flex w-full items-center"
+                        >
+                          <Eye className="mr-2 h-4 w-4" />
+                          View
+                        </Link>
                       </DropdownMenuItem>
-                      <DropdownMenuItem className="text-red-500">
-                        <Trash2 className="h-4 w-4 mr-2" />
-                        Delete
-                      </DropdownMenuItem>
+                      <form action={deleteProperty.bind(null, p.id)}>
+                        <DropdownMenuItem
+                          asChild
+                          className="text-red-500 focus:text-red-600"
+                        >
+                          <button type="submit" className="flex w-full items-center">
+                            <Trash2 className="mr-2 h-4 w-4" />
+                            Delete
+                          </button>
+                        </DropdownMenuItem>
+                      </form>
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </div>
               </div>
 
               <CardHeader>
-                <div className="flex justify-between items-start">
-                  <CardTitle className="text-2xl font-bold text-secondary leading-tight">
+                <div className="flex items-start justify-between">
+                  <CardTitle className="font-bold text-2xl text-secondary leading-tight">
                     {p.title}
                   </CardTitle>
                   <Badge
@@ -175,31 +188,31 @@ export default async function AdminPropertiesPage({
                     {p.availability ? "Available" : "Occupied"}
                   </Badge>
                 </div>
-                <p className="text-sm text-gray-500 pt-1">{p.location}</p>
+                <p className="pt-1 text-gray-500 text-sm">{p.location}</p>
               </CardHeader>
 
               <CardContent className="flex-grow">
-                <div className="flex items-center text-gray-600 space-x-4 mb-4">
+                <div className="mb-4 flex items-center space-x-4 text-gray-600">
                   <div className="flex items-center">
-                    <Bed className="h-5 w-5 mr-2" />
+                    <Bed className="mr-2 h-5 w-5" />
                     <span>{p.bedrooms}</span>
                   </div>
                   <div className="flex items-center">
-                    <Bath className="h-5 w-5 mr-2" />
+                    <Bath className="mr-2 h-5 w-5" />
                     <span>{p.bathrooms}</span>
                   </div>
                   <div className="flex items-center">
-                    <Home className="h-5 w-5 mr-2" />
+                    <Home className="mr-2 h-5 w-5" />
                     <span>{p.type}</span>
                   </div>
                 </div>
-                <p className="text-gray-700 leading-relaxed truncate">
+                <p className="truncate text-gray-700 leading-relaxed">
                   {p.description}
                 </p>
-                <div className="mt-6 flex items-center text-2xl font-bold text-secondary">
-                  <CircleDollarSign className="h-6 w-6 mr-2 text-primary" />R
+                <div className="mt-6 flex items-center font-bold text-2xl text-secondary">
+                  <CircleDollarSign className="mr-2 h-6 w-6 text-primary" />R
                   {p.price.toLocaleString()}
-                  <span className="text-sm font-normal text-gray-500 ml-2">
+                  <span className="ml-2 font-normal text-gray-500 text-sm">
                     / month
                   </span>
                 </div>
