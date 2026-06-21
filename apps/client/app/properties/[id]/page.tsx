@@ -21,6 +21,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { getPropertyById } from "../actions";
 
+const PROPERTY_IMAGE_FALLBACK = "/logo.jpg";
+
 export default async function PropertyDetailPage({
   params,
 }: {
@@ -50,7 +52,7 @@ export default async function PropertyDetailPage({
         <CardHeader>
           <div className="relative h-96">
             <Image
-              src={property.imageUrl ?? "/logo.jpg"}
+              src={property.imageUrl || PROPERTY_IMAGE_FALLBACK}
               alt={property.title}
               fill
               className="object-cover rounded-t-xl"
@@ -108,9 +110,9 @@ export default async function PropertyDetailPage({
               </h3>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                 {gallery.slice(0, 3).map((image) => (
-                  <div key={image.imageUrl} className="relative h-48">
+                  <div key={image.imageUrl || image.title} className="relative h-48">
                     <Image
-                      src={image.imageUrl}
+                      src={image.imageUrl || PROPERTY_IMAGE_FALLBACK}
                       alt={image.title}
                       fill
                       className="object-cover rounded-lg"
