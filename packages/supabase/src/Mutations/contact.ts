@@ -1,3 +1,4 @@
+import { requireAdminUser } from "../auth";
 import { createSupabaseServerClient } from "../server";
 import { CACHE_TAGS, mutationResult } from "../cache";
 import type { TablesInsert, TablesUpdate } from "../supabaseType";
@@ -18,6 +19,7 @@ export async function submitContactMessage(
 }
 
 export async function updateContactMessageStatus(id: string, status: string) {
+  await requireAdminUser();
   const supabase = await createSupabaseServerClient();
   const update: TablesUpdate<"contact_messages"> = { status };
   const { error } = await supabase
@@ -33,6 +35,7 @@ export async function updateContactMessageStatus(id: string, status: string) {
 }
 
 export async function deleteContactMessage(id: string) {
+  await requireAdminUser();
   const supabase = await createSupabaseServerClient();
   const { error } = await supabase.from("contact_messages").delete().eq("id", id);
 
