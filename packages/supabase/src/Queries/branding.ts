@@ -1,3 +1,4 @@
+import { requireAdminUser } from "../auth";
 import { createSupabasePublicClient } from "../public";
 import { createSupabaseServerClient } from "../server";
 
@@ -30,10 +31,12 @@ export async function getBrandingById(id: string) {
 }
 
 export async function getBrandingInquiries() {
+  await requireAdminUser();
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
     .from("branding_inquiries")
-    .select("*, branding(id, title)");
+    .select("*, branding(id, title)")
+    .order("createdAt", { ascending: false });
   if (error) throw new Error(error.message);
   return data;
 }
