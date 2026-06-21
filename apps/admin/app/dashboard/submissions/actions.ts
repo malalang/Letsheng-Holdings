@@ -6,14 +6,22 @@ import {
   updateBrandingInquiryStatus as updateBrandingInquiryStatusService,
 } from "@repo/supabase/Mutations/branding";
 import {
+  deleteContactMessage as deleteContactMessageService,
+  updateContactMessageStatus as updateContactMessageStatusService,
+} from "@repo/supabase/Mutations/contact";
+import {
   deleteLeaseApplication as deleteLeaseApplicationService,
   updateLeaseApplicationStatus as updateLeaseApplicationStatusService,
 } from "@repo/supabase/Mutations/properties";
 import { getBrandingInquiries as getBrandingInquiriesService } from "@repo/supabase/Queries/branding";
+import { getContactMessages as getContactMessagesService } from "@repo/supabase/Queries/contact";
 import { getLeaseApplications as getLeaseApplicationsService } from "@repo/supabase/Queries/properties";
 import { revalidatePath } from "next/cache";
 
-// Action to update the status of a branding inquiry
+function getErrorMessage(error: unknown) {
+  return error instanceof Error ? error.message : "Unexpected error";
+}
+
 export async function updateBrandingInquiryStatus(
   id: string,
   status: string,
@@ -22,23 +30,21 @@ export async function updateBrandingInquiryStatus(
     await updateBrandingInquiryStatusService(id, status);
     revalidatePath("/dashboard/submissions");
     return { ok: true };
-  } catch (error: any) {
-    return { ok: false, error: error.message };
+  } catch (error) {
+    return { ok: false, error: getErrorMessage(error) };
   }
 }
 
-// Action to delete a branding inquiry
 export async function deleteBrandingInquiry(id: string): Promise<ActionResult> {
   try {
     await deleteBrandingInquiryService(id);
     revalidatePath("/dashboard/submissions");
     return { ok: true };
-  } catch (error: any) {
-    return { ok: false, error: error.message };
+  } catch (error) {
+    return { ok: false, error: getErrorMessage(error) };
   }
 }
 
-// Action to update the status of a lease application
 export async function updateLeaseApplicationStatus(
   id: string,
   status: string,
@@ -47,12 +53,11 @@ export async function updateLeaseApplicationStatus(
     await updateLeaseApplicationStatusService(id, status);
     revalidatePath("/dashboard/submissions");
     return { ok: true };
-  } catch (error: any) {
-    return { ok: false, error: error.message };
+  } catch (error) {
+    return { ok: false, error: getErrorMessage(error) };
   }
 }
 
-// Action to delete a lease application
 export async function deleteLeaseApplication(
   id: string,
 ): Promise<ActionResult> {
@@ -60,12 +65,34 @@ export async function deleteLeaseApplication(
     await deleteLeaseApplicationService(id);
     revalidatePath("/dashboard/submissions");
     return { ok: true };
-  } catch (error: any) {
-    return { ok: false, error: error.message };
+  } catch (error) {
+    return { ok: false, error: getErrorMessage(error) };
   }
 }
 
-// Fetches all lease applications with property titles
+export async function updateContactMessageStatus(
+  id: string,
+  status: string,
+): Promise<ActionResult> {
+  try {
+    await updateContactMessageStatusService(id, status);
+    revalidatePath("/dashboard/submissions");
+    return { ok: true };
+  } catch (error) {
+    return { ok: false, error: getErrorMessage(error) };
+  }
+}
+
+export async function deleteContactMessage(id: string): Promise<ActionResult> {
+  try {
+    await deleteContactMessageService(id);
+    revalidatePath("/dashboard/submissions");
+    return { ok: true };
+  } catch (error) {
+    return { ok: false, error: getErrorMessage(error) };
+  }
+}
+
 export async function getLeaseApplications() {
   try {
     const data = await getLeaseApplicationsService();
@@ -76,10 +103,10 @@ export async function getLeaseApplications() {
       applicantName: app.applicantName,
       email: app.email,
       phone: app.phone,
-      employment: app.employment as any,
+      employment: app.employment,
       message: app.message,
-      propertyTitle: (app.properties as any)?.title ?? "Property Not Found",
-      propertyId: (app.properties as any)?.id ?? "",
+      propertyTitle: app.properties?.title ?? "Property Not Found",
+      propertyId: app.properties?.id ?? "",
     }));
   } catch (error) {
     console.error("Error fetching lease applications:", error);
@@ -87,7 +114,6 @@ export async function getLeaseApplications() {
   }
 }
 
-// Fetches all branding inquiries with product titles
 export async function getBrandingInquiries() {
   try {
     const data = await getBrandingInquiriesService();
@@ -100,11 +126,20 @@ export async function getBrandingInquiries() {
       company: inquiry.company,
       quantity: inquiry.quantity,
       message: inquiry.message,
-      productTitle: (inquiry.branding as any)?.title ?? "Product Not Found",
-      productId: (inquiry.branding as any)?.id ?? "",
+      productTitle: inquiry.branding?.title ?? "Product Not Found",
+      productId: inquiry.branding?.id ?? "",
     }));
   } catch (error) {
     console.error("Error fetching branding inquiries:", error);
+    return [];
+  }
+}
+
+export async function getContactMessages() {
+  try {
+    return await getContactMessagesService();
+  } catch (error) {
+    console.error("Error fetching contact messages:", error);
     return [];
   }
 }
