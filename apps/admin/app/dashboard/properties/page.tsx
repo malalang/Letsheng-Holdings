@@ -22,6 +22,8 @@ import {
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { deleteProperty, getProperties } from "./actions";
 
+const PROPERTY_IMAGE_FALLBACK = "/logo.jpg";
+
 const statusOptions = [
   { value: "all", label: "All" },
   { value: "available", label: "Available" },
@@ -135,7 +137,7 @@ export default async function AdminPropertiesPage({
                 <div className="relative h-48">
                   <Link href={`/dashboard/properties/property/${propertyId}`}>
                     <Image
-                      src={p.imageUrl || ""}
+                      src={p.imageUrl || PROPERTY_IMAGE_FALLBACK}
                       alt={p.title}
                       fill
                       className="object-cover"
