@@ -23,6 +23,8 @@ import {
 
 import { getProperties } from "./actions";
 
+const PROPERTY_IMAGE_FALLBACK = "/logo.jpg";
+
 function EstatesHero() {
   return (
     <section className="relative overflow-hidden bg-white pt-16 pb-12 md:pt-24 md:pb-20">
@@ -81,7 +83,7 @@ export default async function PropertiesPage() {
               {/* Consistent Height */}
               <Link href={`/properties/${p.id}`}>
                 <Image
-                  src={p.imageUrl ?? "/logo.jpg"}
+                  src={p.imageUrl || PROPERTY_IMAGE_FALLBACK}
                   alt={p.title}
                   fill
                   className="object-cover"
