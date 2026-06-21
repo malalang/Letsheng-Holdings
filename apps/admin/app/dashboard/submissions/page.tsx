@@ -1,11 +1,19 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { getBrandingInquiries, getLeaseApplications } from "./actions";
+import {
+  getBrandingInquiries,
+  getContactMessages,
+  getLeaseApplications,
+} from "./actions";
 import { BrandingInquiriesTable } from "./BrandingInquiriesTable";
+import { ContactMessagesTable } from "./ContactMessagesTable";
 import { LeaseApplicationsTable } from "./LeaseApplicationsTable";
 
 export default async function SubmissionsPage() {
-  const applications = await getLeaseApplications();
-  const inquiries = await getBrandingInquiries();
+  const [applications, inquiries, contactMessages] = await Promise.all([
+    getLeaseApplications(),
+    getBrandingInquiries(),
+    getContactMessages(),
+  ]);
 
   return (
     <div>
@@ -21,12 +29,16 @@ export default async function SubmissionsPage() {
         <TabsList>
           <TabsTrigger value="leases">Lease Applications</TabsTrigger>
           <TabsTrigger value="branding">Branding Inquiries</TabsTrigger>
+          <TabsTrigger value="contacts">Contact Messages</TabsTrigger>
         </TabsList>
         <TabsContent value="leases">
           <LeaseApplicationsTable applications={applications} />
         </TabsContent>
         <TabsContent value="branding">
           <BrandingInquiriesTable inquiries={inquiries} />
+        </TabsContent>
+        <TabsContent value="contacts">
+          <ContactMessagesTable messages={contactMessages} />
         </TabsContent>
       </Tabs>
     </div>
