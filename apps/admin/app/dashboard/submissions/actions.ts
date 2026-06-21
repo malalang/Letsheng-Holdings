@@ -18,6 +18,18 @@ import { getContactMessages as getContactMessagesService } from "@repo/supabase/
 import { getLeaseApplications as getLeaseApplicationsService } from "@repo/supabase/Queries/properties";
 import { revalidatePath } from "next/cache";
 
+type LeaseApplicationWithProperty = Awaited<
+  ReturnType<typeof getLeaseApplicationsService>
+>[number] & {
+  properties: { id: string; title: string } | null;
+};
+
+type BrandingInquiryWithProduct = Awaited<
+  ReturnType<typeof getBrandingInquiriesService>
+>[number] & {
+  branding: { id: string; title: string } | null;
+};
+
 function getErrorMessage(error: unknown) {
   return error instanceof Error ? error.message : "Unexpected error";
 }
@@ -95,7 +107,7 @@ export async function deleteContactMessage(id: string): Promise<ActionResult> {
 
 export async function getLeaseApplications() {
   try {
-    const data = await getLeaseApplicationsService();
+    const data = (await getLeaseApplicationsService()) as LeaseApplicationWithProperty[];
     return data.map((app) => ({
       id: app.id,
       createdAt: app.createdAt,
@@ -116,7 +128,7 @@ export async function getLeaseApplications() {
 
 export async function getBrandingInquiries() {
   try {
-    const data = await getBrandingInquiriesService();
+    const data = (await getBrandingInquiriesService()) as BrandingInquiryWithProduct[];
     return data.map((inquiry) => ({
       id: inquiry.id,
       createdAt: inquiry.createdAt,
