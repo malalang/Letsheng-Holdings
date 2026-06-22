@@ -1,0 +1,30 @@
+{
+  "name": "@repo/supabase",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    "./client": "./src/client.ts",
+    "./public": "./src/public.ts",
+    "./server": "./src/server.ts",
+    "./proxy": "./src/middleware.ts",
+    "./auth": "./src/auth.ts",
+    "./cache": "./src/cache.ts",
+    "./validations": "./src/validations.ts",
+    "./supabaseType": "./src/supabaseType.ts",
+    "./Queries/*": "./src/Queries/*.ts",
+    "./Mutations/*": "./src/Mutations/*.ts"
+  },
+  "scripts": {
+    "supabase:types": "supabase gen types typescript --local > src/supabaseType.ts"
+  },
+  "dependencies": {
+    "@supabase/ssr": "catalog:",
+    "@supabase/supabase-js": "catalog:",
+    "next": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "typescript": "catalog:"
+  }
+}
