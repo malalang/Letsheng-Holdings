@@ -30,8 +30,41 @@ type BrandingInquiryWithProduct = Awaited<
   branding: { id: string; title: string } | null;
 };
 
+type LeaseEmployment =
+  | "employed"
+  | "self-employed"
+  | "unemployed"
+  | "student"
+  | null;
+
+type LeaseApplicationTableEntry = {
+  id: string;
+  createdAt: string;
+  status: string;
+  applicantName: string;
+  email: string;
+  phone: string | null;
+  employment: LeaseEmployment;
+  message: string | null;
+  propertyTitle: string;
+  propertyId: string;
+};
+
+const leaseEmploymentValues = new Set([
+  "employed",
+  "self-employed",
+  "unemployed",
+  "student",
+]);
+
 function getErrorMessage(error: unknown) {
   return error instanceof Error ? error.message : "Unexpected error";
+}
+
+function normalizeLeaseEmployment(value: string | null): LeaseEmployment {
+  return value && leaseEmploymentValues.has(value)
+    ? (value as Exclude<LeaseEmployment, null>)
+    : null;
 }
 
 export async function updateBrandingInquiryStatus(
@@ -105,9 +138,12 @@ export async function deleteContactMessage(id: string): Promise<ActionResult> {
   }
 }
 
-export async function getLeaseApplications() {
+export async function getLeaseApplications(): Promise<
+  LeaseApplicationTableEntry[]
+> {
   try {
-    const data = (await getLeaseApplicationsService()) as LeaseApplicationWithProperty[];
+    const data =
+      (await getLeaseApplicationsService()) as LeaseApplicationWithProperty[];
     return data.map((app) => ({
       id: app.id,
       createdAt: app.createdAt,
@@ -115,7 +151,7 @@ export async function getLeaseApplications() {
       applicantName: app.applicantName,
       email: app.email,
       phone: app.phone,
-      employment: app.employment,
+      employment: normalizeLeaseEmployment(app.employment),
       message: app.message,
       propertyTitle: app.properties?.title ?? "Property Not Found",
       propertyId: app.properties?.id ?? "",
@@ -128,7 +164,8 @@ export async function getLeaseApplications() {
 
 export async function getBrandingInquiries() {
   try {
-    const data = (await getBrandingInquiriesService()) as BrandingInquiryWithProduct[];
+    const data =
+      (await getBrandingInquiriesService()) as BrandingInquiryWithProduct[];
     return data.map((inquiry) => ({
       id: inquiry.id,
       createdAt: inquiry.createdAt,
