@@ -10,9 +10,9 @@ export const businessInfo = {
   seoDescription:
     "Your strategic partner for premium residential estates, corporate branding, water supply, detergents, and tenant-focused property services across South Africa.",
   address: "1294 Mahamba Street, Phola, Ogies, Mpumalanga 2233",
-  phones: ["+27 83 753 5424", "+27 83 222 692"],
+  phones: ["+27 83 753 5424", "+27 783 222 692"],
   emails: ["kgotso@letshengholdings.co.za", "elsie@letshengholdings.co.za"],
-  whatsappHref: "https://wa.me/27837535424",
+  whatsappHref: "https://wa.me/27679295983",
   social: {
     linkedin: "https://www.linkedin.com/company/letsheng-holdings",
     facebook: "https://www.facebook.com/profile.php?id=100088899263799",
