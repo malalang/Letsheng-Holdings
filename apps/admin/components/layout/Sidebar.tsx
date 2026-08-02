@@ -19,7 +19,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-
+import Link from 'next/link';
 const navItems = [
   { href: "/dashboard", icon: Home, label: "Dashboard" },
   { href: "/dashboard/properties", icon: Building2, label: "Estates" },
@@ -72,6 +72,7 @@ const Sidebar = () => {
               </SidebarMenuButton>
             </SidebarMenuItem>
           ))}
+          <Link href="/about"  target="_blank" rel="noopener noreferrer">Emails</Link>
         </SidebarMenu>
       </SidebarContent>
     </Shell>
