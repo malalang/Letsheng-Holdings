@@ -5,6 +5,7 @@ import {
   BookUser,
   Building2,
   Home,
+  Mail,
   Package2,
   ShoppingCart,
 } from "lucide-react";
@@ -19,7 +20,6 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import Link from 'next/link';
 const navItems = [
   { href: "/dashboard", icon: Home, label: "Dashboard" },
   { href: "/dashboard/properties", icon: Building2, label: "Estates" },
@@ -27,6 +27,7 @@ const navItems = [
   { href: "/dashboard/payments", icon: Package2, label: "Payments" },
   { href: "/dashboard/branding", icon: ShoppingCart, label: "Branding Shop" },
   { href: "/dashboard/submissions", icon: Archive, label: "Submissions" },
+  { href: "https://emails.letsheng-holdings.com", icon: Mail, label: "Emails", external: true },
 ];
 
 function isActivePath(pathname: string, href: string) {
@@ -65,14 +66,17 @@ const Sidebar = () => {
                 isActive={isActivePath(pathname, item.href)}
                 className="w-full justify-start transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:bg-sidebar-accent focus-visible:text-sidebar-accent-foreground data-[active=true]:bg-sidebar-accent data-[active=true]:text-sidebar-accent-foreground data-[active=true]:font-semibold"
               >
-                <Link href={item.href}>
+                <Link
+                  href={item.href}
+                  target={item.external || item.href.startsWith("http") ? "_blank" : undefined}
+                  rel={item.external || item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                >
                   <item.icon className="h-5 w-5" />
                   <span>{item.label}</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
           ))}
-          <Link href="/about"  target="_blank" rel="noopener noreferrer">Emails</Link>
         </SidebarMenu>
       </SidebarContent>
     </Shell>
