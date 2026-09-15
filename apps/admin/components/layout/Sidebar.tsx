@@ -20,6 +20,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+
 const navItems = [
   { href: "/dashboard", icon: Home, label: "Dashboard" },
   { href: "/dashboard/properties", icon: Building2, label: "Estates" },
@@ -27,7 +28,12 @@ const navItems = [
   { href: "/dashboard/payments", icon: Package2, label: "Payments" },
   { href: "/dashboard/branding", icon: ShoppingCart, label: "Branding Shop" },
   { href: "/dashboard/submissions", icon: Archive, label: "Submissions" },
-  { href: "https://emails.letsheng-holdings.com", icon: Mail, label: "Emails", external: true },
+  {
+    href: "https://emails.letsheng-holdings.com",
+    icon: Mail,
+    label: "Emails",
+    external: true,
+  },
 ];
 
 function isActivePath(pathname: string, href: string) {
@@ -68,8 +74,16 @@ const Sidebar = () => {
               >
                 <Link
                   href={item.href}
-                  target={item.external || item.href.startsWith("http") ? "_blank" : undefined}
-                  rel={item.external || item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  target={
+                    item.external || item.href.startsWith("http")
+                      ? "_blank"
+                      : undefined
+                  }
+                  rel={
+                    item.external || item.href.startsWith("http")
+                      ? "noopener noreferrer"
+                      : undefined
+                  }
                 >
                   <item.icon className="h-5 w-5" />
                   <span>{item.label}</span>

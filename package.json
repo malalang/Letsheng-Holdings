@@ -9,10 +9,11 @@
     "lint:fix": "biome check --write .",
     "format": "biome format --write .",
     "typecheck": "turbo run typecheck",
-    "gen:types": "pnpm --filter @repo/supabase supabase:types"
+    "gen:types": "pnpm --filter @letsheng-holdings/supabase supabase:types"
   },
   "devDependencies": {
-    "turbo": "^2.9.14"
+    "@biomejs/biome": "catalog:",
+    "turbo": "catalog:"
   },
-  "packageManager": "pnpm@9.1.0"
+  "packageManager": "pnpm@10.0.0"
 }

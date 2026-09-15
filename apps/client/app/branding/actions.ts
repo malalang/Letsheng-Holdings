@@ -1,14 +1,17 @@
 "use server";
 
-import { submitBrandingInquiry as submitBrandingInquiryService } from "@repo/supabase/Mutations/branding";
+import type { ActionResult } from "@letsheng-holdings/contracts/actionResult";
 import {
   type Branding,
   type BrandingInquiry,
   brandingInquirySchema,
   brandingSchema,
-} from "@repo/contracts/branding";
-import { type ActionResult } from "@repo/contracts/actionResult";
-import { getCachedBrandingRowById, getCachedBrandingRows } from "../_lib/cached-public-data";
+} from "@letsheng-holdings/contracts/branding";
+import { submitBrandingInquiry as submitBrandingInquiryService } from "@letsheng-holdings/supabase/Mutations/branding";
+import {
+  getCachedBrandingRowById,
+  getCachedBrandingRows,
+} from "../_lib/cached-public-data";
 
 export type BrandingRecord = Branding & { id: string };
 
@@ -50,7 +53,10 @@ export async function submitBrandingInquiry(
     return {
       ok: false,
       error: "Invalid data provided.",
-      fieldErrors: validatedFields.error.flatten().fieldErrors as Record<string, string[]>,
+      fieldErrors: validatedFields.error.flatten().fieldErrors as Record<
+        string,
+        string[]
+      >,
     };
   }
 

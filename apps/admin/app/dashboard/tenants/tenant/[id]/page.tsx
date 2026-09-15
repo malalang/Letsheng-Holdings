@@ -1,7 +1,7 @@
 import {
   getPaymentsByTenantId,
   getTenantById,
-} from "@repo/supabase/Queries/tenants";
+} from "@letsheng-holdings/supabase/Queries/tenants";
 import { ArrowLeft, Edit } from "lucide-react";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";

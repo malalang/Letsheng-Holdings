@@ -1,9 +1,12 @@
-import { CACHE_TAGS } from "@repo/supabase/cache";
-import { getBranding, getBrandingById } from "@repo/supabase/Queries/branding";
+import { CACHE_TAGS } from "@letsheng-holdings/supabase/cache";
+import {
+  getBranding,
+  getBrandingById,
+} from "@letsheng-holdings/supabase/Queries/branding";
 import {
   getProperties,
   getPropertyById,
-} from "@repo/supabase/Queries/properties";
+} from "@letsheng-holdings/supabase/Queries/properties";
 import { unstable_cache } from "next/cache";
 
 export const getCachedPropertyRows = unstable_cache(

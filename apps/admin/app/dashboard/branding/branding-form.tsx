@@ -1,11 +1,15 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { type Branding, brandingSchema } from "@repo/contracts/branding";
+import {
+  type Branding,
+  brandingSchema,
+} from "@letsheng-holdings/contracts/branding";
 import { Loader2, PlusCircle, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
+import type { z } from "zod";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -45,7 +49,7 @@ interface BrandingFormProps {
   product?: Branding;
 }
 
-type BrandingFormValues = Branding;
+type BrandingFormValues = z.input<typeof brandingSchema>;
 
 export default function BrandingForm({ product }: BrandingFormProps) {
   const [isLoading, setIsLoading] = useState(false);

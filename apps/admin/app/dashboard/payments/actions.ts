@@ -1,6 +1,6 @@
 "use server";
 
-import { getPayments as getPaymentsService } from "@repo/supabase/Queries/tenants";
+import { getPayments as getPaymentsService } from "@letsheng-holdings/supabase/Queries/tenants";
 
 export async function getPayments() {
   try {

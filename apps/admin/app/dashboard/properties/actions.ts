@@ -1,21 +1,24 @@
 "use server";
 
-import type { ActionResult } from "@repo/contracts/actionResult";
-import { type Property, propertySchema } from "@repo/contracts/property";
+import type { ActionResult } from "@letsheng-holdings/contracts/actionResult";
+import {
+  type Property,
+  propertySchema,
+} from "@letsheng-holdings/contracts/property";
 import {
   createProperty as createPropertyService,
   deleteProperty as deletePropertyService,
   updateProperty as updatePropertyService,
-} from "@repo/supabase/Mutations/properties";
+} from "@letsheng-holdings/supabase/Mutations/properties";
 import {
   getAdminProperties as getAdminPropertiesService,
   getAdminPropertyById as getAdminPropertyByIdService,
-} from "@repo/supabase/Queries/properties";
+} from "@letsheng-holdings/supabase/Queries/properties";
 import type {
   Json,
   TablesInsert,
   TablesUpdate,
-} from "@repo/supabase/supabaseType";
+} from "@letsheng-holdings/supabase/supabaseType";
 import { revalidatePath } from "next/cache";
 import { triggerRevalidation } from "@/lib/revalidation";
 

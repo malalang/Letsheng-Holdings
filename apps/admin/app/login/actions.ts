@@ -1,6 +1,6 @@
 "use server";
 
-import { createSupabaseServerClient } from "@repo/supabase/server";
+import { createSupabaseServerClient } from "@letsheng-holdings/supabase/server";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 

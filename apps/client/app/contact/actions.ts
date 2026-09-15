@@ -1,11 +1,11 @@
 "use server";
 
-import { submitContactMessage } from "@repo/supabase/Mutations/contact";
+import type { ActionResult } from "@letsheng-holdings/contracts/actionResult";
 import {
   type ContactMessage,
   contactMessageSchema,
-} from "@repo/contracts/contact";
-import { type ActionResult } from "@repo/contracts/actionResult";
+} from "@letsheng-holdings/contracts/contact";
+import { submitContactMessage } from "@letsheng-holdings/supabase/Mutations/contact";
 
 export async function sendContactMessage(
   data: ContactMessage,
@@ -16,7 +16,10 @@ export async function sendContactMessage(
     return {
       ok: false,
       error: "Invalid contact details provided.",
-      fieldErrors: validatedFields.error.flatten().fieldErrors as Record<string, string[]>,
+      fieldErrors: validatedFields.error.flatten().fieldErrors as Record<
+        string,
+        string[]
+      >,
     };
   }
 

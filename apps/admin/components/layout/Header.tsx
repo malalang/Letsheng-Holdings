@@ -40,7 +40,10 @@ const Header = () => {
           <DropdownMenuLabel>Create New</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem asChild>
-            <Link href="/dashboard/properties/new" className="flex items-center">
+            <Link
+              href="/dashboard/properties/new"
+              className="flex items-center"
+            >
               <Building2 className="h-4 w-4 mr-2" />
               Property
             </Link>

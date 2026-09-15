@@ -62,11 +62,11 @@ export default function Header() {
             <NavLink href="/branding" onLinkClick={onLinkClick}>
               Branding
             </NavLink>
-        
-             <NavLink href="/waterDetergents" onLinkClick={onLinkClick}>
+
+            <NavLink href="/waterDetergents" onLinkClick={onLinkClick}>
               Water and Detergents
             </NavLink>
-    {/* <NavLink href="/services" onLinkClick={onLinkClick}>
+            {/* <NavLink href="/services" onLinkClick={onLinkClick}>
               services
             </NavLink> */}
             <NavLink href="/about" onLinkClick={onLinkClick}>
@@ -107,9 +107,9 @@ export default function Header() {
                   <NavLink href="/branding" onLinkClick={onLinkClick}>
                     Branding
                   </NavLink>
-                    <NavLink href="/waterDetergents" onLinkClick={onLinkClick}>
-              Water and Detergents
-            </NavLink>
+                  <NavLink href="/waterDetergents" onLinkClick={onLinkClick}>
+                    Water and Detergents
+                  </NavLink>
                   {/* <NavLink href="/services" onLinkClick={onLinkClick}>
                     services
                   </NavLink> */}

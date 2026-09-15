@@ -2,7 +2,7 @@ import {
   featureSchema,
   galleryItemSchema,
   reviewSchema,
-} from "@repo/supabase/validations";
+} from "@letsheng-holdings/contracts/property";
 import {
   Bath,
   Bed,
@@ -110,7 +110,10 @@ export default async function PropertyDetailPage({
               </h3>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                 {gallery.slice(0, 3).map((image) => (
-                  <div key={image.imageUrl || image.title} className="relative h-48">
+                  <div
+                    key={image.imageUrl || image.title}
+                    className="relative h-48"
+                  >
                     <Image
                       src={image.imageUrl || PROPERTY_IMAGE_FALLBACK}
                       alt={image.title}

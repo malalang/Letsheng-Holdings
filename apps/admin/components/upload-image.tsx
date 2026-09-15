@@ -1,6 +1,6 @@
 "use client";
 
-import { createSupabaseBrowserClient } from "@repo/supabase/client";
+import { createSupabaseBrowserClient } from "@letsheng-holdings/supabase/client";
 import { Loader2, Pencil, Trash2, Upload } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";

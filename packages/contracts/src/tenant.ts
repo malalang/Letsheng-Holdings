@@ -35,28 +35,35 @@ const optionalNullableEmailSchema = optionalNullableStringSchema(emailSchema);
 
 const dateInputSchema = z.union([
   z.date(),
-  z.string().trim().transform((value, ctx) => {
-    if (value === "") {
-      ctx.addIssue({
-        code: "custom",
-        message: "Date is required.",
-      });
-      return z.NEVER;
-    }
-    const date = new Date(value);
-    if (Number.isNaN(date.getTime())) {
-      ctx.addIssue({
-        code: "custom",
-        message: "Please enter a valid date.",
-      });
-      return z.NEVER;
-    }
-    return date;
-  }),
+  z
+    .string()
+    .trim()
+    .transform((value, ctx) => {
+      if (value === "") {
+        ctx.addIssue({
+          code: "custom",
+          message: "Date is required.",
+        });
+        return z.NEVER;
+      }
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) {
+        ctx.addIssue({
+          code: "custom",
+          message: "Please enter a valid date.",
+        });
+        return z.NEVER;
+      }
+      return date;
+    }),
 ]);
 
 const nullableDateSchema = z.union([
-  z.string().trim().length(0).transform(() => null),
+  z
+    .string()
+    .trim()
+    .length(0)
+    .transform(() => null),
   z.null(),
   dateInputSchema,
 ]);
@@ -82,17 +89,20 @@ const nullableImageSourceSchema = (message: string) =>
 const numberInputSchema = (schema: z.ZodNumber) =>
   z.union([
     z.number().transform((value, ctx) => parseWithSchema(schema, value, ctx)),
-    z.string().trim().transform((value, ctx) => {
-      const numericValue = Number(value);
-      if (!Number.isFinite(numericValue)) {
-        ctx.addIssue({
-          code: "custom",
-          message: "Please enter a valid number.",
-        });
-        return z.NEVER;
-      }
-      return parseWithSchema(schema, numericValue, ctx);
-    }),
+    z
+      .string()
+      .trim()
+      .transform((value, ctx) => {
+        const numericValue = Number(value);
+        if (!Number.isFinite(numericValue)) {
+          ctx.addIssue({
+            code: "custom",
+            message: "Please enter a valid number.",
+          });
+          return z.NEVER;
+        }
+        return parseWithSchema(schema, numericValue, ctx);
+      }),
   ]);
 
 export const tenantSchema = z.object({

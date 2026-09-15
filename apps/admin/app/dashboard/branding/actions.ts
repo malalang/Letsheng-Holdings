@@ -1,21 +1,21 @@
 "use server";
 
-import type { ActionResult } from "@repo/contracts/actionResult";
-import type { Branding } from "@repo/contracts/branding";
+import type { ActionResult } from "@letsheng-holdings/contracts/actionResult";
+import type { Branding } from "@letsheng-holdings/contracts/branding";
 import {
   createBranding as createBrandingProductService,
   deleteBranding as deleteBrandingProductService,
   updateBranding as updateBrandingProductService,
-} from "@repo/supabase/Mutations/branding";
+} from "@letsheng-holdings/supabase/Mutations/branding";
 import {
   getBrandingById as getBrandingProductService,
   getBranding as getBrandingProductsService,
-} from "@repo/supabase/Queries/branding";
+} from "@letsheng-holdings/supabase/Queries/branding";
 import type {
   Json,
   TablesInsert,
   TablesUpdate,
-} from "@repo/supabase/supabaseType";
+} from "@letsheng-holdings/supabase/supabaseType";
 import { revalidatePath } from "next/cache";
 import { triggerRevalidation } from "@/lib/revalidation";
 

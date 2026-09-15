@@ -32,36 +32,46 @@ const optionalNullableStringSchema = <Schema extends z.ZodTypeAny>(
 
 const nullableNumberSchema = (schema: z.ZodNumber) =>
   z.union([
-    z.string().trim().length(0).transform(() => null),
+    z
+      .string()
+      .trim()
+      .length(0)
+      .transform(() => null),
     z.null(),
     z.number().transform((value, ctx) => parseWithSchema(schema, value, ctx)),
-    z.string().trim().transform((value, ctx) => {
-      const numericValue = Number(value);
-      if (!Number.isFinite(numericValue)) {
-        ctx.addIssue({
-          code: "custom",
-          message: "Please enter a valid number.",
-        });
-        return z.NEVER;
-      }
-      return parseWithSchema(schema, numericValue, ctx);
-    }),
+    z
+      .string()
+      .trim()
+      .transform((value, ctx) => {
+        const numericValue = Number(value);
+        if (!Number.isFinite(numericValue)) {
+          ctx.addIssue({
+            code: "custom",
+            message: "Please enter a valid number.",
+          });
+          return z.NEVER;
+        }
+        return parseWithSchema(schema, numericValue, ctx);
+      }),
   ]);
 
 const numberInputSchema = (schema: z.ZodNumber) =>
   z.union([
     z.number().transform((value, ctx) => parseWithSchema(schema, value, ctx)),
-    z.string().trim().transform((value, ctx) => {
-      const numericValue = Number(value);
-      if (!Number.isFinite(numericValue)) {
-        ctx.addIssue({
-          code: "custom",
-          message: "Please enter a valid number.",
-        });
-        return z.NEVER;
-      }
-      return parseWithSchema(schema, numericValue, ctx);
-    }),
+    z
+      .string()
+      .trim()
+      .transform((value, ctx) => {
+        const numericValue = Number(value);
+        if (!Number.isFinite(numericValue)) {
+          ctx.addIssue({
+            code: "custom",
+            message: "Please enter a valid number.",
+          });
+          return z.NEVER;
+        }
+        return parseWithSchema(schema, numericValue, ctx);
+      }),
   ]);
 
 const isValidImageSource = (value: string) => {
@@ -105,12 +115,20 @@ export const propertySchema = z.object({
   id: z.string().optional(),
   title: z.string().trim().min(3, "Title must be at least 3 characters"),
   description: optionalNullableStringSchema(z.string().trim()),
-  price: numberInputSchema(z.number().positive("Price must be a positive number")),
-  location: nullableStringSchema(z.string().trim().min(3, "Location is required")),
+  price: numberInputSchema(
+    z.number().positive("Price must be a positive number"),
+  ),
+  location: nullableStringSchema(
+    z.string().trim().min(3, "Location is required"),
+  ),
   availability: z.boolean(),
   imageUrl: nullableImageSourceSchema("Must be a valid image URL or app path"), // camelCase
-  bedrooms: nullableNumberSchema(z.number().int().min(1, "Must have at least one bedroom")),
-  bathrooms: nullableNumberSchema(z.number().int().min(1, "Must have at least one bathroom")),
+  bedrooms: nullableNumberSchema(
+    z.number().int().min(1, "Must have at least one bedroom"),
+  ),
+  bathrooms: nullableNumberSchema(
+    z.number().int().min(1, "Must have at least one bathroom"),
+  ),
   type: nullableStringSchema(z.string().trim().min(1, "Type is required")),
   features: z.array(featureSchema).optional().nullable(),
   isFeatured: z.boolean(), // camelCase

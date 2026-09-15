@@ -1,6 +1,15 @@
 "use client";
 
-import { Calendar, CheckCircle2, Inbox, Mail, MoreVertical, Phone, Trash2, User } from "lucide-react";
+import {
+  Calendar,
+  CheckCircle2,
+  Inbox,
+  Mail,
+  MoreVertical,
+  Phone,
+  Trash2,
+  User,
+} from "lucide-react";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";

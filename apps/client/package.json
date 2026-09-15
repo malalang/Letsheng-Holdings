@@ -13,13 +13,12 @@
     "clean": "rm -rf .next"
   },
   "dependencies": {
-    "@repo/contracts": "workspace:*",
-    "@repo/supabase": "workspace:*",
+    "@letsheng-holdings/contracts": "workspace:*",
+    "@letsheng-holdings/supabase": "workspace:*",
     "zod": "catalog:",
     "clsx": "catalog:",
     "next": "catalog:",
     "react": "catalog:",
-    "supabase": "catalog:",
     "react-dom": "catalog:",
     "react-icons": "catalog:",
     "@supabase/ssr": "catalog:",
@@ -41,7 +40,7 @@
     "tailwind-merge": "catalog:"
   },
   "devDependencies": {
-    "@repo/typescript-config": "workspace:*",
+    "@letsheng-holdings/typescript-config": "workspace:*",
     "@biomejs/biome": "catalog:",
     "@tailwindcss/postcss": "catalog:",
     "@types/node": "catalog:",

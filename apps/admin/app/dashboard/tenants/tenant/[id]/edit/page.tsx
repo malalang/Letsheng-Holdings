@@ -1,4 +1,4 @@
-import type { Tenant } from "@repo/contracts/tenant";
+import type { Tenant } from "@letsheng-holdings/contracts/tenant";
 import { getTenantById } from "../../../actions";
 import TenantForm from "../../../tenant-form";
 

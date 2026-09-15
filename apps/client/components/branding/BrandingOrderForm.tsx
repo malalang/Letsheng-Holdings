@@ -5,12 +5,13 @@ import {
   type Branding,
   type BrandingInquiry,
   brandingInquirySchema,
-} from "@repo/contracts/branding";
+} from "@letsheng-holdings/contracts/branding";
 import { ArrowRight, Loader2, Package, Upload, User } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import type { z } from "zod";
 import { submitBrandingInquiry } from "@/app/branding/actions";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -29,7 +30,7 @@ interface BrandingOrderFormProps {
   product: Branding;
 }
 
-type BrandingInquiryFormValues = BrandingInquiry;
+type BrandingInquiryFormValues = z.input<typeof brandingInquirySchema>;
 
 export default function BrandingOrderForm({ product }: BrandingOrderFormProps) {
   const [isLoading, setIsLoading] = useState(false);

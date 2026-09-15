@@ -1,5 +1,5 @@
 {
-  "name": "@repo/contracts",
+  "name": "@letsheng-holdings/contracts",
   "version": "0.0.0",
   "private": true,
   "exports": {
@@ -20,7 +20,7 @@
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@repo/typescript-config": "workspace:*",
+    "@letsheng-holdings/typescript-config": "workspace:*",
     "typescript": "catalog:"
   }
 }

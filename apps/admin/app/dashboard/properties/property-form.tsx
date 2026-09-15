@@ -1,11 +1,15 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { type Property, propertySchema } from "@repo/contracts/property";
+import {
+  type Property,
+  propertySchema,
+} from "@letsheng-holdings/contracts/property";
 import { Loader2, PlusCircle, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
+import type { z } from "zod";
 import { ArrayInput } from "@/components/admin/ArrayInput";
 import { Button } from "@/components/ui/button";
 import {
@@ -42,7 +46,7 @@ interface PropertyFormProps {
   property?: Property;
 }
 
-type PropertyFormValues = Property;
+type PropertyFormValues = z.input<typeof propertySchema>;
 
 export default function PropertyForm({ property }: PropertyFormProps) {
   const [isLoading, setIsLoading] = useState(false);

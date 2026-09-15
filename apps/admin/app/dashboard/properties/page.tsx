@@ -32,9 +32,7 @@ const statusOptions = [
 
 type StatusOption = (typeof statusOptions)[number]["value"];
 
-function getStatusFilter(
-  status: string | string[] | undefined,
-): StatusOption {
+function getStatusFilter(status: string | string[] | undefined): StatusOption {
   if (Array.isArray(status)) {
     status = status[0];
   }
@@ -114,7 +112,11 @@ export default async function AdminPropertiesPage({
       {statusProperties.length === 0 ? (
         <div className="mt-8 rounded-2xl border border-dashed border-muted p-12 text-center">
           <h2 className="text-xl font-semibold">
-            No {selectedStatus === "all" ? "properties" : `${selectedStatus} properties`} found.
+            No{" "}
+            {selectedStatus === "all"
+              ? "properties"
+              : `${selectedStatus} properties`}{" "}
+            found.
           </h2>
           <p className="mt-2 text-sm text-muted-foreground">
             Adjust the filter or add a new property to see it appear here.

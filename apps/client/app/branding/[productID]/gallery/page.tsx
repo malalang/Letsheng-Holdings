@@ -1,4 +1,4 @@
-import { galleryItemSchema } from "@repo/contracts/property";
+import { galleryItemSchema } from "@letsheng-holdings/contracts/property";
 import Image from "next/image";
 
 import { Card } from "@/components/ui/card";

@@ -34,17 +34,20 @@ const optionalNullableStringSchema = <Schema extends z.ZodTypeAny>(
 const numberInputSchema = (schema: z.ZodNumber) =>
   z.union([
     z.number().transform((value, ctx) => parseWithSchema(schema, value, ctx)),
-    z.string().trim().transform((value, ctx) => {
-      const numericValue = Number(value);
-      if (!Number.isFinite(numericValue)) {
-        ctx.addIssue({
-          code: "custom",
-          message: "Please enter a valid number.",
-        });
-        return z.NEVER;
-      }
-      return parseWithSchema(schema, numericValue, ctx);
-    }),
+    z
+      .string()
+      .trim()
+      .transform((value, ctx) => {
+        const numericValue = Number(value);
+        if (!Number.isFinite(numericValue)) {
+          ctx.addIssue({
+            code: "custom",
+            message: "Please enter a valid number.",
+          });
+          return z.NEVER;
+        }
+        return parseWithSchema(schema, numericValue, ctx);
+      }),
   ]);
 
 const isValidImageSource = (value: string) => {

@@ -28,6 +28,7 @@ node_modules/
 *.pem
 .turbo
 **/supabase/.temp/
+media/
 
 # debug
 npm-debug.log*

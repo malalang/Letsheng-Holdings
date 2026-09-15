@@ -190,9 +190,7 @@ const NextStep = ({
 
 export default async function HomePage() {
   const properties = await getProperties();
-  const featuredProperties = properties
-    .filter((p) => p.isFeatured)
-    .slice(0, 3);
+  const featuredProperties = properties.filter((p) => p.isFeatured).slice(0, 3);
   const products = await getBrandingProducts();
   const featuredProducts = products.filter((p) => p.isFeatured).slice(0, 3);
 

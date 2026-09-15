@@ -1,17 +1,20 @@
 "use server";
 
-import type { ActionResult } from "@repo/contracts/actionResult";
-import { type Tenant, tenantSchema } from "@repo/contracts/tenant";
+import type { ActionResult } from "@letsheng-holdings/contracts/actionResult";
+import { type Tenant, tenantSchema } from "@letsheng-holdings/contracts/tenant";
 import {
   createTenant as createTenantService,
   deleteTenant as deleteTenantService,
   updateTenant as updateTenantService,
-} from "@repo/supabase/Mutations/tenants";
+} from "@letsheng-holdings/supabase/Mutations/tenants";
 import {
   getTenantById as getTenantByIdService,
   getTenants as getTenantsService,
-} from "@repo/supabase/Queries/tenants";
-import type { TablesInsert, TablesUpdate } from "@repo/supabase/supabaseType";
+} from "@letsheng-holdings/supabase/Queries/tenants";
+import type {
+  TablesInsert,
+  TablesUpdate,
+} from "@letsheng-holdings/supabase/supabaseType";
 import { revalidatePath } from "next/cache";
 
 // NOTE: Tenant is imported from contracts which uses camelCase.

@@ -2,7 +2,7 @@ import {
   featureSchema,
   galleryItemSchema,
   reviewSchema,
-} from "@repo/contracts/property";
+} from "@letsheng-holdings/contracts/property";
 import {
   ArrowLeft,
   Bath,

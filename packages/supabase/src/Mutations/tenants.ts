@@ -18,7 +18,10 @@ export async function createTenant(tenant: TablesInsert<"tenants">) {
   });
 }
 
-export async function updateTenant(id: string, tenant: TablesUpdate<"tenants">) {
+export async function updateTenant(
+  id: string,
+  tenant: TablesUpdate<"tenants">,
+) {
   await requireAdminUser();
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase

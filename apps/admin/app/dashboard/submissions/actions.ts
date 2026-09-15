@@ -1,21 +1,21 @@
 "use server";
 
-import type { ActionResult } from "@repo/contracts/actionResult";
+import type { ActionResult } from "@letsheng-holdings/contracts/actionResult";
 import {
   deleteBrandingInquiry as deleteBrandingInquiryService,
   updateBrandingInquiryStatus as updateBrandingInquiryStatusService,
-} from "@repo/supabase/Mutations/branding";
+} from "@letsheng-holdings/supabase/Mutations/branding";
 import {
   deleteContactMessage as deleteContactMessageService,
   updateContactMessageStatus as updateContactMessageStatusService,
-} from "@repo/supabase/Mutations/contact";
+} from "@letsheng-holdings/supabase/Mutations/contact";
 import {
   deleteLeaseApplication as deleteLeaseApplicationService,
   updateLeaseApplicationStatus as updateLeaseApplicationStatusService,
-} from "@repo/supabase/Mutations/properties";
-import { getBrandingInquiries as getBrandingInquiriesService } from "@repo/supabase/Queries/branding";
-import { getContactMessages as getContactMessagesService } from "@repo/supabase/Queries/contact";
-import { getLeaseApplications as getLeaseApplicationsService } from "@repo/supabase/Queries/properties";
+} from "@letsheng-holdings/supabase/Mutations/properties";
+import { getBrandingInquiries as getBrandingInquiriesService } from "@letsheng-holdings/supabase/Queries/branding";
+import { getContactMessages as getContactMessagesService } from "@letsheng-holdings/supabase/Queries/contact";
+import { getLeaseApplications as getLeaseApplicationsService } from "@letsheng-holdings/supabase/Queries/properties";
 import { revalidatePath } from "next/cache";
 
 type LeaseApplicationWithProperty = Awaited<

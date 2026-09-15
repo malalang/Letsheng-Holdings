@@ -1,33 +1,19 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalEnv": [
-    "REVALIDATION_SECRET",
-    "NEXT_PUBLIC_CLIENT_URL"
-  ],
+  "globalEnv": ["REVALIDATION_SECRET", "NEXT_PUBLIC_CLIENT_URL"],
   "tasks": {
     "build": {
-      "dependsOn": [
-        "^build"
-      ],
-      "outputs": [
-        ".next/**",
-        "!.next/cache/**"
-      ]
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "!.next/cache/**"]
     },
     "lint": {
-      "dependsOn": [
-        "^lint"
-      ]
+      "dependsOn": ["^lint"]
     },
     "lint:fix": {
-      "dependsOn": [
-        "^lint:fix"
-      ]
+      "dependsOn": ["^lint:fix"]
     },
     "typecheck": {
-      "dependsOn": [
-        "^typecheck"
-      ]
+      "dependsOn": ["^typecheck"]
     },
     "clean": {
       "cache": false

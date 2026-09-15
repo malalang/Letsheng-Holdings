@@ -1,5 +1,5 @@
 {
-  "name": "@repo/supabase",
+  "name": "@letsheng-holdings/supabase",
   "version": "0.0.0",
   "private": true,
   "exports": {
@@ -9,7 +9,6 @@
     "./proxy": "./src/middleware.ts",
     "./auth": "./src/auth.ts",
     "./cache": "./src/cache.ts",
-    "./validations": "./src/validations.ts",
     "./supabaseType": "./src/supabaseType.ts",
     "./Queries/*": "./src/Queries/*.ts",
     "./Mutations/*": "./src/Mutations/*.ts"
@@ -25,7 +24,8 @@
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@repo/typescript-config": "workspace:*",
+    "@letsheng-holdings/typescript-config": "workspace:*",
+    "supabase": "catalog:",
     "typescript": "catalog:"
   }
 }

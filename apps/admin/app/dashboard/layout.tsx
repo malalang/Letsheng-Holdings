@@ -1,6 +1,9 @@
 import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
-import { SidebarInset as Inset, SidebarProvider as Provider } from "@/components/ui/sidebar";
+import {
+  SidebarInset as Inset,
+  SidebarProvider as Provider,
+} from "@/components/ui/sidebar";
 
 export const dynamic = "force-dynamic";
 

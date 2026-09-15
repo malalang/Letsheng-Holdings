@@ -1,4 +1,4 @@
-import type { RevalidationRequest } from "@repo/contracts/revalidation";
+import type { RevalidationRequest } from "@letsheng-holdings/contracts/revalidation";
 
 function getClientRevalidationUrl(clientUrl: string) {
   const normalizedClientUrl = clientUrl.trim().match(/^https?:\/\//)
