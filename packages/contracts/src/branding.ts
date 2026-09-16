@@ -1,12 +1,11 @@
 import { z } from "zod";
+import { galleryItemSchema, reviewSchema } from "./property";
 import {
   emailSchema,
   nullableImageSourceSchema,
-  nullableStringSchema,
   numberInputSchema,
   optionalNullableStringSchema,
 } from "./utils";
-import { galleryItemSchema, reviewSchema } from "./property";
 
 export const specItemSchema = z.object({
   label: z.string().trim().min(1, "Label is required"),

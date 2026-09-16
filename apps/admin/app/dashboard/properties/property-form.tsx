@@ -107,9 +107,15 @@ export default function PropertyForm({ property }: PropertyFormProps) {
           );
         }
       } else {
-        await createProperty(data);
-        toast.success("New property has been created.");
-        router.push("/dashboard/properties");
+        const result = await createProperty(data);
+        if (result.ok) {
+          toast.success("New property has been created.");
+          router.push("/dashboard/properties");
+        } else {
+          toast.error(
+            result.error || "An unexpected error occurred. Please try again.",
+          );
+        }
       }
     } catch (error) {
       console.error("Failed to save property:", error);
@@ -128,10 +134,16 @@ export default function PropertyForm({ property }: PropertyFormProps) {
 
     setIsDeleting(true);
     try {
-      await deleteProperty(property.id);
-      toast.success("Property has been deleted.");
-      router.push("/dashboard/properties");
-      router.refresh();
+      const result = await deleteProperty(property.id);
+      if (result.ok) {
+        toast.success("Property has been deleted.");
+        router.push("/dashboard/properties");
+        router.refresh();
+      } else {
+        toast.error(
+          result.error || "An unexpected error occurred while deleting. Please try again.",
+        );
+      }
     } catch (error) {
       console.error("Failed to delete property:", error);
       toast.error(

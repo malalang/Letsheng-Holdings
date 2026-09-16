@@ -33,7 +33,8 @@ export default async function PropertyDetailsPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const property = await getPropertyById(id);
+  const result = await getPropertyById(id);
+  const property = result.ok ? result.data.property : null;
 
   if (!property) {
     return (

@@ -71,33 +71,40 @@ function toPropertyUpdate(
   };
 }
 
-export async function getProperties() {
+export async function getProperties(): Promise<
+  ActionResult<{ properties: PropertyType[] }>
+> {
   try {
     const rawProperties = await getAdminPropertiesService();
-    return rawProperties as PropertyType[];
+    return { ok: true, data: { properties: rawProperties as PropertyType[] } };
   } catch (error: unknown) {
-    throw new Error(getErrorMessage(error));
+    return { ok: false, error: getErrorMessage(error) };
   }
 }
 
-export async function getPropertyById(id: string) {
+export async function getPropertyById(
+  id: string,
+): Promise<ActionResult<{ property: PropertyType }>> {
   try {
     const p = await getAdminPropertyByIdService(id);
-    return p as PropertyType;
+    return { ok: true, data: { property: p as PropertyType } };
   } catch (error: unknown) {
-    throw new Error(getErrorMessage(error));
+    return { ok: false, error: getErrorMessage(error) };
   }
 }
 
-export async function createProperty(data: PropertyType) {
+export async function createProperty(
+  data: PropertyType,
+): Promise<ActionResult> {
   const validatedData = propertySchema.parse(data);
 
   try {
     const result = await createPropertyService(toPropertyInsert(validatedData));
     revalidatePath("/dashboard/properties");
     await triggerRevalidation(result.revalidate);
+    return { ok: true };
   } catch (error: unknown) {
-    throw new Error(getErrorMessage(error));
+    return { ok: false, error: getErrorMessage(error) };
   }
 }
 
@@ -124,12 +131,13 @@ export async function updateProperty(
   }
 }
 
-export async function deleteProperty(id: string) {
+export async function deleteProperty(id: string): Promise<ActionResult> {
   try {
     const result = await deletePropertyService(id);
     revalidatePath("/dashboard/properties");
     await triggerRevalidation(result.revalidate);
+    return { ok: true };
   } catch (error: unknown) {
-    throw new Error(getErrorMessage(error));
+    return { ok: false, error: getErrorMessage(error) };
   }
 }

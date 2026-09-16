@@ -1,7 +1,10 @@
 "use server";
 
 import type { ActionResult } from "@letsheng-holdings/contracts/actionResult";
-import { type TenantType, tenantSchema } from "@letsheng-holdings/contracts/tenant";
+import {
+  type TenantType,
+  tenantSchema,
+} from "@letsheng-holdings/contracts/tenant";
 import {
   createTenant as createTenantService,
   deleteTenant as deleteTenantService,

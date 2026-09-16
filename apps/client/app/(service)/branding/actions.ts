@@ -2,8 +2,8 @@
 
 import type { ActionResult } from "@letsheng-holdings/contracts/actionResult";
 import {
-  type BrandingType,
   type BrandingInquiryType,
+  type BrandingType,
   brandingInquirySchema,
   brandingSchema,
 } from "@letsheng-holdings/contracts/branding";

@@ -2,8 +2,8 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-  type BrandingType,
   type BrandingInquiryType,
+  type BrandingType,
   brandingInquirySchema,
 } from "@letsheng-holdings/contracts/branding";
 import { ArrowRight, Loader2, Package, Upload, User } from "lucide-react";
@@ -36,17 +36,19 @@ export default function BrandingOrderForm({ product }: BrandingOrderFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  const form = useForm<BrandingInquiryFormValues, unknown, BrandingInquiryType>({
-    resolver: zodResolver(brandingInquirySchema),
-    defaultValues: {
-      customerName: "",
-      email: "",
-      company: "",
-      quantity: 1,
-      message: "",
-      productId: product.id ?? "",
+  const form = useForm<BrandingInquiryFormValues, unknown, BrandingInquiryType>(
+    {
+      resolver: zodResolver(brandingInquirySchema),
+      defaultValues: {
+        customerName: "",
+        email: "",
+        company: "",
+        quantity: 1,
+        message: "",
+        productId: product.id ?? "",
+      },
     },
-  });
+  );
 
   async function onSubmit(data: BrandingInquiryType) {
     setIsLoading(true);

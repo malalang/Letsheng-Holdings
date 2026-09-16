@@ -1,7 +1,10 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import type { PaymentType, TenantType } from "@letsheng-holdings/contracts/tenant";
+import type {
+  PaymentType,
+  TenantType,
+} from "@letsheng-holdings/contracts/tenant";
 import { createSupabaseBrowserClient } from "@letsheng-holdings/supabase/client";
 import { ArrowLeft, Trash2 } from "lucide-react";
 import Link from "next/link";

@@ -85,7 +85,9 @@ export async function getBrandingProducts(): Promise<BrandingType[]> {
   }
 }
 
-export async function getBrandingProduct(id: string): Promise<BrandingType | null> {
+export async function getBrandingProduct(
+  id: string,
+): Promise<BrandingType | null> {
   try {
     const data = await getBrandingProductService(id);
     return data ? toBrandingRow(data) : null;

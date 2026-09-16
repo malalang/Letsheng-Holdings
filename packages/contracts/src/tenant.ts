@@ -5,7 +5,6 @@ import {
   nullableStringSchema,
   numberInputSchema,
   optionalNullableStringSchema,
-  parseWithSchema,
 } from "./utils";
 
 const optionalNullableEmailSchema = optionalNullableStringSchema(emailSchema);

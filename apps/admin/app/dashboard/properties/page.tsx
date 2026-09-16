@@ -56,10 +56,10 @@ export default async function AdminPropertiesPage({
   searchParams?: Promise<{ status?: string | string[] }>;
 }) {
   const resolvedSearchParams = await searchParams;
-  const properties = await getProperties();
+  const result = await getProperties();
   const selectedStatus = getStatusFilter(resolvedSearchParams?.status);
 
-  const allProperties = properties;
+  const allProperties = result.ok ? result.data.properties : [];
   const availableProperties = properties.filter(
     (property) => property.availability,
   );

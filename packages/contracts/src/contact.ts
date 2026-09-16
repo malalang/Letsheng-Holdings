@@ -1,8 +1,5 @@
 import { z } from "zod";
-import {
-  emailSchema,
-  optionalNullableStringSchema,
-} from "./utils";
+import { emailSchema, optionalNullableStringSchema } from "./utils";
 
 export const contactMessageSchema = z.object({
   name: z.string().trim().min(1, "Name is required"),

@@ -1,5 +1,6 @@
 "use server";
 
+import type { ActionResult } from "@letsheng-holdings/contracts/actionResult";
 import { createSupabaseServerClient } from "@letsheng-holdings/supabase/server";
 import { redirect } from "next/navigation";
 import { z } from "zod";
@@ -11,7 +12,7 @@ const loginSchema = z.object({
 
 type LoginFormValues = z.infer<typeof loginSchema>;
 
-export async function login(values: LoginFormValues) {
+export async function login(values: LoginFormValues): Promise<ActionResult> {
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase.auth.signInWithPassword({
     email: values.email,
@@ -19,19 +20,11 @@ export async function login(values: LoginFormValues) {
   });
 
   if (error) {
-    return {
-      ok: false,
-      error: error.message,
-    };
+    return { ok: false, error: error.message };
   } else if (data.user) {
-    return {
-      ok: true,
-    };
+    return { ok: true };
   }
-  return {
-    ok: false,
-    error: "An unknown error occurred.",
-  };
+  return { ok: false, error: "An unknown error occurred." };
 }
 
 export async function logout() {
