@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-  type Branding,
+  type BrandingType,
   brandingSchema,
 } from "@letsheng-holdings/contracts/branding";
 import { Loader2, PlusCircle, Trash2 } from "lucide-react";
@@ -46,7 +46,7 @@ import {
 } from "./actions";
 
 interface BrandingFormProps {
-  product?: Branding;
+  product?: BrandingType;
 }
 
 type BrandingFormValues = z.input<typeof brandingSchema>;
@@ -56,7 +56,7 @@ export default function BrandingForm({ product }: BrandingFormProps) {
   const [isDeleting, setIsDeleting] = useState(false);
   const router = useRouter();
 
-  const form = useForm<BrandingFormValues, unknown, Branding>({
+  const form = useForm<BrandingFormValues, unknown, BrandingType>({
     resolver: zodResolver(brandingSchema),
     defaultValues: product
       ? {
@@ -103,7 +103,7 @@ export default function BrandingForm({ product }: BrandingFormProps) {
     name: "specs",
   });
 
-  async function onSubmit(data: Branding) {
+  async function onSubmit(data: BrandingType) {
     setIsLoading(true);
     try {
       if (product?.id) {

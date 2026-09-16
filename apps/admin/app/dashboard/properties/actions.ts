@@ -2,7 +2,7 @@
 
 import type { ActionResult } from "@letsheng-holdings/contracts/actionResult";
 import {
-  type Property,
+  type PropertyType,
   propertySchema,
 } from "@letsheng-holdings/contracts/property";
 import {
@@ -32,7 +32,7 @@ function toJson(value: unknown): Json | null {
   return value === undefined ? null : (value as Json | null);
 }
 
-function toPropertyInsert(property: Property): TablesInsert<"properties"> {
+function toPropertyInsert(property: PropertyType): TablesInsert<"properties"> {
   return {
     id: property.id,
     title: property.title,
@@ -52,7 +52,7 @@ function toPropertyInsert(property: Property): TablesInsert<"properties"> {
 }
 
 function toPropertyUpdate(
-  property: Omit<Property, "id">,
+  property: Omit<PropertyType, "id">,
 ): TablesUpdate<"properties"> {
   return {
     title: property.title,
@@ -74,7 +74,7 @@ function toPropertyUpdate(
 export async function getProperties() {
   try {
     const rawProperties = await getAdminPropertiesService();
-    return rawProperties as Property[];
+    return rawProperties as PropertyType[];
   } catch (error: unknown) {
     throw new Error(getErrorMessage(error));
   }
@@ -83,13 +83,13 @@ export async function getProperties() {
 export async function getPropertyById(id: string) {
   try {
     const p = await getAdminPropertyByIdService(id);
-    return p as Property;
+    return p as PropertyType;
   } catch (error: unknown) {
     throw new Error(getErrorMessage(error));
   }
 }
 
-export async function createProperty(data: Property) {
+export async function createProperty(data: PropertyType) {
   const validatedData = propertySchema.parse(data);
 
   try {
@@ -103,7 +103,7 @@ export async function createProperty(data: Property) {
 
 export async function updateProperty(
   id: string,
-  data: Property,
+  data: PropertyType,
 ): Promise<ActionResult> {
   try {
     const validatedData = propertySchema.parse(data);

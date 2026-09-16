@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-  type LeaseApplication,
+  type LeaseApplicationType,
   leaseApplicationSchema,
 } from "@letsheng-holdings/contracts/leaseApplication";
 import { Controller, useForm } from "react-hook-form";
@@ -35,14 +35,14 @@ export default function LeaseApplicationForm({
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm<LeaseApplication>({
+  } = useForm<LeaseApplicationType>({
     resolver: zodResolver(leaseApplicationSchema),
     defaultValues: {
       propertyId: propertyId,
     },
   });
 
-  const onSubmit = async (data: LeaseApplication) => {
+  const onSubmit = async (data: LeaseApplicationType) => {
     const result = await submitLeaseApplication(data);
     if (result.ok) {
       toast.success("Application submitted successfully!");

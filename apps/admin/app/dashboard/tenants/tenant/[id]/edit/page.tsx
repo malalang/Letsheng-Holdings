@@ -1,4 +1,4 @@
-import type { Tenant } from "@letsheng-holdings/contracts/tenant";
+import type { TenantType } from "@letsheng-holdings/contracts/tenant";
 import { getTenantById } from "../../../actions";
 import TenantForm from "../../../tenant-form";
 
@@ -14,5 +14,5 @@ export default async function EditTenantPage({
     return <div>Tenant not found</div>;
   }
 
-  return <TenantForm tenant={tenant as Tenant & { id: string }} />;
+  return <TenantForm tenant={tenant as TenantType & { id: string }} />;
 }

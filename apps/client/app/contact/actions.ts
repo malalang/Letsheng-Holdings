@@ -2,13 +2,13 @@
 
 import type { ActionResult } from "@letsheng-holdings/contracts/actionResult";
 import {
-  type ContactMessage,
+  type ContactType,
   contactMessageSchema,
 } from "@letsheng-holdings/contracts/contact";
 import { submitContactMessage } from "@letsheng-holdings/supabase/Mutations/contact";
 
 export async function sendContactMessage(
-  data: ContactMessage,
+  data: ContactType,
 ): Promise<ActionResult> {
   const validatedFields = contactMessageSchema.safeParse(data);
 

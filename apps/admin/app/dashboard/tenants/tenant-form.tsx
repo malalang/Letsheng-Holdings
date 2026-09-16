@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import type { Payment, Tenant } from "@letsheng-holdings/contracts/tenant";
+import type { PaymentType, TenantType } from "@letsheng-holdings/contracts/tenant";
 import { createSupabaseBrowserClient } from "@letsheng-holdings/supabase/client";
 import { ArrowLeft, Trash2 } from "lucide-react";
 import Link from "next/link";
@@ -52,11 +52,11 @@ const formSchema = z.object({
 });
 type FormValues = z.infer<typeof formSchema>;
 
-type TenantRecord = Tenant & { id: string };
+type TenantRecord = TenantType & { id: string };
 
 interface TenantFormProps {
   tenant?: TenantRecord;
-  payments?: (Payment & { id: string })[];
+  payments?: (PaymentType & { id: string })[];
 }
 
 // Helper to format date for input
@@ -114,7 +114,7 @@ export default function TenantForm({ tenant, payments }: TenantFormProps) {
   }, []);
 
   async function onSubmit(data: FormValues) {
-    const dataForAction: Omit<Tenant, "id" | "avatarUrl"> = {
+    const dataForAction: Omit<TenantType, "id" | "avatarUrl"> = {
       name: data.name,
       email: data.email || null,
       propertyId: data.propertyId || null,

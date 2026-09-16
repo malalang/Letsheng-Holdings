@@ -2,11 +2,11 @@
 
 import type { ActionResult } from "@letsheng-holdings/contracts/actionResult";
 import {
-  type LeaseApplication,
+  type LeaseApplicationType,
   leaseApplicationSchema,
 } from "@letsheng-holdings/contracts/leaseApplication";
 import {
-  type Property,
+  type PropertyType,
   propertySchema,
 } from "@letsheng-holdings/contracts/property";
 import { submitLeaseApplication as submitLeaseApplicationService } from "@letsheng-holdings/supabase/Mutations/properties";
@@ -15,7 +15,7 @@ import {
   getCachedPropertyRows,
 } from "../_lib/cached-public-data";
 
-export type PropertyRecord = Property & { id: string };
+export type PropertyRecord = PropertyType & { id: string };
 
 function parsePropertyRecord(data: unknown): PropertyRecord {
   const property = propertySchema.parse(data);
@@ -35,7 +35,7 @@ export async function getPropertyById(id: string): Promise<PropertyRecord> {
 }
 
 export async function submitLeaseApplication(
-  data: LeaseApplication,
+  data: LeaseApplicationType,
 ): Promise<ActionResult> {
   const validatedData = leaseApplicationSchema.safeParse(data);
 

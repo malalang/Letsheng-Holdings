@@ -75,7 +75,7 @@ export const specItemSchema = z.object({
   value: z.string().trim().min(1, "Value is required"),
 });
 
-export type SpecItem = z.infer<typeof specItemSchema>;
+export type SpecItemType = z.infer<typeof specItemSchema>;
 
 export const brandingSchema = z.object({
   id: z.string().optional(),
@@ -89,7 +89,7 @@ export const brandingSchema = z.object({
   reviews: z.array(reviewSchema).optional().nullable(),
 });
 
-export type Branding = z.infer<typeof brandingSchema>;
+export type BrandingType = z.infer<typeof brandingSchema>;
 
 export const brandingInquirySchema = z.object({
   customerName: z.string().trim().min(1, "Name is required"), // camelCase
@@ -105,4 +105,4 @@ export const brandingInquirySchema = z.object({
   productId: z.string().min(1, "Product is required"), // camelCase
 });
 
-export type BrandingInquiry = z.infer<typeof brandingInquirySchema>;
+export type BrandingInquiryType = z.infer<typeof brandingInquirySchema>;

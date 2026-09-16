@@ -1,7 +1,7 @@
 "use server";
 
 import type { ActionResult } from "@letsheng-holdings/contracts/actionResult";
-import { type Tenant, tenantSchema } from "@letsheng-holdings/contracts/tenant";
+import { type TenantType, tenantSchema } from "@letsheng-holdings/contracts/tenant";
 import {
   createTenant as createTenantService,
   deleteTenant as deleteTenantService,
@@ -20,7 +20,7 @@ import { revalidatePath } from "next/cache";
 // NOTE: Tenant is imported from contracts which uses camelCase.
 // Database now also uses camelCase.
 
-export type TenantWithProperty = Tenant & {
+export type TenantWithProperty = TenantType & {
   property: { title: string } | null;
 };
 
@@ -30,13 +30,13 @@ function getErrorMessage(error: unknown) {
     : "An unexpected error occurred.";
 }
 
-function toLeaseEndDate(value: Tenant["leaseEndDate"] | undefined) {
+function toLeaseEndDate(value: TenantType["leaseEndDate"] | undefined) {
   if (value === undefined) return undefined;
   return value ? value.toISOString() : null;
 }
 
 function toTenantInsert(
-  tenant: Omit<Tenant, "id" | "avatarUrl">,
+  tenant: Omit<TenantType, "id" | "avatarUrl">,
 ): TablesInsert<"tenants"> {
   return {
     name: tenant.name,
@@ -48,7 +48,7 @@ function toTenantInsert(
 }
 
 function toTenantUpdate(
-  tenant: Partial<Omit<Tenant, "id" | "avatarUrl">>,
+  tenant: Partial<Omit<TenantType, "id" | "avatarUrl">>,
 ): TablesUpdate<"tenants"> {
   const payload: TablesUpdate<"tenants"> = {};
 
@@ -77,15 +77,15 @@ export async function getTenants() {
 }
 
 export async function createTenant(
-  formData: Omit<Tenant, "id" | "avatarUrl">,
-): Promise<ActionResult<Tenant>> {
+  formData: Omit<TenantType, "id" | "avatarUrl">,
+): Promise<ActionResult<TenantType>> {
   const insertSchema = tenantSchema.omit({ id: true, avatarUrl: true });
   const validatedData = insertSchema.parse(formData);
 
   try {
     const result = await createTenantService(toTenantInsert(validatedData));
     revalidatePath("/dashboard/tenants");
-    return { ok: true, data: result.data as Tenant };
+    return { ok: true, data: result.data as TenantType };
   } catch (error: unknown) {
     console.error("Error creating tenant:", error);
     return { ok: false, error: getErrorMessage(error) };
@@ -94,8 +94,8 @@ export async function createTenant(
 
 export async function updateTenant(
   id: string,
-  formData: Partial<Omit<Tenant, "id" | "avatarUrl">>,
-): Promise<ActionResult<Tenant>> {
+  formData: Partial<Omit<TenantType, "id" | "avatarUrl">>,
+): Promise<ActionResult<TenantType>> {
   const partialTenantSchema = tenantSchema
     .partial()
     .omit({ id: true, avatarUrl: true });
@@ -105,7 +105,7 @@ export async function updateTenant(
     const result = await updateTenantService(id, toTenantUpdate(validatedData));
     revalidatePath("/dashboard/tenants");
     revalidatePath(`/dashboard/tenants/${id}/edit`);
-    return { ok: true, data: result.data as Tenant };
+    return { ok: true, data: result.data as TenantType };
   } catch (error: unknown) {
     console.error("Error updating tenant:", error);
     return { ok: false, error: getErrorMessage(error) };
@@ -127,7 +127,7 @@ export async function getTenantById(id: string) {
   try {
     const tenant = await getTenantByIdService(id);
     if (!tenant) return null;
-    return tenant as Tenant;
+    return tenant as TenantType;
   } catch (error) {
     console.error("Error fetching tenant:", error);
     return null;

@@ -117,7 +117,7 @@ export const tenantSchema = z.object({
   ).optional(), // camelCase
 });
 
-export type Tenant = z.infer<typeof tenantSchema>;
+export type TenantType = z.infer<typeof tenantSchema>;
 
 export const paymentSchema = z.object({
   id: z.string().optional(),
@@ -129,4 +129,4 @@ export const paymentSchema = z.object({
   tenantId: optionalNullableStringSchema(z.string()), // camelCase
 });
 
-export type Payment = z.infer<typeof paymentSchema>;
+export type PaymentType = z.infer<typeof paymentSchema>;

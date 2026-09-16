@@ -41,4 +41,4 @@ export const leaseApplicationSchema = z.object({
   propertyId: z.string(), // camelCase
 });
 
-export type LeaseApplication = z.infer<typeof leaseApplicationSchema>;
+export type LeaseApplicationType = z.infer<typeof leaseApplicationSchema>;

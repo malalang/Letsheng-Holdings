@@ -2,8 +2,8 @@
 
 import type { ActionResult } from "@letsheng-holdings/contracts/actionResult";
 import {
-  type Branding,
-  type BrandingInquiry,
+  type BrandingType,
+  type BrandingInquiryType,
   brandingInquirySchema,
   brandingSchema,
 } from "@letsheng-holdings/contracts/branding";
@@ -13,7 +13,7 @@ import {
   getCachedBrandingRows,
 } from "../_lib/cached-public-data";
 
-export type BrandingRecord = Branding & { id: string };
+export type BrandingRecord = BrandingType & { id: string };
 
 function parseBrandingRecord(data: unknown): BrandingRecord {
   const product = brandingSchema.parse(data);
@@ -45,7 +45,7 @@ export async function getBrandingProduct(
 }
 
 export async function submitBrandingInquiry(
-  data: BrandingInquiry,
+  data: BrandingInquiryType,
 ): Promise<ActionResult> {
   const validatedFields = brandingInquirySchema.safeParse(data);
 

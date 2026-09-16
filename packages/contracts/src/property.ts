@@ -98,7 +98,7 @@ export const galleryItemSchema = z.object({
   description: optionalNullableStringSchema(z.string().trim()),
 });
 
-export type GalleryItem = z.infer<typeof galleryItemSchema>;
+export type GalleryItemType = z.infer<typeof galleryItemSchema>;
 
 export const reviewSchema = z.object({
   id: z.string().optional(),
@@ -107,7 +107,7 @@ export const reviewSchema = z.object({
   comment: z.string().trim().min(1, "Comment is required"),
 });
 
-export type Review = z.infer<typeof reviewSchema>;
+export type ReviewType = z.infer<typeof reviewSchema>;
 
 export const featureSchema = z.string().trim().min(1, "Feature is required");
 
@@ -136,4 +136,4 @@ export const propertySchema = z.object({
   reviews: z.array(reviewSchema).optional().nullable(),
 });
 
-export type Property = z.infer<typeof propertySchema>;
+export type PropertyType = z.infer<typeof propertySchema>;

@@ -40,4 +40,4 @@ export const contactMessageSchema = z.object({
   message: z.string().trim().min(1, "Message is required"),
 });
 
-export type ContactMessage = z.infer<typeof contactMessageSchema>;
+export type ContactType = z.infer<typeof contactMessageSchema>;

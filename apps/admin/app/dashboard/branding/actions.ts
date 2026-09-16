@@ -1,7 +1,7 @@
 "use server";
 
 import type { ActionResult } from "@letsheng-holdings/contracts/actionResult";
-import type { Branding } from "@letsheng-holdings/contracts/branding";
+import type { BrandingType } from "@letsheng-holdings/contracts/branding";
 import {
   createBranding as createBrandingProductService,
   deleteBranding as deleteBrandingProductService,
@@ -29,7 +29,7 @@ function toJson(value: unknown): Json | null {
   return value === undefined ? null : (value as Json | null);
 }
 
-function toBrandingInsert(product: Branding): TablesInsert<"branding"> {
+function toBrandingInsert(product: BrandingType): TablesInsert<"branding"> {
   return {
     id: product.id,
     title: product.title,
@@ -44,7 +44,7 @@ function toBrandingInsert(product: Branding): TablesInsert<"branding"> {
 }
 
 function toBrandingUpdate(
-  product: Partial<Branding>,
+  product: Partial<BrandingType>,
 ): TablesUpdate<"branding"> {
   const payload: TablesUpdate<"branding"> = {};
 
@@ -61,7 +61,7 @@ function toBrandingUpdate(
   return payload;
 }
 
-function toBranding(row: any): Branding {
+function toBrandingRow(row: any): BrandingType {
   return {
     id: row.id,
     title: row.title,
@@ -75,31 +75,28 @@ function toBranding(row: any): Branding {
   };
 }
 
-// Action to fetch all branding products
-export async function getBrandingProducts(): Promise<Branding[]> {
+export async function getBrandingProducts(): Promise<BrandingType[]> {
   try {
     const data = await getBrandingProductsService();
-    return data.map(toBranding);
+    return data.map(toBrandingRow);
   } catch (error) {
     console.error("Error fetching branding products:", error);
     return [];
   }
 }
 
-// Action to fetch a single branding product by its ID
-export async function getBrandingProduct(id: string): Promise<Branding | null> {
+export async function getBrandingProduct(id: string): Promise<BrandingType | null> {
   try {
     const data = await getBrandingProductService(id);
-    return data ? toBranding(data) : null;
+    return data ? toBrandingRow(data) : null;
   } catch (error) {
     console.error("Error fetching branding product:", error);
     return null;
   }
 }
 
-// Action to create a new branding product
 export async function createBrandingProduct(
-  product: Branding,
+  product: BrandingType,
 ): Promise<ActionResult> {
   try {
     const result = await createBrandingProductService(
@@ -114,10 +111,9 @@ export async function createBrandingProduct(
   }
 }
 
-// Action to update an existing branding product
 export async function updateBrandingProduct(
   id: string,
-  product: Partial<Branding>,
+  product: Partial<BrandingType>,
 ): Promise<ActionResult> {
   try {
     const result = await updateBrandingProductService(
@@ -134,7 +130,6 @@ export async function updateBrandingProduct(
   }
 }
 
-// Action to delete a branding product
 export async function deleteBrandingProduct(id: string): Promise<ActionResult> {
   try {
     const result = await deleteBrandingProductService(id);

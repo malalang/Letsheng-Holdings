@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-  type Property,
+  type PropertyType,
   propertySchema,
 } from "@letsheng-holdings/contracts/property";
 import { Loader2, PlusCircle, Trash2 } from "lucide-react";
@@ -43,7 +43,7 @@ import { UploadImage } from "@/components/upload-image";
 import { createProperty, deleteProperty, updateProperty } from "./actions";
 
 interface PropertyFormProps {
-  property?: Property;
+  property?: PropertyType;
 }
 
 type PropertyFormValues = z.input<typeof propertySchema>;
@@ -53,7 +53,7 @@ export default function PropertyForm({ property }: PropertyFormProps) {
   const [isDeleting, setIsDeleting] = useState(false);
   const router = useRouter();
 
-  const form = useForm<PropertyFormValues, unknown, Property>({
+  const form = useForm<PropertyFormValues, unknown, PropertyType>({
     resolver: zodResolver(propertySchema),
     defaultValues: property
       ? {
@@ -93,7 +93,7 @@ export default function PropertyForm({ property }: PropertyFormProps) {
     name: "reviews",
   });
 
-  async function onSubmit(data: Property) {
+  async function onSubmit(data: PropertyType) {
     setIsLoading(true);
     try {
       if (property?.id) {
