@@ -46,10 +46,10 @@ const NextStepsInfo = () => (
 export default async function BrandingOrderPage({
   params,
 }: {
-  params: Promise<{ productID: string }>;
+  params: Promise<{ id: string }>;
 }) {
-  const { productID } = await params;
-  const product = await getBrandingProduct(productID);
+  const { id } = await params;
+  const product = await getBrandingProduct(id);
 
   if (!product) {
     return <div>Product not found</div>;

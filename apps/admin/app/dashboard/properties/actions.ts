@@ -107,7 +107,6 @@ export async function updateProperty(
 ): Promise<ActionResult> {
   try {
     const validatedData = propertySchema.parse(data);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { id: _, ...updateData } = validatedData;
 
     const result = await updatePropertyService(

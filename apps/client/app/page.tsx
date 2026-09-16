@@ -14,8 +14,8 @@ import WaterDetergentsSpotlight from "@/components/branding/waterDetergents";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { getBrandingProducts } from "./branding/actions";
-import { getProperties } from "./properties/actions";
+import { getBrandingProducts } from "./(service)/branding/actions";
+import { getProperties } from "./(service)/properties/actions";
 
 // ==============================================
 // Sub-Components

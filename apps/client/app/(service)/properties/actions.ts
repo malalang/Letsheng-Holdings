@@ -13,7 +13,7 @@ import { submitLeaseApplication as submitLeaseApplicationService } from "@letshe
 import {
   getCachedPropertyRowById,
   getCachedPropertyRows,
-} from "../_lib/cached-public-data";
+} from "../../_lib/cached-public-data";
 
 export type PropertyRecord = PropertyType & { id: string };
 

@@ -12,7 +12,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import type { z } from "zod";
-import { submitBrandingInquiry } from "@/app/branding/actions";
+import { submitBrandingInquiry } from "@/app/(service)/branding/actions";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {

@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
+    "./utils": "./src/utils.ts",
     "./property": "./src/property.ts",
     "./branding": "./src/branding.ts",
     "./leaseApplication": "./src/leaseApplication.ts",

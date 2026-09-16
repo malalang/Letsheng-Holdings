@@ -11,7 +11,7 @@ import { submitBrandingInquiry as submitBrandingInquiryService } from "@letsheng
 import {
   getCachedBrandingRowById,
   getCachedBrandingRows,
-} from "../_lib/cached-public-data";
+} from "../../_lib/cached-public-data";
 
 export type BrandingRecord = BrandingType & { id: string };
 
