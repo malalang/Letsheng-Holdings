@@ -20,7 +20,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { deleteProperty, getProperties } from "./actions";
+import { deletePropertyFromList, getProperties } from "./actions";
 
 const PROPERTY_IMAGE_FALLBACK = "/logo.jpg";
 
@@ -59,11 +59,11 @@ export default async function AdminPropertiesPage({
   const result = await getProperties();
   const selectedStatus = getStatusFilter(resolvedSearchParams?.status);
 
-  const allProperties = result.ok ? result.data.properties : [];
-  const availableProperties = properties.filter(
+  const allProperties = result.ok && result.data ? result.data.properties : [];
+  const availableProperties = allProperties.filter(
     (property) => property.availability,
   );
-  const unavailableProperties = properties.filter(
+  const unavailableProperties = allProperties.filter(
     (property) => !property.availability,
   );
 
@@ -171,7 +171,8 @@ export default async function AdminPropertiesPage({
                             View
                           </Link>
                         </DropdownMenuItem>
-                        <form action={deleteProperty.bind(null, propertyId)}>
+                        <form action={deletePropertyFromList}>
+                          <input type="hidden" name="id" value={propertyId} />
                           <DropdownMenuItem
                             asChild
                             className="text-red-500 focus:text-red-600"

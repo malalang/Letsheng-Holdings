@@ -3,15 +3,15 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
-    "./utils": "./src/utils.ts",
+    "./gallery": "./src/gallery.ts",
+    "./contact": "./src/contact.ts",
     "./property": "./src/property.ts",
+    "./tenant": "./src/tenant.ts",
     "./branding": "./src/branding.ts",
     "./leaseApplication": "./src/leaseApplication.ts",
-    "./tenant": "./src/tenant.ts",
-    "./contact": "./src/contact.ts",
+    "./env": "./src/env.ts",
     "./actionResult": "./src/actionResult.ts",
-    "./revalidation": "./src/revalidation.ts",
-    "./env": "./src/env.ts"
+    "./revalidation": "./src/revalidation.ts"
   },
   "scripts": {
     "build": "tsc",

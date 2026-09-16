@@ -47,11 +47,11 @@ export default function LoginPage() {
   async function onSubmit(values: LoginFormValues) {
     const result = await login(values);
 
-    if (result.error) {
+    if (!result.ok) {
       toast.error("Login Failed", {
         description: result.error,
       });
-    } else if (result.ok) {
+    } else {
       toast.success("Login Successful", {
         description: "Redirecting to dashboard...",
       });

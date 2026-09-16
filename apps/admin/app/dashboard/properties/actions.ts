@@ -141,3 +141,11 @@ export async function deleteProperty(id: string): Promise<ActionResult> {
     return { ok: false, error: getErrorMessage(error) };
   }
 }
+
+export async function deletePropertyFromList(
+  formData: FormData,
+): Promise<void> {
+  const id = String(formData.get("id") ?? "");
+  if (!id) return;
+  await deleteProperty(id);
+}

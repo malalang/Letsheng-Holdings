@@ -18,7 +18,7 @@ export default async function EditPropertyPage({
 }) {
   const { id } = await params;
   const result = await getPropertyById(id);
-  const property = result.ok ? result.data.property : null;
+  const property = result.ok && result.data ? result.data.property : null;
 
   if (!property) {
     return (
