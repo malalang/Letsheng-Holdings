@@ -55,6 +55,10 @@ export async function deleteProperty(id: string) {
   return mutationResult(undefined, propertyRevalidation(id));
 }
 
+// Public-facing insert used by the client lease-application form
+// (apps/client/app/(service)/properties/[id]/apply-to-lease).
+// Auth is intentionally omitted because this runs as an
+// unauthenticated public submission.
 export async function submitLeaseApplication(
   application: TablesInsert<"lease_applications">,
 ) {

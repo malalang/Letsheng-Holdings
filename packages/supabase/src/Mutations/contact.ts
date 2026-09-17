@@ -5,6 +5,9 @@ import { CACHE_TAGS, mutationResult } from "../cache";
 import { createSupabaseServerClient } from "../server";
 import type { TablesInsert, TablesUpdate } from "../supabaseType";
 
+// Public-facing insert used by the client contact form
+// (apps/client/app/contact). Auth is intentionally omitted
+// because this runs as an unauthenticated public submission.
 export async function submitContactMessage(
   message: TablesInsert<"contact_messages">,
 ) {

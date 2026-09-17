@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { emailSchema, optionalNullableStringSchema } from "./utils";
 
-export const contactMessageSchema = z.object({
+export const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required"),
   email: emailSchema,
   phone: optionalNullableStringSchema(z.string().trim()),
@@ -9,4 +9,4 @@ export const contactMessageSchema = z.object({
   message: z.string().trim().min(1, "Message is required"),
 });
 
-export type ContactType = z.infer<typeof contactMessageSchema>;
+export type ContactType = z.infer<typeof contactSchema>;

@@ -55,6 +55,9 @@ export async function deleteBranding(id: string) {
   return mutationResult(undefined, brandingRevalidation(id));
 }
 
+// Public-facing insert used by the client branding-inquiry form
+// (apps/client/app/(service)/branding). Auth is intentionally omitted
+// because this runs as an unauthenticated public submission.
 export async function submitBrandingInquiry(
   inquiry: TablesInsert<"branding_inquiries">,
 ) {

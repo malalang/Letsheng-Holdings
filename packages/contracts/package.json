@@ -11,7 +11,8 @@
     "./leaseApplication": "./src/leaseApplication.ts",
     "./env": "./src/env.ts",
     "./actionResult": "./src/actionResult.ts",
-    "./revalidation": "./src/revalidation.ts"
+    "./revalidation": "./src/revalidation.ts",
+    "./utils": "./src/utils.ts"
   },
   "scripts": {
     "build": "tsc",

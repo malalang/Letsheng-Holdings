@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   type ContactType,
-  contactMessageSchema,
+  contactSchema,
 } from "@letsheng-holdings/contracts/contact";
 import { Loader2, Send } from "lucide-react";
 import { useState } from "react";
@@ -25,7 +25,7 @@ import { sendContactMessage } from "./actions";
 export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const form = useForm<ContactType>({
-    resolver: zodResolver(contactMessageSchema),
+    resolver: zodResolver(contactSchema),
     defaultValues: {
       name: "",
       email: "",

@@ -3,14 +3,14 @@
 import type { ActionResult } from "@letsheng-holdings/contracts/actionResult";
 import {
   type ContactType,
-  contactMessageSchema,
+  contactSchema,
 } from "@letsheng-holdings/contracts/contact";
 import { submitContactMessage } from "@letsheng-holdings/supabase/Mutations/contact";
 
 export async function sendContactMessage(
   data: ContactType,
 ): Promise<ActionResult> {
-  const validatedFields = contactMessageSchema.safeParse(data);
+  const validatedFields = contactSchema.safeParse(data);
 
   if (!validatedFields.success) {
     return {

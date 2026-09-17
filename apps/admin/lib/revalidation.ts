@@ -1,4 +1,4 @@
-import type { RevalidationRequest } from "@letsheng-holdings/contracts/revalidation";
+import type { RevalidationPayload } from "@letsheng-holdings/contracts/revalidation";
 
 function getClientRevalidationUrl(clientUrl: string) {
   const normalizedClientUrl = clientUrl.trim().match(/^https?:\/\//)
@@ -8,7 +8,7 @@ function getClientRevalidationUrl(clientUrl: string) {
   return new URL("/api/revalidate", normalizedClientUrl);
 }
 
-export async function triggerRevalidation(request: RevalidationRequest) {
+export async function triggerRevalidation(request: RevalidationPayload) {
   const clientUrl = process.env.NEXT_PUBLIC_CLIENT_URL;
   const secret = process.env.REVALIDATION_SECRET;
 
