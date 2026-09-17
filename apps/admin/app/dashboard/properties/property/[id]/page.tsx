@@ -1,6 +1,6 @@
+import { galleryItemSchema } from "@letsheng-holdings/contracts/gallery";
 import {
   featureSchema,
-  galleryItemSchema,
   reviewSchema,
 } from "@letsheng-holdings/contracts/property";
 import {

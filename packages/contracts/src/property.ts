@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { galleryItemSchema } from "./gallery";
 import {
   imageSourceSchema,
   nullableImageSourceSchema,
@@ -32,14 +33,6 @@ const nullableNumberSchema = (schema: z.ZodNumber) =>
         return parseWithSchema(schema, numericValue, ctx);
       }),
   ]);
-
-export const galleryItemSchema = z.object({
-  imageUrl: imageSourceSchema("Please enter a valid image URL or app path."),
-  title: z.string().trim().min(1, "Title is required"),
-  description: optionalNullableStringSchema(z.string().trim()),
-});
-
-export type GalleryItemType = z.infer<typeof galleryItemSchema>;
 
 export const reviewSchema = z.object({
   id: z.string().optional(),

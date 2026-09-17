@@ -1,8 +1,6 @@
 import { specItemSchema } from "@letsheng-holdings/contracts/branding";
-import {
-  galleryItemSchema,
-  reviewSchema,
-} from "@letsheng-holdings/contracts/property";
+import { galleryItemSchema } from "@letsheng-holdings/contracts/gallery";
+import { reviewSchema } from "@letsheng-holdings/contracts/property";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";

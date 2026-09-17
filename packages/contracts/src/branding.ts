@@ -1,5 +1,6 @@
 import { z } from "zod";
-import { galleryItemSchema, reviewSchema } from "./property";
+import { galleryItemSchema } from "./gallery";
+import { reviewSchema } from "./property";
 import {
   emailSchema,
   nullableImageSourceSchema,
