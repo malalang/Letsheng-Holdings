@@ -1,4 +1,4 @@
-import { createSupabaseProxyClient } from "@letsheng-holdings/supabase/proxy";
+import { createSupabaseProxyClient } from "@letsheng-holdings/supabase/session";
 import { type NextRequest, NextResponse } from "next/server";
 
 export async function proxy(request: NextRequest) {

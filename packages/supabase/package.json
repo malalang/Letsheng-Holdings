@@ -6,7 +6,7 @@
     "./client": "./src/client.ts",
     "./public": "./src/public.ts",
     "./server": "./src/server.ts",
-    "./proxy": "./src/middleware.ts",
+    "./session": "./src/session.ts",
     "./auth": "./src/auth.ts",
     "./cache": "./src/cache.ts",
     "./supabaseType": "./src/supabaseType.ts",
