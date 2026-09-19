@@ -1,7 +1,13 @@
 "use client";
 
 import { PlusCircle, Trash2 } from "lucide-react";
-import { type Control, type FieldValues, useFieldArray } from "react-hook-form";
+import {
+  type Control,
+  type FieldArrayPath,
+  type FieldPath,
+  type FieldValues,
+  useFieldArray,
+} from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import {
   FormControl,
@@ -13,8 +19,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
-interface ArrayInputProps {
-  control: Control<FieldValues>;
+interface ArrayInputProps<
+  TFieldValues extends FieldValues,
+  TTransformedValues = TFieldValues,
+> {
+  control: Control<TFieldValues, any, TTransformedValues>;
   name: string;
   label: string;
   addLabel?: string;
@@ -23,7 +32,10 @@ interface ArrayInputProps {
   className?: string;
 }
 
-export function ArrayInput({
+export function ArrayInput<
+  TFieldValues extends FieldValues,
+  TTransformedValues = TFieldValues,
+>({
   control,
   name,
   label,
@@ -31,10 +43,10 @@ export function ArrayInput({
   placeholder,
   emptyLabel = "No items added yet.",
   className,
-}: ArrayInputProps) {
+}: ArrayInputProps<TFieldValues, TTransformedValues>) {
   const { fields, append, remove } = useFieldArray({
     control,
-    name,
+    name: name as FieldArrayPath<TFieldValues>,
   });
 
   return (
@@ -44,8 +56,10 @@ export function ArrayInput({
         {fields.map((item, index) => (
           <FormField
             key={item.id}
-            control={control}
-            name={`${name}.${index}`}
+            control={
+              control as unknown as Control<TFieldValues, any, TFieldValues>
+            }
+            name={`${name}.${index}` as FieldPath<TFieldValues>}
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="sr-only">
@@ -87,7 +101,7 @@ export function ArrayInput({
         type="button"
         variant="outline"
         size="sm"
-        onClick={() => append("")}
+        onClick={() => append("" as never)}
       >
         <PlusCircle className="mr-2 h-4 w-4" />
         {addLabel}

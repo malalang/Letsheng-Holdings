@@ -23,7 +23,14 @@ import { revalidatePath } from "next/cache";
 // NOTE: Tenant is imported from contracts which uses camelCase.
 // Database now also uses camelCase.
 
-export type TenantWithProperty = TenantType & {
+export type TenantWithProperty = {
+  id: string;
+  name: string;
+  email: string | null | undefined;
+  status: string;
+  propertyId: string | null;
+  leaseEndDate: string | null;
+  avatarUrl: string | null;
   property: { title: string } | null;
 };
 

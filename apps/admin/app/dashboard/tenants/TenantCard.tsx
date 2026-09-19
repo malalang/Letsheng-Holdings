@@ -27,7 +27,7 @@ import { statusBadgeClass } from "@/lib/statusBadge";
 interface TenantCardData {
   id: string;
   name: string;
-  email: string | null;
+  email?: string | null;
   status: string;
   propertyId: string | null;
   leaseEndDate: string | null;
