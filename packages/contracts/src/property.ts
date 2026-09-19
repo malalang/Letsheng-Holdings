@@ -1,7 +1,6 @@
 import { z } from "zod";
 import { galleryItemSchema } from "./gallery";
 import {
-  imageSourceSchema,
   nullableImageSourceSchema,
   nullableStringSchema,
   numberInputSchema,

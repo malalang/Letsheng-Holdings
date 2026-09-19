@@ -141,7 +141,8 @@ export default function PropertyForm({ property }: PropertyFormProps) {
         router.refresh();
       } else {
         toast.error(
-          result.error || "An unexpected error occurred while deleting. Please try again.",
+          result.error ||
+            "An unexpected error occurred while deleting. Please try again.",
         );
       }
     } catch (error) {
