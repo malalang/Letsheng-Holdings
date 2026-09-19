@@ -42,16 +42,12 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { statusBadgeClass } from "@/lib/statusBadge";
 
 import {
   deleteLeaseApplication,
   updateLeaseApplicationStatus,
 } from "./actions";
-
-const statusVariantMap: Record<string, string> = {
-  Pending: "bg-yellow-50 text-yellow-700 border-yellow-200",
-  Reviewed: "bg-blue-50 text-blue-700 border-blue-200",
-};
 
 interface LeaseApplicationWithDetails {
   id: string;
@@ -143,7 +139,7 @@ export function LeaseApplicationsTable({
                         </h3>
                         <Badge
                           variant="outline"
-                          className={`capitalize px-2 py-0 h-5 text-[10px] font-bold ${statusVariantMap[app.status]}`}
+                          className={`capitalize px-2 py-0 h-5 text-[10px] font-bold ${statusBadgeClass(app.status)}`}
                         >
                           {app.status}
                         </Badge>

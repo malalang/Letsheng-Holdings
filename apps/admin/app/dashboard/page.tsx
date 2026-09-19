@@ -19,6 +19,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { statusBadgeClass } from "@/lib/statusBadge";
 import { getDashboardKpis, getRecentLeases } from "./actions";
 
 interface KpiData {
@@ -168,11 +169,7 @@ export default async function DashboardPage() {
                       </p>
                       <Badge
                         variant="outline"
-                        className={`text-[10px] px-1.5 py-0 h-4 uppercase font-black tracking-tighter ${
-                          lease.status === "Late Payment"
-                            ? "bg-red-50 text-red-700 border-red-200"
-                            : "bg-green-50 text-green-700 border-green-200"
-                        }`}
+                        className={`text-[10px] px-1.5 py-0 h-4 uppercase font-black tracking-tighter ${statusBadgeClass(lease.status)}`}
                       >
                         {lease.status}
                       </Badge>

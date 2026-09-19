@@ -53,7 +53,13 @@ export async function submitLeaseApplication(
   try {
     await submitLeaseApplicationService(validatedData.data);
     return { ok: true, message: "Application submitted successfully!" };
-  } catch (error: any) {
-    return { ok: false, error: error.message };
+  } catch (error) {
+    return {
+      ok: false,
+      error:
+        error instanceof Error
+          ? error.message
+          : "An unexpected error occurred.",
+    };
   }
 }

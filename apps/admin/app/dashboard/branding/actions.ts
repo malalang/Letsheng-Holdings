@@ -13,6 +13,7 @@ import {
 } from "@letsheng-holdings/supabase/Queries/branding";
 import type {
   Json,
+  Tables,
   TablesInsert,
   TablesUpdate,
 } from "@letsheng-holdings/supabase/supabaseType";
@@ -61,7 +62,7 @@ function toBrandingUpdate(
   return payload;
 }
 
-function toBrandingRow(row: any): BrandingType {
+function toBrandingRow(row: Tables<"branding">): BrandingType {
   return {
     id: row.id,
     title: row.title,
@@ -69,9 +70,9 @@ function toBrandingRow(row: any): BrandingType {
     description: row.description,
     image: row.image,
     isFeatured: row.isFeatured,
-    specs: row.specs as any,
-    gallery: row.gallery as any,
-    reviews: row.reviews as any,
+    specs: row.specs as BrandingType["specs"],
+    gallery: row.gallery as BrandingType["gallery"],
+    reviews: row.reviews as BrandingType["reviews"],
   };
 }
 

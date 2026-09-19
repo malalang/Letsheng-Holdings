@@ -228,7 +228,7 @@ export default async function HomePage() {
             <div className="space-y-4">
               <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white leading-[1.1] lg:leading-[0.9]">
                 Elevating <br />
-                <span className="text-primary italic drop-shadow-[0_0_15px_rgba(var(--primary),0.3)]">
+                <span className="text-primary italic drop-shadow-[0_0_15px_color-mix(in_srgb,var(--color-primary)_30%,transparent)]">
                   Ambitions
                 </span>
               </h1>
@@ -250,7 +250,7 @@ export default async function HomePage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
               <Button
                 size="lg"
-                className="h-14 md:h-16 px-8 md:px-10 text-base md:text-lg font-bold shadow-[0_10px_20px_-10px_rgba(var(--primary),0.5)] transition-transform hover:scale-105 active:scale-95 hover:bg-white hover:text-secondary transition-all bg-primary text-secondary"
+                className="h-14 md:h-16 px-8 md:px-10 text-base md:text-lg font-bold shadow-[0_10px_20px_-10px_color-mix(in_srgb,var(--color-primary)_50%,transparent)] transition-transform hover:scale-105 active:scale-95 hover:bg-white hover:text-secondary transition-all bg-primary text-secondary"
                 asChild
               >
                 <Link href="/properties">Explore Estates</Link>

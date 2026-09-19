@@ -23,23 +23,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
-const getStatusBadgeClass = (status: string) => {
-  switch (status) {
-    case "Active":
-      return "bg-green-500 text-white";
-    case "Inactive":
-      return "bg-red-500 text-white";
-    case "Pending":
-      return "bg-yellow-500 text-white";
-    case "Paid":
-      return "bg-green-100 text-green-800";
-    case "Late":
-      return "bg-red-100 text-red-800";
-    default:
-      return "bg-gray-100 text-gray-800";
-  }
-};
+import { statusBadgeClass } from "@/lib/statusBadge";
 
 export default async function Page({
   params,
@@ -107,7 +91,7 @@ export default async function Page({
               </div>
               <div>
                 <p className="text-sm font-medium text-gray-500">Status</p>
-                <Badge className={getStatusBadgeClass(tenant.status)}>
+                <Badge className={statusBadgeClass(tenant.status)}>
                   {tenant.status}
                 </Badge>
               </div>
@@ -146,7 +130,7 @@ export default async function Page({
                       ${(payment.amount as number).toFixed(2)}
                     </TableCell>
                     <TableCell>
-                      <Badge className={getStatusBadgeClass(payment.status)}>
+                      <Badge className={statusBadgeClass(payment.status)}>
                         {payment.status}
                       </Badge>
                     </TableCell>

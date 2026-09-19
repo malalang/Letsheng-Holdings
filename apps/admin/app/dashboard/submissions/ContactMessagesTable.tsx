@@ -21,6 +21,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { statusBadgeClass } from "@/lib/statusBadge";
 import { deleteContactMessage, updateContactMessageStatus } from "./actions";
 
 type ContactMessage = {
@@ -36,12 +37,6 @@ type ContactMessage = {
 
 type ContactMessagesTableProps = {
   messages: ContactMessage[];
-};
-
-const statusVariantMap: Record<string, string> = {
-  New: "bg-yellow-50 text-yellow-700 border-yellow-200",
-  Contacted: "bg-blue-50 text-blue-700 border-blue-200",
-  Resolved: "bg-emerald-50 text-emerald-700 border-emerald-200",
 };
 
 export function ContactMessagesTable({ messages }: ContactMessagesTableProps) {
@@ -98,7 +93,7 @@ export function ContactMessagesTable({ messages }: ContactMessagesTableProps) {
                     </h3>
                     <Badge
                       variant="outline"
-                      className={`capitalize px-2 py-0 h-5 text-[10px] font-bold ${statusVariantMap[message.status] ?? "bg-muted text-muted-foreground"}`}
+                      className={`capitalize px-2 py-0 h-5 text-[10px] font-bold ${statusBadgeClass(message.status)}`}
                     >
                       {message.status}
                     </Badge>

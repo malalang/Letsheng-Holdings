@@ -1,7 +1,7 @@
 "use client";
 
 import { PlusCircle, Trash2 } from "lucide-react";
-import { useFieldArray } from "react-hook-form";
+import { type Control, type FieldValues, useFieldArray } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import {
   FormControl,
@@ -14,7 +14,7 @@ import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
 interface ArrayInputProps {
-  control: any;
+  control: Control<FieldValues>;
   name: string;
   label: string;
   addLabel?: string;

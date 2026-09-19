@@ -25,21 +25,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { statusBadgeClass } from "@/lib/statusBadge";
 import { getTenants } from "../tenants/actions";
 import { getPayments } from "./actions";
 
-const getStatusBadge = (status: string) => {
-  switch (status) {
-    case "Paid":
-      return <Badge className="bg-green-500 text-white">Paid</Badge>;
-    case "Late":
-      return <Badge variant="destructive">Late</Badge>;
-    case "Pending":
-      return <Badge className="bg-yellow-500 text-white">Pending</Badge>;
-    default:
-      return <Badge variant="secondary">{status}</Badge>;
-  }
-};
+const getStatusBadge = (status: string) => (
+  <Badge className={statusBadgeClass(status)}>{status}</Badge>
+);
 
 export default async function PaymentsPage() {
   const [payments, tenants] = await Promise.all([getPayments(), getTenants()]);

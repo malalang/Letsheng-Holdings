@@ -40,13 +40,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { statusBadgeClass } from "@/lib/statusBadge";
 
 import { deleteBrandingInquiry, updateBrandingInquiryStatus } from "./actions";
-
-const statusVariantMap: Record<string, string> = {
-  New: "bg-yellow-50 text-yellow-700 border-yellow-200",
-  Contacted: "bg-blue-50 text-blue-700 border-blue-200",
-};
 
 interface BrandingInquiryWithProduct {
   id: string;
@@ -124,7 +120,7 @@ export function BrandingInquiriesTable({
                         </h3>
                         <Badge
                           variant="outline"
-                          className={`capitalize px-2 py-0 h-5 text-[10px] font-bold ${statusVariantMap[inquiry.status]}`}
+                          className={`capitalize px-2 py-0 h-5 text-[10px] font-bold ${statusBadgeClass(inquiry.status)}`}
                         >
                           {inquiry.status}
                         </Badge>

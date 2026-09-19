@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  ArrowUpRight,
   Calendar,
   CreditCard,
   Edit,
@@ -21,23 +22,26 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { statusBadgeClass } from "@/lib/statusBadge";
 
-interface TenantCardProps {
-  tenant: any; // Using any for now to handle Joined types
+interface TenantCardData {
+  id: string;
+  name: string;
+  email: string | null;
+  status: string;
+  propertyId: string | null;
+  leaseEndDate: string | null;
+  avatarUrl: string | null;
+  property: { title: string } | null;
 }
 
-const getStatusBadge = (status: string) => {
-  switch (status) {
-    case "Active":
-      return <Badge className="bg-green-500 text-white">Active</Badge>;
-    case "Inactive":
-      return <Badge variant="destructive">Inactive</Badge>;
-    case "Pending":
-      return <Badge className="bg-yellow-500 text-white">Pending</Badge>;
-    default:
-      return <Badge variant="secondary">{status}</Badge>;
-  }
-};
+interface TenantCardProps {
+  tenant: TenantCardData;
+}
+
+const getStatusBadge = (status: string) => (
+  <Badge className={statusBadgeClass(status)}>{status}</Badge>
+);
 
 export default function TenantCard({ tenant }: TenantCardProps) {
   const leaseEnd = tenant.leaseEndDate
@@ -174,5 +178,3 @@ export default function TenantCard({ tenant }: TenantCardProps) {
     </Card>
   );
 }
-
-import { ArrowUpRight } from "lucide-react";

@@ -137,7 +137,7 @@ export default async function BrandingPage() {
                 <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">
                   Specifications
                 </p>
-                {(p.specs as any[]).slice(0, 3).map((spec) => (
+                {(p.specs ?? []).slice(0, 3).map((spec) => (
                   <div
                     key={spec.label}
                     className="flex justify-between text-sm border-b border-gray-50 pb-1"

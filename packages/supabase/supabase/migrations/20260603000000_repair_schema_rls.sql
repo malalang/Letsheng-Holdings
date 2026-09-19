@@ -2,30 +2,30 @@ create extension if not exists "pgcrypto";
 
 create table if not exists public.properties (
   id text primary key default gen_random_uuid()::text,
-  created_at timestamptz not null default now(),
+  createdAt timestamptz not null default now(),
   title text not null,
   description text,
   price numeric not null,
   location text,
   availability boolean not null default true,
-  image_url text,
+  imageUrl text,
   bedrooms integer,
   bathrooms integer,
   type text,
   features jsonb default '[]'::jsonb,
-  is_featured boolean not null default false,
+  isFeatured boolean not null default false,
   gallery jsonb default '[]'::jsonb,
   reviews jsonb default '[]'::jsonb
 );
 
 create table if not exists public.branding (
   id text primary key default gen_random_uuid()::text,
-  created_at timestamptz not null default now(),
+  createdAt timestamptz not null default now(),
   title text not null,
   description text,
   category text not null,
   image text,
-  is_featured boolean not null default false,
+  isFeatured boolean not null default false,
   specs jsonb default '[]'::jsonb,
   gallery jsonb default '[]'::jsonb,
   reviews jsonb default '[]'::jsonb
@@ -33,55 +33,59 @@ create table if not exists public.branding (
 
 create table if not exists public.tenants (
   id text primary key default gen_random_uuid()::text,
-  created_at timestamptz not null default now(),
+  createdAt timestamptz not null default now(),
   name text not null,
   email text,
-  property_id text references public.properties(id) on delete set null,
+  propertyId text,
   status text not null default 'Pending'
     check (status in ('Active', 'Inactive', 'Pending')),
-  lease_end_date timestamptz,
-  avatar_url text
+  leaseEndDate timestamptz,
+  avatarUrl text,
+  constraint tenants_property_id_fkey foreign key (propertyId) references public.properties(id) on delete set null
 );
 
 create table if not exists public.payments (
   id text primary key default gen_random_uuid()::text,
-  created_at timestamptz not null default now(),
-  tenant_id text references public.tenants(id) on delete cascade,
+  createdAt timestamptz not null default now(),
+  tenantId text,
   amount numeric not null,
   date timestamptz not null,
   status text not null default 'Pending'
-    check (status in ('Paid', 'Pending', 'Late'))
+    check (status in ('Paid', 'Pending', 'Late')),
+  constraint payments_tenant_id_fkey foreign key (tenantId) references public.tenants(id) on delete cascade
 );
 
 create table if not exists public.branding_inquiries (
   id text primary key default gen_random_uuid()::text,
-  created_at timestamptz not null default now(),
-  product_id text references public.branding(id) on delete set null,
-  customer_name text not null,
+  createdAt timestamptz not null default now(),
+  productId text,
+  customerName text not null,
   email text not null,
   company text,
   quantity integer not null check (quantity > 0),
   message text,
   status text not null default 'New'
-    check (status in ('New', 'In Progress', 'Completed', 'Archived'))
+    check (status in ('New', 'In Progress', 'Completed', 'Archived')),
+  constraint branding_inquiries_product_id_fkey foreign key (productId) references public.branding(id) on delete set null
 );
 
 create table if not exists public.lease_applications (
   id text primary key default gen_random_uuid()::text,
-  created_at timestamptz not null default now(),
-  property_id text references public.properties(id) on delete set null,
-  applicant_name text not null,
+  createdAt timestamptz not null default now(),
+  propertyId text,
+  applicantName text not null,
   email text not null,
   phone text,
   employment text,
   message text,
   status text not null default 'Pending'
-    check (status in ('Pending', 'Approved', 'Rejected', 'Archived'))
+    check (status in ('Pending', 'Approved', 'Rejected', 'Archived')),
+  constraint lease_applications_product_id_fkey foreign key (propertyId) references public.properties(id) on delete set null
 );
 
 create table if not exists public.contact_messages (
   id text primary key default gen_random_uuid()::text,
-  created_at timestamptz not null default now(),
+  createdAt timestamptz not null default now(),
   name text not null,
   email text not null,
   phone text,
