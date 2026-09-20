@@ -25,7 +25,7 @@ import {
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import {
   Dialog,
   DialogContent,
@@ -40,6 +40,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Empty } from "@/components/ui/empty";
 import { statusBadgeClass } from "@/lib/statusBadge";
 
 import { deleteBrandingInquiry, updateBrandingInquiryStatus } from "./actions";
@@ -89,15 +90,12 @@ export function BrandingInquiriesTable({
 
   if (inquiries.length === 0) {
     return (
-      <Card className="border-dashed py-20 text-center">
-        <CardContent className="flex flex-col items-center">
-          <Inbox className="h-12 w-12 text-muted-foreground/30 mb-4" />
-          <h3 className="text-lg font-semibold">No branding inquiries</h3>
-          <p className="text-sm text-muted-foreground">
-            You don't have any incoming branding project inquiries.
-          </p>
-        </CardContent>
-      </Card>
+      <Empty
+        icon={Inbox}
+        title="No branding inquiries"
+        description="You don't have any incoming branding project inquiries."
+        className="mt-6"
+      />
     );
   }
 

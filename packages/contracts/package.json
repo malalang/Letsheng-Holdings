@@ -11,8 +11,7 @@
     "./leaseApplication": "./src/leaseApplication.ts",
     "./env": "./src/env.ts",
     "./actionResult": "./src/actionResult.ts",
-    "./revalidation": "./src/revalidation.ts",
-    "./utils": "./src/utils.ts"
+    "./revalidation": "./src/revalidation.ts"
   },
   "scripts": {
     "build": "tsc",
@@ -23,6 +22,7 @@
   },
   "devDependencies": {
     "@letsheng-holdings/typescript-config": "workspace:*",
+    "@types/node": "catalog:",
     "typescript": "catalog:"
   }
 }

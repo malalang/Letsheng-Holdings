@@ -2,7 +2,7 @@ import {
   getPaymentsByTenantId,
   getTenantById,
 } from "@letsheng-holdings/supabase/Queries/tenants";
-import { ArrowLeft, Edit } from "lucide-react";
+import { ArrowLeft, Edit, Receipt } from "lucide-react";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
@@ -14,15 +14,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Empty } from "@/components/ui/empty";
 import { Separator } from "@/components/ui/separator";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import { statusBadgeClass } from "@/lib/statusBadge";
 
 export default async function Page({
@@ -114,30 +107,34 @@ export default async function Page({
             <CardTitle>Payment History</CardTitle>
           </CardHeader>
           <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Date</TableHead>
-                  <TableHead>Amount</TableHead>
-                  <TableHead>Status</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
+            {payments.length === 0 ? (
+              <Empty
+                icon={Receipt}
+                title="No payments yet"
+                description="Payments made by this tenant will appear here."
+              />
+            ) : (
+              <ul className="space-y-2">
                 {payments.map((payment) => (
-                  <TableRow key={payment.id}>
-                    <TableCell>{payment.date}</TableCell>
-                    <TableCell>
-                      ${(payment.amount as number).toFixed(2)}
-                    </TableCell>
-                    <TableCell>
+                  <li
+                    key={payment.id}
+                    className="flex items-center justify-between gap-4 rounded-lg border p-3"
+                  >
+                    <div>
+                      <p className="font-medium">
+                        {new Date(payment.date).toLocaleDateString()}
+                      </p>
                       <Badge className={statusBadgeClass(payment.status)}>
                         {payment.status}
                       </Badge>
-                    </TableCell>
-                  </TableRow>
+                    </div>
+                    <p className="font-semibold">
+                      ${(payment.amount as number).toFixed(2)}
+                    </p>
+                  </li>
                 ))}
-              </TableBody>
-            </Table>
+              </ul>
+            )}
           </CardContent>
         </Card>
       </div>

@@ -1,7 +1,7 @@
 import { PlusCircle, Search, Users } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Empty } from "@/components/ui/empty";
 import { Input } from "@/components/ui/input";
 import { getTenants } from "./actions";
 import TenantCard from "./TenantCard";
@@ -44,16 +44,11 @@ export default async function AdminTenantsPage() {
       </div>
 
       {tenants.length === 0 ? (
-        <Card className="border-dashed py-20 text-center">
-          <CardContent className="flex flex-col items-center">
-            <Users className="h-12 w-12 text-muted-foreground/30 mb-4" />
-            <h3 className="text-lg font-semibold">No tenants found</h3>
-            <p className="text-sm text-muted-foreground max-w-xs mx-auto mt-2">
-              You haven't added any tenants yet. Click the button above to
-              create your first tenant record.
-            </p>
-          </CardContent>
-        </Card>
+        <Empty
+          icon={Users}
+          title="No tenants found"
+          description="You haven't added any tenants yet. Click the button above to create your first tenant record."
+        />
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           {tenants.map((tenant) => (

@@ -1,3 +1,4 @@
+import { getEnv } from "@letsheng-holdings/contracts/env";
 import type { RevalidationPayload } from "@letsheng-holdings/contracts/revalidation";
 
 function getClientRevalidationUrl(clientUrl: string) {
@@ -9,8 +10,9 @@ function getClientRevalidationUrl(clientUrl: string) {
 }
 
 export async function triggerRevalidation(request: RevalidationPayload) {
-  const clientUrl = process.env.NEXT_PUBLIC_CLIENT_URL;
-  const secret = process.env.REVALIDATION_SECRET;
+  const env = getEnv();
+  const clientUrl = env.NEXT_PUBLIC_CLIENT_URL;
+  const secret = env.REVALIDATION_SECRET;
 
   if (!clientUrl || !secret) {
     console.warn(

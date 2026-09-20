@@ -6,6 +6,12 @@ export const envSchema = z.object({
   SUPABASE_SERVICE_ROLE_KEY: z.string().min(1).optional(),
   REVALIDATION_SECRET: z.string().min(1).optional(),
   NEXT_PUBLIC_CLIENT_URL: z.string().url().optional(),
+  NEXT_PUBLIC_SITE_URL: z.string().url().optional(),
 });
 
 export type Env = z.infer<typeof envSchema>;
+
+export function getEnv(): Env {
+  const result = envSchema.safeParse(process.env);
+  return result.success ? result.data : (process.env as unknown as Env);
+}

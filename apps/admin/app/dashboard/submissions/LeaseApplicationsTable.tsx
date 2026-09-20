@@ -27,7 +27,7 @@ import {
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import {
   Dialog,
   DialogContent,
@@ -42,6 +42,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Empty } from "@/components/ui/empty";
 import { statusBadgeClass } from "@/lib/statusBadge";
 
 import {
@@ -108,15 +109,12 @@ export function LeaseApplicationsTable({
 
   if (applications.length === 0) {
     return (
-      <Card className="border-dashed py-20 text-center">
-        <CardContent className="flex flex-col items-center">
-          <Inbox className="h-12 w-12 text-muted-foreground/30 mb-4" />
-          <h3 className="text-lg font-semibold">No lease applications</h3>
-          <p className="text-sm text-muted-foreground">
-            You don't have any incoming lease applications at the moment.
-          </p>
-        </CardContent>
-      </Card>
+      <Empty
+        icon={Inbox}
+        title="No lease applications"
+        description="You don't have any incoming lease applications at the moment."
+        className="mt-6"
+      />
     );
   }
 

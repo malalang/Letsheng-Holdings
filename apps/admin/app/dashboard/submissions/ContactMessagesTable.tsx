@@ -21,6 +21,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Empty } from "@/components/ui/empty";
 import { statusBadgeClass } from "@/lib/statusBadge";
 import { deleteContactMessage, updateContactMessageStatus } from "./actions";
 
@@ -64,15 +65,12 @@ export function ContactMessagesTable({ messages }: ContactMessagesTableProps) {
 
   if (messages.length === 0) {
     return (
-      <Card className="border-dashed py-20 text-center mt-6">
-        <CardContent className="flex flex-col items-center">
-          <Inbox className="h-12 w-12 text-muted-foreground/30 mb-4" />
-          <h3 className="text-lg font-semibold">No contact messages</h3>
-          <p className="text-sm text-muted-foreground">
-            You do not have any general contact messages yet.
-          </p>
-        </CardContent>
-      </Card>
+      <Empty
+        icon={Inbox}
+        title="No contact messages"
+        description="You do not have any general contact messages yet."
+        className="mt-6"
+      />
     );
   }
 

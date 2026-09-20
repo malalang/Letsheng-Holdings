@@ -353,6 +353,9 @@ importers:
       '@letsheng-holdings/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
+      '@types/node':
+        specifier: 'catalog:'
+        version: 22.19.20
       typescript:
         specifier: 'catalog:'
         version: 5.9.3

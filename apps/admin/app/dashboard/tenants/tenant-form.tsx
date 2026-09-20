@@ -6,7 +6,7 @@ import type {
   TenantType,
 } from "@letsheng-holdings/contracts/tenant";
 import { createSupabaseBrowserClient } from "@letsheng-holdings/supabase/client";
-import { ArrowLeft, Trash2 } from "lucide-react";
+import { ArrowLeft, Receipt, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -20,6 +20,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Empty } from "@/components/ui/empty";
 import {
   Form,
   FormControl,
@@ -36,14 +37,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import { createTenant, deleteTenant, updateTenant } from "./actions";
 
 const formSchema = z.object({
@@ -278,26 +271,34 @@ export default function TenantForm({ tenant, payments }: TenantFormProps) {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Date</TableHead>
-                      <TableHead>Amount</TableHead>
-                      <TableHead>Status</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
+                {payments.length === 0 ? (
+                  <Empty
+                    icon={Receipt}
+                    title="No payments yet"
+                    description="Payments made by this tenant will appear here."
+                  />
+                ) : (
+                  <ul className="space-y-2">
                     {payments.map((payment) => (
-                      <TableRow key={payment.id}>
-                        <TableCell>
-                          {new Date(payment.date).toLocaleDateString()}
-                        </TableCell>
-                        <TableCell>${payment.amount.toFixed(2)}</TableCell>
-                        <TableCell>{payment.status}</TableCell>
-                      </TableRow>
+                      <li
+                        key={payment.id}
+                        className="flex items-center justify-between gap-4 rounded-lg border p-3"
+                      >
+                        <div>
+                          <p className="font-medium">
+                            {new Date(payment.date).toLocaleDateString()}
+                          </p>
+                          <p className="text-sm text-muted-foreground">
+                            {payment.status}
+                          </p>
+                        </div>
+                        <p className="font-semibold">
+                          ${payment.amount.toFixed(2)}
+                        </p>
+                      </li>
                     ))}
-                  </TableBody>
-                </Table>
+                  </ul>
+                )}
               </CardContent>
             </Card>
           )}
