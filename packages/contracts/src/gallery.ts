@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { imageSourceSchema, optionalNullableStringSchema } from "./utils";
+﻿import { z } from "zod";
+import { imageSourceSchema, optionalNullableStringSchema } from "./schemaPrimitives";
 
 export const galleryItemSchema = z.object({
   imageUrl: imageSourceSchema("Please enter a valid image URL or app path."),

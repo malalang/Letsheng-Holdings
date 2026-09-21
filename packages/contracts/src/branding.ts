@@ -1,4 +1,4 @@
-import { z } from "zod";
+﻿import { z } from "zod";
 import { galleryItemSchema } from "./gallery";
 import { reviewSchema } from "./property";
 import {
@@ -6,7 +6,7 @@ import {
   nullableImageSourceSchema,
   numberInputSchema,
   optionalNullableStringSchema,
-} from "./utils";
+} from "./schemaPrimitives";
 
 export const specItemSchema = z.object({
   label: z.string().trim().min(1, "Label is required"),

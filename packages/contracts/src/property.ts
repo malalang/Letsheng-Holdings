@@ -1,4 +1,4 @@
-import { z } from "zod";
+﻿import { z } from "zod";
 import { galleryItemSchema } from "./gallery";
 import {
   nullableImageSourceSchema,
@@ -6,7 +6,7 @@ import {
   numberInputSchema,
   optionalNullableStringSchema,
   parseWithSchema,
-} from "./utils";
+} from "./schemaPrimitives";
 
 const nullableNumberSchema = (schema: z.ZodNumber) =>
   z.union([

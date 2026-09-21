@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { emailSchema, optionalNullableStringSchema } from "./utils";
+﻿import { z } from "zod";
+import { emailSchema, optionalNullableStringSchema } from "./schemaPrimitives";
 
 export const leaseApplicationSchema = z.object({
   applicantName: z.string().trim().min(1, "Name is required"), // camelCase

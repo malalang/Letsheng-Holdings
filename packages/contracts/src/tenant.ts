@@ -1,11 +1,11 @@
-import { z } from "zod";
+﻿import { z } from "zod";
 import {
   emailSchema,
   nullableImageSourceSchema,
   nullableStringSchema,
   numberInputSchema,
   optionalNullableStringSchema,
-} from "./utils";
+} from "./schemaPrimitives";
 
 const optionalNullableEmailSchema = optionalNullableStringSchema(emailSchema);
 
