@@ -9,6 +9,7 @@
     "./tenant": "./src/tenant.ts",
     "./branding": "./src/branding.ts",
     "./leaseApplication": "./src/leaseApplication.ts",
+    "./schemaPrimitives": "./src/schemaPrimitives.ts",
     "./env": "./src/env.ts",
     "./actionResult": "./src/actionResult.ts",
     "./revalidation": "./src/revalidation.ts"

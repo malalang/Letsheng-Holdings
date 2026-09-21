@@ -36,11 +36,11 @@ type ContactMessage = {
   subject: string | null;
 };
 
-type ContactMessagesTableProps = {
+type ContactMessagesCardsProps = {
   messages: ContactMessage[];
 };
 
-export function ContactMessagesTable({ messages }: ContactMessagesTableProps) {
+export function ContactMessagesCards({ messages }: ContactMessagesCardsProps) {
   const handleStatusUpdate = async (id: string, status: string) => {
     const result = await updateContactMessageStatus(id, status);
     if (result.ok) {

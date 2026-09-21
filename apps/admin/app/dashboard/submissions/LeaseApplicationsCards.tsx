@@ -63,13 +63,13 @@ interface LeaseApplicationWithDetails {
   propertyId: string;
 }
 
-interface LeaseApplicationsTableProps {
+interface LeaseApplicationsCardsProps {
   applications: LeaseApplicationWithDetails[];
 }
 
-export function LeaseApplicationsTable({
+export function LeaseApplicationsCards({
   applications,
-}: LeaseApplicationsTableProps) {
+}: LeaseApplicationsCardsProps) {
   const router = useRouter();
   const [selectedApplication, setSelectedApplication] =
     useState<LeaseApplicationWithDetails | null>(null);

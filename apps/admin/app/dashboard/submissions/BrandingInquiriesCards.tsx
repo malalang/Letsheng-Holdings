@@ -58,13 +58,13 @@ interface BrandingInquiryWithProduct {
   productId: string;
 }
 
-interface BrandingInquiriesTableProps {
+interface BrandingInquiriesCardsProps {
   inquiries: BrandingInquiryWithProduct[];
 }
 
-export function BrandingInquiriesTable({
+export function BrandingInquiriesCards({
   inquiries,
-}: BrandingInquiriesTableProps) {
+}: BrandingInquiriesCardsProps) {
   const [selectedInquiry, setSelectedInquiry] =
     useState<BrandingInquiryWithProduct | null>(null);
 

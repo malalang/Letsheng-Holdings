@@ -4,9 +4,9 @@ import {
   getContactMessages,
   getLeaseApplications,
 } from "./actions";
-import { BrandingInquiriesTable } from "./BrandingInquiriesTable";
-import { ContactMessagesTable } from "./ContactMessagesTable";
-import { LeaseApplicationsTable } from "./LeaseApplicationsTable";
+import { BrandingInquiriesCards } from "./BrandingInquiriesCards";
+import { ContactMessagesCards } from "./ContactMessagesCards";
+import { LeaseApplicationsCards } from "./LeaseApplicationsCards";
 
 export default async function SubmissionsPage() {
   const [applications, inquiries, contactMessages] = await Promise.all([
@@ -32,13 +32,13 @@ export default async function SubmissionsPage() {
           <TabsTrigger value="contacts">Contact Messages</TabsTrigger>
         </TabsList>
         <TabsContent value="leases">
-          <LeaseApplicationsTable applications={applications} />
+          <LeaseApplicationsCards applications={applications} />
         </TabsContent>
         <TabsContent value="branding">
-          <BrandingInquiriesTable inquiries={inquiries} />
+          <BrandingInquiriesCards inquiries={inquiries} />
         </TabsContent>
         <TabsContent value="contacts">
-          <ContactMessagesTable messages={contactMessages} />
+          <ContactMessagesCards messages={contactMessages} />
         </TabsContent>
       </Tabs>
     </div>
