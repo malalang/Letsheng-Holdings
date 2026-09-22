@@ -40,8 +40,6 @@ export const reviewSchema = z.object({
   comment: z.string().trim().min(1, "Comment is required"),
 });
 
-export type ReviewType = z.infer<typeof reviewSchema>;
-
 export const featureSchema = z.string().trim().min(1, "Feature is required");
 
 export const propertySchema = z.object({

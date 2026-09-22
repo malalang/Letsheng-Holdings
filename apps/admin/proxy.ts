@@ -8,8 +8,14 @@ export async function proxy(request: NextRequest) {
   } = await supabase.auth.getUser();
   const pathname = request.nextUrl.pathname;
 
+  const redirect = (to: string) => {
+    const res = NextResponse.redirect(new URL(to, request.url));
+    response.cookies.getAll().forEach((cookie) => res.cookies.set(cookie));
+    return res;
+  };
+
   if (!user && pathname !== "/login") {
-    return NextResponse.redirect(new URL("/login", request.url));
+    return redirect("/login");
   }
 
   if (!user) {
@@ -20,13 +26,11 @@ export async function proxy(request: NextRequest) {
   const hasAdminAccess = !adminError && isAdmin === true;
 
   if (!hasAdminAccess && pathname !== "/login") {
-    return NextResponse.redirect(
-      new URL("/login?error=unauthorized", request.url),
-    );
+    return redirect("/login?error=unauthorized");
   }
 
   if (hasAdminAccess && pathname === "/login") {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
+    return redirect("/dashboard");
   }
 
   return response;

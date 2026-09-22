@@ -49,18 +49,3 @@ export async function deleteTenant(id: string) {
     mode: "immediate",
   });
 }
-
-export async function createPayment(payment: TablesInsert<"payments">) {
-  await requireAdminUser();
-  const supabase = await createSupabaseServerClient();
-  const { data, error } = await supabase
-    .from("payments")
-    .insert(payment)
-    .select()
-    .single();
-  if (error) throw new Error(error.message);
-  return mutationResult(data, {
-    tags: [CACHE_TAGS.payments],
-    mode: "immediate",
-  });
-}

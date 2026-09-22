@@ -9,16 +9,6 @@ export async function getBranding() {
   return data;
 }
 
-export async function getFeaturedBranding() {
-  const supabase = createSupabasePublicClient();
-  const { data, error } = await supabase
-    .from("branding")
-    .select("*")
-    .eq("isFeatured", true);
-  if (error) throw new Error(error.message);
-  return data;
-}
-
 export async function getBrandingById(id: string) {
   const supabase = createSupabasePublicClient();
   const { data, error } = await supabase

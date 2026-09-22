@@ -9,5 +9,3 @@ export const galleryItemSchema = z.object({
   title: z.string().trim().min(1, "Title is required"),
   description: optionalNullableStringSchema(z.string().trim()),
 });
-
-export type GalleryItemType = z.infer<typeof galleryItemSchema>;

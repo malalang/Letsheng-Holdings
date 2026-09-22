@@ -13,8 +13,6 @@ export const specItemSchema = z.object({
   value: z.string().trim().min(1, "Value is required"),
 });
 
-export type SpecItemType = z.infer<typeof specItemSchema>;
-
 export const brandingSchema = z.object({
   id: z.string().optional(),
   title: z.string().trim().min(3, "Title must be at least 3 characters"),

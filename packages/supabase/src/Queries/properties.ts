@@ -17,16 +17,6 @@ export async function getAdminProperties() {
   return data;
 }
 
-export async function getFeaturedProperties() {
-  const supabase = createSupabasePublicClient();
-  const { data, error } = await supabase
-    .from("properties")
-    .select("*")
-    .eq("isFeatured", true);
-  if (error) throw new Error(error.message);
-  return data;
-}
-
 export async function getPropertyById(id: string) {
   const supabase = createSupabasePublicClient();
   const { data, error } = await supabase
