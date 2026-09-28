@@ -1,9 +1,17 @@
+import type { Metadata } from "next";
+
 import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
 import {
   SidebarInset as Inset,
   SidebarProvider as Provider,
 } from "@/components/ui/sidebar";
+
+export const metadata: Metadata = {
+  title: "Dashboard",
+  description:
+    "Portfolio performance and operational overview for Letsheng Holdings.",
+};
 
 export const dynamic = "force-dynamic";
 

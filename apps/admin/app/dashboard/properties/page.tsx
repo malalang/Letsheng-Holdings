@@ -8,6 +8,7 @@ import {
   MoreVertical,
   Trash2,
 } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
@@ -20,7 +21,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
 import { deletePropertyFromList, getProperties } from "./actions";
+
+export const metadata: Metadata = {
+  title: "Properties",
+  description:
+    "Manage the Letsheng Holdings real estate portfolio and lease assignments.",
+};
 
 const PROPERTY_IMAGE_FALLBACK = "/logo.jpg";
 

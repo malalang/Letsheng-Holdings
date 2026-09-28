@@ -1,4 +1,5 @@
 import { ArrowLeft } from "lucide-react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,6 +11,24 @@ import {
 } from "@/components/ui/card";
 import { getPropertyById } from "../../../actions";
 import PropertyForm from "../../../property-form";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const result = await getPropertyById(id);
+  const property = result.ok && result.data ? result.data.property : null;
+
+  if (!property) {
+    return {};
+  }
+
+  return {
+    title: `Edit ${property.title}`,
+  };
+}
 
 export default async function EditPropertyPage({
   params,

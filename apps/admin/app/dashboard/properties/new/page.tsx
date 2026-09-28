@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
+
 import PropertyForm from "../property-form";
+
+export const metadata: Metadata = {
+  title: "New Property",
+  description: "Add a property to the Letsheng Holdings real estate portfolio.",
+};
 
 export default function NewPropertyPage() {
   return (

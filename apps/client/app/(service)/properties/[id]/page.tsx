@@ -12,6 +12,7 @@ import {
   MapPin,
   Star,
 } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -22,6 +23,24 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getPropertyById } from "../actions";
 
 const PROPERTY_IMAGE_FALLBACK = "/logo.jpg";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+
+  try {
+    const property = await getPropertyById(id);
+    return {
+      title: property.title,
+      description: property.description ?? undefined,
+    };
+  } catch {
+    return {};
+  }
+}
 
 export default async function PropertyDetailPage({
   params,

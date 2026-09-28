@@ -9,7 +9,9 @@ import {
   Percent,
   User,
 } from "lucide-react";
+import type { Metadata } from "next";
 import Link from "next/link";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -59,6 +61,12 @@ const KpiCard = ({ item }: { item: KpiData }) => {
       </Card>
     </CardWrapper>
   );
+};
+
+export const metadata: Metadata = {
+  title: "Dashboard",
+  description:
+    "Portfolio performance and operational overview for Letsheng Holdings.",
 };
 
 export default async function DashboardPage() {

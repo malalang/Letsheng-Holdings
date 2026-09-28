@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
+
 import BrandingForm from "../branding-form";
+
+export const metadata: Metadata = {
+  title: "New Branding Product",
+  description: "Create a branding product for the Letsheng Holdings portfolio.",
+};
 
 export default function NewBrandingPage() {
   return (

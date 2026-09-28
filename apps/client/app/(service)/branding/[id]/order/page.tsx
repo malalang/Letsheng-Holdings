@@ -1,6 +1,25 @@
+import type { Metadata } from "next";
+
 import BrandingOrderForm from "@/components/branding/BrandingOrderForm";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getBrandingProduct } from "../../actions";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const product = await getBrandingProduct(id);
+
+  if (!product) {
+    return {};
+  }
+
+  return {
+    title: `Order ${product.title}`,
+  };
+}
 
 // --- Sidebar Component --- //
 const NextStepsInfo = () => (

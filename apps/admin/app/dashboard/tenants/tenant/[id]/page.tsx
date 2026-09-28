@@ -3,6 +3,7 @@ import {
   getTenantById,
 } from "@letsheng-holdings/supabase/Queries/tenants";
 import { ArrowLeft, Edit, Receipt } from "lucide-react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
@@ -17,6 +18,24 @@ import {
 import { Empty } from "@/components/ui/empty";
 import { Separator } from "@/components/ui/separator";
 import { statusBadgeClass } from "@/lib/statusBadge";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const tenant = await getTenantById(id);
+
+  if (!tenant) {
+    return {};
+  }
+
+  return {
+    title: tenant.name,
+    description: `Lease and payment details for ${tenant.name}.`,
+  };
+}
 
 export default async function Page({
   params,

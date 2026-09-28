@@ -1,10 +1,17 @@
 import { PlusCircle, Search, Users } from "lucide-react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Empty } from "@/components/ui/empty";
 import { Input } from "@/components/ui/input";
 import { getTenants } from "./actions";
 import TenantCard from "./TenantCard";
+
+export const metadata: Metadata = {
+  title: "Tenants",
+  description:
+    "Manage your Letsheng Holdings resident portfolio and lease agreements.",
+};
 
 export default async function AdminTenantsPage() {
   const tenants = await getTenants();

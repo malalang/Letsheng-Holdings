@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   getBrandingInquiries,
@@ -7,6 +9,12 @@ import {
 import { BrandingInquiriesCards } from "./BrandingInquiriesCards";
 import { ContactMessagesCards } from "./ContactMessagesCards";
 import { LeaseApplicationsCards } from "./LeaseApplicationsCards";
+
+export const metadata: Metadata = {
+  title: "Submissions",
+  description:
+    "Review lease applications, branding inquiries and contact messages.",
+};
 
 export default async function SubmissionsPage() {
   const [applications, inquiries, contactMessages] = await Promise.all([

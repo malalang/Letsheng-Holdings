@@ -13,6 +13,7 @@ import {
   MapPin,
   Star,
 } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
@@ -26,6 +27,25 @@ import {
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { getPropertyById } from "../../actions";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const result = await getPropertyById(id);
+  const property = result.ok && result.data ? result.data.property : null;
+
+  if (!property) {
+    return {};
+  }
+
+  return {
+    title: property.title,
+    description: property.description ?? undefined,
+  };
+}
 
 export default async function PropertyDetailsPage({
   params,

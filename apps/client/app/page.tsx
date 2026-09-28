@@ -7,15 +7,23 @@ import {
   Search,
   Star,
 } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import type React from "react";
+
 import WaterDetergentsSpotlight from "@/components/branding/waterDetergents";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { businessInfo } from "@/lib/business";
 import { getBrandingProducts } from "./(service)/branding/actions";
 import { getProperties } from "./(service)/properties/actions";
+
+export const metadata: Metadata = {
+  title: { absolute: businessInfo.seoTitle },
+  description: businessInfo.seoDescription,
+};
 
 // ==============================================
 // Sub-Components

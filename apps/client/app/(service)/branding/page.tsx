@@ -7,6 +7,7 @@ import {
   Tag,
   Zap,
 } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -21,6 +22,12 @@ import {
 } from "@/components/ui/card";
 
 import { getBrandingProducts } from "./actions";
+
+export const metadata: Metadata = {
+  title: "Branding",
+  description:
+    "High-fidelity corporate identity, apparel, signage and marketing materials from Letsheng Holdings.",
+};
 
 const BRANDING_IMAGE_FALLBACK = "/logo.jpg";
 

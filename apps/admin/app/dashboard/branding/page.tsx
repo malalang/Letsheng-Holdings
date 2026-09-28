@@ -1,4 +1,5 @@
 import { Edit, Eye, MoreVertical, PlusCircle, Trash2 } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
@@ -17,6 +18,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { getBrandingProducts } from "./actions";
+
+export const metadata: Metadata = {
+  title: "Branding",
+  description: "Manage your Letsheng Holdings branding and print portfolio.",
+};
 
 export default async function AdminBrandingPage() {
   const products = await getBrandingProducts();

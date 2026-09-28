@@ -2,6 +2,7 @@ import { specItemSchema } from "@letsheng-holdings/contracts/branding";
 import { galleryItemSchema } from "@letsheng-holdings/contracts/gallery";
 import { reviewSchema } from "@letsheng-holdings/contracts/property";
 import { ArrowLeft } from "lucide-react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
@@ -13,6 +14,23 @@ import {
 } from "@/components/ui/card";
 import { getBrandingProduct } from "../../../actions";
 import BrandingForm from "../../../branding-form";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const product = await getBrandingProduct(id);
+
+  if (!product) {
+    return {};
+  }
+
+  return {
+    title: `Edit ${product.title}`,
+  };
+}
 
 export default async function EditBrandingPage({
   params,

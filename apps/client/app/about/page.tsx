@@ -14,10 +14,17 @@ import {
   Users,
   Zap,
 } from "lucide-react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import type React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+export const metadata: Metadata = {
+  title: "About Us",
+  description:
+    "The Letsheng Standard - premium housing, high-fidelity branding and essential community services across South Africa.",
+};
 
 // ==============================================
 // Page-Specific Components

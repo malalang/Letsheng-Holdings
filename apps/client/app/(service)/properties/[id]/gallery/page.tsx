@@ -1,4 +1,5 @@
 import { galleryItemSchema } from "@letsheng-holdings/contracts/gallery";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -6,6 +7,23 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
 import { getPropertyById } from "../../actions";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+
+  try {
+    const property = await getPropertyById(id);
+    return {
+      title: `${property.title} Gallery`,
+    };
+  } catch {
+    return {};
+  }
+}
 
 export default async function PropertyGalleryPage({
   params,

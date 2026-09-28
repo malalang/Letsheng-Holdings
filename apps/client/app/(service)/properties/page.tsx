@@ -7,6 +7,7 @@ import {
   ShieldCheck,
   Stars,
 } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -22,6 +23,12 @@ import {
 } from "@/components/ui/card";
 
 import { getProperties } from "./actions";
+
+export const metadata: Metadata = {
+  title: "Properties",
+  description:
+    "Premium residential estates and rental properties from Letsheng Holdings across Mpumalanga and Gauteng.",
+};
 
 const PROPERTY_IMAGE_FALLBACK = "/logo.jpg";
 

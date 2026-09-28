@@ -1,8 +1,26 @@
 import { galleryItemSchema } from "@letsheng-holdings/contracts/gallery";
+import type { Metadata } from "next";
 import Image from "next/image";
 
 import { Card } from "@/components/ui/card";
 import { getBrandingProduct } from "../../actions";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const product = await getBrandingProduct(id);
+
+  if (!product) {
+    return {};
+  }
+
+  return {
+    title: `${product.title} Gallery`,
+  };
+}
 
 export default async function ProductGalleryPage({
   params,

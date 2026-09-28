@@ -2,6 +2,7 @@ import { specItemSchema } from "@letsheng-holdings/contracts/branding";
 import { galleryItemSchema } from "@letsheng-holdings/contracts/gallery";
 import { reviewSchema } from "@letsheng-holdings/contracts/property";
 import { ShoppingCart, Star } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -9,6 +10,24 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getBrandingProduct } from "../actions";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const product = await getBrandingProduct(id);
+
+  if (!product) {
+    return {};
+  }
+
+  return {
+    title: product.title,
+    description: product.description,
+  };
+}
 
 export default async function ProductPage({
   params,

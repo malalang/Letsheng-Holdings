@@ -10,11 +10,18 @@ import {
   Truck,
   Waves,
 } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+
+export const metadata: Metadata = {
+  title: "Water & Detergents",
+  description:
+    "Bulk water supply and high-fidelity cleaning detergents from Letsheng Holdings for households, businesses and industry.",
+};
 
 const FeaturePoint = ({ children }: { children: React.ReactNode }) => (
   <li className="flex items-center gap-3 text-gray-300">

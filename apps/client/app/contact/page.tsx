@@ -1,8 +1,14 @@
 import { Mail, MapPin, Phone } from "lucide-react";
+import type { Metadata } from "next";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { businessInfo } from "@/lib/business";
 import { ContactForm } from "./contact-form";
+
+export const metadata: Metadata = {
+  title: "Contact Us",
+  description: `Get in touch with ${businessInfo.name} about properties, branding, water supply and detergents.`,
+};
 
 export default function ContactPage() {
   return (

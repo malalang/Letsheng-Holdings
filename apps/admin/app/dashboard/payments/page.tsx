@@ -8,6 +8,7 @@ import {
   TrendingUp,
   User,
 } from "lucide-react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   Accordion,
@@ -25,9 +26,16 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
 import { statusBadgeClass } from "@/lib/statusBadge";
 import { getTenants } from "../tenants/actions";
 import { getPayments } from "./actions";
+
+export const metadata: Metadata = {
+  title: "Payments",
+  description:
+    "Manage tenant ledgers, track revenue, and handle arrears for Letsheng Holdings.",
+};
 
 const getStatusBadge = (status: string) => (
   <Badge className={statusBadgeClass(status)}>{status}</Badge>
