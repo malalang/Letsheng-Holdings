@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
+    ".": "./src/client.ts",
     "./client": "./src/client.ts",
     "./public": "./src/public.ts",
     "./server": "./src/server.ts",
@@ -10,8 +11,15 @@
     "./auth": "./src/auth.ts",
     "./cache": "./src/cache.ts",
     "./supabaseType": "./src/supabaseType.ts",
-    "./Queries/*": "./src/Queries/*.ts",
-    "./Mutations/*": "./src/Mutations/*.ts"
+    "./Mutations/branding": "./src/Mutations/branding.ts",
+    "./Mutations/contact": "./src/Mutations/contact.ts",
+    "./Mutations/properties": "./src/Mutations/properties.ts",
+    "./Mutations/tenants": "./src/Mutations/tenants.ts",
+    "./Queries/branding": "./src/Queries/branding.ts",
+    "./Queries/contact": "./src/Queries/contact.ts",
+    "./Queries/dashboard": "./src/Queries/dashboard.ts",
+    "./Queries/properties": "./src/Queries/properties.ts",
+    "./Queries/tenants": "./src/Queries/tenants.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
