@@ -1,5 +1,5 @@
 import { PlusCircle, Search, Users } from "lucide-react";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Empty } from "@/components/ui/empty";
@@ -13,6 +13,16 @@ export const metadata: Metadata = {
     "Manage your Letsheng Holdings resident portfolio and lease agreements.",
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#1f2937" },
+  ],
+};
 export default async function AdminTenantsPage() {
   const tenants = await getTenants();
 

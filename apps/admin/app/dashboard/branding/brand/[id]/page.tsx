@@ -2,7 +2,7 @@ import { specItemSchema } from "@letsheng-holdings/contracts/branding";
 import { galleryItemSchema } from "@letsheng-holdings/contracts/gallery";
 import { reviewSchema } from "@letsheng-holdings/contracts/property";
 import { ArrowLeft, CheckCircle, Edit, Star } from "lucide-react";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
@@ -29,6 +29,16 @@ export async function generateMetadata({
   };
 }
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#1f2937" },
+  ],
+};
 export default async function BrandingDetailPage({
   params,
 }: {

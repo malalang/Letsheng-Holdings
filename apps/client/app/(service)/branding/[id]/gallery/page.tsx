@@ -1,5 +1,5 @@
 import { galleryItemSchema } from "@letsheng-holdings/contracts/gallery";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Image from "next/image";
 
 import { Card } from "@/components/ui/card";
@@ -22,6 +22,16 @@ export async function generateMetadata({
   };
 }
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#1f2937" },
+  ],
+};
 export default async function ProductGalleryPage({
   params,
 }: {

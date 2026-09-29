@@ -1,5 +1,5 @@
 import { ArrowRight, CheckCircle2, ShieldCheck, Sparkles } from "lucide-react";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
@@ -82,6 +82,16 @@ const ServiceCard = ({
   </Card>
 );
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#1f2937" },
+  ],
+};
 export default function ServicesPage() {
   return (
     <div className="animate-fade-in space-y-24 pb-20">

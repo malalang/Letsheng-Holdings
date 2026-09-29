@@ -1,5 +1,5 @@
 import { Mail, MapPin, Phone } from "lucide-react";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { businessInfo } from "@/lib/business";
@@ -10,6 +10,16 @@ export const metadata: Metadata = {
   description: `Get in touch with ${businessInfo.name} about properties, branding, water supply and detergents.`,
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#1f2937" },
+  ],
+};
 export default function ContactPage() {
   return (
     <div className="animate-fade-in space-y-12">

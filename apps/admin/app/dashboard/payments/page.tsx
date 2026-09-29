@@ -8,7 +8,7 @@ import {
   TrendingUp,
   User,
 } from "lucide-react";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Link from "next/link";
 import {
   Accordion,
@@ -41,6 +41,16 @@ const getStatusBadge = (status: string) => (
   <Badge className={statusBadgeClass(status)}>{status}</Badge>
 );
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#1f2937" },
+  ],
+};
 export default async function PaymentsPage() {
   const [payments, tenants] = await Promise.all([getPayments(), getTenants()]);
 

@@ -9,7 +9,7 @@ import {
   Percent,
   User,
 } from "lucide-react";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Link from "next/link";
 
 import { Badge } from "@/components/ui/badge";
@@ -69,6 +69,16 @@ export const metadata: Metadata = {
     "Portfolio performance and operational overview for Letsheng Holdings.",
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#1f2937" },
+  ],
+};
 export default async function DashboardPage() {
   const kpis = await getDashboardKpis();
   const recentLeases = await getRecentLeases();
