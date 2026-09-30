@@ -8,6 +8,7 @@
     "./property": "./src/property.ts",
     "./tenant": "./src/tenant.ts",
     "./branding": "./src/branding.ts",
+    "./imageUpload": "./src/imageUpload.ts",
     "./leaseApplication": "./src/leaseApplication.ts",
     "./schemaPrimitives": "./src/schemaPrimitives.ts",
     "./env": "./src/env.ts",

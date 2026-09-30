@@ -1,12 +1,12 @@
 "use client";
 
-import { createSupabaseBrowserClient } from "@letsheng-holdings/supabase/client";
 import { Loader2, Pencil, Trash2, Upload } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { uploadAdminImage } from "@/lib/imageUploadActions";
 
 interface UploadImageProps {
   onUploadSuccess: (url: string) => void;
@@ -21,7 +21,6 @@ export function UploadImage({
 }: UploadImageProps) {
   const [uploading, setUploading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string | null>(initialUrl || null);
-  const supabase = createSupabaseBrowserClient();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Sync state with external changes to initialUrl
@@ -36,29 +35,28 @@ export function UploadImage({
     if (!file) return;
 
     setUploading(true);
-    const bucketName = "letshengHoldings";
-    const fileName = `${Date.now()}-${file.name}`;
-    const filePath = folder ? `${folder}/${fileName}` : fileName;
 
-    const { error: uploadError } = await supabase.storage
-      .from(bucketName)
-      .upload(filePath, file);
+    const formData = new FormData();
+    formData.append("folder", folder ?? "");
+    formData.append("file", file);
 
-    if (uploadError) {
-      toast.error(`Upload failed: ${uploadError.message}`);
+    const result = await uploadAdminImage(formData);
+
+    if (!result.ok) {
+      toast.error(`Upload failed: ${result.error}`);
       setUploading(false);
       return;
     }
 
-    const { data } = supabase.storage.from(bucketName).getPublicUrl(filePath);
-
-    if (data.publicUrl) {
-      setImageUrl(data.publicUrl);
-      onUploadSuccess(data.publicUrl);
-      toast.success("Image uploaded successfully!");
-    } else {
+    if (!result.data?.url) {
       toast.error("Image uploaded, but failed to retrieve public URL.");
+      setUploading(false);
+      return;
     }
+
+    setImageUrl(result.data.url);
+    onUploadSuccess(result.data.url);
+    toast.success("Image uploaded successfully!");
 
     setUploading(false);
   };
@@ -80,7 +78,7 @@ export function UploadImage({
         type="file"
         onChange={handleFileChange}
         disabled={uploading}
-        accept="image/*"
+        accept="image/png,image/jpeg,image/gif"
         className="hidden"
       />
 
@@ -141,7 +139,7 @@ export function UploadImage({
                 Click to upload an image
               </span>
               <p className="text-xs text-muted-foreground">
-                PNG, JPG, GIF up to 10MB
+                PNG, JPG, GIF up to 4MB
               </p>
             </div>
           )}
