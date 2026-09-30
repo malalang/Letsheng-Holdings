@@ -318,7 +318,7 @@ export default function PropertyForm({ property }: PropertyFormProps) {
                               variant="ghost"
                               size="icon"
                               className="text-destructive hover:text-destructive/80"
-                              onClick={() => remove(index)}
+                              onClick={() => remove(index)} aria-label={`Remove gallery item ${index + 1}`}
                             >
                               <Trash2 className="h-4 w-4" />
                             </Button>
@@ -513,7 +513,7 @@ export default function PropertyForm({ property }: PropertyFormProps) {
                               variant="ghost"
                               size="icon"
                               className="text-destructive hover:text-destructive/80"
-                              onClick={() => removeReview(index)}
+                              onClick={() => removeReview(index)} aria-label={`Remove review ${index + 1}`}
                             >
                               <Trash2 className="h-4 w-4" />
                             </Button>

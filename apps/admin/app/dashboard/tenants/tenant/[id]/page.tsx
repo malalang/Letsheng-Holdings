@@ -59,12 +59,12 @@ export default async function Page({
     return (
       <div className="mx-auto max-w-5xl">
         <h1 className="text-2xl font-bold mb-4">Tenant not found</h1>
-        <Link href="/dashboard/tenants">
-          <Button variant="outline">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Tenants
-          </Button>
-        </Link>
+        <Button asChild variant="outline">
+          <Link href="/dashboard/tenants">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Tenants
+          </Link>
+        </Button>
       </div>
     );
   }
@@ -74,18 +74,18 @@ export default async function Page({
   return (
     <div className="mx-auto max-w-5xl">
       <div className="mb-4 flex items-center justify-between">
-        <Link href="/dashboard/tenants">
-          <Button variant="outline" size="sm">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Tenants
-          </Button>
-        </Link>
-        <Link href={`/dashboard/tenants/tenant/${tenant.id}/edit`}>
-          <Button variant="outline" size="sm">
-            <Edit className="mr-2 h-4 w-4" />
-            Edit Tenant
-          </Button>
-        </Link>
+        <Button asChild variant="outline" size="sm">
+          <Link href="/dashboard/tenants">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Tenants
+          </Link>
+        </Button>
+        <Button asChild variant="outline" size="sm">
+          <Link href={`/dashboard/tenants/tenant/${tenant.id}/edit`}>
+              <Edit className="mr-2 h-4 w-4" />
+              Edit Tenant
+          </Link>
+        </Button>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">

@@ -53,12 +53,12 @@ export default async function EditPropertyPage({
     return (
       <div className="mx-auto max-w-5xl">
         <h1 className="text-2xl font-bold mb-4">Property not found</h1>
-        <Link href="/dashboard/properties">
-          <Button variant="outline">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Properties
-          </Button>
-        </Link>
+        <Button asChild variant="outline">
+          <Link href="/dashboard/properties">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Properties
+          </Link>
+        </Button>
       </div>
     );
   }
@@ -66,12 +66,12 @@ export default async function EditPropertyPage({
   return (
     <div className="mx-auto max-w-5xl">
       <div className="mb-4 flex items-center gap-4">
-        <Link href={`/dashboard/properties/property/${property.id}`}>
-          <Button variant="outline" size="sm">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Cancel Edit
-          </Button>
-        </Link>
+        <Button asChild variant="outline" size="sm">
+          <Link href={`/dashboard/properties/property/${property.id}`}>
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Cancel Edit
+          </Link>
+        </Button>
       </div>
       <Card>
         <CardHeader>

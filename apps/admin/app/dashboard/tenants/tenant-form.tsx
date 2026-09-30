@@ -145,12 +145,12 @@ export default function TenantForm({ tenant, payments }: TenantFormProps) {
   return (
     <div className="mx-auto max-w-2xl">
       <div className="mb-4">
-        <Link href="/dashboard/tenants">
-          <Button variant="outline" size="sm">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Tenants
-          </Button>
-        </Link>
+        <Button asChild variant="outline" size="sm">
+          <Link href="/dashboard/tenants">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Tenants
+          </Link>
+        </Button>
       </div>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">

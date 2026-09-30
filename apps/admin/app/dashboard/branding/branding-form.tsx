@@ -286,7 +286,7 @@ export default function BrandingForm({ product }: BrandingFormProps) {
                               variant="ghost"
                               size="icon"
                               className="text-destructive hover:text-destructive/80"
-                              onClick={() => removeGallery(index)}
+                              onClick={() => removeGallery(index)} aria-label={`Remove gallery item ${index + 1}`}
                             >
                               <Trash2 className="h-4 w-4" />
                             </Button>
@@ -421,7 +421,7 @@ export default function BrandingForm({ product }: BrandingFormProps) {
                             type="button"
                             variant="ghost"
                             size="icon"
-                            onClick={() => removeSpec(index)}
+                            onClick={() => removeSpec(index)} aria-label={`Remove specification ${index + 1}`}
                           >
                             <Trash2 className="h-4 w-4 text-destructive" />
                           </Button>

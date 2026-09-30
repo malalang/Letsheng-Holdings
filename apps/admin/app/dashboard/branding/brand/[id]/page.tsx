@@ -54,12 +54,12 @@ export default async function BrandingDetailPage({
         <p className="text-muted-foreground">
           The product you are looking for does not exist.
         </p>
-        <Link href="/dashboard/branding">
-          <Button variant="outline" className="mt-4">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Branding
-          </Button>
-        </Link>
+        <Button asChild variant="outline" className="mt-4">
+          <Link href="/dashboard/branding">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Branding
+          </Link>
+        </Button>
       </div>
     );
   }
@@ -76,18 +76,18 @@ export default async function BrandingDetailPage({
   return (
     <div className="mx-auto max-w-6xl">
       <div className="mb-4 flex items-center justify-between">
-        <Link href="/dashboard/branding">
-          <Button variant="outline" size="sm">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Branding
-          </Button>
-        </Link>
-        <Link href={`/dashboard/branding/brand/${product.id}/edit`}>
-          <Button variant="outline" size="sm">
-            <Edit className="mr-2 h-4 w-4" />
-            Edit Product
-          </Button>
-        </Link>
+        <Button asChild variant="outline" size="sm">
+          <Link href="/dashboard/branding">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Branding
+          </Link>
+        </Button>
+        <Button asChild variant="outline" size="sm">
+          <Link href={`/dashboard/branding/brand/${product.id}/edit`}>
+              <Edit className="mr-2 h-4 w-4" />
+              Edit Product
+          </Link>
+        </Button>
       </div>
 
       <div className="grid gap-8 md:grid-cols-[1fr_350px]">

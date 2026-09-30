@@ -92,18 +92,18 @@ export default async function PropertyDetailsPage({
   return (
     <div className="mx-auto max-w-6xl">
       <div className="mb-4 flex items-center justify-between">
-        <Link href="/dashboard/properties">
-          <Button variant="outline" size="sm">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Properties
-          </Button>
-        </Link>
-        <Link href={`/dashboard/properties/property/${property.id}/edit`}>
-          <Button variant="outline" size="sm">
-            <Edit className="mr-2 h-4 w-4" />
-            Edit Property
-          </Button>
-        </Link>
+        <Button asChild variant="outline" size="sm">
+          <Link href="/dashboard/properties">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Properties
+          </Link>
+        </Button>
+        <Button asChild variant="outline" size="sm">
+          <Link href={`/dashboard/properties/property/${property.id}/edit`}>
+              <Edit className="mr-2 h-4 w-4" />
+              Edit Property
+          </Link>
+        </Button>
       </div>
 
       <div className="grid gap-8 md:grid-cols-[1fr_350px]">

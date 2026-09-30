@@ -54,12 +54,12 @@ export default async function EditBrandingPage({
     return (
       <div className="mx-auto max-w-5xl">
         <h1 className="text-2xl font-bold mb-4">Product not found</h1>
-        <Link href="/dashboard/branding">
-          <Button variant="outline">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Branding
-          </Button>
-        </Link>
+        <Button asChild variant="outline">
+          <Link href="/dashboard/branding">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Branding
+          </Link>
+        </Button>
       </div>
     );
   }
@@ -78,12 +78,12 @@ export default async function EditBrandingPage({
   return (
     <div className="mx-auto max-w-5xl">
       <div className="mb-4 flex items-center gap-4">
-        <Link href={`/dashboard/branding/brand/${product.id}`}>
-          <Button variant="outline" size="sm">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Cancel Edit
-          </Button>
-        </Link>
+        <Button asChild variant="outline" size="sm">
+          <Link href={`/dashboard/branding/brand/${product.id}`}>
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Cancel Edit
+          </Link>
+        </Button>
       </div>
       <Card>
         <CardHeader>

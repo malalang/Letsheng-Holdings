@@ -45,12 +45,12 @@ export default async function AdminBrandingPage() {
             Manage your branding portfolio.
           </p>
         </div>
-        <Link href="/dashboard/branding/new">
-          <Button>
-            <PlusCircle className="mr-2 h-4 w-4" />
-            Create New
-          </Button>
-        </Link>
+        <Button asChild>
+          <Link href="/dashboard/branding/new">
+              <PlusCircle className="mr-2 h-4 w-4" />
+              Create New
+          </Link>
+        </Button>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
         {products.map((p) => (
@@ -71,6 +71,7 @@ export default async function AdminBrandingPage() {
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button size="icon">
+                      aria-label={`Actions for ${p.title}`}
                       <MoreVertical className="h-4 w-4" />
                     </Button>
                   </DropdownMenuTrigger>

@@ -167,6 +167,7 @@ export default async function AdminPropertiesPage({
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <Button variant="default" size="icon">
+                          aria-label={`Actions for ${p.title}`}
                           <MoreVertical className="h-4 w-4" />
                         </Button>
                       </DropdownMenuTrigger>
