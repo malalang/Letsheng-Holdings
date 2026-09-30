@@ -118,7 +118,7 @@ export function BrandingInquiriesCards({
                         </h3>
                         <Badge
                           variant="outline"
-                          className={`capitalize px-2 py-0 h-5 text-[10px] font-bold ${statusBadgeClass(inquiry.status)}`}
+                          className={`capitalize px-2 py-0 min-h-5 text-xs font-bold ${statusBadgeClass(inquiry.status)}`}
                         >
                           {inquiry.status}
                         </Badge>

@@ -9,7 +9,12 @@ const Card = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "rounded-lg border bg-card/60 text-card-foreground glass-card",
+      // The glass-card treatment (translucent fill, backdrop blur, raw rgba
+      // border) was removed to meet the card spec: bg-card, border-border, and
+      // depth from the surface step. The rule is still defined in globals.css
+      // if the brand look is wanted back - re-tokenized, not reinstated as
+      // literals.
+      "rounded-lg border border-border bg-card text-card-foreground transition-colors duration-150 ease-out",
       className,
     )}
     {...props}
@@ -36,7 +41,7 @@ const CardTitle = React.forwardRef<
   <h3
     ref={ref}
     className={cn(
-      "text-lg font-semibold leading-none tracking-tight",
+      "text-base font-semibold leading-none tracking-tight",
       className,
     )}
     {...props}

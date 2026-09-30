@@ -1,6 +1,6 @@
 "use client";
 
-import { Building2, ChevronDown, LogOut, PlusCircle, ShoppingCart } from "lucide-react";
+import { ChevronDown, LogOut } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
@@ -15,7 +15,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -105,41 +104,6 @@ const Header = ({ user }: { user: AdminUser }) => {
       </div>
 
       <div className="flex shrink-0 items-center gap-2">
-        {/* Zone 3's optional contextual action, before the identity control. */}
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              variant="outline"
-              size="sm"
-              className="h-10 max-md:size-11 gap-1"
-            >
-              <PlusCircle className="h-3.5 w-3.5" />
-              <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                Quick Add
-              </span>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Create New</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem asChild>
-              <Link
-                href="/dashboard/properties/new"
-                className="flex items-center"
-              >
-                <Building2 className="mr-2 h-4 w-4" />
-                Property
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem asChild>
-              <Link href="/dashboard/branding/new" className="flex items-center">
-                <ShoppingCart className="mr-2 h-4 w-4" />
-                Branding Product
-              </Link>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button

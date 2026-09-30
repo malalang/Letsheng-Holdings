@@ -111,7 +111,7 @@ export default function TenantCard({ tenant }: TenantCardProps) {
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-1">
-              <p className="text-[10px] text-muted-foreground uppercase font-bold tracking-tight">
+              <p className="text-xs text-muted-foreground uppercase font-bold tracking-tight">
                 Property / Unit
               </p>
               <div className="flex items-center gap-2 text-sm font-medium">
@@ -131,7 +131,7 @@ export default function TenantCard({ tenant }: TenantCardProps) {
               </div>
             </div>
             <div className="space-y-1">
-              <p className="text-[10px] text-muted-foreground uppercase font-bold tracking-tight">
+              <p className="text-xs text-muted-foreground uppercase font-bold tracking-tight">
                 Lease Ends
               </p>
               <div className="flex items-center gap-2 text-sm font-medium">

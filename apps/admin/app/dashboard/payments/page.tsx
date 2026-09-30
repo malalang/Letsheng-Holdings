@@ -93,7 +93,7 @@ export default async function PaymentsPage() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card className="bg-brand-card">
           <CardHeader className="pb-2">
-            <CardDescription className="text-primary/70 font-medium uppercase tracking-wider text-[10px]">
+            <CardDescription className="text-primary/70 font-medium uppercase tracking-wider text-xs">
               Total Revenue
             </CardDescription>
             <CardTitle className="text-3xl font-bold flex items-baseline gap-1">
@@ -113,7 +113,7 @@ export default async function PaymentsPage() {
 
         <Card className="bg-brand-card border-destructive/30">
           <CardHeader className="pb-2">
-            <CardDescription className="text-destructive/70 font-medium uppercase tracking-wider text-[10px]">
+            <CardDescription className="text-destructive/70 font-medium uppercase tracking-wider text-xs">
               Total Overdue
             </CardDescription>
             <CardTitle className="text-3xl font-bold text-destructive flex items-baseline gap-1">
@@ -133,7 +133,7 @@ export default async function PaymentsPage() {
 
         <Card className="bg-brand-card">
           <CardHeader className="pb-2">
-            <CardDescription className="text-primary/70 font-medium uppercase tracking-wider text-[10px]">
+            <CardDescription className="text-primary/70 font-medium uppercase tracking-wider text-xs">
               Collection Rate
             </CardDescription>
             <CardTitle className="text-3xl font-bold">94.2%</CardTitle>
@@ -199,7 +199,7 @@ export default async function PaymentsPage() {
                         </div>
                         <div className="flex items-center gap-6">
                           <div className="text-right">
-                            <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider text-[10px]">
+                            <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider text-xs">
                               Amount Due
                             </p>
                             <p className="text-xl font-bold text-destructive">
@@ -316,7 +316,7 @@ export default async function PaymentsPage() {
                             <p className="font-bold leading-none">
                               {tenant.name}
                             </p>
-                            <p className="text-[10px] text-muted-foreground uppercase mt-1">
+                            <p className="text-xs text-muted-foreground uppercase mt-1">
                               {tenantPayments.length} Transactions
                             </p>
                           </div>
@@ -346,7 +346,7 @@ export default async function PaymentsPage() {
                                         )
                                       : "N/A"}
                                   </p>
-                                  <p className="text-[10px] text-muted-foreground">
+                                  <p className="text-xs text-muted-foreground">
                                     {p.id.slice(0, 8)}
                                   </p>
                                 </div>

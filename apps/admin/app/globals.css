@@ -14,6 +14,13 @@
 }
 
 @theme {
+  /* One sans family with a variable weight axis, as the type ladder requires.
+     The system stack is fast and consistent and costs no webfont request.
+     Held identical to Malalang, bilacert and sally-m so the four admins render
+     the same text. */
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
   /* Core Colors */
   --color-background: #f0f2f5; /* Light gray background for content area */
   --color-foreground: #002147; /* Default text color (Navy) */
@@ -63,10 +70,7 @@
 
 @layer base {
   body {
-    @apply bg-background text-foreground;
-    font-family:
-      Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
-      "Helvetica Neue", Arial;
+    @apply bg-background text-foreground font-sans;
   }
 
   h1,

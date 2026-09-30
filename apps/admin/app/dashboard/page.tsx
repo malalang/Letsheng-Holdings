@@ -41,7 +41,7 @@ const KpiCard = ({ item }: { item: KpiData }) => {
         className={`bg-brand-card hover:shadow-md transition-all cursor-pointer group ${item.color === "destructive" ? "border-destructive/20" : ""}`}
       >
         <CardHeader className="flex flex-row items-center justify-between pb-2">
-          <CardTitle className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+          <CardTitle className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
             {item.title}
           </CardTitle>
           <item.icon
@@ -54,7 +54,7 @@ const KpiCard = ({ item }: { item: KpiData }) => {
           >
             {item.value}
           </div>
-          <p className="text-[10px] text-muted-foreground mt-1 font-medium">
+          <p className="text-xs text-muted-foreground mt-1 font-medium">
             {item.change}
           </p>
         </CardContent>
@@ -187,7 +187,7 @@ export default async function DashboardPage() {
                       </p>
                       <Badge
                         variant="outline"
-                        className={`text-[10px] px-1.5 py-0 h-4 uppercase font-black tracking-tighter ${statusBadgeClass(lease.status)}`}
+                        className={`text-xs px-1.5 py-0 min-min-h-5 uppercase font-black tracking-tighter ${statusBadgeClass(lease.status)}`}
                       >
                         {lease.status}
                       </Badge>
@@ -231,13 +231,13 @@ export default async function DashboardPage() {
 
             <div className="grid grid-cols-2 gap-4 pt-4 border-t border-primary/10">
               <div className="space-y-1">
-                <p className="text-[10px] text-muted-foreground uppercase font-bold">
+                <p className="text-xs text-muted-foreground uppercase font-bold">
                   New Submissions
                 </p>
                 <p className="text-2xl font-bold">{kpis?.pendingOrders}</p>
               </div>
               <div className="space-y-1">
-                <p className="text-[10px] text-muted-foreground uppercase font-bold">
+                <p className="text-xs text-muted-foreground uppercase font-bold">
                   Property Yield
                 </p>
                 <p className="text-2xl font-bold">12.4%</p>
