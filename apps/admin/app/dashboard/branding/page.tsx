@@ -56,7 +56,7 @@ export default async function AdminBrandingPage() {
         {products.map((p) => (
           <Card
             key={p.id}
-            className="rounded-xl shadow-lg border-gray-200/50 overflow-hidden flex flex-col"
+            className="rounded-xl shadow-lg border-border overflow-hidden flex flex-col"
           >
             <div className="relative aspect-square overflow-hidden">
               <Link href={`/dashboard/branding/brand/${p.id}`}>
@@ -93,7 +93,7 @@ export default async function AdminBrandingPage() {
                         View
                       </Link>
                     </DropdownMenuItem>
-                    <DropdownMenuItem className="text-red-500">
+                    <DropdownMenuItem className="text-destructive">
                       <Trash2 className="h-4 w-4 mr-2" />
                       Delete
                     </DropdownMenuItem>
@@ -118,7 +118,7 @@ export default async function AdminBrandingPage() {
             </CardHeader>
 
             <CardContent className="flex-grow">
-              <p className="text-gray-700 leading-relaxed truncate">
+              <p className="text-foreground leading-relaxed truncate">
                 {p.description}
               </p>
             </CardContent>

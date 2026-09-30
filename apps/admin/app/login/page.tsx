@@ -64,15 +64,15 @@ export default function LoginPage() {
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
           <Shield className="mx-auto h-12 w-12 text-primary" />
-          <h1 className="mt-4 text-4xl font-bold text-white">
+          <h1 className="mt-4 text-4xl font-bold text-secondary-foreground">
             Admin Secure Login
           </h1>
-          <p className="mt-2 text-gray-400">Letsheng Holdings Command Center</p>
+          <p className="mt-2 text-muted-foreground">Letsheng Holdings Command Center</p>
         </div>
-        <Card className="border-gray-700 bg-gray-900/50 text-white">
+        <Card className="border-border bg-foreground text-secondary-foreground">
           <CardHeader>
             <CardTitle>Enter Credentials</CardTitle>
-            <CardDescription className="text-gray-400">
+            <CardDescription className="text-muted-foreground">
               Provide your administrative credentials to proceed.
             </CardDescription>
           </CardHeader>
@@ -93,7 +93,7 @@ export default function LoginPage() {
                           type="email"
                           placeholder="admin@letsheng.co.za"
                           {...field}
-                          className="border-gray-600 bg-gray-800 text-white placeholder:text-gray-500"
+                          className="border-border bg-muted text-foreground placeholder:text-muted-foreground"
                         />
                       </FormControl>
                       <FormMessage />
@@ -111,7 +111,7 @@ export default function LoginPage() {
                           type="password"
                           placeholder="••••••••••••••"
                           {...field}
-                          className="border-gray-600 bg-gray-800 text-white placeholder:text-gray-500"
+                          className="border-border bg-muted text-foreground placeholder:text-muted-foreground"
                         />
                       </FormControl>
                       <FormMessage />

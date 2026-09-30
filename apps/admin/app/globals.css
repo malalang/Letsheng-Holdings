@@ -24,6 +24,18 @@
   --color-destructive: #ef4444; /* Red for destructive actions */
   --color-destructive-foreground: #ffffff;
 
+  /*
+   * Domain states the app was painting with raw palette colours because no token
+   * existed for them: warnings, informational notices, and the image scrim.
+   * Declaring them is what makes the component sweep mechanical - a status
+   * becomes a token swap instead of a code hunt on every rebrand.
+   */
+  --color-warning: #f59e0b;
+  --color-warning-foreground: #78350f;
+  --color-info: #3b82f6;
+  --color-info-foreground: #1e3a8a;
+  --color-overlay: #002147;
+
   /* Component Colors */
   --color-card: #ffffff;
   --color-card-foreground: #002147;
@@ -73,4 +85,22 @@
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/*
+ * Reduced motion (blueprint check 17).
+ *
+ * 28 transition utilities and 16 non-spin animate-* rules ran with no guard
+ * anywhere in the app. Durations collapse rather than being dropped so a state
+ * change stays visible.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

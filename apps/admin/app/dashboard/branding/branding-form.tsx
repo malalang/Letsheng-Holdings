@@ -285,7 +285,7 @@ export default function BrandingForm({ product }: BrandingFormProps) {
                               type="button"
                               variant="ghost"
                               size="icon"
-                              className="text-red-500 hover:text-red-600"
+                              className="text-destructive hover:text-destructive/80"
                               onClick={() => removeGallery(index)}
                             >
                               <Trash2 className="h-4 w-4" />
@@ -423,7 +423,7 @@ export default function BrandingForm({ product }: BrandingFormProps) {
                             size="icon"
                             onClick={() => removeSpec(index)}
                           >
-                            <Trash2 className="h-4 w-4 text-red-500" />
+                            <Trash2 className="h-4 w-4 text-destructive" />
                           </Button>
                         </div>
                       </Card>

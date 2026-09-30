@@ -148,7 +148,7 @@ export default function TenantCard({ tenant }: TenantCardProps) {
             {tenant.status === "Active" ? (
               <Badge
                 variant="outline"
-                className="bg-green-50 text-green-700 border-green-200"
+                className="bg-primary/10 text-primary border-primary/30"
               >
                 Up to Date
               </Badge>

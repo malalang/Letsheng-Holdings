@@ -225,7 +225,7 @@ export function BrandingInquiriesCards({
                 <div className="mt-8 flex flex-wrap gap-3">
                   <Button
                     size="sm"
-                    className="bg-primary text-white font-bold"
+                    className="bg-primary text-primary-foreground font-bold"
                     onClick={() => handleStatusUpdate(inquiry.id, "Contacted")}
                   >
                     Mark as Contacted
@@ -318,7 +318,7 @@ export function BrandingInquiriesCards({
                 </Button>
                 <Button
                   size="sm"
-                  className="bg-primary text-white"
+                  className="bg-primary text-primary-foreground"
                   onClick={() =>
                     handleStatusUpdate(selectedInquiry.id, "Contacted")
                   }

@@ -84,7 +84,7 @@ export default async function PaymentsPage() {
           <Button variant="outline" className="gap-2">
             <Receipt className="h-4 w-4" /> Export Ledger
           </Button>
-          <Button className="gap-2 bg-primary text-white">
+          <Button className="gap-2 bg-primary text-primary-foreground">
             <CreditCard className="h-4 w-4" /> Record Payment
           </Button>
         </div>
@@ -104,14 +104,14 @@ export default async function PaymentsPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="flex items-center gap-1 text-xs text-green-500 font-bold">
+            <div className="flex items-center gap-1 text-xs text-primary font-bold">
               <TrendingUp className="h-3 w-3" />
               <span>+12% from last month</span>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-brand-card border-red-200/50">
+        <Card className="bg-brand-card border-destructive/30">
           <CardHeader className="pb-2">
             <CardDescription className="text-destructive/70 font-medium uppercase tracking-wider text-[10px]">
               Total Overdue
@@ -166,7 +166,7 @@ export default async function PaymentsPage() {
           {overduePayments.length === 0 ? (
             <Card className="border-dashed py-12">
               <CardContent className="flex flex-col items-center justify-center text-center">
-                <CheckCircle2 className="h-12 w-12 text-green-500 mb-4" />
+                <CheckCircle2 className="h-12 w-12 text-primary mb-4" />
                 <h3 className="text-lg font-semibold">No overdue payments</h3>
                 <p className="text-sm text-muted-foreground">
                   All tenants are up to date with their payments.
@@ -208,7 +208,7 @@ export default async function PaymentsPage() {
                           </div>
                           <Button
                             size="sm"
-                            className="bg-primary text-white font-bold"
+                            className="bg-primary text-primary-foreground font-bold"
                             asChild
                           >
                             <Link
@@ -269,7 +269,7 @@ export default async function PaymentsPage() {
                             </p>
                             <Badge
                               variant="outline"
-                              className="bg-yellow-50 text-yellow-700 border-yellow-200"
+                              className="bg-warning/10 text-warning-foreground border-warning/30"
                             >
                               Pending Verification
                             </Badge>

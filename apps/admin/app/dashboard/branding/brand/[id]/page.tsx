@@ -51,7 +51,7 @@ export default async function BrandingDetailPage({
     return (
       <div className="mx-auto max-w-5xl">
         <h1 className="text-2xl font-bold mb-4">Product not found</h1>
-        <p className="text-gray-600">
+        <p className="text-muted-foreground">
           The product you are looking for does not exist.
         </p>
         <Link href="/dashboard/branding">
@@ -132,7 +132,7 @@ export default async function BrandingDetailPage({
                 <ul className="grid grid-cols-2 gap-x-6 gap-y-2">
                   {specs.map((spec) => (
                     <li key={spec.label} className="flex items-center gap-2">
-                      <CheckCircle className="h-5 w-5 text-green-500" />
+                      <CheckCircle className="h-5 w-5 text-primary" />
                       <span>
                         <strong>{spec.label}:</strong> {spec.value}
                       </span>
@@ -195,7 +195,7 @@ export default async function BrandingDetailPage({
                         {[...Array(review.rating)].map((_, i) => (
                           <Star
                             key={`${review.id ?? review.author}-${reviewIndex}-star-${i}`}
-                            className="h-4 w-4 text-yellow-400 fill-current"
+                            className="h-4 w-4 text-warning-foreground fill-current"
                           />
                         ))}
                       </div>

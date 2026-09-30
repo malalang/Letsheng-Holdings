@@ -147,7 +147,7 @@ export default async function DashboardPage() {
               asChild
               size="sm"
               variant="ghost"
-              className="gap-1 text-primary hover:text-primary hover:bg-primary/10"
+              className="gap-1 text-primary hover:text-primary/80 hover:bg-primary/20"
             >
               <Link href="/dashboard/properties">
                 View All
@@ -206,7 +206,7 @@ export default async function DashboardPage() {
                 <CreditCard className="h-5 w-5 text-primary" />
                 Revenue Health
               </CardTitle>
-              <Badge className="bg-primary text-white">94% Collection</Badge>
+              <Badge className="bg-primary text-primary-foreground">94% Collection</Badge>
             </div>
             <CardDescription>
               Property collection performance vs target.
@@ -245,7 +245,7 @@ export default async function DashboardPage() {
             </div>
 
             <Button
-              className="w-full bg-primary text-white font-bold h-11"
+              className="w-full bg-primary text-primary-foreground font-bold h-11"
               asChild
             >
               <Link href="/dashboard/payments">Manage Collections</Link>

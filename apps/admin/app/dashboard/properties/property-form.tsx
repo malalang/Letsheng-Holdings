@@ -317,7 +317,7 @@ export default function PropertyForm({ property }: PropertyFormProps) {
                               type="button"
                               variant="ghost"
                               size="icon"
-                              className="text-red-500 hover:text-red-600"
+                              className="text-destructive hover:text-destructive/80"
                               onClick={() => remove(index)}
                             >
                               <Trash2 className="h-4 w-4" />
@@ -512,7 +512,7 @@ export default function PropertyForm({ property }: PropertyFormProps) {
                               type="button"
                               variant="ghost"
                               size="icon"
-                              className="text-red-500 hover:text-red-600"
+                              className="text-destructive hover:text-destructive/80"
                               onClick={() => removeReview(index)}
                             >
                               <Trash2 className="h-4 w-4" />

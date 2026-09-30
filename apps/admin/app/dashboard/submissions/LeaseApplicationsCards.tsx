@@ -245,7 +245,7 @@ export function LeaseApplicationsCards({
                 <div className="mt-8 flex flex-wrap gap-3">
                   <Button
                     size="sm"
-                    className="bg-primary text-white font-bold"
+                    className="bg-primary text-primary-foreground font-bold"
                     onClick={() => handleStatusUpdate(app.id, "Reviewed")}
                   >
                     Accept for Review
@@ -350,7 +350,7 @@ export function LeaseApplicationsCards({
                 </Button>
                 <Button
                   size="sm"
-                  className="bg-primary text-white"
+                  className="bg-primary text-primary-foreground"
                   onClick={() =>
                     handleStatusUpdate(selectedApplication.id, "Reviewed")
                   }

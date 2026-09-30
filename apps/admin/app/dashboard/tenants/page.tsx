@@ -39,7 +39,7 @@ export default async function AdminTenantsPage() {
         </div>
         <div className="flex items-center gap-2">
           <Link href="/dashboard/tenants/new">
-            <Button className="bg-primary text-white font-bold">
+            <Button className="bg-primary text-primary-foreground font-bold">
               <PlusCircle className="mr-2 h-4 w-4" />
               New Tenant
             </Button>

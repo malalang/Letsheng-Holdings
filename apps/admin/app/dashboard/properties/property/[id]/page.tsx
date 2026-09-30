@@ -70,10 +70,10 @@ export default async function PropertyDetailsPage({
     return (
       <div className="mx-auto max-w-5xl">
         <h1 className="text-2xl font-bold mb-4">Property not found</h1>
-        <p className="text-gray-600">
+        <p className="text-muted-foreground">
           The property you are looking for does not exist.
         </p>
-        <p className="text-gray-600">here is the id: {id}</p>
+        <p className="text-muted-foreground">here is the id: {id}</p>
       </div>
     );
   }
@@ -166,7 +166,7 @@ export default async function PropertyDetailsPage({
                 <ul className="grid grid-cols-2 gap-x-6 gap-y-2">
                   {features.map((feature) => (
                     <li key={feature} className="flex items-center gap-2">
-                      <CheckCircle className="h-5 w-5 text-green-500" />
+                      <CheckCircle className="h-5 w-5 text-primary" />
                       <span>{feature}</span>
                     </li>
                   ))}
@@ -248,7 +248,7 @@ export default async function PropertyDetailsPage({
                         {[...Array(review.rating)].map((_, i) => (
                           <Star
                             key={`${review.id ?? review.author}-${reviewIndex}-star-${i}`}
-                            className="h-4 w-4 text-yellow-400 fill-current"
+                            className="h-4 w-4 text-warning-foreground fill-current"
                           />
                         ))}
                       </div>

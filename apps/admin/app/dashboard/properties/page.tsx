@@ -152,7 +152,7 @@ export default async function AdminPropertiesPage({
             return (
               <Card
                 key={propertyId}
-                className="flex flex-col overflow-hidden rounded-xl border-gray-200/50 shadow-lg"
+                className="flex flex-col overflow-hidden rounded-xl border-border shadow-lg"
               >
                 <div className="relative h-48">
                   <Link href={`/dashboard/properties/property/${propertyId}`}>
@@ -193,7 +193,7 @@ export default async function AdminPropertiesPage({
                           <input type="hidden" name="id" value={propertyId} />
                           <DropdownMenuItem
                             asChild
-                            className="text-red-500 focus:text-red-600"
+                            className="text-destructive focus:text-destructive"
                           >
                             <button
                               type="submit"
@@ -221,11 +221,11 @@ export default async function AdminPropertiesPage({
                       {p.availability ? "Available" : "Occupied"}
                     </Badge>
                   </div>
-                  <p className="pt-1 text-gray-500 text-sm">{p.location}</p>
+                  <p className="pt-1 text-muted-foreground text-sm">{p.location}</p>
                 </CardHeader>
 
                 <CardContent className="flex-grow">
-                  <div className="mb-4 flex items-center space-x-4 text-gray-600">
+                  <div className="mb-4 flex items-center space-x-4 text-muted-foreground">
                     <div className="flex items-center">
                       <Bed className="mr-2 h-5 w-5" />
                       <span>{p.bedrooms}</span>
@@ -239,13 +239,13 @@ export default async function AdminPropertiesPage({
                       <span>{p.type}</span>
                     </div>
                   </div>
-                  <p className="truncate text-gray-700 leading-relaxed">
+                  <p className="truncate text-foreground leading-relaxed">
                     {p.description}
                   </p>
                   <div className="mt-6 flex items-center font-bold text-2xl text-secondary">
                     <CircleDollarSign className="mr-2 h-6 w-6 text-primary" />R
                     {p.price.toLocaleString()}
-                    <span className="ml-2 font-normal text-gray-500 text-sm">
+                    <span className="ml-2 font-normal text-muted-foreground text-sm">
                       / month
                     </span>
                   </div>
