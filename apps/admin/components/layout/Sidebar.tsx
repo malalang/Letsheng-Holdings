@@ -1,14 +1,5 @@
 "use client";
 
-import {
-  Archive,
-  BookUser,
-  Building2,
-  Home,
-  Mail,
-  Package2,
-  ShoppingCart,
-} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -19,22 +10,9 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from "@/components/ui/sidebar";
-
-const navItems = [
-  { href: "/dashboard", icon: Home, label: "Dashboard" },
-  { href: "/dashboard/properties", icon: Building2, label: "Estates" },
-  { href: "/dashboard/tenants", icon: BookUser, label: "Tenants" },
-  { href: "/dashboard/payments", icon: Package2, label: "Payments" },
-  { href: "/dashboard/branding", icon: ShoppingCart, label: "Branding Shop" },
-  { href: "/dashboard/submissions", icon: Archive, label: "Submissions" },
-  {
-    href: "https://emails.letsheng-holdings.com",
-    icon: Mail,
-    label: "Emails",
-    external: true,
-  },
-];
+import { adminNavItems } from "@/lib/admin-nav";
 
 function isActivePath(pathname: string, href: string) {
   return href === "/dashboard" ? pathname === href : pathname.startsWith(href);
@@ -42,13 +20,15 @@ function isActivePath(pathname: string, href: string) {
 
 const Sidebar = () => {
   const pathname = usePathname();
+  const { setOpenMobile } = useSidebar();
 
   return (
     <Shell variant="inset" collapsible="icon" className="z-30">
-      <SidebarHeader className="group-data-[collapsible=icon]:items-center group-data-[collapsible=icon]:px-2">
+      <SidebarHeader className="h-(--header-height) group-data-[collapsible=icon]:items-center group-data-[collapsible=icon]:px-2">
         <Link
           href="/dashboard"
           className="flex items-center gap-2 group-data-[collapsible=icon]:justify-center"
+          onClick={() => setOpenMobile(false)}
         >
           <Image
             src="/logo.jpg"
@@ -65,7 +45,7 @@ const Sidebar = () => {
       </SidebarHeader>
       <SidebarContent className="p-2">
         <SidebarMenu>
-          {navItems.map((item) => (
+          {adminNavItems.map((item) => (
             <SidebarMenuItem key={item.href}>
               <SidebarMenuButton
                 asChild
@@ -84,6 +64,7 @@ const Sidebar = () => {
                       ? "noopener noreferrer"
                       : undefined
                   }
+                  onClick={() => setOpenMobile(false)}
                 >
                   <item.icon className="h-5 w-5" />
                   <span>{item.label}</span>

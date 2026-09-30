@@ -1,5 +1,18 @@
 @import "tailwindcss";
 
+:root {
+  /*
+   * Admin chrome heights. One value each, read by the header bar, the sticky
+   * sub-nav offset, the sidebar Sheet, and the command overlay - so they can
+   * never disagree. See frontend-blueprint 02-admin-ui-grammar/05-admin-header-standard.md.
+   *
+   * These are lengths, not colours, so they live here rather than in @theme
+   * alongside the raw-hex brand values this file still carries.
+   */
+  --header-height: 3.5rem; /* 56px */
+  --subnav-height: 2.5rem; /* 40px */
+}
+
 @theme {
   /* Core Colors */
   --color-background: #f0f2f5; /* Light gray background for content area */
