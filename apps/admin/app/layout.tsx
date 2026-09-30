@@ -10,11 +10,6 @@ export const metadata: Metadata = {
   title: "Letsheng Holdings Admin Dashboard",
   description:
     "Manage Letsheng Holdings properties, tenants, branding inquiries, payments, and submissions.",
-  icons: {
-    icon: "/favicon.jpg",
-    shortcut: "/favicon.jpg",
-    apple: "/logo.jpg",
-  },
 };
 
 export const viewport: Viewport = {
