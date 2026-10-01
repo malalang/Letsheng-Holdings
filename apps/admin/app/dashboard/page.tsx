@@ -34,32 +34,39 @@ interface KpiData {
 }
 
 const KpiCard = ({ item }: { item: KpiData }) => {
-  const CardWrapper = item.href ? Link : "div";
+  const body = (
+    <Card
+      className={`h-full transition-colors duration-150 ${item.color === "destructive" ? "border-destructive/20" : ""}`}
+    >
+      <CardHeader className="flex flex-row items-start justify-between gap-3 pb-2">
+        <div className="min-w-0 space-y-1">
+          <CardTitle className="truncate">{item.title}</CardTitle>
+          <CardDescription className="truncate">{item.change}</CardDescription>
+        </div>
+        <item.icon
+          className={`h-4 w-4 shrink-0 ${item.color === "destructive" ? "text-destructive" : "text-primary"}`}
+          aria-hidden="true"
+        />
+      </CardHeader>
+      <CardContent>
+        <div
+          className={`text-2xl font-bold tabular-nums ${item.color === "destructive" ? "text-destructive" : ""}`}
+        >
+          {item.value}
+        </div>
+      </CardContent>
+    </Card>
+  );
+
+  if (!item.href) return body;
+
   return (
-    <CardWrapper href={item.href || "#"}>
-      <Card
-        className={`cursor-pointer hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 group ${item.color === "destructive" ? "border-destructive/20" : ""}`}
-      >
-        <CardHeader className="flex flex-row items-center justify-between pb-2">
-          <CardDescription>
-            {item.title}
-          </CardTitle>
-          <item.icon
-            className={`h-4 w-4 ${item.color === "destructive" ? "text-destructive" : "text-primary"}`}
-          />
-        </CardHeader>
-        <CardContent>
-          <div
-            className={`text-2xl font-bold ${item.color === "destructive" ? "text-destructive" : ""}`}
-          >
-            {item.value}
-          </div>
-          <p className="text-xs text-muted-foreground mt-1 font-medium">
-            {item.change}
-          </p>
-        </CardContent>
-      </Card>
-    </CardWrapper>
+    <Link
+      href={item.href}
+      className="block h-full cursor-pointer rounded-lg transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+    >
+      {body}
+    </Link>
   );
 };
 
