@@ -91,7 +91,7 @@ export default async function PaymentsPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card className="bg-brand-card">
+        <Card>
           <CardHeader className="pb-2">
             <CardDescription className="text-primary/70 font-medium uppercase tracking-wider text-xs">
               Total Revenue
@@ -111,7 +111,7 @@ export default async function PaymentsPage() {
           </CardContent>
         </Card>
 
-        <Card className="bg-brand-card border-destructive/30">
+        <Card className="border-destructive/30">
           <CardHeader className="pb-2">
             <CardDescription className="text-destructive/70 font-medium uppercase tracking-wider text-xs">
               Total Overdue
@@ -131,7 +131,7 @@ export default async function PaymentsPage() {
           </CardContent>
         </Card>
 
-        <Card className="bg-brand-card">
+        <Card>
           <CardHeader className="pb-2">
             <CardDescription className="text-primary/70 font-medium uppercase tracking-wider text-xs">
               Collection Rate
@@ -305,7 +305,7 @@ export default async function PaymentsPage() {
                     <AccordionItem
                       key={tenant.id}
                       value={tenant.id!}
-                      className="border-b last:border-0 px-6"
+                      className="border-b border-border last:border-0 px-6"
                     >
                       <AccordionTrigger className="hover:no-underline py-4">
                         <div className="flex items-center gap-4 text-left">
@@ -330,7 +330,7 @@ export default async function PaymentsPage() {
                               className="flex items-center justify-between bg-muted/30 p-3 rounded-lg border border-muted"
                             >
                               <div className="flex items-center gap-3">
-                                <div className="p-2 bg-background rounded border">
+                                <div className="p-2 bg-background rounded border border-border">
                                   <Receipt className="h-3.5 w-3.5 text-muted-foreground" />
                                 </div>
                                 <div>

@@ -38,10 +38,10 @@ const KpiCard = ({ item }: { item: KpiData }) => {
   return (
     <CardWrapper href={item.href || "#"}>
       <Card
-        className={`bg-brand-card hover:shadow-md transition-all cursor-pointer group ${item.color === "destructive" ? "border-destructive/20" : ""}`}
+        className={`cursor-pointer hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 group ${item.color === "destructive" ? "border-destructive/20" : ""}`}
       >
         <CardHeader className="flex flex-row items-center justify-between pb-2">
-          <CardTitle className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+          <CardDescription>
             {item.title}
           </CardTitle>
           <item.icon
@@ -134,9 +134,9 @@ export default async function DashboardPage() {
         ))}
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-2">
-        <Card className="bg-brand-card shadow-sm">
-          <CardHeader className="flex flex-row items-center justify-between pb-4 border-b">
+      <div className="grid gap-4 lg:grid-cols-2">
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between pb-4 border-b border-border">
             <div className="grid gap-1">
               <CardTitle className="text-lg">Recent Lease Activity</CardTitle>
               <CardDescription>
@@ -165,7 +165,7 @@ export default async function DashboardPage() {
                 recentLeases.map((lease) => (
                   <div
                     key={lease.id}
-                    className="flex items-center justify-between p-4 hover:bg-muted/30 transition-colors group"
+                    className="flex items-center justify-between p-4 transition-colors group"
                   >
                     <div className="flex items-center gap-4">
                       <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
@@ -199,7 +199,7 @@ export default async function DashboardPage() {
           </CardContent>
         </Card>
 
-        <Card className="bg-brand-card shadow-sm border-primary/20">
+        <Card className="border-primary/20">
           <CardHeader className="pb-4">
             <div className="flex items-center justify-between">
               <CardTitle className="text-lg flex items-center gap-2">

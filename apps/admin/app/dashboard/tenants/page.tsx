@@ -67,7 +67,7 @@ export default async function AdminTenantsPage() {
           description="You haven't added any tenants yet. Click the button above to create your first tenant record."
         />
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
           {tenants.map((tenant) => (
             <TenantCard key={tenant.id} tenant={tenant} />
           ))}

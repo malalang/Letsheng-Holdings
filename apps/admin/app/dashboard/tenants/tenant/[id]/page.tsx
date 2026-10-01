@@ -97,8 +97,8 @@ export default async function Page({
                 <AvatarFallback>{tenant.name.charAt(0)}</AvatarFallback>
               </Avatar>
               <div>
-                <CardTitle className=" font-bold">{tenant.name}</CardTitle>
-                <CardDescription className="text-lg">
+                <CardTitle >{tenant.name}</CardTitle>
+                <CardDescription>
                   {tenant.id}
                 </CardDescription>
               </div>
@@ -147,7 +147,7 @@ export default async function Page({
                 {payments.map((payment) => (
                   <li
                     key={payment.id}
-                    className="flex items-center justify-between gap-4 rounded-lg border p-3"
+                    className="flex items-center justify-between gap-4 rounded-lg border border-border p-3"
                   >
                     <div>
                       <p className="font-medium">

@@ -119,7 +119,7 @@ export function LeaseApplicationsCards({
   }
 
   return (
-    <div className="grid gap-6 mt-6">
+    <div className="grid gap-4 mt-6">
       {applications.map((app) => (
         <Card key={app.id} className="overflow-hidden group border-muted">
           <Accordion type="single" collapsible>
@@ -198,7 +198,7 @@ export function LeaseApplicationsCards({
                 </div>
               </div>
 
-              <AccordionContent className="px-6 pb-6 pt-2 border-t bg-muted/20">
+              <AccordionContent className="px-6 pb-6 pt-2 border-t border-border bg-muted/20">
                 <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 mt-4">
                   <div className="space-y-4">
                     <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-2">
@@ -335,13 +335,13 @@ export function LeaseApplicationsCards({
                 <p className="text-xs text-muted-foreground font-bold uppercase">
                   Message
                 </p>
-                <div className="bg-muted p-4 rounded-md border text-sm leading-relaxed italic">
+                <div className="bg-muted p-4 rounded-md border border-border text-sm leading-relaxed italic">
                   &quot;{selectedApplication.message || "No message provided."}
                   &quot;
                 </div>
               </div>
 
-              <div className="flex justify-end gap-3 pt-4 border-t">
+              <div className="flex justify-end gap-3 pt-4 border-t border-border">
                 <Button
                   variant="outline"
                   size="sm"

@@ -52,11 +52,11 @@ export default async function AdminBrandingPage() {
           </Link>
         </Button>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-12">
         {products.map((p) => (
           <Card
             key={p.id}
-            className="rounded-xl shadow-lg border-border overflow-hidden flex flex-col"
+            className="rounded-lg border-border overflow-hidden flex flex-col"
           >
             <div className="relative aspect-square overflow-hidden">
               <Link href={`/dashboard/branding/brand/${p.id}`}>
@@ -105,7 +105,7 @@ export default async function AdminBrandingPage() {
 
             <CardHeader>
               <div className="flex justify-between items-start">
-                <CardTitle className="text-2xl font-bold text-secondary leading-tight">
+                <CardTitle className="truncate text-2xl font-bold text-secondary leading-tight">
                   {p.title}
                 </CardTitle>
                 <Badge

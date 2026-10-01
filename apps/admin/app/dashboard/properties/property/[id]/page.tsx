@@ -106,8 +106,8 @@ export default async function PropertyDetailsPage({
         </Button>
       </div>
 
-      <div className="grid gap-8 md:grid-cols-[1fr_350px]">
-        <div className="grid auto-rows-max items-start gap-8">
+      <div className="grid gap-4 md:grid-cols-[1fr_350px]">
+        <div className="grid auto-rows-max items-start gap-4">
           {/* Main Property Card */}
           <Card>
             <CardHeader className="p-0">
@@ -197,7 +197,7 @@ export default async function PropertyDetailsPage({
           )}
         </div>
 
-        <div className="grid auto-rows-max items-start gap-8">
+        <div className="grid auto-rows-max items-start gap-4">
           {/* Status & Price Card */}
           <Card>
             <CardHeader>
@@ -241,7 +241,7 @@ export default async function PropertyDetailsPage({
                 {reviews.map((review, reviewIndex) => (
                   <div
                     key={review.id ?? `${review.author}-${reviewIndex}`}
-                    className="p-4 rounded-lg border"
+                    className="p-4 rounded-lg border border-border"
                   >
                     <div className="flex items-center mb-2">
                       <div className="flex items-center">

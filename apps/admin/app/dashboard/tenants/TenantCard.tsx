@@ -53,7 +53,7 @@ export default function TenantCard({ tenant }: TenantCardProps) {
     : "N/A";
 
   return (
-    <Card className="hover:shadow-md transition-shadow border-muted">
+    <Card className="flex flex-col border-border">
       <CardContent className="p-6">
         <div className="flex flex-col gap-6">
           <div className="flex items-start justify-between">
@@ -141,7 +141,7 @@ export default function TenantCard({ tenant }: TenantCardProps) {
             </div>
           </div>
 
-          <div className="pt-4 border-t flex items-center justify-between">
+          <div className="pt-4 border-t border-border flex items-center justify-between">
             <div className="flex items-center gap-2">
               <CreditCard className="h-4 w-4 text-muted-foreground" />
               <span className="text-xs font-medium">Account Status</span>

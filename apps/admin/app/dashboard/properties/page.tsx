@@ -141,7 +141,7 @@ export default async function AdminPropertiesPage({
           </p>
         </div>
       ) : (
-        <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {statusProperties.map((p) => {
             const propertyId = p.id;
 
@@ -152,7 +152,7 @@ export default async function AdminPropertiesPage({
             return (
               <Card
                 key={propertyId}
-                className="flex flex-col overflow-hidden rounded-xl border-border shadow-lg"
+                className="flex flex-col overflow-hidden rounded-lg border-border"
               >
                 <div className="relative h-48">
                   <Link href={`/dashboard/properties/property/${propertyId}`}>
@@ -212,7 +212,7 @@ export default async function AdminPropertiesPage({
 
                 <CardHeader>
                   <div className="flex items-start justify-between">
-                    <CardTitle className="font-bold text-2xl text-secondary leading-tight">
+                    <CardTitle className="truncate font-bold text-2xl text-secondary leading-tight">
                       {p.title}
                     </CardTitle>
                     <Badge

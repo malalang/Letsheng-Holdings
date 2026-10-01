@@ -282,7 +282,7 @@ export default function TenantForm({ tenant, payments }: TenantFormProps) {
                     {payments.map((payment) => (
                       <li
                         key={payment.id}
-                        className="flex items-center justify-between gap-4 rounded-lg border p-3"
+                        className="flex items-center justify-between gap-4 rounded-lg border border-border p-3"
                       >
                         <div>
                           <p className="font-medium">

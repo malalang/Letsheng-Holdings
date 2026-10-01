@@ -161,9 +161,9 @@ export default function PropertyForm({ property }: PropertyFormProps) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="grid gap-4 md:grid-cols-[1fr_250px] lg:grid-cols-3 lg:gap-8"
+        className="grid gap-4 md:grid-cols-[1fr_250px] lg:grid-cols-3 gap-4"
       >
-        <div className="grid auto-rows-max items-start gap-4 lg:col-span-2 lg:gap-8">
+        <div className="grid auto-rows-max items-start gap-4 lg:col-span-2 gap-4">
           <Tabs defaultValue="general">
             <TabsList>
               <TabsTrigger value="general">General Info</TabsTrigger>
@@ -592,7 +592,7 @@ export default function PropertyForm({ property }: PropertyFormProps) {
             </TabsContent>
           </Tabs>
         </div>
-        <div className="grid auto-rows-max items-start gap-4 lg:gap-8">
+        <div className="grid auto-rows-max items-start gap-4 gap-4">
           <Card>
             <CardHeader>
               <CardTitle>Status & Visibility</CardTitle>

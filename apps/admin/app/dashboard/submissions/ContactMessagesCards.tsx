@@ -75,7 +75,7 @@ export function ContactMessagesCards({ messages }: ContactMessagesCardsProps) {
   }
 
   return (
-    <div className="grid gap-6 mt-6">
+    <div className="grid gap-4 mt-6">
       {messages.map((message) => (
         <Card key={message.id} className="overflow-hidden border-muted">
           <CardContent className="p-6 space-y-5">
@@ -150,7 +150,7 @@ export function ContactMessagesCards({ messages }: ContactMessagesCardsProps) {
               </DropdownMenu>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] border-t pt-5">
+            <div className="grid gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] border-t border-border pt-5">
               <div className="space-y-1">
                 <p className="text-xs text-muted-foreground font-bold uppercase flex items-center gap-2">
                   <User className="h-3 w-3" /> Subject

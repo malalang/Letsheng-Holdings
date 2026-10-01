@@ -90,8 +90,8 @@ export default async function BrandingDetailPage({
         </Button>
       </div>
 
-      <div className="grid gap-8 md:grid-cols-[1fr_350px]">
-        <div className="grid auto-rows-max items-start gap-8">
+      <div className="grid gap-4 md:grid-cols-[1fr_350px]">
+        <div className="grid auto-rows-max items-start gap-4">
           <Card>
             <CardHeader className="p-0">
               <div className="relative h-96">
@@ -164,7 +164,7 @@ export default async function BrandingDetailPage({
           )}
         </div>
 
-        <div className="grid auto-rows-max items-start gap-8">
+        <div className="grid auto-rows-max items-start gap-4">
           <Card>
             <CardHeader>
               <CardTitle>Status</CardTitle>
@@ -188,7 +188,7 @@ export default async function BrandingDetailPage({
                 {reviews.map((review, reviewIndex) => (
                   <div
                     key={review.id ?? `${review.author}-${reviewIndex}`}
-                    className="p-4 rounded-lg border"
+                    className="p-4 rounded-lg border border-border"
                   >
                     <div className="flex items-center mb-2">
                       <div className="flex items-center">
