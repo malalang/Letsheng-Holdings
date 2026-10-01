@@ -65,7 +65,7 @@ export default function AnalysisHeader({
           <Link
             key={item.title}
             href={item.href}
-            className="block h-full cursor-pointer rounded-lg transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            className="block h-full cursor-pointer rounded-lg transition-colors hover:bg-primary/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           >
             {body}
           </Link>
