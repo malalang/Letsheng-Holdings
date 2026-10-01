@@ -1,18 +1,17 @@
 import {
   AlertCircle,
-  ArrowRight,
   Building2,
   CreditCard,
   DollarSign,
   Package,
   Percent,
-  User,
 } from "lucide-react";
 import type { Metadata, Viewport } from "next";
 import Link from "next/link";
 
 import type { AnalysisHeaderItem } from "@/components/admin/AnalysisHeader";
 import AnalysisHeader from "@/components/admin/AnalysisHeader";
+import RecentActivities from "@/components/admin/RecentActivities";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -93,69 +92,23 @@ export default async function DashboardPage() {
       <AnalysisHeader items={kpiData} />
 
       <div className="grid gap-4 lg:grid-cols-2">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-4 border-b border-border">
-            <div className="grid gap-1">
-              <CardTitle className="text-lg">Recent Lease Activity</CardTitle>
-              <CardDescription>
-                Latest property assignments and status updates.
-              </CardDescription>
-            </div>
-            <Button
-              asChild
-              size="sm"
-              variant="ghost"
-              className="gap-1 text-primary hover:text-primary/80 hover:bg-primary/20"
-            >
-              <Link href="/dashboard/properties">
-                View All
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </Button>
-          </CardHeader>
-          <CardContent className="p-0">
-            <div className="divide-y">
-              {recentLeases.length === 0 ? (
-                <div className="p-12 text-center text-muted-foreground italic text-sm">
-                  No recent lease activity.
-                </div>
-              ) : (
-                recentLeases.map((lease) => (
-                  <div
-                    key={lease.id}
-                    className="flex items-center justify-between p-4 transition-colors group"
-                  >
-                    <div className="flex items-center gap-4">
-                      <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                        <Building2 className="h-5 w-5" />
-                      </div>
-                      <div>
-                        <p className="font-bold text-sm leading-none mb-1">
-                          {lease.property}
-                        </p>
-                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                          <User className="h-3 w-3" />
-                          {lease.tenant}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex flex-col items-end gap-2 text-right">
-                      <p className="text-xs font-bold font-mono">
-                        {lease.amount}
-                      </p>
-                      <Badge
-                        variant="outline"
-                        className={`text-xs px-1.5 py-0 min-min-h-5 uppercase font-black tracking-tighter ${statusBadgeClass(lease.status)}`}
-                      >
-                        {lease.status}
-                      </Badge>
-                    </div>
-                  </div>
-                ))
-              )}
-            </div>
-          </CardContent>
-        </Card>
+        <RecentActivities
+          title="Recent Lease Activity"
+          description="Latest property assignments and status updates."
+          icon={Building2}
+          emptyLabel="No recent lease activity."
+          viewAllHref="/dashboard/properties"
+          items={recentLeases.map((lease) => ({
+            id: lease.id,
+            title: lease.property,
+            subtitle: `${lease.tenant} · ${lease.amount}`,
+            href: `/dashboard/tenants/tenant/${lease.id}`,
+            badge: {
+              label: lease.status,
+              className: statusBadgeClass(lease.status),
+            },
+          }))}
+        />
 
         <Card className="border-primary/20">
           <CardHeader className="pb-4">
@@ -164,7 +117,9 @@ export default async function DashboardPage() {
                 <CreditCard className="h-5 w-5 text-primary" />
                 Revenue Health
               </CardTitle>
-              <Badge className="bg-primary text-primary-foreground">94% Collection</Badge>
+              <Badge className="bg-primary text-primary-foreground">
+                94% Collection
+              </Badge>
             </div>
             <CardDescription>
               Property collection performance vs target.
