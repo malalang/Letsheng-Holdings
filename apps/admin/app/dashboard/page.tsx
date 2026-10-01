@@ -1,4 +1,3 @@
-import type { LucideIcon } from "lucide-react";
 import {
   AlertCircle,
   ArrowRight,
@@ -12,6 +11,8 @@ import {
 import type { Metadata, Viewport } from "next";
 import Link from "next/link";
 
+import type { AnalysisHeaderItem } from "@/components/admin/AnalysisHeader";
+import AnalysisHeader from "@/components/admin/AnalysisHeader";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -23,52 +24,6 @@ import {
 } from "@/components/ui/card";
 import { statusBadgeClass } from "@/lib/statusBadge";
 import { getDashboardKpis, getRecentLeases } from "./actions";
-
-interface KpiData {
-  title: string;
-  value: string;
-  icon: LucideIcon;
-  change: string;
-  href?: string;
-  color?: string;
-}
-
-const KpiCard = ({ item }: { item: KpiData }) => {
-  const body = (
-    <Card
-      className={`h-full transition-colors duration-150 ${item.color === "destructive" ? "border-destructive/20" : ""}`}
-    >
-      <CardHeader className="flex flex-row items-start justify-between gap-3 pb-2">
-        <div className="min-w-0 space-y-1">
-          <CardTitle className="truncate">{item.title}</CardTitle>
-          <CardDescription className="truncate">{item.change}</CardDescription>
-        </div>
-        <item.icon
-          className={`h-4 w-4 shrink-0 ${item.color === "destructive" ? "text-destructive" : "text-primary"}`}
-          aria-hidden="true"
-        />
-      </CardHeader>
-      <CardContent>
-        <div
-          className={`text-2xl font-bold tabular-nums ${item.color === "destructive" ? "text-destructive" : ""}`}
-        >
-          {item.value}
-        </div>
-      </CardContent>
-    </Card>
-  );
-
-  if (!item.href) return body;
-
-  return (
-    <Link
-      href={item.href}
-      className="block h-full cursor-pointer rounded-lg transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-    >
-      {body}
-    </Link>
-  );
-};
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -90,34 +45,34 @@ export default async function DashboardPage() {
   const kpis = await getDashboardKpis();
   const recentLeases = await getRecentLeases();
 
-  const kpiData: KpiData[] = kpis
+  const kpiData: AnalysisHeaderItem[] = kpis
     ? [
         {
           title: "Total Monthly Revenue",
           value: `R${kpis.totalRevenue.toLocaleString()}`,
           icon: DollarSign,
-          change: "Total potential collection",
+          description: "Total potential collection",
           href: "/dashboard/payments",
         },
         {
           title: "Occupancy Rate",
           value: `${kpis.occupancyRate.toFixed(1)}%`,
           icon: Percent,
-          change: "Across all properties",
+          description: "Across all properties",
           href: "/dashboard/properties",
         },
         {
           title: "Branding Inquiries",
           value: kpis.pendingOrders.toString(),
           icon: Package,
-          change: "Awaiting response",
+          description: "Awaiting response",
           href: "/dashboard/submissions",
         },
         {
           title: "Overdue Payments",
           value: `R${kpis.overdueAmount.toLocaleString()}`,
           icon: AlertCircle,
-          change: `${kpis.overdueCount} tenants in arrears`,
+          description: `${kpis.overdueCount} tenants in arrears`,
           href: "/dashboard/payments",
           color: "destructive",
         },
@@ -135,11 +90,7 @@ export default async function DashboardPage() {
         </p>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        {kpiData.map((item) => (
-          <KpiCard key={item.title} item={item} />
-        ))}
-      </div>
+      <AnalysisHeader items={kpiData} />
 
       <div className="grid gap-4 lg:grid-cols-2">
         <Card>
