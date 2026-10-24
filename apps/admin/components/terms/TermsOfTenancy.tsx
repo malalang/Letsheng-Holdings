@@ -1,7 +1,9 @@
 export default function TermsOfTenancy() {
   return (
     <section className="glass-card rounded-lg p-5">
-      <h4 className="text-lg font-bold text-secondary-foreground">Terms of Tenancy</h4>
+      <h4 className="text-lg font-bold text-secondary-foreground">
+        Terms of Tenancy
+      </h4>
       <div className="mt-3 text-muted-foreground space-y-2">
         <p>
           Payments are due on or before the <strong>7th</strong> of each month.

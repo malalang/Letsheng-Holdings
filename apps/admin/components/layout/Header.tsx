@@ -70,7 +70,10 @@ const Header = ({ user }: { user: AdminUser }) => {
     <header className="sticky top-0 z-20 flex h-(--header-height) items-center gap-2 border-b bg-background px-4 sm:px-6">
       <div className="flex min-w-0 items-center gap-2">
         <SidebarTrigger className="-ml-1 size-11 sm:size-8" />
-        <Separator orientation="vertical" className="mr-2 hidden h-4 sm:block" />
+        <Separator
+          orientation="vertical"
+          className="mr-2 hidden h-4 sm:block"
+        />
 
         {visibleCrumbs.length > 0 ? (
           <Breadcrumb className="min-w-0">
@@ -138,7 +141,9 @@ const Header = ({ user }: { user: AdminUser }) => {
                 focusable row that does nothing on activation is a promise the
                 menu cannot keep. They stay as inert muted rows until the routes
                 exist, at which point they become real items. */}
-            <p className="px-2 py-1.5 text-sm text-muted-foreground">Settings</p>
+            <p className="px-2 py-1.5 text-sm text-muted-foreground">
+              Settings
+            </p>
             <p className="px-2 py-1.5 text-sm text-muted-foreground">Support</p>
             <DropdownMenuSeparator />
             <DropdownMenuItem

@@ -100,7 +100,9 @@ export function CommandMenu() {
   function onInputKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
     if (event.key === "ArrowDown") {
       event.preventDefault();
-      setActiveIndex((index) => (items.length ? (index + 1) % items.length : 0));
+      setActiveIndex((index) =>
+        items.length ? (index + 1) % items.length : 0,
+      );
       return;
     }
 
@@ -175,7 +177,8 @@ export function CommandMenu() {
 
         {isEmpty ? (
           <p className="px-4 py-10 text-center text-sm text-muted-foreground">
-            No sections match &ldquo;{query.trim()}&rdquo;. Try a different term.
+            No sections match &ldquo;{query.trim()}&rdquo;. Try a different
+            term.
           </p>
         ) : (
           <div

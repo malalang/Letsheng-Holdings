@@ -47,8 +47,8 @@ export default async function AdminBrandingPage() {
         </div>
         <Button asChild>
           <Link href="/dashboard/branding/new">
-              <PlusCircle className="mr-2 h-4 w-4" />
-              Create New
+            <PlusCircle className="mr-2 h-4 w-4" />
+            Create New
           </Link>
         </Button>
       </div>

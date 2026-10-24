@@ -1,6 +1,6 @@
 import { Slot } from "@radix-ui/react-slot";
 import { ChevronRight, MoreHorizontal } from "lucide-react";
-import * as React from "react";
+import type * as React from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -90,7 +90,10 @@ function BreadcrumbEllipsis({
       data-slot="breadcrumb-ellipsis"
       role="presentation"
       aria-hidden="true"
-      className={cn("flex size-9 shrink-0 items-center justify-center", className)}
+      className={cn(
+        "flex size-9 shrink-0 items-center justify-center",
+        className,
+      )}
       {...props}
     >
       <MoreHorizontal className="size-4" />

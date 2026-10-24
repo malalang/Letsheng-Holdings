@@ -3,10 +3,10 @@ import {
   BookUser,
   Building2,
   Home,
+  type LucideIcon,
   Mail,
   Package2,
   ShoppingCart,
-  type LucideIcon,
 } from "lucide-react";
 
 export type AdminNavItem = {

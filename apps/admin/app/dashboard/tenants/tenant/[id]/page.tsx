@@ -61,8 +61,8 @@ export default async function Page({
         <h1 className="text-2xl font-bold mb-4">Tenant not found</h1>
         <Button asChild variant="outline">
           <Link href="/dashboard/tenants">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Tenants
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Tenants
           </Link>
         </Button>
       </div>
@@ -76,14 +76,14 @@ export default async function Page({
       <div className="mb-4 flex items-center justify-between">
         <Button asChild variant="outline" size="sm">
           <Link href="/dashboard/tenants">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Tenants
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Tenants
           </Link>
         </Button>
         <Button asChild variant="outline" size="sm">
           <Link href={`/dashboard/tenants/tenant/${tenant.id}/edit`}>
-              <Edit className="mr-2 h-4 w-4" />
-              Edit Tenant
+            <Edit className="mr-2 h-4 w-4" />
+            Edit Tenant
           </Link>
         </Button>
       </div>
@@ -97,10 +97,8 @@ export default async function Page({
                 <AvatarFallback>{tenant.name.charAt(0)}</AvatarFallback>
               </Avatar>
               <div>
-                <CardTitle >{tenant.name}</CardTitle>
-                <CardDescription>
-                  {tenant.id}
-                </CardDescription>
+                <CardTitle>{tenant.name}</CardTitle>
+                <CardDescription>{tenant.id}</CardDescription>
               </div>
             </div>
           </CardHeader>
@@ -108,11 +106,15 @@ export default async function Page({
             <Separator className="my-4" />
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <p className="text-sm font-medium text-muted-foreground">Property</p>
+                <p className="text-sm font-medium text-muted-foreground">
+                  Property
+                </p>
                 <p className="font-semibold">{tenant.properties?.title}</p>
               </div>
               <div>
-                <p className="text-sm font-medium text-muted-foreground">Status</p>
+                <p className="text-sm font-medium text-muted-foreground">
+                  Status
+                </p>
                 <Badge className={statusBadgeClass(tenant.status)}>
                   {tenant.status}
                 </Badge>

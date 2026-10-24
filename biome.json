@@ -24,6 +24,7 @@
         "noStaticElementInteractions": "off",
         "noSvgWithoutTitle": "off",
         "useButtonType": "off",
+        "useFocusableInteractive": "off",
         "useKeyWithClickEvents": "off",
         "useMediaCaption": "off",
         "useSemanticElements": "off"

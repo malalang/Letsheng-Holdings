@@ -55,8 +55,8 @@ export default async function EditPropertyPage({
         <h1 className="text-2xl font-bold mb-4">Property not found</h1>
         <Button asChild variant="outline">
           <Link href="/dashboard/properties">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Properties
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Properties
           </Link>
         </Button>
       </div>
@@ -68,8 +68,8 @@ export default async function EditPropertyPage({
       <div className="mb-4 flex items-center gap-4">
         <Button asChild variant="outline" size="sm">
           <Link href={`/dashboard/properties/property/${property.id}`}>
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Cancel Edit
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Cancel Edit
           </Link>
         </Button>
       </div>

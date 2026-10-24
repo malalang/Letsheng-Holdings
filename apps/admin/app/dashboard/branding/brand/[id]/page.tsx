@@ -56,8 +56,8 @@ export default async function BrandingDetailPage({
         </p>
         <Button asChild variant="outline" className="mt-4">
           <Link href="/dashboard/branding">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Branding
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Branding
           </Link>
         </Button>
       </div>
@@ -78,14 +78,14 @@ export default async function BrandingDetailPage({
       <div className="mb-4 flex items-center justify-between">
         <Button asChild variant="outline" size="sm">
           <Link href="/dashboard/branding">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Branding
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Branding
           </Link>
         </Button>
         <Button asChild variant="outline" size="sm">
           <Link href={`/dashboard/branding/brand/${product.id}/edit`}>
-              <Edit className="mr-2 h-4 w-4" />
-              Edit Product
+            <Edit className="mr-2 h-4 w-4" />
+            Edit Product
           </Link>
         </Button>
       </div>

@@ -94,14 +94,14 @@ export default async function PropertyDetailsPage({
       <div className="mb-4 flex items-center justify-between">
         <Button asChild variant="outline" size="sm">
           <Link href="/dashboard/properties">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Properties
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Properties
           </Link>
         </Button>
         <Button asChild variant="outline" size="sm">
           <Link href={`/dashboard/properties/property/${property.id}/edit`}>
-              <Edit className="mr-2 h-4 w-4" />
-              Edit Property
+            <Edit className="mr-2 h-4 w-4" />
+            Edit Property
           </Link>
         </Button>
       </div>

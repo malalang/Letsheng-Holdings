@@ -222,7 +222,9 @@ export default async function AdminPropertiesPage({
                       {p.availability ? "Available" : "Occupied"}
                     </Badge>
                   </div>
-                  <p className="pt-1 text-muted-foreground text-sm">{p.location}</p>
+                  <p className="pt-1 text-muted-foreground text-sm">
+                    {p.location}
+                  </p>
                 </CardHeader>
 
                 <CardContent className="flex-grow">

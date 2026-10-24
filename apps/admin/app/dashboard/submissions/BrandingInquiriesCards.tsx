@@ -140,7 +140,8 @@ export function BrandingInquiriesCards({
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button variant="ghost" size="icon" className="h-9 w-9">
-                        aria-label={`Actions for inquiry from ${inquiry.customerName}`}
+                        aria-label=
+                        {`Actions for inquiry from ${inquiry.customerName}`}
                         <MoreVertical className="h-4 w-4" />
                       </Button>
                     </DropdownMenuTrigger>

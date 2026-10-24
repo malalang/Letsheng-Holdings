@@ -147,8 +147,8 @@ export default function TenantForm({ tenant, payments }: TenantFormProps) {
       <div className="mb-4">
         <Button asChild variant="outline" size="sm">
           <Link href="/dashboard/tenants">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Tenants
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Tenants
           </Link>
         </Button>
       </div>

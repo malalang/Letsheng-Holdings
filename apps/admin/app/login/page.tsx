@@ -67,7 +67,9 @@ export default function LoginPage() {
           <h1 className="mt-4 text-4xl font-bold text-secondary-foreground">
             Admin Secure Login
           </h1>
-          <p className="mt-2 text-muted-foreground">Letsheng Holdings Command Center</p>
+          <p className="mt-2 text-muted-foreground">
+            Letsheng Holdings Command Center
+          </p>
         </div>
         <Card className="border-border bg-foreground text-secondary-foreground">
           <CardHeader>
