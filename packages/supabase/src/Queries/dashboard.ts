@@ -1,8 +1,6 @@
-import { requireAdminUser } from "../auth";
 import { createSupabaseServerClient } from "../server";
 
 export async function getDashboardKpis() {
-  await requireAdminUser();
   const supabase = await createSupabaseServerClient();
 
   const { data: properties, error: propertiesError } = await supabase
@@ -58,7 +56,6 @@ export async function getDashboardKpis() {
 }
 
 export async function getRecentLeases() {
-  await requireAdminUser();
   const supabase = await createSupabaseServerClient();
 
   const { data, error } = await supabase

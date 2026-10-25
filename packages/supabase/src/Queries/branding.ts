@@ -1,4 +1,3 @@
-import { requireAdminUser } from "../auth";
 import { createSupabasePublicClient } from "../public";
 import { createSupabaseServerClient } from "../server";
 
@@ -21,7 +20,6 @@ export async function getBrandingById(id: string) {
 }
 
 export async function getBrandingInquiries() {
-  await requireAdminUser();
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
     .from("branding_inquiries")
