@@ -1,8 +1,6 @@
-import { requireAdminUser } from "../auth";
 import { createSupabaseServerClient } from "../server";
 
 export async function getTenants() {
-  await requireAdminUser();
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
     .from("tenants")
@@ -12,7 +10,6 @@ export async function getTenants() {
 }
 
 export async function getTenantById(id: string) {
-  await requireAdminUser();
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
     .from("tenants")
@@ -24,7 +21,6 @@ export async function getTenantById(id: string) {
 }
 
 export async function getPayments() {
-  await requireAdminUser();
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
     .from("payments")
@@ -34,7 +30,6 @@ export async function getPayments() {
 }
 
 export async function getPaymentsByTenantId(tenantId: string) {
-  await requireAdminUser();
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
     .from("payments")

@@ -5,6 +5,7 @@ import {
   type TenantType,
   tenantSchema,
 } from "@letsheng-holdings/contracts/tenant";
+import { requireAdminUser } from "@letsheng-holdings/supabase/auth";
 import {
   createTenant as createTenantService,
   deleteTenant as deleteTenantService,
@@ -74,6 +75,7 @@ function toTenantUpdate(
 }
 
 export async function getTenants() {
+  await requireAdminUser();
   try {
     const tenants = await getTenantsService();
     return tenants.map((tenant) => ({
@@ -134,6 +136,7 @@ export async function deleteTenant(id: string): Promise<ActionResult> {
 }
 
 export async function getTenantById(id: string) {
+  await requireAdminUser();
   try {
     const tenant = await getTenantByIdService(id);
     if (!tenant) return null;
