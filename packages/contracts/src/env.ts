@@ -21,5 +21,11 @@ export function getEnv(): Env {
     NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
   };
   const result = envSchema.safeParse(raw);
-  return result.success ? result.data : (raw as unknown as Env);
+  if (!result.success) {
+    const details = result.error.issues
+      .map((issue) => `${issue.path.join(".")}: ${issue.message}`)
+      .join("; ");
+    throw new Error(`Invalid environment configuration: ${details}`);
+  }
+  return result.data;
 }
