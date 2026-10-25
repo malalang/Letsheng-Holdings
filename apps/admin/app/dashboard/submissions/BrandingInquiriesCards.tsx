@@ -7,6 +7,7 @@ import {
   Eye,
   Inbox,
   Layers,
+  Loader2,
   Mail,
   MessageSquare,
   MoreVertical,
@@ -23,6 +24,16 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -67,6 +78,9 @@ export function BrandingInquiriesCards({
 }: BrandingInquiriesCardsProps) {
   const [selectedInquiry, setSelectedInquiry] =
     useState<BrandingInquiryWithProduct | null>(null);
+  const [deleteTarget, setDeleteTarget] =
+    useState<BrandingInquiryWithProduct | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const handleStatusUpdate = async (id: string, status: string) => {
     const result = await updateBrandingInquiryStatus(id, status);
@@ -78,13 +92,21 @@ export function BrandingInquiriesCards({
   };
 
   const handleDelete = async (id: string) => {
-    if (confirm("Are you sure you want to delete this inquiry?")) {
+    setIsDeleting(true);
+    try {
       const result = await deleteBrandingInquiry(id);
       if (result.ok) {
         toast.success("Inquiry has been deleted.");
+        setDeleteTarget(null);
       } else {
         toast.error(result.error || "Failed to delete inquiry.");
+        setDeleteTarget(null);
       }
+    } catch {
+      toast.error("Failed to delete inquiry. Please try again.");
+      setDeleteTarget(null);
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -139,9 +161,12 @@ export function BrandingInquiriesCards({
                 <div className="flex items-center gap-2">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" size="icon" className="h-9 w-9">
-                        aria-label=
-                        {`Actions for inquiry from ${inquiry.customerName}`}
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="size-9 max-md:size-11"
+                        aria-label={`Actions for inquiry from ${inquiry.customerName}`}
+                      >
                         <MoreVertical className="h-4 w-4" />
                       </Button>
                     </DropdownMenuTrigger>
@@ -161,7 +186,7 @@ export function BrandingInquiriesCards({
                         Contacted
                       </DropdownMenuItem>
                       <DropdownMenuItem
-                        onClick={() => handleDelete(inquiry.id)}
+                        onSelect={() => setDeleteTarget(inquiry)}
                         className="text-destructive"
                       >
                         <Trash2 className="mr-2 h-4 w-4" /> Delete
@@ -332,6 +357,40 @@ export function BrandingInquiriesCards({
           </DialogContent>
         </Dialog>
       )}
+
+      <AlertDialog
+        open={deleteTarget !== null}
+        onOpenChange={(open) => !open && setDeleteTarget(null)}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete this branding inquiry?</AlertDialogTitle>
+            <AlertDialogDescription>
+              The inquiry from "{deleteTarget?.customerName}" for "
+              {deleteTarget?.productTitle}" will be permanently removed. This
+              action cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={isDeleting}>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              variant="destructive"
+              disabled={isDeleting}
+              onClick={(event) => {
+                event.preventDefault();
+                if (deleteTarget) {
+                  void handleDelete(deleteTarget.id);
+                }
+              }}
+            >
+              {isDeleting && (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden />
+              )}
+              Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }

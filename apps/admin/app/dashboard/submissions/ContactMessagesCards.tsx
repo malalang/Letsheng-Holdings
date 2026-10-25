@@ -4,13 +4,25 @@ import {
   Calendar,
   CheckCircle2,
   Inbox,
+  Loader2,
   Mail,
   MoreVertical,
   Phone,
   Trash2,
   User,
 } from "lucide-react";
+import { useState } from "react";
 import { toast } from "sonner";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -41,6 +53,9 @@ type ContactMessagesCardsProps = {
 };
 
 export function ContactMessagesCards({ messages }: ContactMessagesCardsProps) {
+  const [deleteTarget, setDeleteTarget] = useState<ContactMessage | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+
   const handleStatusUpdate = async (id: string, status: string) => {
     const result = await updateContactMessageStatus(id, status);
     if (result.ok) {
@@ -51,15 +66,21 @@ export function ContactMessagesCards({ messages }: ContactMessagesCardsProps) {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this contact message?")) {
-      return;
-    }
-
-    const result = await deleteContactMessage(id);
-    if (result.ok) {
-      toast.success("Contact message has been deleted.");
-    } else {
-      toast.error(result.error || "Failed to delete contact message.");
+    setIsDeleting(true);
+    try {
+      const result = await deleteContactMessage(id);
+      if (result.ok) {
+        toast.success("Contact message has been deleted.");
+        setDeleteTarget(null);
+      } else {
+        toast.error(result.error || "Failed to delete contact message.");
+        setDeleteTarget(null);
+      }
+    } catch {
+      toast.error("Failed to delete contact message. Please try again.");
+      setDeleteTarget(null);
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -123,8 +144,12 @@ export function ContactMessagesCards({ messages }: ContactMessagesCardsProps) {
 
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon" className="h-9 w-9">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="size-9 max-md:size-11"
                     aria-label={`Actions for message from ${message.name}`}
+                  >
                     <MoreVertical className="h-4 w-4" />
                   </Button>
                 </DropdownMenuTrigger>
@@ -141,7 +166,7 @@ export function ContactMessagesCards({ messages }: ContactMessagesCardsProps) {
                     <CheckCircle2 className="mr-2 h-4 w-4" /> Mark as Resolved
                   </DropdownMenuItem>
                   <DropdownMenuItem
-                    onClick={() => handleDelete(message.id)}
+                    onSelect={() => setDeleteTarget(message)}
                     className="text-destructive"
                   >
                     <Trash2 className="mr-2 h-4 w-4" /> Delete
@@ -171,6 +196,39 @@ export function ContactMessagesCards({ messages }: ContactMessagesCardsProps) {
           </CardContent>
         </Card>
       ))}
+
+      <AlertDialog
+        open={deleteTarget !== null}
+        onOpenChange={(open) => !open && setDeleteTarget(null)}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete this contact message?</AlertDialogTitle>
+            <AlertDialogDescription>
+              The message from "{deleteTarget?.name}" will be permanently
+              removed. This action cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={isDeleting}>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              variant="destructive"
+              disabled={isDeleting}
+              onClick={(event) => {
+                event.preventDefault();
+                if (deleteTarget) {
+                  void handleDelete(deleteTarget.id);
+                }
+              }}
+            >
+              {isDeleting && (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden />
+              )}
+              Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }

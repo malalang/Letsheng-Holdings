@@ -6,12 +6,23 @@ import type {
   TenantType,
 } from "@letsheng-holdings/contracts/tenant";
 import { createSupabaseBrowserClient } from "@letsheng-holdings/supabase/client";
-import { ArrowLeft, Receipt, Trash2 } from "lucide-react";
+import { ArrowLeft, Loader2, Receipt, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -92,6 +103,8 @@ export default function TenantForm({ tenant, payments }: TenantFormProps) {
           leaseEndDate: "",
         },
   });
+  const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     const fetchProperties = async () => {
@@ -131,14 +144,23 @@ export default function TenantForm({ tenant, payments }: TenantFormProps) {
   }
 
   async function handleDelete() {
-    if (tenant) {
+    if (!tenant) return;
+    setIsDeleting(true);
+    try {
       const action = await deleteTenant(tenant.id);
       if (action.ok) {
+        setConfirmDeleteOpen(false);
         router.push("/dashboard/tenants");
         router.refresh();
       } else {
-        console.error(action.error);
+        toast.error(action.error || "Failed to delete tenant.");
+        setConfirmDeleteOpen(false);
       }
+    } catch {
+      toast.error("Failed to delete tenant. Please try again.");
+      setConfirmDeleteOpen(false);
+    } finally {
+      setIsDeleting(false);
     }
   }
 
@@ -292,8 +314,8 @@ export default function TenantForm({ tenant, payments }: TenantFormProps) {
                             {payment.status}
                           </p>
                         </div>
-                        <p className="font-semibold">
-                          ${payment.amount.toFixed(2)}
+                        <p className="font-semibold tabular-nums">
+                          R {payment.amount.toFixed(2)}
                         </p>
                       </li>
                     ))}
@@ -305,14 +327,49 @@ export default function TenantForm({ tenant, payments }: TenantFormProps) {
 
           <div className="flex justify-end gap-2">
             {tenant && (
-              <Button
-                variant="destructive"
-                type="button"
-                onClick={handleDelete}
+              <AlertDialog
+                open={confirmDeleteOpen}
+                onOpenChange={setConfirmDeleteOpen}
               >
-                <Trash2 className="mr-2 h-4 w-4" />
-                Delete Tenant
-              </Button>
+                <Button
+                  variant="destructive"
+                  type="button"
+                  onClick={() => setConfirmDeleteOpen(true)}
+                >
+                  <Trash2 className="mr-2 h-4 w-4" />
+                  Delete Tenant
+                </Button>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>Delete this tenant?</AlertDialogTitle>
+                    <AlertDialogDescription>
+                      "{tenant.name}" will be permanently removed. This action
+                      cannot be undone.
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel disabled={isDeleting}>
+                      Cancel
+                    </AlertDialogCancel>
+                    <AlertDialogAction
+                      variant="destructive"
+                      disabled={isDeleting}
+                      onClick={(event) => {
+                        event.preventDefault();
+                        void handleDelete();
+                      }}
+                    >
+                      {isDeleting && (
+                        <Loader2
+                          className="mr-2 h-4 w-4 animate-spin"
+                          aria-hidden
+                        />
+                      )}
+                      Delete
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
             )}
             <Button type="submit" variant="default" className="bg-primary">
               {tenant ? "Save Changes" : "Create Tenant"}

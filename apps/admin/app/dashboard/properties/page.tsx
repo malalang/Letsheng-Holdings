@@ -1,28 +1,13 @@
-import {
-  Bath,
-  Bed,
-  CircleDollarSign,
-  Edit,
-  Eye,
-  Home,
-  MoreVertical,
-  Trash2,
-} from "lucide-react";
+import { Bath, Bed, CircleDollarSign, Home } from "lucide-react";
 import type { Metadata, Viewport } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { RecordActionsMenu } from "@/components/admin/RecordActionsMenu";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import { deletePropertyFromList, getProperties } from "./actions";
+import { deleteProperty, getProperties } from "./actions";
 
 export const metadata: Metadata = {
   title: "Properties",
@@ -164,49 +149,14 @@ export default async function AdminPropertiesPage({
                     />
                   </Link>
                   <div className="absolute top-2 right-2">
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="default" size="icon">
-                          aria-label={`Actions for ${p.title}`}
-                          <MoreVertical className="h-4 w-4" />
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
-                        <DropdownMenuItem asChild>
-                          <Link
-                            href={`/dashboard/properties/property/${propertyId}/edit`}
-                            className="flex w-full items-center"
-                          >
-                            <Edit className="mr-2 h-4 w-4" />
-                            Edit
-                          </Link>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem asChild>
-                          <Link
-                            href={`/dashboard/properties/property/${propertyId}`}
-                            className="flex w-full items-center"
-                          >
-                            <Eye className="mr-2 h-4 w-4" />
-                            View
-                          </Link>
-                        </DropdownMenuItem>
-                        <form action={deletePropertyFromList}>
-                          <input type="hidden" name="id" value={propertyId} />
-                          <DropdownMenuItem
-                            asChild
-                            className="text-destructive focus:text-destructive"
-                          >
-                            <button
-                              type="submit"
-                              className="flex w-full items-center"
-                            >
-                              <Trash2 className="mr-2 h-4 w-4" />
-                              Delete
-                            </button>
-                          </DropdownMenuItem>
-                        </form>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
+                    <RecordActionsMenu
+                      recordName={p.title}
+                      recordType="property"
+                      editHref={`/dashboard/properties/property/${propertyId}/edit`}
+                      viewHref={`/dashboard/properties/property/${propertyId}`}
+                      deleteId={propertyId}
+                      deleteAction={deleteProperty}
+                    />
                   </div>
                 </div>
 

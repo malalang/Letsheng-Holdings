@@ -6,11 +6,25 @@ import {
   CreditCard,
   Edit,
   Eye,
+  Loader2,
   MapPin,
   MoreVertical,
   Trash2,
 } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { toast } from "sonner";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -23,6 +37,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { statusBadgeClass } from "@/lib/statusBadge";
+import { deleteTenant } from "./actions";
 
 interface TenantCardData {
   id: string;
@@ -44,6 +59,10 @@ const getStatusBadge = (status: string) => (
 );
 
 export default function TenantCard({ tenant }: TenantCardProps) {
+  const router = useRouter();
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+
   const leaseEnd = tenant.leaseEndDate
     ? new Date(tenant.leaseEndDate).toLocaleDateString("en-ZA", {
         day: "numeric",
@@ -51,6 +70,26 @@ export default function TenantCard({ tenant }: TenantCardProps) {
         year: "numeric",
       })
     : "N/A";
+
+  const handleDelete = async () => {
+    setIsDeleting(true);
+    try {
+      const result = await deleteTenant(tenant.id);
+      if (result.ok) {
+        toast.success("Tenant has been deleted.");
+        setConfirmOpen(false);
+        router.refresh();
+      } else {
+        toast.error(result.error || "Failed to delete tenant.");
+        setConfirmOpen(false);
+      }
+    } catch {
+      toast.error("Failed to delete tenant. Please try again.");
+      setConfirmOpen(false);
+    } finally {
+      setIsDeleting(false);
+    }
+  };
 
   return (
     <Card className="flex flex-col border-border">
@@ -78,8 +117,12 @@ export default function TenantCard({ tenant }: TenantCardProps) {
               {getStatusBadge(tenant.status)}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon" className="h-8 w-8">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="size-9 max-md:size-11"
                     aria-label={`Actions for ${tenant.name}`}
+                  >
                     <MoreVertical className="h-4 w-4" />
                   </Button>
                 </DropdownMenuTrigger>
@@ -101,7 +144,10 @@ export default function TenantCard({ tenant }: TenantCardProps) {
                       <Edit className="h-4 w-4 mr-2" /> Edit
                     </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem className="text-destructive focus:bg-destructive/10 focus:text-destructive cursor-pointer">
+                  <DropdownMenuItem
+                    onSelect={() => setConfirmOpen(true)}
+                    className="text-destructive focus:bg-destructive/10 focus:text-destructive cursor-pointer"
+                  >
                     <Trash2 className="h-4 w-4 mr-2" /> Delete
                   </DropdownMenuItem>
                 </DropdownMenuContent>
@@ -176,6 +222,34 @@ export default function TenantCard({ tenant }: TenantCardProps) {
           </Button>
         </div>
       </CardContent>
+
+      <AlertDialog open={confirmOpen} onOpenChange={setConfirmOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete this tenant?</AlertDialogTitle>
+            <AlertDialogDescription>
+              "{tenant.name}" will be permanently removed. This action cannot be
+              undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={isDeleting}>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              variant="destructive"
+              disabled={isDeleting}
+              onClick={(event) => {
+                event.preventDefault();
+                void handleDelete();
+              }}
+            >
+              {isDeleting && (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden />
+              )}
+              Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </Card>
   );
 }

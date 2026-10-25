@@ -2,7 +2,6 @@ import {
   AlertCircle,
   CheckCircle2,
   Clock,
-  CreditCard,
   History,
   Receipt,
   TrendingUp,
@@ -10,6 +9,7 @@ import {
 } from "lucide-react";
 import type { Metadata, Viewport } from "next";
 import Link from "next/link";
+import { ExportLedgerButton } from "@/components/admin/ExportLedgerButton";
 import {
   Accordion,
   AccordionContent,
@@ -69,6 +69,18 @@ export default async function PaymentsPage() {
     0,
   );
 
+  const totalExpected = totalRevenue + totalOverdue;
+  const collectionRate =
+    totalExpected > 0 ? Math.round((totalRevenue / totalExpected) * 100) : null;
+  const paidCount = payments.filter((p) => p.status === "Paid").length;
+
+  const ledgerRows = payments.map((p) => ({
+    date: p.date ?? null,
+    tenant: tenants.find((t) => t.id === p.tenantId)?.name ?? "Unknown Tenant",
+    amount: p.amount ?? 0,
+    status: p.status ?? "",
+  }));
+
   return (
     <div className="space-y-8">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -81,12 +93,7 @@ export default async function PaymentsPage() {
           </p>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline" className="gap-2">
-            <Receipt className="h-4 w-4" /> Export Ledger
-          </Button>
-          <Button className="gap-2 bg-primary text-primary-foreground">
-            <CreditCard className="h-4 w-4" /> Record Payment
-          </Button>
+          <ExportLedgerButton rows={ledgerRows} />
         </div>
       </div>
 
@@ -96,7 +103,7 @@ export default async function PaymentsPage() {
             <CardDescription className="text-primary/70 font-medium uppercase tracking-wider text-xs">
               Total Revenue
             </CardDescription>
-            <CardTitle className="text-3xl font-bold flex items-baseline gap-1">
+            <CardTitle className="text-3xl font-bold flex items-baseline gap-1 tabular-nums">
               <span className="text-sm font-normal text-muted-foreground mr-1">
                 R
               </span>
@@ -106,7 +113,7 @@ export default async function PaymentsPage() {
           <CardContent>
             <div className="flex items-center gap-1 text-xs text-primary font-bold">
               <TrendingUp className="h-3 w-3" />
-              <span>+12% from last month</span>
+              <span>{paidCount} payments recorded</span>
             </div>
           </CardContent>
         </Card>
@@ -116,7 +123,7 @@ export default async function PaymentsPage() {
             <CardDescription className="text-destructive/70 font-medium uppercase tracking-wider text-xs">
               Total Overdue
             </CardDescription>
-            <CardTitle className="text-3xl font-bold text-destructive flex items-baseline gap-1">
+            <CardTitle className="text-3xl font-bold text-destructive flex items-baseline gap-1 tabular-nums">
               <span className="text-sm font-normal text-muted-foreground mr-1">
                 R
               </span>
@@ -136,13 +143,15 @@ export default async function PaymentsPage() {
             <CardDescription className="text-primary/70 font-medium uppercase tracking-wider text-xs">
               Collection Rate
             </CardDescription>
-            <CardTitle className="text-3xl font-bold">94.2%</CardTitle>
+            <CardTitle className="text-3xl font-bold tabular-nums">
+              {collectionRate === null ? "—" : `${collectionRate}%`}
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="w-full bg-muted rounded-full h-1.5 mt-2">
               <div
                 className="bg-primary h-1.5 rounded-full"
-                style={{ width: "94.2%" }}
+                style={{ width: `${collectionRate ?? 0}%` }}
               ></div>
             </div>
           </CardContent>
@@ -202,7 +211,7 @@ export default async function PaymentsPage() {
                             <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider text-xs">
                               Amount Due
                             </p>
-                            <p className="text-xl font-bold text-destructive">
+                            <p className="text-xl font-bold text-destructive tabular-nums">
                               R {p.amount?.toLocaleString()}
                             </p>
                           </div>
@@ -264,7 +273,7 @@ export default async function PaymentsPage() {
                         </div>
                         <div className="flex items-center gap-6">
                           <div className="text-right">
-                            <p className="text-xl font-bold">
+                            <p className="text-xl font-bold tabular-nums">
                               R {p.amount?.toLocaleString()}
                             </p>
                             <Badge
@@ -352,7 +361,7 @@ export default async function PaymentsPage() {
                                 </div>
                               </div>
                               <div className="flex items-center gap-4">
-                                <p className="font-mono text-sm font-bold">
+                                <p className="font-mono text-sm font-bold tabular-nums">
                                   R {p.amount?.toLocaleString()}
                                 </p>
                                 {getStatusBadge(p.status || "")}

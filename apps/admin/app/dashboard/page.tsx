@@ -44,6 +44,12 @@ export default async function DashboardPage() {
   const kpis = await getDashboardKpis();
   const recentLeases = await getRecentLeases();
 
+  const totalExpected = (kpis?.totalRevenue || 0) + (kpis?.overdueAmount || 0);
+  const collectionRate =
+    totalExpected > 0
+      ? Math.round(((kpis?.totalRevenue || 0) / totalExpected) * 100)
+      : null;
+
   const kpiData: AnalysisHeaderItem[] = kpis
     ? [
         {
@@ -117,8 +123,10 @@ export default async function DashboardPage() {
                 <CreditCard className="h-5 w-5 text-primary" />
                 Revenue Health
               </CardTitle>
-              <Badge className="bg-primary text-primary-foreground">
-                94% Collection
+              <Badge className="bg-primary text-primary-foreground tabular-nums">
+                {collectionRate === null
+                  ? "No collections yet"
+                  : `${collectionRate}% Collection`}
               </Badge>
             </div>
             <CardDescription>
@@ -127,17 +135,17 @@ export default async function DashboardPage() {
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="space-y-2">
-              <div className="flex justify-between text-sm">
+              <div className="flex justify-between text-sm tabular-nums">
                 <span className="text-muted-foreground">Collected Revenue</span>
                 <span className="font-bold">
-                  R{kpis?.totalRevenue.toLocaleString()} / R
-                  {(kpis?.totalRevenue || 0) + (kpis?.overdueAmount || 0)}
+                  R{(kpis?.totalRevenue || 0).toLocaleString()} / R
+                  {totalExpected.toLocaleString()}
                 </span>
               </div>
               <div className="w-full bg-muted rounded-full h-2">
                 <div
                   className="bg-primary h-2 rounded-full"
-                  style={{ width: "94%" }}
+                  style={{ width: `${collectionRate ?? 0}%` }}
                 ></div>
               </div>
             </div>
@@ -147,13 +155,17 @@ export default async function DashboardPage() {
                 <p className="text-xs text-muted-foreground uppercase font-bold">
                   New Submissions
                 </p>
-                <p className="text-2xl font-bold">{kpis?.pendingOrders}</p>
+                <p className="text-2xl font-bold tabular-nums">
+                  {kpis?.pendingOrders}
+                </p>
               </div>
               <div className="space-y-1">
                 <p className="text-xs text-muted-foreground uppercase font-bold">
-                  Property Yield
+                  Tenants in Arrears
                 </p>
-                <p className="text-2xl font-bold">12.4%</p>
+                <p className="text-2xl font-bold tabular-nums">
+                  {kpis?.overdueCount}
+                </p>
               </div>
             </div>
 

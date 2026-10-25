@@ -10,6 +10,16 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import type { z } from "zod";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -54,6 +64,7 @@ type BrandingFormValues = z.input<typeof brandingSchema>;
 export default function BrandingForm({ product }: BrandingFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
   const router = useRouter();
 
   const form = useForm<BrandingFormValues, unknown, BrandingType>({
@@ -148,12 +159,14 @@ export default function BrandingForm({ product }: BrandingFormProps) {
       const result = await deleteBrandingProduct(product.id);
       if (result.ok) {
         toast.success("Branding product has been deleted.");
+        setConfirmDeleteOpen(false);
         router.push("/dashboard/branding");
       } else {
         toast.error(
           result.error ||
             "An unexpected error occurred while deleting. Please try again.",
         );
+        setConfirmDeleteOpen(false);
       }
       router.refresh();
     } catch (error) {
@@ -163,6 +176,7 @@ export default function BrandingForm({ product }: BrandingFormProps) {
           ? error.message
           : "An unexpected error occurred while deleting. Please try again.",
       );
+      setConfirmDeleteOpen(false);
     } finally {
       setIsDeleting(false);
     }
@@ -486,19 +500,54 @@ export default function BrandingForm({ product }: BrandingFormProps) {
               {product ? "Save Changes" : "Create Product"}
             </Button>
             {product && (
-              <Button
-                variant="destructive"
-                type="button"
-                onClick={onDelete}
-                disabled={isDeleting}
+              <AlertDialog
+                open={confirmDeleteOpen}
+                onOpenChange={setConfirmDeleteOpen}
               >
-                {isDeleting ? (
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                ) : (
+                <Button
+                  variant="destructive"
+                  type="button"
+                  onClick={() => setConfirmDeleteOpen(true)}
+                  disabled={isDeleting}
+                >
                   <Trash2 className="mr-2 h-4 w-4" />
-                )}
-                Delete Product
-              </Button>
+                  Delete Product
+                </Button>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>
+                      Delete this branding product?
+                    </AlertDialogTitle>
+                    <AlertDialogDescription>
+                      "{product.title}" will be permanently removed. This action
+                      cannot be undone.
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel disabled={isDeleting}>
+                      Cancel
+                    </AlertDialogCancel>
+                    <AlertDialogAction
+                      variant="destructive"
+                      disabled={isDeleting}
+                      onClick={(event) => {
+                        event.preventDefault();
+                        onDelete();
+                      }}
+                    >
+                      {isDeleting ? (
+                        <Loader2
+                          className="mr-2 h-4 w-4 animate-spin"
+                          aria-hidden
+                        />
+                      ) : (
+                        <Trash2 className="mr-2 h-4 w-4" />
+                      )}
+                      Delete
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
             )}
           </div>
         </div>

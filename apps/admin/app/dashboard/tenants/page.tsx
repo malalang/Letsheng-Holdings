@@ -23,8 +23,26 @@ export const viewport: Viewport = {
     { media: "(prefers-color-scheme: dark)", color: "#1f2937" },
   ],
 };
-export default async function AdminTenantsPage() {
+
+export default async function AdminTenantsPage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ q?: string | string[] }>;
+}) {
+  const resolvedSearchParams = await searchParams;
+  const rawQuery = resolvedSearchParams?.q;
+  const query =
+    (Array.isArray(rawQuery) ? rawQuery[0] : rawQuery)?.trim() ?? "";
+
   const tenants = await getTenants();
+  const normalizedQuery = query.toLowerCase();
+  const filteredTenants = normalizedQuery
+    ? tenants.filter(
+        (tenant) =>
+          tenant.name.toLowerCase().includes(normalizedQuery) ||
+          (tenant.email ?? "").toLowerCase().includes(normalizedQuery),
+      )
+    : tenants;
 
   return (
     <div className="space-y-6">
@@ -51,15 +69,24 @@ export default async function AdminTenantsPage() {
       </div>
 
       <div className="flex items-center gap-4 py-4">
-        <div className="relative flex-1 max-w-sm">
+        <form
+          action="/dashboard/tenants"
+          method="get"
+          className="relative flex-1 max-w-sm"
+        >
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
+            name="q"
+            defaultValue={query}
             placeholder="Search tenants..."
-            className="pl-9 h-10 shadow-sm"
+            aria-label="Search tenants by name or email"
+            className="pl-9 h-10"
           />
-        </div>
-        <div className="text-sm font-medium text-muted-foreground">
-          {tenants.length} tenants total
+        </form>
+        <div className="text-sm font-medium text-muted-foreground tabular-nums">
+          {normalizedQuery
+            ? `${filteredTenants.length} of ${tenants.length} tenants match "${query}"`
+            : `${tenants.length} tenants total`}
         </div>
       </div>
 
@@ -69,9 +96,19 @@ export default async function AdminTenantsPage() {
           title="No tenants found"
           description="You haven't added any tenants yet. Click the button above to create your first tenant record."
         />
+      ) : filteredTenants.length === 0 ? (
+        <Empty
+          icon={Search}
+          title={`No tenants match "${query}"`}
+          description="No tenant name or email matches this search. Clear the search to see the full portfolio."
+        >
+          <Button asChild variant="outline" size="sm">
+            <Link href="/dashboard/tenants">Clear search</Link>
+          </Button>
+        </Empty>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-          {tenants.map((tenant) => (
+          {filteredTenants.map((tenant) => (
             <TenantCard key={tenant.id} tenant={tenant} />
           ))}
         </div>

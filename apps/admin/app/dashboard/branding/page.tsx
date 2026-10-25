@@ -1,7 +1,8 @@
-import { Edit, Eye, MoreVertical, PlusCircle, Trash2 } from "lucide-react";
+import { PlusCircle } from "lucide-react";
 import type { Metadata, Viewport } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { RecordActionsMenu } from "@/components/admin/RecordActionsMenu";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,13 +12,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { getBrandingProducts } from "./actions";
+import { deleteBrandingProduct, getBrandingProducts } from "./actions";
 
 export const metadata: Metadata = {
   title: "Branding",
@@ -68,38 +63,14 @@ export default async function AdminBrandingPage() {
                 />
               </Link>
               <div className="absolute top-2 right-2">
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button size="icon">
-                      aria-label={`Actions for ${p.title}`}
-                      <MoreVertical className="h-4 w-4" />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuItem asChild>
-                      <Link
-                        href={`/dashboard/branding/brand/${p.id}/edit`}
-                        className="flex items-center w-full"
-                      >
-                        <Edit className="h-4 w-4 mr-2" />
-                        Edit
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
-                      <Link
-                        href={`/dashboard/branding/brand/${p.id}`}
-                        className="flex items-center w-full"
-                      >
-                        <Eye className="h-4 w-4 mr-2" />
-                        View
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem className="text-destructive">
-                      <Trash2 className="h-4 w-4 mr-2" />
-                      Delete
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
+                <RecordActionsMenu
+                  recordName={p.title}
+                  recordType="branding product"
+                  editHref={`/dashboard/branding/brand/${p.id}/edit`}
+                  viewHref={`/dashboard/branding/brand/${p.id}`}
+                  deleteId={p.id}
+                  deleteAction={deleteBrandingProduct}
+                />
               </div>
             </div>
 
