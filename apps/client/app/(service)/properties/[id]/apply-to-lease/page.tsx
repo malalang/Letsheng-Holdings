@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
+import { viewportThemeColor } from "@/lib/theme";
 import { getPropertyById } from "../../actions";
 import LeaseApplicationForm from "./LeaseApplicationForm";
 
@@ -25,10 +26,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#1f2937" },
-  ],
+  themeColor: viewportThemeColor,
 };
 export default async function ApplyToLeasePage({
   params,

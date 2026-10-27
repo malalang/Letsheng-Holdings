@@ -19,6 +19,7 @@ import Link from "next/link";
 import type React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { viewportThemeColor } from "@/lib/theme";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -81,7 +82,7 @@ const InfoSection = ({
 }) => (
   <section className={`space-y-12 ${className}`}>
     <div className="text-center space-y-4">
-      <h2 className="text-4xl font-extrabold text-secondary tracking-tight">
+      <h2 className="text-4xl font-bold text-secondary tracking-tight">
         {title}
       </h2>
       {subtitle && (
@@ -101,10 +102,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#1f2937" },
-  ],
+  themeColor: viewportThemeColor,
 };
 export default function AboutPage() {
   return (
@@ -117,7 +115,7 @@ export default function AboutPage() {
         >
           Est. 2023 • Mpumalanga, SA
         </Badge>
-        <h1 className="text-5xl md:text-7xl font-extrabold text-secondary tracking-tight mb-6">
+        <h1 className="text-5xl md:text-7xl font-bold text-secondary tracking-tight mb-6">
           The Letsheng Standard
         </h1>
         <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -298,7 +296,7 @@ export default function AboutPage() {
                 <CardHeader>
                   <Building className="h-10 w-10 text-primary mb-2" />
                   <CardTitle>Letsheng Estates</CardTitle>
-                  <Badge className="bg-green-100 text-green-700 hover:bg-green-100 border-none w-fit">
+                  <Badge className="bg-success text-success-foreground hover:bg-success border-none w-fit">
                     Active Division
                   </Badge>
                 </CardHeader>
@@ -313,7 +311,7 @@ export default function AboutPage() {
                 <CardHeader>
                   <Printer className="h-10 w-10 text-primary mb-2" />
                   <CardTitle>Letsheng Print</CardTitle>
-                  <Badge className="bg-green-100 text-green-700 hover:bg-green-100 border-none w-fit">
+                  <Badge className="bg-success text-success-foreground hover:bg-success border-none w-fit">
                     Active Division
                   </Badge>
                 </CardHeader>

@@ -54,7 +54,7 @@ export default function LeaseApplicationForm({
   return (
     <div className="animate-fade-in">
       <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-secondary">
+        <h1 className="text-4xl md:text-5xl font-bold text-secondary">
           Apply to Lease
         </h1>
         <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
@@ -82,7 +82,7 @@ export default function LeaseApplicationForm({
                   {...register("applicantName")}
                 />
                 {errors.applicantName && (
-                  <p className="text-red-500 text-sm">
+                  <p className="text-destructive text-sm">
                     {errors.applicantName.message}
                   </p>
                 )}
@@ -96,7 +96,9 @@ export default function LeaseApplicationForm({
                   {...register("email")}
                 />
                 {errors.email && (
-                  <p className="text-red-500 text-sm">{errors.email.message}</p>
+                  <p className="text-destructive text-sm">
+                    {errors.email.message}
+                  </p>
                 )}
               </div>
               <div className="space-y-2">
@@ -107,7 +109,9 @@ export default function LeaseApplicationForm({
                   {...register("phone")}
                 />
                 {errors.phone && (
-                  <p className="text-red-500 text-sm">{errors.phone.message}</p>
+                  <p className="text-destructive text-sm">
+                    {errors.phone.message}
+                  </p>
                 )}
               </div>
               <div className="space-y-2">
@@ -132,7 +136,7 @@ export default function LeaseApplicationForm({
                   )}
                 />
                 {errors.employment && (
-                  <p className="text-red-500 text-sm">
+                  <p className="text-destructive text-sm">
                     {errors.employment.message}
                   </p>
                 )}
@@ -146,7 +150,9 @@ export default function LeaseApplicationForm({
                 {...register("message")}
               />
               {errors.message && (
-                <p className="text-red-500 text-sm">{errors.message.message}</p>
+                <p className="text-destructive text-sm">
+                  {errors.message.message}
+                </p>
               )}
             </div>
             <Button type="submit" className="w-full">

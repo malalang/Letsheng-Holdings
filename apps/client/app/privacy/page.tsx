@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
-
 import { businessInfo } from "@/lib/business";
+import { viewportThemeColor } from "@/lib/theme";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -12,18 +12,13 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#1f2937" },
-  ],
+  themeColor: viewportThemeColor,
 };
 export default function PrivacyPage() {
   return (
     <div className="mx-auto max-w-3xl animate-fade-in space-y-8">
       <header className="space-y-3">
-        <h1 className="text-4xl font-extrabold text-secondary">
-          Privacy Policy
-        </h1>
+        <h1 className="text-4xl font-bold text-secondary">Privacy Policy</h1>
         <p className="text-gray-600">
           {businessInfo.name} collects only the information needed to respond to
           property applications, branding inquiries, and contact requests.

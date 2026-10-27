@@ -7,6 +7,12 @@
   --color-brand-white: #ffffff;
   --color-brand-navy: #002147;
   --color-brand-blue: #ffd700;
+
+  /* Status pairs (fill + foreground) */
+  --color-success: #dcfce7;
+  --color-success-foreground: #15803d;
+  --color-destructive: #dc2626;
+  --color-destructive-foreground: #ffffff;
 }
 
 @layer base {

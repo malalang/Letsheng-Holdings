@@ -11,12 +11,12 @@ import type { Metadata, Viewport } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import type React from "react";
-
 import WaterDetergentsSpotlight from "@/components/branding/waterDetergents";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { businessInfo } from "@/lib/business";
+import { viewportThemeColor } from "@/lib/theme";
 import { getBrandingProducts } from "./(service)/branding/actions";
 import { getProperties } from "./(service)/properties/actions";
 
@@ -75,7 +75,7 @@ const FeaturedPropertyCard = ({
       <p className="text-gray-600 mb-6 line-clamp-2 text-sm leading-relaxed flex-grow">
         {description}
       </p>
-      <p className="font-black text-primary">{price}</p>
+      <p className="font-bold text-primary">{price}</p>
       <div className="flex items-center text-gray-500 gap-4 mb-6 py-4 border-y border-gray-50">
         <div className="flex items-center text-xs font-medium">
           <Bed className="h-4 w-4 mr-1.5 text-primary" />
@@ -201,10 +201,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#1f2937" },
-  ],
+  themeColor: viewportThemeColor,
 };
 export default async function HomePage() {
   const properties = await getProperties();
@@ -244,7 +241,7 @@ export default async function HomePage() {
 
             {/* Heading - Responsive font sizes */}
             <div className="space-y-4">
-              <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white leading-[1.1] lg:leading-[0.9]">
+              <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-white leading-[1.1] lg:leading-[0.9]">
                 Elevating <br />
                 <span className="text-primary italic drop-shadow-[0_0_15px_color-mix(in_srgb,var(--color-primary)_30%,transparent)]">
                   Ambitions
@@ -317,7 +314,7 @@ export default async function HomePage() {
       <section className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
           <div className="max-w-2xl">
-            <h2 className="text-4xl md:text-5xl font-black text-secondary tracking-tight">
+            <h2 className="text-4xl md:text-5xl font-bold text-secondary tracking-tight">
               Featured Estates
             </h2>
             <p className="mt-4 text-lg text-gray-600 leading-relaxed">
@@ -356,7 +353,7 @@ export default async function HomePage() {
       <section className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
           <div className="max-w-2xl">
-            <h2 className="text-4xl md:text-5xl font-black text-secondary tracking-tight">
+            <h2 className="text-4xl md:text-5xl font-bold text-secondary tracking-tight">
               High-Fidelity Branding
             </h2>
             <p className="mt-4 text-lg text-gray-600 leading-relaxed">
@@ -392,7 +389,7 @@ export default async function HomePage() {
       <section className="bg-secondary/5 py-24 mx-4 rounded-[3rem]">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16 space-y-4">
-            <h2 className="text-4xl font-black text-secondary tracking-tight">
+            <h2 className="text-4xl font-bold text-secondary tracking-tight">
               Trusted Across South Africa
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -425,7 +422,7 @@ export default async function HomePage() {
         <div className="bg-primary/5 rounded-[3rem] p-8 md:p-20 border border-primary/10">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
-              <h2 className="text-4xl md:text-5xl font-black text-secondary tracking-tight">
+              <h2 className="text-4xl md:text-5xl font-bold text-secondary tracking-tight">
                 Your Path to Partnership
               </h2>
               <p className="text-lg text-gray-600 leading-relaxed">

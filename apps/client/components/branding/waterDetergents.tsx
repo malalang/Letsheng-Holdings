@@ -49,7 +49,7 @@ export default function WaterDetergentsSpotlight() {
           {/* Content Side */}
           <div className="p-6 sm:p-10 lg:p-16 space-y-8 flex flex-col justify-center">
             <div className="space-y-4 text-center lg:text-left">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tighter leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tighter leading-tight">
                 Essential <span className="text-primary italic">Resources</span>{" "}
                 <br />
                 <span className="lg:block">& Cleaning Solutions</span>

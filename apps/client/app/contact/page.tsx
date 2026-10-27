@@ -1,8 +1,8 @@
 import { Mail, MapPin, Phone } from "lucide-react";
 import type { Metadata, Viewport } from "next";
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { businessInfo } from "@/lib/business";
+import { viewportThemeColor } from "@/lib/theme";
 import { ContactForm } from "./contact-form";
 
 export const metadata: Metadata = {
@@ -15,16 +15,13 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#1f2937" },
-  ],
+  themeColor: viewportThemeColor,
 };
 export default function ContactPage() {
   return (
     <div className="animate-fade-in space-y-12">
       <header className="text-center">
-        <h1 className="text-5xl font-extrabold text-secondary tracking-tight">
+        <h1 className="text-5xl font-bold text-secondary tracking-tight">
           Get in Touch
         </h1>
         <p className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">

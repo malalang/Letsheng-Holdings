@@ -5,10 +5,10 @@ import { ShoppingCart, Star } from "lucide-react";
 import type { Metadata, Viewport } from "next";
 import Image from "next/image";
 import Link from "next/link";
-
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { viewportThemeColor } from "@/lib/theme";
 import { getBrandingProduct } from "../actions";
 
 export async function generateMetadata({
@@ -34,10 +34,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#1f2937" },
-  ],
+  themeColor: viewportThemeColor,
 };
 export default async function ProductPage({
   params,
@@ -77,7 +74,7 @@ export default async function ProductPage({
               <Badge variant="default" className="font-semibold mb-2">
                 {product.category}
               </Badge>
-              <h1 className="text-5xl font-extrabold text-secondary tracking-tight">
+              <h1 className="text-5xl font-bold text-secondary tracking-tight">
                 {product.title}
               </h1>
               <p className="mt-4 text-xl text-gray-600">

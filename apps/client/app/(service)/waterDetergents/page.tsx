@@ -16,6 +16,7 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { viewportThemeColor } from "@/lib/theme";
 
 export const metadata: Metadata = {
   title: "Water & Detergents",
@@ -35,10 +36,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#1f2937" },
-  ],
+  themeColor: viewportThemeColor,
 };
 export default function WaterDetergentsPage() {
   return (
@@ -57,7 +55,7 @@ export default function WaterDetergentsPage() {
             <Badge className="bg-primary/20 text-primary border-primary/30 px-4 py-1 uppercase tracking-widest font-bold">
               Essential Services Division
             </Badge>
-            <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-white leading-[0.9]">
+            <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-white leading-[0.9]">
               Pure Water. <br />
               <span className="text-primary italic">Absolute Clean.</span>
             </h1>
@@ -93,7 +91,7 @@ export default function WaterDetergentsPage() {
 
           <div className="space-y-8 order-1 lg:order-2">
             <div className="space-y-4">
-              <h2 className="text-4xl font-black text-secondary tracking-tight">
+              <h2 className="text-4xl font-bold text-secondary tracking-tight">
                 Bulk Water <span className="text-primary">&</span> Distribution
               </h2>
               <p className="text-gray-600 leading-relaxed text-lg">
@@ -135,7 +133,7 @@ export default function WaterDetergentsPage() {
                 >
                   Manufacturing Division
                 </Badge>
-                <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight">
+                <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
                   High-Fidelity <br />
                   <span className="text-primary">Cleaning Detergents</span>
                 </h2>
@@ -214,7 +212,7 @@ export default function WaterDetergentsPage() {
       {/* --- Featured Product Categories --- */}
       <section className="container mx-auto px-6">
         <div className="text-center mb-16 space-y-4">
-          <h2 className="text-4xl font-black text-secondary tracking-tight">
+          <h2 className="text-4xl font-bold text-secondary tracking-tight">
             Product Categories
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
@@ -263,7 +261,7 @@ export default function WaterDetergentsPage() {
       {/* --- Call to Action --- */}
       <section className="container mx-auto px-6">
         <div className="bg-primary rounded-[3rem] p-12 text-center space-y-8 shadow-2xl shadow-primary/20">
-          <h2 className="text-4xl md:text-5xl font-black text-secondary leading-tight">
+          <h2 className="text-4xl md:text-5xl font-bold text-secondary leading-tight">
             Ready to scale your <br /> supply chain?
           </h2>
           <p className="text-secondary/80 font-medium text-lg max-w-xl mx-auto">

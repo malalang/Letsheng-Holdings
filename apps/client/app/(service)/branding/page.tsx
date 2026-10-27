@@ -10,7 +10,6 @@ import {
 import type { Metadata, Viewport } from "next";
 import Image from "next/image";
 import Link from "next/link";
-
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -20,6 +19,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { viewportThemeColor } from "@/lib/theme";
 
 import { getBrandingProducts } from "./actions";
 
@@ -46,7 +46,7 @@ function BrandingHero() {
           </span>
         </div>
 
-        <h1 className="text-5xl md:text-7xl font-extrabold text-secondary tracking-tight mb-6">
+        <h1 className="text-5xl md:text-7xl font-bold text-secondary tracking-tight mb-6">
           Letsheng <span className="text-primary">Branding</span>
         </h1>
 
@@ -76,10 +76,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#1f2937" },
-  ],
+  themeColor: viewportThemeColor,
 };
 export default async function BrandingPage() {
   const products = await getBrandingProducts();
@@ -192,7 +189,7 @@ export default async function BrandingPage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-4">
             <div>
-              <div className="text-primary font-black text-xl mb-1">
+              <div className="text-primary font-bold text-xl mb-1">
                 01. Quote
               </div>
               <p className="text-sm text-gray-400">
@@ -200,7 +197,7 @@ export default async function BrandingPage() {
               </p>
             </div>
             <div>
-              <div className="text-primary font-black text-xl mb-1">
+              <div className="text-primary font-bold text-xl mb-1">
                 02. Proof
               </div>
               <p className="text-sm text-gray-400">
@@ -208,7 +205,7 @@ export default async function BrandingPage() {
               </p>
             </div>
             <div>
-              <div className="text-primary font-black text-xl mb-1">
+              <div className="text-primary font-bold text-xl mb-1">
                 03. Deliver
               </div>
               <p className="text-sm text-gray-400">Fast nationwide delivery.</p>

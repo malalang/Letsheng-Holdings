@@ -2,9 +2,9 @@ import { galleryItemSchema } from "@letsheng-holdings/contracts/gallery";
 import type { Metadata, Viewport } from "next";
 import Image from "next/image";
 import Link from "next/link";
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { viewportThemeColor } from "@/lib/theme";
 
 import { getPropertyById } from "../../actions";
 
@@ -30,10 +30,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#1f2937" },
-  ],
+  themeColor: viewportThemeColor,
 };
 export default async function PropertyGalleryPage({
   params,
@@ -55,7 +52,7 @@ export default async function PropertyGalleryPage({
   return (
     <div className="animate-fade-in">
       <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-secondary">
+        <h1 className="text-4xl md:text-5xl font-bold text-secondary">
           {property.title} - Gallery
         </h1>
         <Link href={`/properties/${id}`} className="mt-4 inline-block">

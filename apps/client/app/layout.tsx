@@ -1,3 +1,4 @@
+import { viewportThemeColor } from "@/lib/theme";
 import "./globals.css";
 
 import type { Metadata, Viewport } from "next";
@@ -39,8 +40,7 @@ const WhatsAppButton = () => (
     href={businessInfo.whatsappHref}
     target="_blank"
     rel="noopener noreferrer"
-    className="fixed bottom-8 right-8 z-50 p-4 rounded-full shadow-lg transition-transform transform hover:scale-110"
-    style={{ backgroundColor: "#49b3e0" }}
+    className="fixed bottom-8 right-8 z-50 p-4 rounded-full bg-primary shadow-lg transition-transform transform hover:scale-110"
   >
     <FaWhatsapp className="h-8 w-8 text-white" />
   </Link>
@@ -51,10 +51,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#1f2937" },
-  ],
+  themeColor: viewportThemeColor,
 };
 export default function RootLayout({
   children,

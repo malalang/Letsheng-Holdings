@@ -11,6 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { viewportThemeColor } from "@/lib/theme";
 
 export const metadata: Metadata = {
   title: "Our Services | Letsheng Holdings",
@@ -87,10 +88,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#1f2937" },
-  ],
+  themeColor: viewportThemeColor,
 };
 export default function ServicesPage() {
   return (
@@ -113,7 +111,7 @@ export default function ServicesPage() {
             <Badge className="bg-primary/20 text-primary border-primary/30 px-4 py-1 uppercase tracking-widest font-bold">
               Letsheng Holdings
             </Badge>
-            <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-white leading-[1.1]">
+            <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-white leading-[1.1]">
               Our Professional <br />
               <span className="text-primary italic">Services & Divisions</span>
             </h1>
@@ -129,7 +127,7 @@ export default function ServicesPage() {
       {/* Services Grid Section */}
       <section className="container mx-auto px-6">
         <div className="text-center mb-16 space-y-4">
-          <h2 className="text-4xl md:text-5xl font-black text-secondary tracking-tight">
+          <h2 className="text-4xl md:text-5xl font-bold text-secondary tracking-tight">
             Comprehensive Solutions
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -187,7 +185,7 @@ export default function ServicesPage() {
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-6">
-              <h2 className="text-4xl font-black text-secondary tracking-tight">
+              <h2 className="text-4xl font-bold text-secondary tracking-tight">
                 Our Operational Standards
               </h2>
               <p className="text-gray-600 leading-relaxed">

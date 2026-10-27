@@ -15,10 +15,10 @@ import {
 import type { Metadata, Viewport } from "next";
 import Image from "next/image";
 import Link from "next/link";
-
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { viewportThemeColor } from "@/lib/theme";
 
 import { getPropertyById } from "../actions";
 
@@ -47,10 +47,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#1f2937" },
-  ],
+  themeColor: viewportThemeColor,
 };
 export default async function PropertyDetailPage({
   params,
@@ -87,7 +84,7 @@ export default async function PropertyDetailPage({
               className="object-cover rounded-t-xl"
             />
           </div>
-          <CardTitle className="mt-6 text-4xl font-extrabold text-secondary">
+          <CardTitle className="mt-6 text-4xl font-bold text-secondary">
             {property.title}
           </CardTitle>
           <div className="flex justify-between items-center mt-2">
@@ -126,7 +123,7 @@ export default async function PropertyDetailPage({
           <ul className="grid grid-cols-2 gap-2 text-gray-700 mb-8">
             {features.map((feature) => (
               <li key={feature} className="flex items-center">
-                <CheckCircle className="h-5 w-5 mr-2 text-green-500" />
+                <CheckCircle className="h-5 w-5 mr-2 text-success-foreground" />
                 {feature}
               </li>
             ))}

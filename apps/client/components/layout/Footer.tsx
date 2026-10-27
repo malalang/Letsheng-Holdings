@@ -71,7 +71,7 @@ export default function Footer() {
                   className="rounded-full shadow-2xl border-2 border-primary/20 group-hover:border-primary/50 transition-colors"
                 />
               </div>
-              <h3 className="text-xl font-black tracking-tighter text-white">
+              <h3 className="text-xl font-bold tracking-tighter text-white">
                 LETSHENG<span className="text-primary"> HOLDINGS</span>
               </h3>
             </Link>

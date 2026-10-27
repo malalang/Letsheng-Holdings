@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
-
 import BrandingOrderForm from "@/components/branding/BrandingOrderForm";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { viewportThemeColor } from "@/lib/theme";
 import { getBrandingProduct } from "../../actions";
 
 export async function generateMetadata({
@@ -68,10 +68,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#1f2937" },
-  ],
+  themeColor: viewportThemeColor,
 };
 export default async function BrandingOrderPage({
   params,
@@ -88,7 +85,7 @@ export default async function BrandingOrderPage({
   return (
     <div className="animate-fade-in">
       <div className="text-center mb-12">
-        <h1 className="text-5xl font-extrabold text-secondary tracking-tight">
+        <h1 className="text-5xl font-bold text-secondary tracking-tight">
           Inquiry: {product.title}
         </h1>
         <p className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">

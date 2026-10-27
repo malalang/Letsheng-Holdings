@@ -1,8 +1,8 @@
 import { galleryItemSchema } from "@letsheng-holdings/contracts/gallery";
 import type { Metadata, Viewport } from "next";
 import Image from "next/image";
-
 import { Card } from "@/components/ui/card";
+import { viewportThemeColor } from "@/lib/theme";
 import { getBrandingProduct } from "../../actions";
 
 export async function generateMetadata({
@@ -27,10 +27,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#1f2937" },
-  ],
+  themeColor: viewportThemeColor,
 };
 export default async function ProductGalleryPage({
   params,
@@ -51,7 +48,7 @@ export default async function ProductGalleryPage({
 
   return (
     <div className="animate-fade-in">
-      <h1 className="text-5xl font-extrabold text-secondary tracking-tight mb-2">
+      <h1 className="text-5xl font-bold text-secondary tracking-tight mb-2">
         Gallery: {product.title}
       </h1>
       <p className="text-xl text-gray-600 mb-12">
