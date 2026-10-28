@@ -23,7 +23,7 @@
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "supabase:types": "supabase gen types typescript --local > src/supabaseType.ts"
+    "supabase:types": "node scripts/gen-types.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "catalog:",
